@@ -1,0 +1,4 @@
+%h1 Projects
+
+- Project.order('updated_at desc').limit(10).each do |project|
+  = render 'shared/project_teaser', project: project

@@ -1,0 +1,11 @@
+.project-teaser
+  .name= project.name
+  
+  - if project.url?
+    .site= link_to project.url.gsub(%r_^https?://_, ''), project.url
+
+  .description= project.description
+  
+  .participants
+    - project.participants.each do |person|
+      .name= link_to_if person.url?, person.name, person.url

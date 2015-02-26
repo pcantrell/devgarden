@@ -36,12 +36,11 @@ group :development, :test do
 
   gem 'spring'
   gem 'letter_opener'
-end
 
-group :development, :test do
   gem 'unicorn', platform: :ruby
   gem 'minitest-spec-rails'
   gem 'factory_girl_rails'
+  gem 'ffaker'
 end
 
 group :production do

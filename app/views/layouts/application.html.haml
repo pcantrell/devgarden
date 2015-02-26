@@ -1,0 +1,32 @@
+!!!
+%html
+  %head
+    %meta(charset='utf-8')
+      %title Dev Garden
+    
+    %meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
+    %meta(name="viewport" content="width=device-width,initial-scale=1")
+    
+    %meta(property="og:site_name" content="Dev Garden")
+    %meta(property="og:title" content="Dev Garden")
+    %meta(property="og:url" content="https://devgarden.macalester.edu/")
+    %meta(property="og:type" content="website")
+    %meta(property="og:description" content="Macalester’s Software Collaboration Space")
+
+    %meta(name="description" content="Macalester’s Software Collaboration Space")
+    %link(rel="shortcut icon" type="image/x-icon" href="/favicon.ico")
+
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    /[if lt IE 9]
+      = stylesheet_link_tag 'ie', media: 'all', 'data-turbolinks-track' => true
+      = javascript_include_tag 'html5shiv'
+    /[if lt IE 10]
+      :javascript
+        document.typekitDisabled = 1
+    
+    = include_jquery
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+    %body
+      = yield

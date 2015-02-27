@@ -1,0 +1,12 @@
+.person
+  .name= person.name
+  - if person.projects.any?
+    .projects
+      Working on:
+      - person.projects.each do |proj|
+        .project= proj.name
+  - if person.role_offers.any?
+    .role-offers
+      Interested in:
+      - person.role_offers.each do |offer|
+        .role= offer.role.skill_name

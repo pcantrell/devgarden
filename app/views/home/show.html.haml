@@ -1,9 +1,8 @@
-%h1 Projects
+.projects
+  %h1 Projects
+  = render 'projects/recent', projects: recent_projects(limit: 20)
 
-- Project.order('updated_at desc').limit(10).includes(:participants, :role_requests).each do |project|
-  = render 'shared/project_summary', project: project
-
-%h1 People
-
-- Person.order('updated_at desc').limit(10).includes(:projects, :role_offers).each do |person|
-  = render 'shared/person_summary', person: person
+.people
+  %h1 People
+  - Person.order('updated_at desc').limit(10).includes(:projects, :role_offers).each do |person|
+    = render 'shared/person_summary', person: person

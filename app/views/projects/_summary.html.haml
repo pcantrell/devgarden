@@ -1,5 +1,5 @@
-.project-teaser
-  .name= project.name
+.project-summary
+  .name= link_to project.name, project_path(project)
   
   - if project.url?
     .site= link_to project.url.gsub(%r_^https?://_, ''), project.url
@@ -10,8 +10,9 @@
     - project.participants.each do |person|
       .name= link_to_if person.url?, person.name, person.url
 
-  .role-requests
-    Looking for:
-    - project.role_requests.each do |request|
-      .role= request.role.person_name
+  - if project.role_requests.any?
+    .role-requests
+      Looking for:
+      - project.role_requests.each do |request|
+        .role= request.role.person_name
 

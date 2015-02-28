@@ -1,0 +1,51 @@
+class ProjectsController < ApplicationController
+  before_action :find_project, except: [:index, :new]
+
+  def index
+    render partial: 'recent', locals: {
+      projects: recent_projects(updated_before: params[:updated_before], limit: 30) }
+  end
+
+  def show
+  end
+
+  def new
+    @project = Project.new
+  end
+
+  def edit
+  end
+
+  def create
+    @project = Project.new(project_params)
+
+    if @project.save
+      redirect_to @project, notice: 'Project created'
+    else
+      render :new
+    end
+  end
+
+  def update
+    if @project.update(project_params)
+      redirect_to @project, notice: 'Project updated'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @project.destroy  # TODO: hide instead
+    redirect_to projects_url, notice: 'Project destroyed'
+  end
+
+private
+
+  def find_project
+    @project = Project.find(params[:id])
+  end
+
+  def project_params
+    params[:project].permit(:name, :url, :scm_url)
+  end
+end

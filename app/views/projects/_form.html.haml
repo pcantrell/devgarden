@@ -1,0 +1,9 @@
+= semantic_form_for @project, class: 'project' do |f|
+
+  = f.inputs do
+    = f.input :name
+    = f.input :url, label: 'URL of your project web site', required: false, placeholder: 'http://'
+    = f.input :scm_url, label: 'GitHub URL for your project'
+
+  .actions
+    = f.submit 'Save'

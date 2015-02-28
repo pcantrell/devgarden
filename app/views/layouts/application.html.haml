@@ -28,5 +28,11 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
-    %body
-      = yield
+  %body{class: body_classes.join(' ')}
+    - unless flash.empty?
+      .flashes
+        - flash.each do |kind, message|
+          .flash{class: kind}= message
+      - flash.clear
+
+    = yield

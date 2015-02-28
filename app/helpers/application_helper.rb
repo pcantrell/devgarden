@@ -1,9 +1,15 @@
 module ApplicationHelper
-  def recent_projects(updated_before: 100.years.from_now, limit:)
-    Project
-      .order('updated_at desc')
-      .where('updated_at < ?', updated_before)
+  def recent_projects(before: nil, limit:)
+    query = Project
+      .order('updated_at desc, id desc')
       .limit(20)
       .includes(:participants, :role_requests)
+
+    if before
+      query = query.where(
+        'updated_at <= ? and id < ?', before.updated_at, before.id)
+    end
+
+    query
   end
 end

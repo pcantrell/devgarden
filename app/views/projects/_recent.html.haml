@@ -1,2 +1,5 @@
 - projects.each do |project|
   = render 'projects/summary', project: project
+
+- unless projects.empty?
+  .more= link_to 'More…', projects_path(before: projects.last)

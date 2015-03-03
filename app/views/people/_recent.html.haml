@@ -1,4 +1,4 @@
-- people.each do |person|
+- people.includes(:projects, role_offers: :role).each do |person|
   = render 'people/summary', person: person
 
 - unless people.empty?

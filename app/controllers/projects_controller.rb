@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
 
   def index
     render partial: 'recent', locals: {
-      projects: recent_projects(before: Project.find(params[:before]), limit: 10) }
+      projects: Project.recent(10, before: Project.find(params[:before])) }
   end
 
   def show

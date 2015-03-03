@@ -4,4 +4,6 @@ class Project < ActiveRecord::Base
   has_many :role_requests
 
   validates :name, presence: true
+
+  include RecentScope
 end

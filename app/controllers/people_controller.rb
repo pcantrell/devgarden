@@ -3,7 +3,7 @@ class PeopleController < ApplicationController
 
   def index
     render partial: 'recent', locals: {
-      people: recent_people(before: Person.find(params[:before]), limit: 10) }
+      people: Person.recent(10, before: Person.find(params[:before])) }
   end
 
   def show

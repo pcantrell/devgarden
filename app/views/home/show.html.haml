@@ -1,7 +1,7 @@
 .projects.infinite-scroll
   %h1 Projects
-  = render 'projects/recent', projects: recent_projects(limit: 20)
+  = render 'projects/recent', projects: Project.recent(20)
 
 .people.infinite-scroll
   %h1 People
-  = render 'people/recent', people: recent_people(limit: 20)
+  = render 'people/recent', people: Person.recent(20)

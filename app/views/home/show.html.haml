@@ -2,7 +2,6 @@
   %h1 Projects
   = render 'projects/recent', projects: recent_projects(limit: 20)
 
-.people
+.people.infinite-scroll
   %h1 People
-  - Person.order('updated_at desc').limit(10).includes(:projects, :role_offers).each do |person|
-    = render 'shared/person_summary', person: person
+  = render 'people/recent', people: recent_people(limit: 20)

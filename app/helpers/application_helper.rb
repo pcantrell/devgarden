@@ -1,9 +1,18 @@
 module ApplicationHelper
-  def recent_projects(before: nil, limit:)
-    query = Project
+  def recent_projects(**opts)
+    recent_models(Project, **opts).includes(:participants, :role_requests)
+  end
+
+  def recent_people(**opts)
+    recent_models(Person, **opts).includes(:projects, :role_offers)
+  end
+
+private
+
+  def recent_models(model, before: nil, limit:)
+    query = model
       .order('updated_at desc, id desc')
       .limit(limit)
-      .includes(:participants, :role_requests)
 
     if before
       query = query.where(
@@ -12,4 +21,5 @@ module ApplicationHelper
 
     query
   end
+
 end

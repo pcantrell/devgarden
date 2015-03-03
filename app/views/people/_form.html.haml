@@ -1,0 +1,9 @@
+= semantic_form_for @person, class: 'person' do |f|
+
+  = f.inputs do
+    = f.input :name
+    = f.input :email
+    = f.input :url, label: 'Your personal web site', required: false, placeholder: 'http://'
+
+  .actions
+    = f.submit 'Save'

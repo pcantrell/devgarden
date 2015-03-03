@@ -2,7 +2,7 @@ module ApplicationHelper
   def recent_projects(before: nil, limit:)
     query = Project
       .order('updated_at desc, id desc')
-      .limit(20)
+      .limit(limit)
       .includes(:participants, :role_requests)
 
     if before

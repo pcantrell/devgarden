@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
 
   def index
     render partial: 'recent', locals: {
-      projects: recent_projects(before: Project.find(params[:before]), limit: 30) }
+      projects: recent_projects(before: Project.find(params[:before]), limit: 10) }
   end
 
   def show
@@ -32,11 +32,6 @@ class ProjectsController < ApplicationController
     else
       render :edit
     end
-  end
-
-  def destroy
-    @project.destroy  # TODO: hide instead
-    redirect_to projects_url, notice: 'Project destroyed'
   end
 
 private

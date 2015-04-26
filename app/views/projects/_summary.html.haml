@@ -8,7 +8,7 @@
   
   .participants
     - project.participants.each do |person|
-      .name= link_to_if person.url?, person.name, person.url
+      .name= link_to person.name, person
 
   - if project.role_requests.any?
     .role-requests

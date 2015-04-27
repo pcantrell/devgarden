@@ -1,5 +1,4 @@
 class ProjectsController < ApplicationController
-  before_action :find_project, except: [:index, :new]
 
   def index
     render partial: 'recent', locals: {
@@ -17,18 +16,18 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params)
+    project = Project.new(project_params)
 
-    if @project.save
-      redirect_to @project, notice: 'Project created'
+    if project.save
+      redirect_to project, notice: 'Project created'
     else
       render :new
     end
   end
 
   def update
-    if @project.update(project_params)
-      redirect_to @project, notice: 'Project updated'
+    if project.update(project_params)
+      redirect_to project, notice: 'Project updated'
     else
       render :edit
     end
@@ -36,9 +35,10 @@ class ProjectsController < ApplicationController
 
 private
 
-  def find_project
-    @project = Project.find(params[:id])
+  def project
+    @project ||= Project.find(params[:id])
   end
+  helper_method :project
 
   def project_params
     params[:project].permit(:name, :url, :scm_url)

@@ -1,6 +1,4 @@
 class PeopleController < ApplicationController
-  before_action :find_person, except: [:index, :new]
-
   def index
     render partial: 'recent', locals: {
       people: Person.recent(10, before: Person.find(params[:before])) }
@@ -17,8 +15,8 @@ class PeopleController < ApplicationController
   end
 
   def update
-    if @person.update(person_params)
-      redirect_to @person, notice: 'Person updated'
+    if person.update(person_params)
+      redirect_to person, notice: 'Person updated'
     else
       render :edit
     end
@@ -26,9 +24,10 @@ class PeopleController < ApplicationController
 
 private
 
-  def find_person
-    @person = Person.find(params[:id])
+  def person
+    @person ||= Person.find(params[:id])
   end
+  helper_method :person
 
   def person_params
     params[:person].permit(:name, :email, :url)

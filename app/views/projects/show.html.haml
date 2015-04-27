@@ -1,3 +1,8 @@
 = render 'summary', project: project
 
+%p Source control:
+%ul
+  - project.scm_urls.each do |url|
+    %li= link_to url, url
+
 = link_to 'Edit', edit_project_path(project)

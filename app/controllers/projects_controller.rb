@@ -41,6 +41,6 @@ private
   helper_method :project
 
   def project_params
-    params[:project].permit(:name, :url, :scm_url)
+    params[:project].permit(:name, :url, :scm_urls_as_text)
   end
 end

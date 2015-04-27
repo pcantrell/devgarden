@@ -3,7 +3,7 @@
   = f.inputs do
     = f.input :name
     = f.input :url, label: 'URL of your project web site', required: false, placeholder: 'http://'
-    = f.input :scm_url, label: 'GitHub URL for your project'
+    = f.input :scm_urls_as_text, as: :text, label: 'Source control URL(s) for your project (one per line)'
 
   .actions
     = f.submit 'Save'

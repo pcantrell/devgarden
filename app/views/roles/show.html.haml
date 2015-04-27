@@ -1,0 +1,15 @@
+%h1= role.skill_name.capitalize
+
+%p= role.responsibilities
+
+%h2 Projects seeking #{role.person_name.pluralize}
+
+%ul
+  - role.role_requests.includes(:project).each do |req|
+    %li= link_to req.project.name, req.project
+
+%h2 People interested in #{role.skill_name}
+
+%ul
+  - role.role_offers.includes(:person).each do |offer|
+    %li= link_to offer.person.name, offer.person

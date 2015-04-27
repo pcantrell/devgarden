@@ -1,0 +1,7 @@
+%h1 Roles
+
+- roles_by_category.each do |category|
+  %h2= category.name
+  %ul
+    - category.roles.each do |role|
+      %li= link_to role.skill_name, role

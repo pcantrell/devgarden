@@ -1,5 +1,5 @@
 .project-summary
-  .name= link_to project.name, project_path(project)
+  %h3.name= link_to project.name, project_path(project)
   
   - if project.url?
     .site= link_to project.url.gsub(%r_^https?://_, ''), project.url

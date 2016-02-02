@@ -13,7 +13,6 @@ updateInfiniteScrollNow = ->
   dirty = false
 
   scrollBottom = $(window).scrollTop() + $(window).height() + scrollAhead
-  console.log scrollBottom
 
   for container in $infiniteScroll
     $container = $(container)

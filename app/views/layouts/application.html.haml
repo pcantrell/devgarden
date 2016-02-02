@@ -23,7 +23,11 @@
     /[if lt IE 10]
       :javascript
         document.typekitDisabled = 1
-    
+
+    = javascript_include_tag "https://use.typekit.net/mon8ewb.js"
+    :javascript
+      try { Typekit.load({ async: true });} catch(e) { }
+
     = include_jquery
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags

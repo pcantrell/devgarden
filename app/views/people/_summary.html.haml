@@ -1,5 +1,5 @@
 .person-summary
-  .name= person.name
+  %h3.name= person.name
   
   - if person.url?
     .url= link_to person.url.gsub(%r_^https?://_, ''), person.url

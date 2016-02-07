@@ -26,6 +26,7 @@ h1,h2,h3,h4
 
 .summary-group
   float: left
+  background: hsl(0, 0%, 40%)
   &.projects
     width: 75%
   &.people
@@ -35,8 +36,6 @@ h1,h2,h3,h4
   color: rgba(255,255,255,0.6)
   padding-bottom: 10em
   margin-bottom: -10em
-  padding-right: 1px
-  margin-right: -1px
   h2
     margin: 0
   a
@@ -56,7 +55,10 @@ h1,h2,h3,h4
     margin-top: 1.2em
     > .name, > .role
       display: inline-block
-      margin-right: 1ex
+      &:after
+        content: ', '
+      &:last-child:after
+        content: none
 
   &.project
     width: 50%

@@ -13,7 +13,7 @@
 
     - if project.role_requests.any?
       .role-requests
-        Looking for:
+        Looking for
         - project.role_requests.includes(:role).each do |request|
           .role= link_to request.role.person_name, request.role
 

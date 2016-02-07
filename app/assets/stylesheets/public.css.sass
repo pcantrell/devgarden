@@ -1,22 +1,74 @@
 body
+  margin: 0
+  padding: 0
   font:
     family: 'expo-serif-pro'
 
 h1,h2,h3,h4
-  font-family: 'effra'
+  font:
+    family: 'effra'
+    weight: 500
 
-.project-summary, .person-summary
-  margin: 1em
+.summary-group
+  overflow: hidden
+  h1
+    position: relative
+    font:
+      size: 1200%
+      weight: 900
+    text-transform: uppercase
+    color: rgba(39,37,93,0.3)
+    margin: 0
+    height: 0
+    left: 0.88em
+    transform: rotate(90deg)
+    transform-origin: 0% 0%
+
+.summary-group
+  float: left
+  &.projects
+    width: 75%
+  &.people
+    width: 25%
+
+.summary
+  color: rgba(255,255,255,0.6)
+  padding-bottom: 10em
+  margin-bottom: -10em
+  padding-right: 1px
+  margin-right: -1px
+  h2
+    margin: 0
+  a
+    color: white
+    text-decoration: none
+  > .content
+    transform: rotate(0deg)  // To draw on top of big h1
+    padding: 1.6em
+    padding-left: 4em
+
+  .description
+    font:
+      family: 'effra'
+      weight: 200
+    color: rgba(255,255,255,0.8)
   .participants, .role-requests
+    margin-top: 1.2em
     > .name, > .role
       display: inline-block
       margin-right: 1ex
 
-body.home
-  >.projects
+  &.project
+    width: 50%
     float: left
-  >.people
-    float: right
+    &:nth-child(odd)
+      float: right
+      clear: right
+      > .content
+        padding-left: 1.6em
+
+.hero
+  max-height: 16em
 
 .infinite-scroll .loading
   height: 20em

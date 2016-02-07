@@ -1,18 +1,19 @@
-.project-summary
-  %h3.name= link_to project.name, project_path(project)
-  
-  - if project.url?
-    .site= link_to project.url.gsub(%r_^https?://_, ''), project.url
+.project.summary{style: summary_style(project)}
+  .content
+    %h2.name= link_to project.name, project_path(project)
 
-  .description= project.description
-  
-  .participants
-    - project.participants.each do |person|
-      .name= link_to person.name, person
+    .description= project.description
+    
+    - if project.url?
+      .site= link_to project.url.gsub(%r_^https?://_, ''), project.url
+    
+    .participants
+      - project.participants.each do |person|
+        .name= link_to person.name, person
 
-  - if project.role_requests.any?
-    .role-requests
-      Looking for:
-      - project.role_requests.includes(:role).each do |request|
-        .role= link_to request.role.person_name, request.role
+    - if project.role_requests.any?
+      .role-requests
+        Looking for:
+        - project.role_requests.includes(:role).each do |request|
+          .role= link_to request.role.person_name, request.role
 

@@ -33,6 +33,9 @@
     = csrf_meta_tags
 
   %body{class: body_classes.join(' ')}
+
+    = image_tag "/assets/devgarden-logo.svg", class: 'hero', alt: 'Dev Garden – Macalester Software Collaboration Space'
+
     - unless flash.empty?
       .flashes
         - flash.each do |kind, message|

@@ -12,7 +12,7 @@ gem 'mail'
 gem 'valid_email'
 gem 'dalli'
 
-gem 'jquery-cdn', '2.1.1'
+gem 'jquery-cdn', '~> 2.2.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 

@@ -1,7 +1,9 @@
-.projects.infinite-scroll
+.projects.infinite-scroll.summary-group
   %h1 Projects
-  = render 'projects/recent', projects: Project.recent(20)
+  .content
+    = render 'projects/recent', projects: Project.recent(20)
 
-.people.infinite-scroll
+.people.infinite-scroll.summary-group
   %h1 People
-  = render 'people/recent', people: Person.recent(20)
+  .content
+    = render 'people/recent', people: Person.recent(20)

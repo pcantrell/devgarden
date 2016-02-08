@@ -1,4 +1,4 @@
-$divider-height: 1.2em
+$divider-height: 2em
 $summary-overflow: 10em
 
 body
@@ -14,36 +14,36 @@ h1,h2,h3,h4
 
 .summary-group
   overflow: hidden
+  float: left
+  &.projects
+    width: 75%
+    color: #f0f0f0
+    //background: #f0f0f0
+  &.people
+    width: 25%
+    color: rgba(39,37,93,0.32)
+    .content
+      font-size: 90%
   h1
     position: relative
     font:
       size: 1200%
       weight: 900
     text-transform: uppercase
-    color: rgba(39,37,93,0.3)
     margin: 0
     height: 0
     left: 0.88em
     transform: rotate(90deg)
     transform-origin: 0% 0%
 
-.summary-group
-  float: left
-  background: hsl(0, 0%, 40%)
-  &.projects
-    width: 75%
-  &.people
-    width: 25%
-
 .summary
-  color: rgba(255,255,255,0.6)
   padding-bottom: $summary-overflow
-  margin-bottom: -$summary-overflow
+  margin-bottom: -$summary-overflow - $divider-height/2
   h2
     margin: 0
   a
-    color: white
     text-decoration: none
+    color: inherit
   > .content
     transform: rotate(0deg)  // To draw on top of big h1
     padding: 1.6em
@@ -53,7 +53,6 @@ h1,h2,h3,h4
     font:
       family: 'effra'
       weight: 200
-    color: rgba(255,255,255,0.8)
   .participants, .role-requests
     margin-top: 1.2em
     > .name, > .role
@@ -66,6 +65,7 @@ h1,h2,h3,h4
   &.project
     width: 50%
     float: left
+    clear: left
     &:nth-child(odd)
       float: right
       clear: right
@@ -81,9 +81,9 @@ h1,h2,h3,h4
   color: #888
 
 .divider
-  position: relative
-  top: -$divider-height + 0.05em
   height: $divider-height
-  margin-bottom: -$divider-height
+  width: 60%
+  margin: 1.6em 25% (-$divider-height) 15%
+  opacity: 0.4
 .summary .content
   margin-bottom: $divider-height / 2

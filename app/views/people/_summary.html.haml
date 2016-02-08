@@ -1,6 +1,6 @@
 - background_color = summary_color(person)
 
-.person.summary{style: "background: #{background_color}"}
+.person.summary{style: "color: white; background: #{background_color}"}
   .content
     %h2.name= person.name
     
@@ -18,3 +18,4 @@
         Interested in:
         - person.role_offers.includes(:role).each do |offer|
           .role= link_to offer.role.skill_name, offer.role
+

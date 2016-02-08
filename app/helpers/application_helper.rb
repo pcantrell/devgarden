@@ -30,16 +30,25 @@ module ApplicationHelper
       rand(2) * 2 - 1
     end
 
-    path.move_to(1, 4)
-    path.line_to(0, 4)
-    path.line_to(0, rand(-0.4..0.4))
-    path.cubic_to(
-      rand(0.1..0.5), 1.2 * randsign,
-      rand(0.5..0.9), 1.2 * randsign,
-      1, rand(-0.4..0.4))
-    path.close
+    x0, y0 = 0, rand(-0.5..0.5)
+    x1, y1 = rand(0.1..0.5), 1 * randsign
+    x2, y2 = rand(0.5..0.9), 1 * randsign
+    x3, y3 = 1, rand(-0.5..0.5)
+    ally = [y0, y1, y2, y3]
+    ymid = (ally.min + ally.max) / 2
 
-puts path
+    thickness = 0.1
+
+    path.move_to(x0, y0 - ymid)
+    path.cubic_to(
+      x1, y1 + thickness - ymid,
+      x2, y2 + thickness - ymid,
+      x3, y3 - ymid)
+    path.cubic_to(
+      x2, y2 - thickness - ymid,
+      x1, y1 - thickness - ymid,
+      x0, y0 - ymid)
+    path.close
 
     path.to_s
   end

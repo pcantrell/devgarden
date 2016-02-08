@@ -23,7 +23,7 @@ module ApplicationHelper
     "hsl(#{hue}, 40%, 30%)"
   end
 
-  def random_divider_path(npts = 2)
+  def project_divider_path(npts = 2)
     path = SVGPath.new
 
     def randsign

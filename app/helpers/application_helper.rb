@@ -5,6 +5,8 @@ module ApplicationHelper
     RoleCategory.includes(:roles).shuffle
   end
 
+  LIGHTNESS_BY_HUE = [37, 32, 25, 32, 42, 35]
+
   def summary_color(model)
     @hue_weights ||= [0] * 12
     hue_index = weighted_rand(@hue_weights.map { |x| 1 / (x + 1) })
@@ -19,8 +21,9 @@ module ApplicationHelper
     end
 
     hue = ((hue_index + rand) / @hue_weights.length * 360).to_i
+    lightness = circular_interpolate(LIGHTNESS_BY_HUE, hue / 360.0 * LIGHTNESS_BY_HUE.length)
 
-    "hsl(#{hue}, 40%, 30%)"
+    "hsl(#{hue}, 40%, #{lightness}%)"
   end
 
   def project_divider_path(npts = 2)
@@ -62,6 +65,11 @@ private
       return i if x <= 0
     end
     array.length - 1
+  end
+
+  def circular_interpolate(array, index)
+    w = index % 1
+    array[index] * (1-w) + array[(index + 1) % array.length] * w
   end
 
 end

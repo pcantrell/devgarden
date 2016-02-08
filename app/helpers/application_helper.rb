@@ -1,9 +1,11 @@
+require "svg_path"
+
 module ApplicationHelper
   def roles_by_category
     RoleCategory.includes(:roles).shuffle
   end
 
-  def summary_style(model)
+  def summary_color(model)
     @hue_weights ||= [0] * 12
     hue_index = weighted_rand(@hue_weights.map { |x| 1 / (x + 1) })
 
@@ -18,7 +20,28 @@ module ApplicationHelper
 
     hue = ((hue_index + rand) / @hue_weights.length * 360).to_i
 
-    "background: hsl(#{hue}, 75%, 40%);"
+    "hsl(#{hue}, 40%, 30%)"
+  end
+
+  def random_divider_path(npts = 2)
+    path = SVGPath.new
+
+    def randsign
+      rand(2) * 2 - 1
+    end
+
+    path.move_to(1, 4)
+    path.line_to(0, 4)
+    path.line_to(0, rand(-0.4..0.4))
+    path.cubic_to(
+      rand(0.1..0.5), 1.2 * randsign,
+      rand(0.5..0.9), 1.2 * randsign,
+      1, rand(-0.4..0.4))
+    path.close
+
+puts path
+
+    path.to_s
   end
 
 private

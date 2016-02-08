@@ -1,6 +1,5 @@
 - projects.includes(:participants, :role_requests).each do |project|
   = render 'projects/summary', project: project
-  -#.divider
 
 - unless projects.empty?
   .more= link_to 'More…', projects_path(before: projects.last)

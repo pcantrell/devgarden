@@ -1,4 +1,6 @@
-.person.summary{style: summary_style(person)}
+- background_color = summary_color(person)
+
+.person.summary{style: "background: #{background_color}"}
   .content
     %h2.name= person.name
     

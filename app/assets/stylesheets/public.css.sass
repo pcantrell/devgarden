@@ -1,3 +1,6 @@
+$divider-height: 1.2em
+$summary-overflow: 10em
+
 body
   margin: 0
   padding: 0
@@ -34,8 +37,8 @@ h1,h2,h3,h4
 
 .summary
   color: rgba(255,255,255,0.6)
-  padding-bottom: 10em
-  margin-bottom: -10em
+  padding-bottom: $summary-overflow
+  margin-bottom: -$summary-overflow
   h2
     margin: 0
   a
@@ -77,10 +80,10 @@ h1,h2,h3,h4
   padding: 1em
   color: #888
 
-
 .divider
-  height: 2.6em
-  margin: 0.5ex 0
-  canvas
-    width: 100%
-    height: 100%
+  position: relative
+  top: -$divider-height + 0.05em
+  height: $divider-height
+  margin-bottom: -$divider-height
+.summary .content
+  margin-bottom: $divider-height / 2

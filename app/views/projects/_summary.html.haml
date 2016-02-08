@@ -1,4 +1,11 @@
-.project.summary{style: summary_style(project)}
+- background_color = summary_color(project)
+
+.project.summary{style: "background: #{background_color}"}
+  .divider
+    - gradient_id = rand(1000000)
+    %svg{width: "100%", height: "100%", viewbox: "0 -1 1 2", preserveAspectRatio: "none"}
+      %path{fill: background_color, d: random_divider_path}
+
   .content
     %h2.name= link_to project.name, project_path(project)
 
@@ -16,4 +23,3 @@
         Looking for
         - project.role_requests.includes(:role).each do |request|
           .role= link_to request.role.person_name, request.role
-

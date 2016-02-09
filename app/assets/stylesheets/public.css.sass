@@ -1,3 +1,11 @@
+@mixin if-below-width($width)
+  @media all and (max-width: $width)
+    @content
+
+@mixin if-above-width($width)
+  @media all and (min-width: $width)
+    @content
+
 $divider-height: 1.6em
 $summary-overflow: 10em
 $content-vpad: 1.6em
@@ -23,11 +31,11 @@ a
 .summary-group
   float: left
   &.projects
-    width: 75%
+    width: 60%
     color: rgba(39,37,93,0.1)
   &.people
     overflow: hidden
-    width: 25%
+    width: 40%
     color: rgba(39,37,93,0.32)
     .content
       font-size: 90%
@@ -60,7 +68,7 @@ a
     padding-left: 1.2em
   > .content
     transform: rotate(0deg)  // To draw on top of big h1
-    padding: $content-vpad
+    padding: $content-vpad 1.2em
     padding-left: 4em
 
   .description
@@ -76,19 +84,30 @@ a
       &:x-after
         content: '│'
         color: #ccc
-
       &:last-child:after
         content: none
 
-  &.project
-    width: 50%
-    float: left
-    clear: left
-    &:nth-child(even)
-      float: right
-      clear: right
-      > .content
-        padding-left: 1.6em
+@include if-above-width(50em)
+  .summary-group
+    &.projects
+      width: 75%
+      color: rgba(39,37,93,0.1)
+    &.people
+      overflow: hidden
+      width: 25%
+  .summary
+    &.project
+      width: 50%
+      float: left
+      clear: left
+      &:nth-child(odd)
+        .content
+          padding-right: 0
+      &:nth-child(even)
+        float: right
+        clear: right
+        .content
+          padding-left: 1.2em
 
 .hero
   max-height: 16em

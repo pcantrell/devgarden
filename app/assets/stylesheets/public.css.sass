@@ -1,4 +1,4 @@
-$divider-height: 2em
+$divider-height: 1.6em
 $summary-overflow: 10em
 $content-vpad: 1.6em
 
@@ -6,20 +6,27 @@ body
   margin: 0
   padding: 0
   font:
-    family: 'expo-serif-pro'
+    family: 'freight-text-pro'
+    weight: 400
+    size: 1.1em
 
-h1,h2,h3,h4
+h1,h2,h3,h4,.site
   font:
     family: 'effra'
     weight: 500
 
+a
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+
 .summary-group
-  overflow: hidden
   float: left
   &.projects
     width: 75%
     color: rgba(39,37,93,0.1)
   &.people
+    overflow: hidden
     width: 25%
     color: rgba(39,37,93,0.32)
     .content
@@ -42,8 +49,15 @@ h1,h2,h3,h4
   h2
     margin: 0
   a
-    text-decoration: none
     color: inherit
+  .meta
+    opacity: 0.4
+    &:before
+      display: inline-block
+      content: '⤑'
+      width: 1.2em
+  .role
+    padding-left: 1.2em
   > .content
     transform: rotate(0deg)  // To draw on top of big h1
     padding: $content-vpad
@@ -55,10 +69,14 @@ h1,h2,h3,h4
       weight: 200
   .participants, .role-requests
     margin-top: 1.2em
+    float: left
+    width: 50%
     > .name, > .role
-      display: inline-block
-      &:after
-        content: ', '
+      x-display: inline-block
+      &:x-after
+        content: '│'
+        color: #ccc
+
       &:last-child:after
         content: none
 
@@ -66,7 +84,7 @@ h1,h2,h3,h4
     width: 50%
     float: left
     clear: left
-    &:nth-child(odd)
+    &:nth-child(even)
       float: right
       clear: right
       > .content
@@ -81,9 +99,10 @@ h1,h2,h3,h4
   color: #888
 
 .divider
+  clear: both
   height: $divider-height
-  width: 60%
-  margin: 0 25% (-$divider-height) 15%
+  width: 90%
+  margin: 0 5% (-$divider-height) 5%
   opacity: 0.4
   position: relative
   top: $content-vpad - $divider-height/2

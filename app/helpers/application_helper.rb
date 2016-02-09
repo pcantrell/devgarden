@@ -5,11 +5,11 @@ module ApplicationHelper
     RoleCategory.includes(:roles).shuffle
   end
 
-  LIGHTNESS_BY_HUE = [37, 32, 25, 32, 42, 35]
+  LIGHTNESS_BY_HUE = [38, 34, 25, 32, 45, 36]
 
   def summary_color(model)
     @hue_weights ||= [0] * 12
-    hue_index = weighted_rand(@hue_weights.map { |x| 1 / (x + 1) })
+    hue_index = weighted_rand(@hue_weights.map { |x| 1 / (x + 0.2) })
 
     @hue_weights.map!.with_index do |weight, i|
       bucket_angle = (hue_index - i) * 2 * Math::PI / @hue_weights.length

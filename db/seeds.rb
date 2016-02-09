@@ -32,8 +32,7 @@ category 'Writing' do
   role 'copywriting', 'copywriter'
 end
 
-category 'Business' do
-  role 'business analysis', 'business analyst'
-  role 'business development', 'business developer'
-  role 'market research', 'market researcher'
-end
+# category 'Business' do
+#   role 'business analysis', 'business analyst'
+#   role 'market research', 'market researcher'
+# end

@@ -73,6 +73,11 @@ GEM
       thor (~> 0.19)
     builder (3.2.2)
     byebug (8.2.2)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -156,6 +161,7 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.99)
+    mini_magick (4.4.0)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     minitest-spec-rails (5.3.0)
@@ -264,6 +270,7 @@ DEPENDENCIES
   activeadmin!
   bcrypt (~> 3.1.7)
   byebug
+  carrierwave
   coffee-rails (~> 4.1.0)
   dalli
   delayed_job_active_record
@@ -278,6 +285,7 @@ DEPENDENCIES
   jquery-rails
   letter_opener
   mail
+  mini_magick
   minitest-spec-rails
   pg
   rails (= 4.2.0)

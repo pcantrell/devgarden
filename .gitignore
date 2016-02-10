@@ -13,4 +13,5 @@
 /tmp
 
 /public/assets
+/public/uploads
 .sass-cache

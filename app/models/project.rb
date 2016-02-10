@@ -3,6 +3,8 @@ class Project < ActiveRecord::Base
   has_many :participants, through: :participations, source: :person
   has_many :role_requests
 
+  mount_uploader :icon, ProjectIconUploader
+
   validates :name, presence: true
 
   URL_REGEXP = URI::regexp(%w(http https))

@@ -2,10 +2,14 @@
 
 .project.summary{style: "color: #{project_color}"}
   .content
-    %h2.name= link_to project.name, project_path(project)
+    - if project.icon?
+      = link_to project, class: 'icon' do
+        = image_tag project.icon.thumb.url
 
-    .description= project.description
-    
+    .heading
+      %h2.name= link_to project.name, project
+      .description= project.description
+
     - if project.url?
       .site= link_to project.url.gsub(%r_^https?://_, ''), project.url
     

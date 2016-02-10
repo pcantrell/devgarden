@@ -23,6 +23,9 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'devise', '>= 3.2.0'
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'carrierwave'
+gem 'mini_magick'
+
 gem 'delayed_job_active_record'
 
 # gem 'unicorn'

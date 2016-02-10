@@ -54,6 +54,15 @@ a
 .summary
   padding-bottom: $summary-overflow
   margin-bottom: -$summary-overflow
+  .icon
+    float: left
+    margin: 0.5ex 1.5ex 0 0
+    img
+      width: 48px
+      height: 48px
+      object-fit: contain
+  .heading
+    overflow: hidden
   h2
     margin: 0
   a
@@ -75,8 +84,10 @@ a
     font:
       family: 'effra'
       weight: 200
+  .participants
+    clear: left
   .participants, .role-requests
-    margin-top: 1.2em
+    margin-top: 0.6em
     float: left
     width: 50%
     > .name, > .role

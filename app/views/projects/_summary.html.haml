@@ -9,9 +9,12 @@
     .heading
       %h2.name= link_to project.name, project
       .description= project.description
+      - if project.url?
+        .site= link_to project.url.gsub(%r_^https?://_, ''), project.url
 
-    - if project.url?
-      .site= link_to project.url.gsub(%r_^https?://_, ''), project.url
+    .tags
+      - project.tags.each do |tag|
+        .tag{class: "tag-#{tag.category.key}"}= tag.name
     
     .participants
       - project.participants.shuffle.each do |person|

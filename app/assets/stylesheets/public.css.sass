@@ -84,8 +84,33 @@ a
     font:
       family: 'effra'
       weight: 200
-  .participants
+  .tags
     clear: left
+    overflow: hidden
+    white-space: nowrap
+    margin: 1em 0
+    font:
+      family: 'effra'
+      weight: 500
+      size: 54%
+    .tag
+      display: inline-block
+      text-transform: uppercase
+      padding: 0 1ex
+      float: left
+      border-right: #ccc 0.5px solid
+      &:first-child
+        padding-left: 0
+      &:last-child
+        border-right: none
+      &.tag-platform_type
+        color: hsl(340, 60%, 40%)
+      &.tag-platform
+        color: hsl(110, 60%, 40%)
+      &.tag-tool
+        color: hsl(42, 60%, 40%)
+      &.tag-language
+        color: hsl(260, 60%, 50%)
   .participants, .role-requests
     margin-top: 0.6em
     float: left

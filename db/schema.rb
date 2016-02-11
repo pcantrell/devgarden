@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210043109) do
+ActiveRecord::Schema.define(version: 20160210055910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,17 @@ ActiveRecord::Schema.define(version: 20160210043109) do
   end
 
   add_index "people", ["email"], name: "index_people_on_email", unique: true, using: :btree
+
+  create_table "project_tags", force: :cascade do |t|
+    t.integer  "project_id", null: false
+    t.integer  "tag_id",     null: false
+    t.integer  "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "project_tags", ["project_id"], name: "index_project_tags_on_project_id", using: :btree
+  add_index "project_tags", ["tag_id"], name: "index_project_tags_on_tag_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -87,11 +98,33 @@ ActiveRecord::Schema.define(version: 20160210043109) do
 
   add_index "roles", ["category_id"], name: "index_roles_on_category_id", using: :btree
 
+  create_table "tag_categories", force: :cascade do |t|
+    t.string   "key",        null: false
+    t.string   "name",       null: false
+    t.integer  "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.integer  "category_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "long_name"
+  end
+
+  add_index "tags", ["category_id"], name: "index_tags_on_category_id", using: :btree
+  add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
+
   add_foreign_key "participations", "people"
   add_foreign_key "participations", "projects"
+  add_foreign_key "project_tags", "projects"
+  add_foreign_key "project_tags", "tags"
   add_foreign_key "role_offers", "people"
   add_foreign_key "role_offers", "roles"
   add_foreign_key "role_requests", "projects"
   add_foreign_key "role_requests", "roles"
   add_foreign_key "roles", "role_categories", column: "category_id"
+  add_foreign_key "tags", "tag_categories", column: "category_id"
 end

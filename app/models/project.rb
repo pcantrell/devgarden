@@ -2,6 +2,8 @@ class Project < ActiveRecord::Base
   has_many :participations
   has_many :participants, through: :participations, source: :person
   has_many :role_requests
+  has_many :project_tags, -> { order(:order) }
+  has_many :tags, through: :project_tags
 
   mount_uploader :icon, ProjectIconUploader
 

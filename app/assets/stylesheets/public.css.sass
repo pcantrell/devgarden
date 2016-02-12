@@ -8,7 +8,7 @@
 
 $divider-height: 1.6em
 $summary-overflow: 10em
-$content-vpad: 1.6em
+$content-vpad: 2em
 
 body
   margin: 0
@@ -67,12 +67,6 @@ a
     margin: 0
   a
     color: inherit
-  .meta
-    opacity: 0.4
-    &:before
-      display: inline-block
-      content: '⤑'
-      width: 1.2em
   .role
     padding-left: 1.2em
   > .content
@@ -80,7 +74,7 @@ a
     padding: $content-vpad 1.2em
     padding-left: 4em
 
-  .description
+  .description, .meta
     font:
       family: 'effra'
       weight: 200
@@ -116,9 +110,12 @@ a
     .tag-category-language
       color: hsl(260, 40%, 40%)
   .participants, .role-requests
-    margin-top: 0.6em
+    margin-top: 0.2em
+    padding-top: 0.4em
     float: left
     width: 50%
+    color: #666
+    font-size: 96%
     > .name, > .role
       x-display: inline-block
       &:x-after
@@ -126,6 +123,17 @@ a
         color: #ccc
       &:last-child:after
         content: none
+  .role-requests .meta
+    color: #999
+    text-transform: uppercase
+    font-size: 75%
+    padding: 0.2em 0
+    &:before
+      display: inline-block
+      content: '⤑'
+      width: 1.2em
+      font-size: 133%
+      color: #ccc
 
 @include if-above-width(50em)
   .summary-group
@@ -160,8 +168,8 @@ a
 .divider
   clear: both
   height: $divider-height
-  width: 90%
-  margin: 0 5% (-$divider-height) 5%
+  width: 60%
+  margin: 0 20% (-$divider-height) 20%
   opacity: 0.4
   position: relative
   top: $content-vpad - $divider-height/2

@@ -8,7 +8,9 @@
 
     .heading
       %h2.name= link_to project.name, project
+      
       .description= project.description
+      
       - if project.url?
         .site= link_to project.url.gsub(%r_^https?://_, ''), project.url
 
@@ -24,7 +26,7 @@
 
     - if project.role_requests.any?
       .role-requests
-        .meta looking for
+        .meta Looking for
         - project.role_requests.includes(:role).shuffle.each do |request|
           .role= link_to request.role.person_name, request.role
 

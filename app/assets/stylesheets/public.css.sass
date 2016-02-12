@@ -38,7 +38,7 @@ a
     width: 40%
     color: rgba(39,37,93,0.32)
     .content
-      font-size: 90%
+      font-size: 92%
   h1
     position: relative
     font:
@@ -67,17 +67,22 @@ a
     margin: 0
   a
     color: inherit
-  .role
-    padding-left: 1.2em
   > .content
     transform: rotate(0deg)  // To draw on top of big h1
     padding: $content-vpad 1.2em
-    padding-left: 4em
 
   .description, .meta
     font:
       family: 'effra'
       weight: 200
+  .meta
+    text-transform: uppercase
+    font-size: 75%
+    padding: 0.2em 0
+
+.project.summary
+  > .content
+    padding-left: 4em
   .tags
     clear: left
     overflow: hidden
@@ -123,19 +128,33 @@ a
         color: #ccc
       &:last-child:after
         content: none
-  .role-requests .meta
-    color: #999
-    text-transform: uppercase
-    font-size: 75%
-    padding: 0.2em 0
-    &:before
-      display: inline-block
-      content: '⤑'
-      width: 1.2em
-      font-size: 133%
-      color: #ccc
+  .role-requests
+    .meta
+      color: #999
+      &:before
+        display: inline-block
+        content: '⤑'
+        width: 1.2em
+        font-size: 133%
+        color: #ccc
+    .role
+      padding-left: 1.2em
 
-@include if-above-width(50em)
+.person.summary
+  > .content
+    padding-left: 2em
+  .projects, .role-offers
+    margin-top: 1.2em
+    width: 50%
+    .meta
+      color: rgba(255, 255, 255, 0.6)
+      font-size: 90%
+  .projects
+    float: left
+  .role-offers
+    float: right
+
+@include if-above-width(60em)
   .summary-group
     &.projects
       width: 75%

@@ -15,6 +15,12 @@ class Project < ActiveRecord::Base
 
   include RecentScope
 
+  def tags_grouped
+    tags.includes(:category)
+      .group_by(&:category)
+      .sort_by(&:first)
+  end
+
   def scm_urls_as_text
     scm_urls.join("\n")
   end

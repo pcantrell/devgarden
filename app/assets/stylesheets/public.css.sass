@@ -93,24 +93,28 @@ a
       family: 'effra'
       weight: 500
       size: 54%
+    .tag-category
+      display: inline
+    .tag-category-family
+      color: #444
+      .tag:last-child
+        border-right: 0.5px solid black
+        padding-right: 0.8em
+        margin-right: 0.8em
+      &:last-child .tag:last-child
+        border: none
     .tag
-      display: inline-block
       text-transform: uppercase
-      padding: 0 1ex
+      letter-spacing: 0.5px
+      padding: 0.2ex 0
+      margin-right: 0.8em
       float: left
-      border-right: #ccc 0.5px solid
-      &:first-child
-        padding-left: 0
-      &:last-child
-        border-right: none
-      &.tag-platform_type
-        color: hsl(340, 60%, 40%)
-      &.tag-platform
-        color: hsl(110, 60%, 40%)
-      &.tag-tool
-        color: hsl(42, 60%, 40%)
-      &.tag-language
-        color: hsl(260, 60%, 50%)
+    .tag-category-platform
+      color: hsl(110, 40%, 30%)
+    .tag-category-tool
+      color: hsl(42, 40%, 30%)
+    .tag-category-language
+      color: hsl(260, 40%, 40%)
   .participants, .role-requests
     margin-top: 0.6em
     float: left

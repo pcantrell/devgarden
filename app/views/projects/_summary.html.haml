@@ -13,8 +13,10 @@
         .site= link_to project.url.gsub(%r_^https?://_, ''), project.url
 
     .tags
-      - project.tags.each do |tag|
-        .tag{class: "tag-#{tag.category.key}"}= tag.name
+      - project.tags_grouped.each do |category, tags|
+        .tag-category{class: "tag-category-#{category.key}"}
+          -tags.each do |tag|
+            .tag= tag.name
     
     .participants
       - project.participants.shuffle.each do |person|

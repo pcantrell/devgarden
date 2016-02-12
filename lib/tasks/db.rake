@@ -18,7 +18,7 @@ namespace :db do
         Project.create!(
           name: FFaker::Lorem.words(rand(2) + 1).map(&:capitalize).join(['', ' '].sample),
           url: (FFaker::Internet.http_url if rand < 0.5),
-          description: FFaker::Company.catch_phrase,
+          tagline: FFaker::Company.catch_phrase,
           participants: people.sample(1 + rand(3)),
           role_requests: all_roles.sample(rand(5)).map { |role| RoleRequest.new(role: role) }
         )

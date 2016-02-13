@@ -1,17 +1,14 @@
 .events
-  - limit = 5
-  - time_limit = 1.week.from_now
-  - EventDate.future.each.with_index do |event_date, index|
-    - break unless index < limit || event_date.start_time < time_limit
-    - event = event_date.event
-
+  - upcoming_events(min_events: 3, including_all_within: 1.week) do |event, dates|
     .event
       .title= event.title
-      .date
-        = format_time_range(event_date.start_time, event_date.end_time)
-      .location
-        .name=   event.location.name
-        .detail= event.location.detail
+      .dates
+        - dates.each do |date|
+          .date= format_time_range(date.start_time, date.end_time)
+      - if event.location
+        .location
+          .name=   event.location.name
+          .detail= event.location.detail
 
 .projects.infinite-scroll.summary-group
   %h1 Projects

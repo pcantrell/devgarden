@@ -2,7 +2,12 @@ require "svg_path"
 
 module DatesHelper
 
-  def format_time_range(start_time, end_time = nil, format = default_time_range_format, separator = "–")
+  def format_time_range(
+      start_time,
+      end_time = nil,
+      format = default_time_range_format,
+      separator = span_tag(:separator, "–"))
+
     merged = if end_time
       merge_identical_levels(
         recursive_format(start_time, format),
@@ -12,20 +17,22 @@ module DatesHelper
       recursive_format(start_time, format)
     end
 
-    merged.flatten.join(" ").html_safe
+    merged.flatten.join.html_safe
   end
 
   def default_time_range_format
     @default_time_range_format ||= IceNine.deep_freeze(
       [
-        span_tag(:weekday, "%a"),
-        span_tag(:monthday, "%b %-d"),
+        "<span class='daterange'>",
+        span_tag(:weekday, "%a "),
+        span_tag(:monthday, "%b %-d, "),
         [
           [
-            span_tag(:hourmin, "%l:%M")
+            span_tag(:hourmin, "%-l:%M")
           ],
           span_tag(:ampm, "%p")
-        ]
+        ],
+        "</span>"
       ]
     )
   end

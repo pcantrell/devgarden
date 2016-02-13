@@ -29,17 +29,47 @@ a
     text-decoration: underline
 
 .events
-  margin: 1.2em 10%
-  width: 80%
-  display: table
+  margin: 1.2em auto
+  max-width: 90%
   .event
-    display: table-row
-    .title, .date, .location
-      display: table-cell
+    padding: 0.6em 0
+    .dates, .location
+      padding-left: 1.2em !important
     .title
-      max-width: 40%
-    .date
-      white-space: nowrap
+      margin-bottom: 0.2em
+    .dates
+      font:
+        family: 'effra'
+        weight: 300
+        size: 90%
+      .daterange
+        white-space: nowrap
+      .weekday
+        font-weight: 500
+        margin-right: 0.2ex
+      .ampm
+        font-size: 1.2ex
+        font-weight: 400
+        margin-left: 0.2ex
+      .date > .separator
+        &:before, &:after
+          content: ' '
+    .location
+      font:
+        family: 'effra'
+        weight: 400
+        size: 94%
+      .detail
+        font-size: 75%
+        font-weight: 300
+
+  @include if-above-width(36em)
+    display: table
+    .event
+      display: table-row
+      .title, .dates, .location
+        display: table-cell
+        padding: 0.6em 0
 
 .summary-group
   float: left
@@ -135,10 +165,6 @@ a
     color: #666
     font-size: 96%
     > .name, > .role
-      x-display: inline-block
-      &:x-after
-        content: '│'
-        color: #ccc
       &:last-child:after
         content: none
   .role-requests

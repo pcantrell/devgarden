@@ -1,4 +1,4 @@
 class Event < ActiveRecord::Base
   belongs_to :location
-  has_many :dates, class: EventDate
+  has_many :dates, class: EventDate, dependent: :destroy
 end

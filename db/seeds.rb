@@ -1,3 +1,5 @@
+Location.find_or_create_by!(name: 'Innovation Space').update!(detail: 'Basement of Markim Hall (IGC)')
+
 def category(name)
   @category = RoleCategory.find_or_create_by!(name: name)
   yield

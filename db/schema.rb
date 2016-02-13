@@ -11,10 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160212055159) do
+ActiveRecord::Schema.define(version: 20160212055449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "event_dates", force: :cascade do |t|
+    t.integer  "event_id",   null: false
+    t.datetime "start_time", null: false
+    t.datetime "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "event_dates", ["event_id"], name: "index_event_dates_on_event_id", using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title",       null: false
+    t.text     "description"
+    t.integer  "location_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "events", ["location_id"], name: "index_events_on_location_id", using: :btree
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "detail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "participations", force: :cascade do |t|
     t.integer  "project_id"
@@ -118,6 +145,8 @@ ActiveRecord::Schema.define(version: 20160212055159) do
   add_index "tags", ["category_id"], name: "index_tags_on_category_id", using: :btree
   add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
 
+  add_foreign_key "event_dates", "events"
+  add_foreign_key "events", "locations"
   add_foreign_key "participations", "people"
   add_foreign_key "participations", "projects"
   add_foreign_key "project_tags", "projects"

@@ -1,3 +1,18 @@
+.events
+  - limit = 5
+  - time_limit = 1.week.from_now
+  - EventDate.future.each.with_index do |event_date, index|
+    - break unless index < limit || event_date.start_time < time_limit
+    - event = event_date.event
+
+    .event
+      .title= event.title
+      .date
+        = format_time_range(event_date.start_time, event_date.end_time)
+      .location
+        .name=   event.location.name
+        .detail= event.location.detail
+
 .projects.infinite-scroll.summary-group
   %h1 Projects
   .content

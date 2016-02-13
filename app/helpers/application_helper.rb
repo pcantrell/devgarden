@@ -5,6 +5,10 @@ module ApplicationHelper
     RoleCategory.includes(:roles).shuffle
   end
 
+  def span_tag(css_class, text)
+    content_tag(:span, text, class: css_class)
+  end
+
   LIGHTNESS_BY_HUE = [38, 34, 25, 32, 45, 36]
 
   def summary_color(model)

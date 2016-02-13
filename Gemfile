@@ -10,6 +10,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'formtastic', ">= 2.3.0.rc2"
 gem 'mail'
 gem 'valid_email'
+gem 'ice_nine'
 gem 'dalli'
 
 gem 'jquery-cdn', '~> 2.2.0'

@@ -29,9 +29,9 @@ gem 'mini_magick'
 
 gem 'delayed_job_active_record'
 
-# gem 'unicorn'
-
 group :development, :test do
+  gem 'unicorn'
+  
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 

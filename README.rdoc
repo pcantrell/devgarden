@@ -1,28 +1,15 @@
-== README
+This is the source code for [The Dev Garden](http://devgarden.macalester.edu)’s web site.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Installation
 
-Things you may want to cover:
+- Install Ruby, Rails and PostgreSQL. The [Railsbridge Installfest](http://docs.railsbridge.org/installfest/) is a good installation guide.
+- Clone this repository.
+- `cd devgarden`
+- `bundle install`
+- `rake db:setup`
+- If you want fill your local database with fake data: `rake db:fake`
 
-* Ruby version
+To run the site locally:
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+- Run `unicorn` on the command line.
+- Visit `http://localhost:8080` in your web browser.

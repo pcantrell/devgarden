@@ -45,6 +45,8 @@ group :development, :test do
   gem 'minitest-spec-rails'
   gem 'factory_girl_rails'
   gem 'ffaker'
+
+  gem 'rails_real_favicon'
 end
 
 group :production do

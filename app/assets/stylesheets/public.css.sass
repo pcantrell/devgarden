@@ -72,26 +72,37 @@ hr
   border-top: 0.5px solid #ccc
 
 .more
+  margin-top: 0.6em
   font:
     family: 'effra'
     size: 80%
   text-transform: uppercase
+  text-align: right
   a:after
     display: inline-block
     opacity: 0.6
     content: '  〉'
     width: 0
 
-.events
-  margin: 1.2em auto
+.features
+  margin: 0 auto
   max-width: 90%
+  .feature
+    margin: 1.2em 0
+    padding-bottom: 1.2em
+    border-bottom: 0.5px solid #ccc
+    &:last-child
+      border: none
+
+.events
   .event
     padding: 0.2em 0
-    line-height: 1.2em
+
     .dates, .location
       padding-left: 1.2em !important
     .title
       margin-bottom: 0.6em
+      line-height: 1.15em
     .dates
       font:
         family: 'effra'
@@ -117,21 +128,20 @@ hr
       .detail
         font-weight: 300
 
-  .more
-    text-align: right
-    padding: 0.6em 0
-
-  @include if-above-width(36em)
+@include if-above-width(36em)
+  .about
+    text-align: center
+  .features
     display: table
     .event
       display: table-row
       .title, .dates, .location
         display: table-cell
-        padding: 0.2em 0
+        padding: 0.6em 0
 
 .summary-group
   float: left
-  margin-top: 2.4em
+  margin-top: 1.2em
   &.projects
     width: 60%
     color: rgba(39,37,93,0.1)
@@ -275,7 +285,7 @@ hr
           padding-left: 1.2em
 
 .hero
-  margin: 1.2em 0
+  margin-top: 1.2em
   max-height: 16em
 
 .infinite-scroll .loading

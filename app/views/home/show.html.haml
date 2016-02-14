@@ -2,22 +2,28 @@
 = provide :hero do
   = image_tag image_url("devgarden-logo.svg"), class: 'hero', alt: 'Dev Garden – Macalester Software Collaboration Space'
 
-.events
-  .event-list
-    - upcoming_events(min_events: 3, including_all_within: 1.week) do |event, dates|
-      .event
-        .title= event.title
-        .dates
-          - dates.each do |date|
-            .date= format_time_range(date.start_time, date.end_time)
-        - if event.location
-          .location
-            .name=   event.location.name
-            .detail= event.location.detail
-  .more
-    = link_to "More events", '#' #events_path
+.features
+  .feature.about
+    .blurb
+      The Dev Garden supports student software projects.
+      %br
+      It is open to all majors, roles, backgrounds, and ability levels.
+    .more= link_to 'More Info', '#'
 
-%hr
+  .feature.events
+    .event-list
+      - upcoming_events(min_events: 3, including_all_within: 1.week) do |event, dates|
+        .event
+          .title= event.title
+          .dates
+            - dates.each do |date|
+              .date= format_time_range(date.start_time, date.end_time)
+          - if event.location
+            .location
+              .name=   event.location.name
+              .detail= event.location.detail
+    .more
+      = link_to "More events", '#' #events_path
 
 .projects.infinite-scroll.summary-group
   %h1 Projects

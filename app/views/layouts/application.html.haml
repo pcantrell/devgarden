@@ -33,8 +33,9 @@
     = csrf_meta_tags
 
   %body{class: body_classes.join(' ')}
+    = render "shared/nav_bar"
 
-    = image_tag "/assets/devgarden-logo.svg", class: 'hero', alt: 'Dev Garden – Macalester Software Collaboration Space'
+    = yield :hero
 
     - unless flash.empty?
       .flashes

@@ -1,6 +1,8 @@
+# Dev Garden
+
 This is the source code for [The Dev Garden](http://devgarden.macalester.edu)’s web site.
 
-# Installation
+## Installation
 
 - Install Ruby, Rails and PostgreSQL. The [Railsbridge Installfest](http://docs.railsbridge.org/installfest/) is a good installation guide.
 - Clone this repository.

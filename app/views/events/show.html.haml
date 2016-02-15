@@ -1,0 +1,10 @@
+%h1= event.title
+
+.dates
+  - event.dates.future.each do |date|
+    .date= format_time_range(date.start_time, date.end_time)
+
+- if event.location
+  .location
+    .name=   event.location.name
+    .detail= event.location.detail

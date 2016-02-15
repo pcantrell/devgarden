@@ -1,0 +1,97 @@
+@import '_util'
+
+.clear
+  clear: both
+
+body
+  margin: 0
+  padding: 0
+  color: $devgarden-dark
+  font:
+    family: 'freight-text-pro'
+    weight: 400
+    size: 1.1em
+
+h1,h2,h3,h4,.site
+  font:
+    family: 'effra'
+    weight: 500
+
+a
+  &:link, &:visited
+    color: #3530b1
+  &:hover
+    color: #3d36de
+    text-decoration: underline
+  text-decoration: none
+
+.nav-bar
+  font:
+    family: 'effra'
+    size: 80%
+    weight: 500
+  letter-spacing: 0.5px
+  text-transform: uppercase
+  background: $devgarden-dark
+  border-bottom: 0.5px solid #ccc
+  padding: 0.6em
+  a
+    color: rgba(255,255,255,0.9)
+    &:hover
+      color: white
+  .logo
+    img
+      height: 2.4em
+  .nav-items
+    float: right
+    .nav-item
+      line-height: 2.4em
+      display: inline-block
+      margin-right: 1.8em
+
+hr
+  border: none
+  height: 1px
+  width: 50%
+  margin: 0.6em 25%
+  border-top: 0.5px solid #ccc
+
+.more
+  margin-top: 0.6em
+  font:
+    family: 'effra'
+    size: 80%
+  text-transform: uppercase
+  text-align: right
+  a:after
+    display: inline-block
+    opacity: 0.6
+    content: '  〉'
+    width: 0
+
+.features
+  margin: 0 auto
+  max-width: 90%
+  .feature
+    margin: 1.2em 0
+    padding-bottom: 1.2em
+    border-bottom: 0.5px solid #ccc
+    &:last-child
+      border: none
+
+
+@include if-above-width(36em)
+  .about
+    text-align: center
+  .features
+    display: table
+
+.hero
+  margin-top: 1.2em
+  max-height: 16em
+
+.infinite-scroll .loading
+  height: 20em
+  padding: 1em
+  color: #888
+

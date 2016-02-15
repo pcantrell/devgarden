@@ -1,0 +1,164 @@
+@import '_util'
+
+.home-controller
+
+  $summary-overflow: 10em
+  $content-vpad: 2em
+  $divider-height: 1.6em
+
+  .nav-bar .logo
+    display: none
+
+  .summary-group
+    float: left
+    margin-top: 1.2em
+    &.projects
+      width: 60%
+      color: rgba(39,37,93,0.1)
+    &.people
+      overflow: hidden
+      width: 40%
+      color: rgba(39,37,93,0.32)
+      .content
+        font-size: 92%
+    h1
+      position: relative
+      font:
+        size: 1200%
+        weight: 900
+      text-transform: uppercase
+      margin: 0
+      height: 0
+      left: 0.88em
+      transform: rotate(90deg)
+      transform-origin: 0% 0%
+
+  .summary
+    padding-bottom: $summary-overflow
+    margin-bottom: -$summary-overflow
+    .icon
+      float: left
+      margin: 0.5ex 1.5ex 0 0
+      img
+        width: 48px
+        height: 48px
+        object-fit: contain
+    .heading
+      overflow: hidden
+    h2
+      margin: 0
+    a
+      color: inherit
+    > .content
+      transform: rotate(0deg)  // To draw on top of big h1
+      padding: $content-vpad 1.2em
+
+    .tagline, .meta
+      font:
+        family: 'effra'
+        weight: 200
+    .meta
+      text-transform: uppercase
+      font-size: 75%
+      padding: 0.2em 0
+
+  .project.summary
+    > .content
+      padding-left: 4em
+    .tags
+      clear: left
+      overflow: hidden
+      white-space: nowrap
+      margin: 1em 0
+      font:
+        family: 'effra'
+        weight: 500
+        size: 54%
+      .tag-category
+        display: inline
+      .tag-category-family
+        color: #444
+        .tag:last-child
+          border-right: 0.5px solid black
+          padding-right: 0.8em
+          margin-right: 0.8em
+        &:last-child .tag:last-child
+          border: none
+      .tag
+        text-transform: uppercase
+        letter-spacing: 0.5px
+        padding: 0.2ex 0
+        margin-right: 0.8em
+        float: left
+      .tag-category-platform
+        color: hsl(110, 40%, 30%)
+      .tag-category-tool
+        color: hsl(42, 40%, 30%)
+      .tag-category-language
+        color: hsl(260, 40%, 40%)
+    .participants, .role-requests
+      margin-top: 0.2em
+      padding-top: 0.4em
+      float: left
+      width: 50%
+      color: #666
+      font-size: 96%
+      > .name, > .role
+        &:last-child:after
+          content: none
+    .role-requests
+      .meta
+        color: #999
+        &:before
+          display: inline-block
+          content: '⤑'
+          width: 1.2em
+          font-size: 133%
+          color: #ccc
+      .role
+        padding-left: 1.2em
+
+  .person.summary
+    > .content
+      padding-left: 2em
+    .projects, .role-offers
+      margin-top: 1.2em
+      width: 50%
+      .meta
+        color: rgba(255, 255, 255, 0.6)
+        font-size: 90%
+    .projects
+      float: left
+    .role-offers
+      float: right
+
+  @include if-above-width(60em)
+    .summary-group
+      &.projects
+        width: 75%
+        color: rgba(39,37,93,0.1)
+      &.people
+        overflow: hidden
+        width: 25%
+    .summary
+      &.project
+        width: 50%
+        float: left
+        clear: left
+        &:nth-child(odd)
+          .content
+            padding-right: 0
+        &:nth-child(even)
+          float: right
+          clear: right
+          .content
+            padding-left: 1.2em
+
+  .divider
+    clear: both
+    height: $divider-height
+    width: 60%
+    margin: 0 20% (-$divider-height) 20%
+    opacity: 0.4
+    position: relative
+    top: $content-vpad - $divider-height/2

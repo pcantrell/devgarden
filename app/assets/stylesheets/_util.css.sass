@@ -1,0 +1,9 @@
+@mixin if-below-width($width)
+  @media all and (max-width: $width)
+    @content
+
+@mixin if-above-width($width)
+  @media all and (min-width: $width)
+    @content
+
+$devgarden-dark: #282561

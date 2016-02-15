@@ -1,0 +1,66 @@
+@import '_util'
+
+.event
+  padding: 0.2em 0
+
+  a, a:visited
+    color: $devgarden-dark
+    &:hover
+      color: #3d36de
+
+  .dates, .location
+    padding-left: 1.2em !important
+  .title
+    margin-bottom: 0.6em
+    line-height: 1.15em
+
+@include if-above-width(36em)
+  .events
+    display: table
+    .event
+      display: table-row
+      .title, .dates, .location
+        display: table-cell
+        padding: 0.6em 0
+
+.event, .events-controller
+  .dates
+    font:
+      family: 'effra'
+      weight: 300
+      size: 94%
+    .daterange
+      white-space: nowrap
+    .weekday
+      font-weight: 500
+      margin-right: 0.2ex
+    .ampm
+      font-size: 1.4ex
+      font-weight: 400
+      margin-left: 0.2ex
+    .date > .separator
+      &:before, &:after
+        content: ' '
+  .location
+    font:
+      family: 'effra'
+      weight: 400
+      size: 94%
+    .detail
+      font-weight: 300
+
+.events-controller
+  &.index-action
+    h1
+      text-align: center
+    .events
+      margin: 1.2em auto
+
+  &.show-action
+    main
+      margin: 0 auto
+      padding: 0 1.8em
+      max-width: 40em
+    .dates
+      float: right
+      text-align: right

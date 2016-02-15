@@ -1,0 +1,9 @@
+.event
+  .title= link_to event.title, event
+  .dates
+    - dates.each do |date|
+      .date= link_to format_time_range(date.start_time, date.end_time), event
+  - if event.location
+    .location
+      .name=   event.location.name
+      .detail= event.location.detail

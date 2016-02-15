@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
 
   def body_classes
     [
-      controller_name,
-      action_name,
+      "#{controller_name}-controller",
+      "#{action_name}-action",
       ("#{controller_name.singularize}-#{params[:id]}" if params[:id])
     ].compact
   end

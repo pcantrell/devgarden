@@ -1,4 +1,29 @@
-= render 'summary', project: project
+- if project.icon?
+  .icon
+    = image_tag project.icon.feature.url
+
+%h1.name= project.name
+
+.tagline= project.tagline
+  
+- if project.url?
+  .site= link_to project.url.gsub(%r_^https?://_, ''), project.url
+
+.tags
+  - project.tags_grouped.each do |category, tags|
+    .tag-category{class: "tag-category-#{category.key}"}
+      -tags.each do |tag|
+        .tag= tag.name
+
+.participants
+  - project.participants.shuffle.each do |person|
+    .name= link_to person.name, person
+
+- if project.role_requests.any?
+  .role-requests
+    .meta Looking for
+    - project.role_requests.includes(:role).shuffle.each do |request|
+      .role= link_to request.role.person_name, request.role
 
 %p Source control:
 %ul

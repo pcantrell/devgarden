@@ -26,6 +26,10 @@ class ProjectIconUploader < CarrierWave::Uploader::Base
     process resize_to_fit: [96, 96]
   end
 
+  version :feature do
+    process resize_to_fit: [256, 256]
+  end
+
   def extension_white_list
     %w(jpg jpeg gif png)
   end

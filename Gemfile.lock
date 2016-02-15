@@ -126,6 +126,7 @@ GEM
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
+    high_voltage (2.4.0)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
       haml (~> 4.0.0)
@@ -156,6 +157,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.10.0)
+    kramdown (1.9.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.4.1)
@@ -299,10 +301,12 @@ DEPENDENCIES
   ffaker
   formtastic (>= 2.3.0.rc2)
   haml-rails
+  high_voltage (~> 2.4.0)
   ice_nine
   jbuilder (~> 2.0)
   jquery-cdn (~> 2.2.0)
   jquery-rails
+  kramdown
   letter_opener
   mail
   mini_magick

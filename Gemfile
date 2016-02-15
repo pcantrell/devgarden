@@ -20,6 +20,9 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'high_voltage', '~> 2.4.0'
+gem 'kramdown'
+
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'devise', '>= 3.2.0'
 gem 'bcrypt', '~> 3.1.7'
@@ -30,8 +33,6 @@ gem 'mini_magick'
 gem 'delayed_job_active_record'
 
 group :development, :test do
-  gem 'unicorn'
-  
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 

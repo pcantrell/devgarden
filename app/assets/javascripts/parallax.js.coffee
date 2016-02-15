@@ -1,20 +1,11 @@
 $ ->
-  $groups = $('.summary-group')
-  if $groups.length > 0
+  $window = $(window)
+  $document = $(document)
 
-    $window = $(window)
-    $document = $(document)
+  applyCoverParallax = ->
+    scrollOffset = $document.scrollTop()
+    for heading in $('.summary-group h1')
+      $(heading).css('top', "#{scrollOffset / 2}px")
 
-    configureParallax = (group) ->
-      $group = $(group)
-      $heading = $group.find('h1')
-
-      applyCoverParallax = ->
-        scrollOffset = $document.scrollTop()
-        $heading.css('top', "#{scrollOffset / 2}px")
-
-      applyCoverParallax()
-      $window.scroll applyCoverParallax
-
-    for group in $groups
-      configureParallax(group)
+  applyCoverParallax()
+  $window.scroll applyCoverParallax

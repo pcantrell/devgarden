@@ -8,3 +8,6 @@
   .location
     .name=   event.location.name
     .detail= event.location.detail
+
+- if event.description
+  .description= markdown(event.description)

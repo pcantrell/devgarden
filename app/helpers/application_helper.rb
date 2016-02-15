@@ -19,4 +19,8 @@ module ApplicationHelper
     content_tag(:span, text, class: css_class)
   end
 
+  def markdown(md)
+    Kramdown::Document.new(md).to_html.html_safe
+  end
+
 end

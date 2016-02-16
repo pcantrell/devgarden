@@ -1,7 +1,7 @@
-%h1 Roles
+- heading "Roles" do
 
-- roles_by_category.each do |category|
-  %h2= category.name
-  %ul
-    - category.roles.each do |role|
-      %li= link_to role.skill_name, role
+  - roles_by_category.each do |category|
+    - heading category.name do
+      %ul
+        - category.roles.each do |role|
+          %li= link_to role.skill_name, role

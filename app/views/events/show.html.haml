@@ -1,13 +1,13 @@
-%h1= event.title
+- heading event.title do
 
-.dates
-  - event.dates.future.each do |date|
-    .date= format_time_range(date.start_time, date.end_time)
+  .dates
+    - event.dates.future.each do |date|
+      .date= format_time_range(date.start_time, date.end_time)
 
-- if event.location
-  .location
-    .name=   event.location.name
-    .detail= event.location.detail
+  - if event.location
+    .location
+      .name=   event.location.name
+      .detail= event.location.detail
 
-- if event.description
-  .description= markdown(event.description)
+  - if event.description
+    .description= markdown(event.description)

@@ -2,4 +2,4 @@
   = render 'people/summary', person: person
 
 - unless people.empty?
-  .more= link_to 'More…', people_path(before: people.last)
+  .more= link_to 'More…', people_path(before: people.last, heading_level: @heading_level)

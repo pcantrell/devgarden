@@ -3,21 +3,23 @@
 .person.summary{style: "color: white; background: #{background_color}"}
   .content
     .heading
-      %h2.name= link_to person.name, person
+      - heading link_to(person.name, person), class: "name"
       
       - if person.url?
         .url= link_to person.url.gsub(%r_^https?://_, ''), person.url
     
-    - if person.projects.any?
-      .projects
-        .meta Projects
-        - person.projects.each do |proj|
-          .project= link_to proj.name, proj
-    
-    - if person.role_offers.any?
-      .role-offers
-        .meta Interested in
-        - person.role_offers.includes(:role).each do |offer|
-          .role= link_to offer.role.skill_name, offer.role
+    - with_next_heading_level do
+
+      - if person.projects.any?
+        .projects
+          - heading "Projects" do
+            - person.projects.each do |proj|
+              .project= link_to proj.name, proj
+      
+      - if person.role_offers.any?
+        .role-offers
+          - heading "Interested in" do
+            - person.role_offers.includes(:role).each do |offer|
+              .role= link_to offer.role.skill_name, offer.role
 
     .divider

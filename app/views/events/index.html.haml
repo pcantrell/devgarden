@@ -1,6 +1,6 @@
-%h1= event_query_description
+- heading event_query_description do
 
-.events
-  .event-list
-    - event_query do |event, dates|
-      = render 'events/event', event: event, dates: dates
+  .events
+    .event-list
+      - event_query do |event, dates|
+        = render 'events/event', event: event, dates: dates

@@ -1,33 +1,43 @@
-- if project.icon?
-  .icon
-    = image_tag project.icon.feature.url
+.banner
+  - if project.icon?
+    .icon
+      = image_tag project.icon.feature.url
 
-%h1.name= project.name
+  .info
+    - heading project.name, class: "name" do
 
-.tagline= project.tagline
-  
-- if project.url?
-  .site= link_to project.url.gsub(%r_^https?://_, ''), project.url
+      .tagline= project.tagline
+      
+      - if project.url?
+        .site= link_to project.url.gsub(%r_^https?://_, ''), project.url
 
-.tags
-  - project.tags_grouped.each do |category, tags|
-    .tag-category{class: "tag-category-#{category.key}"}
-      -tags.each do |tag|
-        .tag= tag.name
+      .tags
+        - project.tags_grouped.each do |category, tags|
+          .tag-category{class: "tag-category-#{category.key}"}
+            -tags.each do |tag|
+              .tag= tag.name
 
-.participants
-  - project.participants.shuffle.each do |person|
-    .name= link_to person.name, person
+- with_next_heading_level do
 
-- if project.role_requests.any?
-  .role-requests
-    .meta Looking for
-    - project.role_requests.includes(:role).shuffle.each do |request|
-      .role= link_to request.role.person_name, request.role
+  .meta
+    .participants
+      - heading "Participants" do
+        - project.participants.shuffle.each do |person|
+          .name= link_to person.name, person
 
-%p Source control:
-%ul
-  - project.scm_urls.each do |url|
-    %li= link_to url, url
+    - if project.role_requests.any?
+      .role-requests
+        - heading "Looking for" do
+          - project.role_requests.includes(:role).shuffle.each do |request|
+            .role= link_to request.role.person_name, request.role
 
-= link_to 'Edit', edit_project_path(project)
+    - if project.scm_urls.any?
+      .repos
+        - heading "Source code" do
+          - project.scm_urls.each do |url|
+            .repo= link_to url, url
+
+  - if project.description?
+    .description= markdown(project.description)
+
+  = link_to 'Edit', edit_project_path(project)

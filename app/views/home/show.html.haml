@@ -18,11 +18,11 @@
       = link_to "More events", events_path
 
 .projects.infinite-scroll.summary-group
-  %h1 Projects
-  .content
-    = render 'projects/recent', projects: Project.recent(20)
+  - heading "Projects" do
+    .content
+      = render 'projects/recent', projects: Project.recent(20)
 
 .people.infinite-scroll.summary-group
-  %h1 People
-  .content
-    = render 'people/recent', people: Person.recent(20)
+  - heading "People" do
+    .content
+      = render 'people/recent', people: Person.recent(20)

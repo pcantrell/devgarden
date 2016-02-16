@@ -1,15 +1,15 @@
-%h1= role.skill_name.titlecase
+- heading role.skill_name.titlecase do
 
-%p= role.responsibilities
+  %p= role.responsibilities
 
-%h2 Projects seeking #{role.person_name.pluralize}
+  - heading "Projects seeking #{role.person_name.pluralize}" do
 
-%ul
-  - role.role_requests.includes(:project).each do |req|
-    %li= link_to req.project.name, req.project
+    %ul
+      - role.role_requests.includes(:project).each do |req|
+        %li= link_to req.project.name, req.project
 
-%h2 People interested in #{role.skill_name}
+  - heading "People interested in #{role.skill_name}" do
 
-%ul
-  - role.role_offers.includes(:person).each do |offer|
-    %li= link_to offer.person.name, offer.person
+    %ul
+      - role.role_offers.includes(:person).each do |offer|
+        %li= link_to offer.person.name, offer.person

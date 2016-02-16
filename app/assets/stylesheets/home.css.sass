@@ -50,6 +50,10 @@
         object-fit: contain
     .heading
       overflow: hidden
+    .site
+      font:
+        family: 'effra'
+        weight: 500
     h2
       margin: 0
     a
@@ -58,18 +62,21 @@
       transform: rotate(0deg)  // To draw on top of big h1
       padding: $content-vpad 1.2em
 
-    .tagline, .meta
+    .tagline, h3, h4
       font:
         family: 'effra'
         weight: 200
-    .meta
+    h3, h4
       text-transform: uppercase
       font-size: 75%
       padding: 0.2em 0
+      margin: 0
 
   .project.summary
     > .content
       padding-left: 4em
+    .tags
+      clear: left
     .participants, .role-requests
       margin-top: 0.2em
       padding-top: 0.4em
@@ -81,8 +88,9 @@
         &:last-child:after
           content: none
     .role-requests
-      .meta
+      h3, h4
         color: #999
+        margin: 0
         &:before
           display: inline-block
           content: '⤑'
@@ -98,7 +106,7 @@
     .projects, .role-offers
       margin-top: 1.2em
       width: 50%
-      .meta
+      h2, h3, h4
         color: rgba(255, 255, 255, 0.6)
         font-size: 90%
     .projects

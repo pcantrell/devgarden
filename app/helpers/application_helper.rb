@@ -15,6 +15,22 @@ module ApplicationHelper
       .each { |dates| yield dates.first.event, dates }
   end
 
+  def heading(title, **tag_attrs, &block)
+    @heading_level ||= (params[:heading_level] || 1).to_i
+    haml_tag("h#{@heading_level}", title, **tag_attrs)
+    with_next_heading_level(&block) if block
+  end
+
+  def with_next_heading_level(&block)
+    @heading_level += 1
+    begin
+      yield
+      ""
+    ensure
+      @heading_level -= 1
+    end
+  end
+
   def span_tag(css_class, text)
     content_tag(:span, text, class: css_class)
   end

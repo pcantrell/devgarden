@@ -8,15 +8,7 @@
 
   .meta
     - if person.projects.any?
-      .projects
-        - heading "Participating in" do
-          - person.projects.each do |project|
-            .project
-              .icon
-                - if project.icon?
-                  = link_to project do
-                    = image_tag project.icon.thumb.url
-              .name= link_to project.name, project
+      = render 'projects/thumb_list', projects: person.projects, project_list_title: "Participating in"
     
     - if person.role_offers.any?
       .role-offers

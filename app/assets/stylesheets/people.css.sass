@@ -14,9 +14,6 @@
     @include title-font
 
   .meta
-    h2, h3, h4
-      @include meta-heading
-      margin-bottom: 0.6em
     a
       color: inherit
 
@@ -30,18 +27,4 @@
         margin-left: 0
         padding-left: 0
 
-    .projects
-      display: table
-      h2, h3, h4
-        display: table-caption
-        white-space: nowrap
-      .project
-        display: table-row
-        .icon, .name
-          display: table-cell
-          vertical-align: middle
-        .icon
-          img
-            float: left
-            margin-right: 0.6em
-          @include thumb-icon
+    @include project-thumb-list

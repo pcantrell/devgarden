@@ -23,15 +23,7 @@
     @include title-font
 
   .meta
-    @include if-above-width(30em)
-      float: right
-      margin: 0 0 1.2em 1.2em
-      padding: 0.15em 0
-      padding-left: 1.2em
-      border-left: 0.5px solid $devgarden-dark
-      max-width: 40%
-    h2, h3, h4
-      @include meta-heading
+    @include meta-float-right
     >*:first-child
       h2, h3, h4
         margin-top: 0

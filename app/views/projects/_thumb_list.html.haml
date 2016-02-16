@@ -1,0 +1,9 @@
+.projects
+  - heading project_list_title do
+    - projects.each do |project|
+      .project
+        .icon
+          - if project.icon?
+            = link_to project do
+              = image_tag project.icon.thumb.url
+        .name= link_to project.name, project

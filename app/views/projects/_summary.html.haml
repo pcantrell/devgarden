@@ -12,11 +12,7 @@
         - if project.url?
           .site= link_to project.url.gsub(%r_^https?://_, ''), project.url
 
-    .tags
-      - project.tags_grouped.each do |category, tags|
-        .tag-category{class: "tag-category-#{category.key}"}
-          -tags.each do |tag|
-            .tag= tag.name
+    = render "tags/project_tags", project: project
     
     - with_next_heading_level do
       .participants

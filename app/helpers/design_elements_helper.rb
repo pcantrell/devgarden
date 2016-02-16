@@ -4,7 +4,7 @@ module DesignElementsHelper
 
   LIGHTNESS_BY_HUE = [38, 34, 25, 32, 45, 36]
 
-  def text_color_for(model)
+  def featured_color_for(model)
     @hue_weights ||= [0] * 12
     hue_index = weighted_rand(@hue_weights.map { |x| 1 / (x + 0.2) })
 

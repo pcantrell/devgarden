@@ -1,6 +1,4 @@
-- background_color = text_color_for(person)
-
-.person.summary{style: "color: white; background: #{background_color}"}
+.person.summary{style: "color: white; background: #{featured_color_for(person)}"}
   .content
     .heading
       - heading link_to(person.name, person), class: "name"

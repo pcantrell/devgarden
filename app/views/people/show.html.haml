@@ -1,3 +1,27 @@
-= render 'summary', person: person
+.banner{style: "color: #{featured_color_for(person)}"}
+  - heading link_to(person.name, person), class: "name"
+  
+  - if person.url?
+    .url= link_to person.url.gsub(%r_^https?://_, ''), person.url
 
-= link_to 'Edit', edit_person_path(person)
+- with_next_heading_level do
+
+  .meta
+    - if person.projects.any?
+      .projects
+        - heading "Participating in" do
+          - person.projects.each do |project|
+            .project
+              .icon
+                - if project.icon?
+                  = link_to project do
+                    = image_tag project.icon.thumb.url
+              .name= link_to project.name, project
+    
+    - if person.role_offers.any?
+      .role-offers
+        - heading "Interested in" do
+          - person.role_offers.includes(:role).each do |offer|
+            .role= link_to offer.role.skill_name, offer.role
+
+.divider

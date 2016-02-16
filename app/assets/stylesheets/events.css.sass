@@ -25,10 +25,8 @@
 
 .event, .events-controller
   .dates
-    font:
-      family: 'effra'
-      weight: 300
-      size: 94%
+    @include meta-font
+    font-size: 94%
     .daterange
       white-space: nowrap
     .weekday
@@ -42,10 +40,8 @@
       &:before, &:after
         content: ' '
   .location
-    font:
-      family: 'effra'
-      weight: 400
-      size: 94%
+    @include meta-more-font
+    font-size: 94%
     .detail
       font-weight: 300
 

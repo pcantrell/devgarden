@@ -7,3 +7,32 @@
     @content
 
 $devgarden-dark: #282561
+
+@mixin title-font
+  font:
+    family: 'effra'
+    weight: 500
+
+@mixin meta-font
+  font:
+    family: 'effra'
+    weight: 200
+
+@mixin meta-more-font
+  font:
+    family: 'effra'
+    weight: 400
+
+@mixin meta-tiny-font
+  font:
+    family: 'effra'
+    weight: 500
+    size: 54%
+
+@mixin meta-heading
+  @include meta-font
+  text-transform: uppercase
+  font-size: 75%
+  opacity: 0.6
+  padding: 0.2em 0
+  margin-bottom: 0

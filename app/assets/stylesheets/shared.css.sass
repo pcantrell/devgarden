@@ -17,12 +17,10 @@ main
   padding: 0 1.8em
   max-width: 40em
 
-h1,h2,h3,h4
+h1, h2, h3, h4
   padding: 0
   margin: 1.2em 0 0.6em 0
-  font:
-    family: 'effra'
-    weight: 500
+  @include title-font
 
 a
   &:link, &:visited
@@ -33,10 +31,8 @@ a
   text-decoration: none
 
 .nav-bar
-  font:
-    family: 'effra'
-    size: 80%
-    weight: 500
+  @include title-font
+  font-size: 80%
   letter-spacing: 0.5px
   text-transform: uppercase
   background: $devgarden-dark
@@ -65,9 +61,8 @@ hr
 
 .more
   margin-top: 0.6em
-  font:
-    family: 'effra'
-    size: 80%
+  @include meta-more-font
+  font-size: 80%
   text-transform: uppercase
   text-align: right
   a:after
@@ -100,10 +95,7 @@ hr
   overflow: hidden
   white-space: nowrap
   margin: 1em 0
-  font:
-    family: 'effra'
-    weight: 500
-    size: 54%
+  @include meta-tiny-font
   .tag-category
     display: inline
   .tag-category-family
@@ -126,6 +118,7 @@ hr
     color: hsl(42, 40%, 30%)
   .tag-category-language
     color: hsl(260, 40%, 40%)
+
 .infinite-scroll .loading
   height: 20em
   padding: 1em

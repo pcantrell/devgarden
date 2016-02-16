@@ -15,9 +15,12 @@ module ApplicationHelper
       .each { |dates| yield dates.first.event, dates }
   end
 
-  def heading(title, **tag_attrs, &block)
+  def heading_level
     @heading_level ||= (params[:heading_level] || 1).to_i
-    haml_tag("h#{@heading_level}", title, **tag_attrs)
+  end
+
+  def heading(title, **tag_attrs, &block)
+    haml_tag("h#{heading_level}", title, **tag_attrs)
     with_next_heading_level(&block) if block
   end
 
@@ -36,7 +39,7 @@ module ApplicationHelper
   end
 
   def markdown(md)
-    Kramdown::Document.new(md).to_html.html_safe
+    Kramdown::Document.new(md, header_offset: heading_level - 1).to_html.html_safe
   end
 
 end

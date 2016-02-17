@@ -48,6 +48,12 @@ $devgarden-dark: #282561
     width: 128px
     height: 128px
     object-fit: contain
+    @include if-below-width(512px)
+      width: 96px
+      height: 96px
+    @include if-below-width(384px)
+      width: 64px
+      height: 64px
 
 @mixin project-thumb-list
   .projects

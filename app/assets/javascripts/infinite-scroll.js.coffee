@@ -17,7 +17,7 @@ updateInfiniteScrollNow = ->
   for container in $infiniteScroll
     $container = $(container)
     $more = $container.find('.infinite-scroll-more')
-    if $more.length > 0 && scrollBottom > $more.offset().top
+    if $more.length > 0 && $more.is(":visible") && scrollBottom > $more.offset().top
       href = $more.find('a').attr('href')
       $more.remove()
       $container.append($('<div class="loading">Loading…</div>'))

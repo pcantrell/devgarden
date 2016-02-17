@@ -92,8 +92,9 @@ hr
     margin: 1.2em 0
     padding-bottom: 1.2em
     border-bottom: 0.5px solid #ccc
-    &:last-child
-      border: none
+    @include if-above-width(36em)
+      &:last-child
+        border: none
 
 @include if-above-width(36em)
   .about

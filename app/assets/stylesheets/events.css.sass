@@ -2,14 +2,13 @@
 
 .event
   padding: 0.2em 0
+  margin-bottom: 1.2em
 
   a, a:link, a:visited
     color: $devgarden-dark
     &:hover
       color: #3d36de
 
-  .dates, .location
-    padding-left: 1.2em !important
   .title
     margin-bottom: 0.6em
     line-height: 1.15em
@@ -22,6 +21,8 @@
       .title, .dates, .location
         display: table-cell
         padding: 0.6em 0
+      .dates, .location
+        padding-left: 1.2em
 
 .event, .events-controller
   .dates

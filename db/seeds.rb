@@ -7,7 +7,7 @@ def category(name)
 end
 
 def role(skill_name, person_name, desc = '')
-  Role.find_or_create_by!(skill_name: skill_name, person_name: person_name).
+  Role.create_with(category: @category).find_or_create_by!(skill_name: skill_name, person_name: person_name).
     update!(responsibilities: desc, category: @category)
 end
 

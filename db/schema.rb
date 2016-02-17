@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216200401) do
+ActiveRecord::Schema.define(version: 20160217071943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 20160216200401) do
   end
 
   create_table "participations", force: :cascade do |t|
-    t.integer  "project_id"
-    t.integer  "person_id"
+    t.integer  "project_id",                 null: false
+    t.integer  "person_id",                  null: false
     t.boolean  "admin",      default: false, null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(version: 20160216200401) do
   end
 
   create_table "role_offers", force: :cascade do |t|
-    t.integer  "person_id"
-    t.integer  "role_id"
+    t.integer  "person_id",  null: false
+    t.integer  "role_id",    null: false
     t.text     "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -104,8 +104,8 @@ ActiveRecord::Schema.define(version: 20160216200401) do
   add_index "role_offers", ["role_id"], name: "index_role_offers_on_role_id", using: :btree
 
   create_table "role_requests", force: :cascade do |t|
-    t.integer  "project_id"
-    t.integer  "role_id"
+    t.integer  "project_id", null: false
+    t.integer  "role_id",    null: false
     t.integer  "priority"
     t.text     "comment"
     t.datetime "created_at", null: false
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 20160216200401) do
     t.string   "skill_name"
     t.string   "person_name"
     t.text     "responsibilities"
-    t.integer  "category_id"
+    t.integer  "category_id",      null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end

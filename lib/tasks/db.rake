@@ -11,11 +11,12 @@ namespace :db do
           name: FFaker::Name.name,
           email: (FFaker::Internet.email if rand < 0.4),
           url: (FFaker::Internet.http_url if rand < 0.1),
-          role_offers: all_roles.sample(rand(4)).uniq.map { |role| RoleOffer.new(role: role) }
+          role_offers: all_roles.sample(rand(4)).uniq.map { |role| RoleOffer.new(role: role) },
+          updated_at: 1.year.ago
         )
       end
 
-      projects = 12.times.map do
+      projects = 22.times.map do
         Project.create!(
           name: FFaker::Lorem.words(rand(2) + 1).map(&:capitalize).join(['', ' '].sample),
           url: (FFaker::Internet.http_url if rand < 0.5),
@@ -23,7 +24,8 @@ namespace :db do
           tags: all_tags.sample(rand(1..4) * rand(1..4)).uniq,
           description: FFaker::Lorem.paragraphs(4).join("\n\n"),
           participants: people.sample(rand(1..3) * rand(1..3)).uniq,
-          role_requests: all_roles.sample(rand(5)).map { |role| RoleRequest.new(role: role) }
+          role_requests: all_roles.sample(rand(5)).map { |role| RoleRequest.new(role: role) },
+          updated_at: 1.year.ago
         )
       end
 

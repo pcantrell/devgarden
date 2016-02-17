@@ -103,8 +103,19 @@ hr
     display: table
 
 .hero
-  margin-top: 1.2em
-  max-height: 16em
+  $hero-max-width: 60em
+  $hero-margin: 1.2em
+  $hero-margin-wide: $hero-margin * 2
+
+  display: block
+  margin: $hero-margin auto
+  max-width: $hero-max-width
+  img
+    margin: 0 $hero-margin
+  @include if-above-width(36em)
+    margin: $hero-margin-wide auto
+    img
+      margin: 0 $hero-margin-wide
 
 .site
   @include title-font

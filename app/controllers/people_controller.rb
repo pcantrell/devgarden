@@ -1,7 +1,7 @@
 class PeopleController < ApplicationController
   def index
     render partial: 'recent', locals: {
-      people: Person.recent(10, before: Person.find(params[:before])) }
+      people: Person.recent(10, scroll_continuation: params[:scroll_cont]) }
   end
 
   def show

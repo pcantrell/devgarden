@@ -16,7 +16,7 @@ updateInfiniteScrollNow = ->
 
   for container in $infiniteScroll
     $container = $(container)
-    $more = $container.find('.more')
+    $more = $container.find('.infinite-scroll-more')
     if $more.length > 0 && scrollBottom > $more.offset().top
       href = $more.find('a').attr('href')
       $more.remove()

@@ -14,8 +14,7 @@
     .event-list
       - upcoming_events(min_events: 3, including_all_within: 1.week) do |event, dates|
         = render 'events/event', event: event, dates: dates
-    .more
-      = link_to "More events", events_path
+    .more= link_to "More events", events_path
 
 .projects.infinite-scroll.summary-group
   - heading "Projects" do

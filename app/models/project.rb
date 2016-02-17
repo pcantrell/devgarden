@@ -1,9 +1,9 @@
 class Project < ActiveRecord::Base
   has_many :participations
   has_many :participants, through: :participations, source: :person
-  has_many :role_requests
-  has_many :project_tags, -> { order(:order) }
-  has_many :tags, through: :project_tags
+  has_many :role_requests, -> { includes(:role) }
+  has_many :project_tags, -> { includes(:tag).order(:order) }
+  has_many :tags, -> { includes(:category) }, through: :project_tags
 
   mount_uploader :icon, ProjectIconUploader
 
@@ -16,7 +16,7 @@ class Project < ActiveRecord::Base
   include RecentScope
 
   def tags_grouped
-    tags.includes(:category)
+    tags
       .group_by(&:category)
       .sort_by(&:first)
   end

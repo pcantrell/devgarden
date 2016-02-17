@@ -22,7 +22,7 @@
       - if project.role_requests.any?
         .role-requests
           - heading "Looking for" do
-            - project.role_requests.includes(:role).shuffle.each do |request|
+            - project.role_requests.shuffle.each do |request|
               .role= link_to request.role.person_name, request.role
 
     .divider

@@ -1,4 +1,4 @@
-- projects.includes(:participants, :role_requests).each do |project|
+- projects.includes(:participants, role_requests: :role, tags: :category).each do |project|
   = render 'projects/summary', project: project
 
 - unless projects.empty?

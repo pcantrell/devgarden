@@ -1,7 +1,7 @@
 class Person < ActiveRecord::Base
   has_many :participations
   has_many :projects, through: :participations
-  has_many :role_offers
+  has_many :role_offers, -> { includes(:role) }
 
   include RecentScope
 end

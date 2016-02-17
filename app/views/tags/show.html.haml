@@ -1,5 +1,10 @@
 - heading current_tag.full_name do
-  -#.description= markdown(tag.description)
 
   .meta
     = render 'projects/thumb_list', projects: current_tag.projects, project_list_title: project_list_heading
+
+  - if current_tag.url?
+    .site= pretty_url_link current_tag.url
+
+  - if current_tag.description?
+    .description= markdown(current_tag.description)

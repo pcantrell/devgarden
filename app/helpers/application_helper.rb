@@ -1,5 +1,3 @@
-require "svg_path"
-
 module ApplicationHelper
 
   def roles_by_category

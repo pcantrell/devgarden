@@ -9,7 +9,7 @@
       .tagline= project.tagline
       
       - if project.url?
-        .site= link_to project.url.gsub(%r_^https?://_, ''), project.url
+        .site= pretty_url_link project.url
 
       = render "tags/project_tags", project: project
 
@@ -31,7 +31,7 @@
       .repos
         - heading "Source code" do
           - project.scm_urls.each do |url|
-            .repo= link_to url, url
+            .repo= pretty_url_link url
 
   - if project.description?
     .description= markdown(project.description)

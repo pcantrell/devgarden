@@ -117,6 +117,38 @@ hr
     img
       margin: 0 $hero-margin-wide
 
+.flashes
+  text-align: center
+  padding: 0 1.2em 1.2em 1.2em
+  white-space: pre-line
+  .flash
+    @include meta-more-font
+    display: inline-block
+    text-align: center
+    margin: 0.6em
+    max-width: 20em
+    border-radius: 1ex
+    color: white
+    padding: 1em 1.6em
+    background: #858997
+    &:before
+      font-size: 180%
+      opacity: 0.6
+      margin-right: 0.8ex
+      vertical-align: middle
+    &.success
+      background: #3da649
+      &:before
+        content: '✓'
+    &.warning
+      background: #a6443d
+      &:before
+        content: '!'
+    &.error
+      background: #a6443d
+      &:before
+        content: '☠'
+
 .site
   @include title-font
 

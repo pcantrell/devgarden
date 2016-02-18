@@ -1,3 +1,6 @@
+$devgarden-dark: #282561
+$devgarden-highlight: #3d36de
+
 @mixin if-below-width($width)
   @media all and (max-width: $width)
     @content
@@ -5,8 +8,6 @@
 @mixin if-above-width($width)
   @media all and (min-width: $width)
     @content
-
-$devgarden-dark: #282561
 
 @mixin title-font
   font:

@@ -24,8 +24,8 @@ gem 'high_voltage', '~> 2.4.0'
 gem 'kramdown'
 
 gem 'activeadmin', github: 'gregbell/active_admin'
-gem 'devise', '>= 3.2.0'
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt'
+gem 'omniauth-github'
 
 gem 'carrierwave'
 gem 'mini_magick'

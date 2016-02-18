@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217071943) do
+ActiveRecord::Schema.define(version: 20160218042005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,12 +57,17 @@ ActiveRecord::Schema.define(version: 20160217071943) do
   create_table "people", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.text     "external_ids", default: [], null: false, array: true
+    t.string   "github_user"
+    t.string   "avatar_url"
+    t.string   "urls",         default: [], null: false, array: true
   end
 
   add_index "people", ["email"], name: "index_people_on_email", unique: true, using: :btree
+  add_index "people", ["external_ids"], name: "index_people_on_external_ids", using: :gin
+  add_index "people", ["github_user"], name: "index_people_on_github_user", using: :btree
 
   create_table "project_tags", force: :cascade do |t|
     t.integer  "project_id", null: false

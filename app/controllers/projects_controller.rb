@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
     project = Project.new(project_params)
 
     if project.save
-      redirect_to project, notice: 'Project created'
+      redirect_to project, flash: { success: 'Project created' }
     else
       render :new
     end
@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
 
   def update
     if project.update(project_params)
-      redirect_to project, notice: 'Project updated'
+      redirect_to project, flash: { success: 'Project updated' }
     else
       render :edit
     end

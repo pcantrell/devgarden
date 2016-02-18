@@ -42,4 +42,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  
+  ENV["GITHUB_CLIENT_ID"] ||= "1048f76331850401c99c"
+  ENV["GITHUB_SECRET"] ||= "eddd0cb433c746d506d1c02b08bbda233b6b1cf6"
 end

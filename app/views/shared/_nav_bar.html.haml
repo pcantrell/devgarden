@@ -4,5 +4,8 @@
   .nav-items
     .nav-item= link_to 'About', page_path('about')
     .nav-item= link_to 'Contact', page_path('contact')
-    .nav-item= link_to 'Log In', '#'
+    - if logged_in?
+      .nav-item= link_to 'Log Out', logout_path
+    - else
+      .nav-item= link_to 'Log In', login_path
   .clear

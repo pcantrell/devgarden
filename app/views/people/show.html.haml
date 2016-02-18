@@ -1,8 +1,8 @@
 .banner{style: "color: #{featured_color_for(person)}"}
   - heading link_to(person.name, person), class: "name"
   
-  - if person.url?
-    .url= link_to person.url.gsub(%r_^https?://_, ''), person.url
+  - if url = person.urls.first
+    .url= pretty_url_link url
 
 - with_next_heading_level do
 

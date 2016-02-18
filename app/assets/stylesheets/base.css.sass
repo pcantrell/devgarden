@@ -30,7 +30,7 @@ a
   &:link, &:visited
     color: #3530b1
   &:hover
-    color: #3d36de
+    color: $devgarden-highlight
     text-decoration: underline
   text-decoration: none
 
@@ -193,3 +193,20 @@ hr
   height: 20em
   padding: 1em
   color: #888
+
+.big_button
+  @include title-font
+  display: inline-block
+  margin: 1.2em auto
+  font-size: 120%
+  padding: 0.6em 1.2em
+  border-radius: 0.6em
+  color: white !important
+  background: $devgarden-dark
+  &:hover
+    background: $devgarden-highlight
+    text-decoration: none
+
+.page-login main
+  text-align: center
+  margin-top: 9.6em

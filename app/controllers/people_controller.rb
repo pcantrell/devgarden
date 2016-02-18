@@ -16,7 +16,7 @@ class PeopleController < ApplicationController
 
   def update
     if person.update(person_params)
-      redirect_to person, notice: 'Person updated'
+      redirect_to person, flash: { success: 'Person updated' }
     else
       render :edit
     end

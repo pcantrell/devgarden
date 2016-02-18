@@ -1,10 +1,12 @@
-.person.summary{style: "color: white; background: #{featured_color_for(person)}"}
+.person.summary{style: "background: #{featured_color_for(person)}"}
   .content
     .heading
       - heading link_to(person.name, person), class: "name"
       
-      - if person.url?
-        .url= link_to person.url.gsub(%r_^https?://_, ''), person.url
+      - if person.urls.any?
+        .urls
+          - person.urls.each do |url|
+            .url= pretty_url_link url
     
     - with_next_heading_level do
 

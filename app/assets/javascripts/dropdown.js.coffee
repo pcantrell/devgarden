@@ -31,10 +31,10 @@ showPopup = ($button, show) ->
 
   updateHeaderState = -> $header.toggleClass('dropdown-header-active', show)
   action = if(show)
-    $dropdown.slideDown(200)
+    $dropdown.slideDown(120)
     updateHeaderState()
   else
-    $dropdown.slideUp(200, updateHeaderState)
+    $dropdown.slideUp(120, updateHeaderState)
 
   if show
     positionCurPopup()

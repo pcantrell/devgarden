@@ -14,17 +14,25 @@ class Person < ActiveRecord::Base
     raise "No credentials found" unless provider && uid
     external_id = "#{provider}:#{uid}"
     
-    info = auth["info"] || {}
-    email = info["email"]
-    name  = info["name"]
+    if provider == "github"
+      info = auth["info"] || {}
+      email       = info["email"]
+      name        = info["name"]
+      github_user = info["nickname"]
+      avatar_url  = info["image"]
+      urls        = info["urls"].values
+    end
 
     user = Person.find_by('external_ids @> ARRAY[?]', external_id) ||
+           (Person.find_by(github_user: github_user) if github_user) ||
            (Person.find_by(email: email) if email) ||
-           Person.new(external_ids: [external_id], name: name, email: email)
+           Person.new
+    user.full_name ||= name
+    user.email ||= email
     user.external_ids = (user.external_ids + [external_id]).uniq
-    user.avatar_url ||= info["image"]
-    user.github_user ||= info["nickname"]
-    user.urls = info["urls"].values if user.urls.empty?
+    user.avatar_url ||= avatar_url
+    user.github_user ||= github_user
+    user.urls = urls if user.urls.empty?
     user.save!
     user
   end

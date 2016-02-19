@@ -1,5 +1,8 @@
 class ProjectsController < ApplicationController
 
+  before_filter :require_project_admin, except: [:index, :show, :new, :create]
+  before_filter :require_login, except: [:index, :show]
+
   def index
     render partial: 'recent', locals: {
       projects: Project.recent(10, scroll_continuation: params[:scroll_cont]) }
@@ -35,6 +38,12 @@ class ProjectsController < ApplicationController
 
 private
 
+  def require_project_admin
+    unless project.admins_include?(current_user)
+      redirect_to login_path, flash: { error: "You must log in as an admin of #{project.name} in order to edit it." }
+    end
+  end
+
   def project
     @project ||= Project.find(params[:id])
   end
@@ -43,4 +52,5 @@ private
   def project_params
     params[:project].permit(:name, :url, :scm_urls_as_text)
   end
+
 end

@@ -1,5 +1,7 @@
 module ApplicationHelper
 
+  include CurrentUserHelper
+
   def roles_by_category
     RoleCategory.includes(:roles).shuffle
   end

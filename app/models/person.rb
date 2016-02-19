@@ -5,6 +5,10 @@ class Person < ActiveRecord::Base
 
   include RecentScope
 
+  def name
+    full_name || github_user
+  end
+
   def self.for_auth(auth)
     provider, uid = auth["provider"], auth["uid"]
     raise "No credentials found" unless provider && uid

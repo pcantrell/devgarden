@@ -8,9 +8,9 @@ namespace :db do
 
         40.times.map do
           Person.create!(
-            name: FFaker::Name.name,
+            full_name: FFaker::Name.name,
             email: (FFaker::Internet.email if rand < 0.4),
-            url: (FFaker::Internet.http_url if rand < 0.1),
+            urls: (rand(4)*rand(4)).times.map { FFaker::Internet.http_url },
             role_offers: all_roles.sample(rand(4)).uniq.map { |role| RoleOffer.new(role: role) },
             updated_at: 1.year.ago
           )

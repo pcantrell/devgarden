@@ -1,3 +1,6 @@
+- if logged_in? && project.admins_include?(current_user)
+  = link_to "Edit Project", edit_project_path(project), class: 'big-button edit'
+
 .banner{style: "color: #{featured_color_for(project)}"}
   - if project.icon?
     .icon
@@ -35,5 +38,3 @@
 
   - if project.description?
     .description= markdown(project.description)
-
-  = link_to 'Edit', edit_project_path(project)

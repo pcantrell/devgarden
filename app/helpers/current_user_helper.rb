@@ -9,7 +9,9 @@ module CurrentUserHelper
   end
 
   def current_user
-    Person.find(session[:user_id]) if session[:user_id]
+    if session[:user_id]
+      @current_user ||= Person.find(session[:user_id])
+    end
   end
 
   def logged_in?

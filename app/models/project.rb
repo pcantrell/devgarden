@@ -15,6 +15,10 @@ class Project < ActiveRecord::Base
 
   include RecentScope
 
+  def admins_include?(person)
+    participations.where(person: person, admin: true).any?
+  end
+
   def tags_grouped
     tags
       .group_by(&:category)

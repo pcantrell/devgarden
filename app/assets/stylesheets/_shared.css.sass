@@ -9,26 +9,29 @@ $devgarden-highlight: #3d36de
   @media all and (min-width: $width)
     @content
 
+@mixin sans
+  font-family: 'effra'
+  line-height: 100%
+  padding: 0.1em 0
+
 @mixin title-font
-  font:
-    family: 'effra'
-    weight: 500
+  @include sans
+  font-weight: 500
 
 @mixin meta-font
-  font:
-    family: 'effra'
-    weight: 200
+  @include sans
+  font-weight: 200
 
 @mixin meta-more-font
-  font:
-    family: 'effra'
-    weight: 400
+  @include sans
+  font-weight: 400
 
 @mixin meta-tiny-font
+  @include sans
   font:
-    family: 'effra'
     weight: 500
     size: 54%
+  line-height: 100%
 
 @mixin meta-heading
   @include meta-font

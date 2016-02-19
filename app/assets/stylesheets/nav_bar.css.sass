@@ -1,0 +1,65 @@
+@import "_shared"
+
+.nav-bar
+  @include title-font
+  font-size: 80%
+  letter-spacing: 0.5px
+  text-transform: uppercase
+  background: $devgarden-dark
+  border-bottom: 0.5px solid #ccc
+  padding: 0.6em
+  a
+    color: rgba(255,255,255,0.9)
+    &:hover
+      color: white
+  .logo
+    img
+      float: left
+      height: 2.4em
+  .nav-items
+    float: right
+    .nav-item
+      line-height: 2.4em
+      display: inline-block
+      padding: 0 0.6em
+      margin-right: 0.6em
+      .avatar
+        width: 1.8em
+        height: 1.8em
+        margin-right: 0.4em
+        padding-bottom: 0.2em
+        vertical-align: middle
+
+.dropdown
+  position: absolute
+  display: none
+  padding: 1.2em
+  background: white
+  border-radius: 1ex
+  border-top-right-radius: 0
+  text-transform: none
+  letter-spacing: 0
+  font-size: 120%
+  text-align: center
+  box-shadow: 0 1ex 1ex rgba(0, 0, 0, 0.333)
+  border-top: 0.5px solid #ccc
+  ul
+    padding: 0
+    margin: 0.6em 0
+    li
+      padding: 0
+      margin-bottom: 1.2em
+      &:last-child
+        margin-bottom: 0
+
+.dropdown, .dropdown-header-active
+  background: white
+  color: $devgarden-dark
+  a, a:hover, a:visited
+    color: $devgarden-dark
+
+.dropdown-header-active
+  border-top-left-radius: 1ex
+  border-top-right-radius: 1ex
+  a, a:hover, a:visited
+    text-decoration: none

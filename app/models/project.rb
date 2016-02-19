@@ -25,13 +25,8 @@ class Project < ActiveRecord::Base
       .sort_by(&:first)
   end
 
-  def scm_urls_as_text
-    scm_urls.join("\n")
-  end
-
-  def scm_urls_as_text=(text)
-    self.scm_urls = text.split(/\s+/).reject(&:blank?)
-  end
+  include StringArrayAttribute
+  exposes_string_array_as_text :scm_urls
 
 private
 

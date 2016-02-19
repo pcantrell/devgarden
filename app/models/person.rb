@@ -9,6 +9,9 @@ class Person < ActiveRecord::Base
     full_name || github_user
   end
 
+  include StringArrayAttribute
+  exposes_string_array_as_text :urls
+
   def self.for_auth(auth)
     provider, uid = auth["provider"], auth["uid"]
     raise "No credentials found" unless provider && uid

@@ -33,7 +33,7 @@
 .dropdown
   position: absolute
   display: none
-  padding: 1.2em
+  padding: 0
   background: white
   border-radius: 1ex
   border-top-right-radius: 0
@@ -43,9 +43,18 @@
   text-align: center
   box-shadow: 0 1ex 1ex rgba(0, 0, 0, 0.333)
   border-top: 0.5px solid #ccc
+  p
+    font-weight: 400
+    line-height: 120%
+    margin: 1.2em
+    max-width: 12em
   ul
     padding: 0
-    margin: 0.6em 0
+    margin: 1.2em 0
+    &.projects
+      padding-bottom: 1.2em
+      border-bottom: 0.5px solid #ccc
+      font-weight: 400
     li
       padding: 0
       margin-bottom: 1.2em

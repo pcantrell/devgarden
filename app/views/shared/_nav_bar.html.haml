@@ -14,11 +14,15 @@
       - else
         = link_to 'Log In', login_path, auth_item_opts
     %aside.dropdown#auth-dropdown
-      %ul
-        - if logged_in?
+      - if logged_in?
+        - if current_user.projects.any?
+          %ul.projects
+            - current_user.projects.recent.limit(6).each do |project|
+              %li= link_to project.name, project
+        %ul
           %li= link_to "Edit Profile", edit_person_path(current_user)
           %li= link_to "Log Out", logout_path
-        - else
-          %li The Dev Garden uses Github for authentication.
-          %li= link_to "Log in with Github", "/auth/github", class: "big-button"
+      - else
+        %p The Dev Garden uses Github for authentication.
+        %p= link_to "Log in with Github", "/auth/github", class: "big-button"
   .clear

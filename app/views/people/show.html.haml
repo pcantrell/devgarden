@@ -1,3 +1,6 @@
+- if person == current_user
+  = link_to "Edit Profile", edit_person_path(person), class: 'big-button edit'
+
 .banner{style: "color: #{featured_color_for(person)}"}
   - heading link_to(person.name, person), class: "name"
   

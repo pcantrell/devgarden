@@ -1,0 +1,72 @@
+@import "_shared"
+
+form
+  input, textarea
+    @include body-font
+    margin: 0.6em 0
+    padding: 0.3em 0.6em
+    border-radius: 0.6em
+    &:focus
+      outline: none !important
+      box-shadow: 0 0 0.3em $devgarden-highlight
+  input
+    &[type='submit']
+      @include button
+      border: none
+      text-transform: uppercase
+      min-width: 6em
+
+  &.formtastic
+    fieldset
+      max-width: 24em
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea
+      display: block
+      width: 99%
+      border: 0.5px solid $devgarden-dark
+      background: #fbfbf9
+      &:focus
+        background: white
+    input[type="checkbox"]
+      margin-right: 0.6em
+      display: inline-block
+      vertical-align: middle
+      width: 1.2em
+      height: 1.2em
+    input[type="submit"]
+      padding: 0.6em 1.2em
+      font-size: 110%
+      border-radius: 1.2em
+    li
+      list-style: none
+      &.action
+        text-align: center
+      &.stringish, &.text
+        margin: 1.8em 0
+      &.error
+        input, textarea
+          border: 0.5px solid #E22
+          background: #fff4f4
+    label
+      @include sans
+      margin: 0 0.6em
+    .validation
+      @include meta-tiny-font
+      text-transform: uppercase
+      color: rgba(0, 0, 1, 0.4)
+      border: none
+      margin-left: 1.2em
+      line-height: 240%
+      float: right
+    .inline-hint
+      @include meta-font
+      font-size: 92%
+      margin: 1px
+      padding: 0 0.6em
+    .inline-error
+      margin: 0
+      color: #b44
+      font-weight: 500
+

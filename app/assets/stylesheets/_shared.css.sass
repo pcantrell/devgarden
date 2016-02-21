@@ -9,6 +9,12 @@ $devgarden-highlight: #3d36de
   @media all and (min-width: $width)
     @content
 
+@mixin body-font
+  font:
+    family: 'freight-text-pro'
+    weight: 400
+    size: 1.1em
+
 @mixin sans
   font-family: 'effra'
   line-height: 100%
@@ -40,6 +46,18 @@ $devgarden-highlight: #3d36de
   opacity: 0.6
   padding: 0.2em 0
   margin-bottom: 0
+
+@mixin button
+  @include title-font
+  display: inline-block
+  margin: 1.2em auto
+  padding: 0.6em 1.2em
+  border-radius: 0.6em
+  color: white !important
+  background: $devgarden-dark
+  &:hover
+    background: $devgarden-highlight
+    text-decoration: none
 
 @mixin thumb-icon
   img

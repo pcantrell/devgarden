@@ -1,9 +1,14 @@
 = semantic_form_for person, class: 'person' do |f|
 
   = f.inputs do
-    = f.input :name
-    = f.input :email
-    = f.input :urls_as_text, as: :text, label: 'Your web site(s) (one per line)'
+    = f.input :full_name, required: true, hint: "It is a good idea to use your full, real name."
+    -# TODO: student/alum? class year
+    -# TODO: prof? department
+    = f.input :email, required: true
+    = f.input :urls_as_text, as: :text, label: "Your web site(s) (one per line)"
+
+    -# :participations
+    -# :role_offers, -> { includes(:role) }
 
   .actions
     = f.submit 'Save'

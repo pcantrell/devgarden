@@ -87,14 +87,15 @@ $devgarden-highlight: #3d36de
       .icon, .name
         display: table-cell
         vertical-align: middle
-        padding-bottom: 1.2em
       .icon
         img
           float: left
           margin-right: 0.6em
         @include thumb-icon
+        padding: 0.6em 0
       .name
         @include meta-more-font
+        padding: 1.2em 0
 
 @mixin meta-float-right
   @include if-above-width(30em)

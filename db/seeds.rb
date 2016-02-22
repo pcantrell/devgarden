@@ -1,4 +1,4 @@
-Location.find_or_create_by!(name: 'Innovation Space').update!(detail: 'Lower level of Markim Hall (IGC)')
+Location.find_or_create_by!(name: 'Innovator Space').update!(detail: 'Lower level of Markim Hall (IGC)')
 
 def category(name)
   @category = RoleCategory.find_or_create_by!(name: name)

@@ -32,6 +32,7 @@ category 'Writing' do
   role 'copy editing', 'copy editor'
   role 'tech writing', 'tech writer'
   role 'copywriting', 'copywriter'
+  role 'translation', 'translator'
 end
 
 # category 'Business' do

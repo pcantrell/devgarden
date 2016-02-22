@@ -4,8 +4,9 @@ module PrettyUrlHelper
     h(url)
       .gsub(%r_^https?://(www\.)?_, '')
       .gsub(%r_/$_, '')
-      .gsub(%r_^github\.com/_) { inline_icon_tag(:github) }
-      .gsub(%r_^..\.wikipedia\.org/wiki/(.*)_) { inline_icon_tag(:wikipedia) + "Definition" }
+      .gsub(%r_\Agithub\.com/_) { inline_icon_tag(:github) }
+      .gsub(%r_\A..\.wikipedia\.org/wiki/(.*)_) { inline_icon_tag(:wikipedia) + "Definition" }
+      .gsub(%r_\A(?!<span)_) { inline_icon_tag('generic-link') }
       .html_safe
   end
 

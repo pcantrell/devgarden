@@ -137,13 +137,21 @@ hr
 
 .site
   @include title-font
+  .inline-icon
+    display: none
+
+.url
+  @include meta-font
+  white-space: nowrap
 
 .inline-icon
   svg
-    width: 1.2em
-    height: 1.2em
+    width: 1em
+    height: 1em
     vertical-align: middle
-    margin: 0.1em 0.1em 0.3em 0
+    padding: 0 1px 1px 0
+    position: relative
+    top: -1px
     path
       fill: $devgarden-dark
 

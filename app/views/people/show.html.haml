@@ -1,15 +1,25 @@
-- if person == current_user
-  = link_to "Edit Profile", edit_person_path(person), class: 'big-button edit'
+- person_color = featured_color_for(person)
 
-.banner{style: "color: #{featured_color_for(person)}"}
-  - heading link_to(person.name, person), class: "name"
+- if person == current_user
+  = link_to "Edit Profile", edit_person_path(person), class: 'big-button edit', style: "background: #{person_color}"
+
+.banner{style: "color: #{person_color}"}
+  - heading person.name
+
+  .bio
+    - if person.department?
+      .bio-item= person.department
+    - if person.class_year?
+      .bio-item Class of #{person.class_year}
   
-  - if url = person.urls.first
-    .url= pretty_url_link url
+  - if person.urls.any?
+    .urls
+      - person.urls.each do |url|
+        .url= pretty_url_link url
 
 - with_next_heading_level do
 
-  .meta
+  .meta{style: "color: #{person_color}"}
     - if person.projects.any?
       = render 'projects/thumb_list', projects: person.projects, project_list_title: "Participating in"
     

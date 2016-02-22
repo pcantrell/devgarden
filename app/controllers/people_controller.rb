@@ -35,7 +35,7 @@ private
   helper_method :person
 
   def person_params
-    params[:person].permit(:name, :email, :url)
+    params[:person].permit(:name, :email, :urls_as_text, :class_year, :department)
   end
 
 end

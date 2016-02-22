@@ -6,7 +6,7 @@ form
     font-size: 100%
     margin: 0.6em 0
     padding: 0.3em 0.6em
-    border-radius: 0.6em
+    border-radius: 0.3em
     &:focus
       outline: none !important
       box-shadow: 0 0 0.3em $devgarden-highlight
@@ -34,18 +34,27 @@ form
       margin-right: 0.6em
       display: inline-block
       vertical-align: middle
-      width: 1.2em
-      height: 1.2em
+      &:focus
+        outline: 2px solid $devgarden-highlight !important
     input[type="submit"]
       padding: 0.6em 1.2em
       font-size: 110%
       border-radius: 1.2em
     li
       list-style: none
+      padding: 0 1.8em 0 0.6em
+      margin: 0.3em -0.6em
       &.action
         text-align: center
       &.stringish, &.text
-        margin: 1.8em 0
+        margin:
+          top: 1.8em
+          bottom: 1.8em
+        &.disclosure-target
+          margin-top: 0.3em
+          overflow: auto
+          box-sizing: content-box
+          -moz-box-sizing: content-box
       &.error
         input, textarea
           border: 0.5px solid #E22

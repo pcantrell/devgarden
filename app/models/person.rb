@@ -4,11 +4,20 @@ class Person < ActiveRecord::Base
   has_many :role_offers, -> { includes(:role) }
 
   validates :name, :email, presence: true
+  validates :class_year, inclusion: 1920..(Time.now.year + 4), allow_blank: true
 
   include RecentScope
 
   def name
     full_name || github_user
+  end
+
+  def student_or_alum?
+    class_year?
+  end
+
+  def faculty_or_staff?
+    department?
   end
 
   include StringArrayAttribute

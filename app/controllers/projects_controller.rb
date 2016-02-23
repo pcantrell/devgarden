@@ -19,10 +19,11 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    project = Project.new(project_params)
+    @project = Project.new(project_params)
+    @project.participations.new(person: current_user, admin: true)
 
     if project.save
-      redirect_to project, flash: { success: 'Project created' }
+      redirect_to @project, flash: { success: 'Project created' }
     else
       render :new
     end
@@ -50,7 +51,7 @@ private
   helper_method :project
 
   def project_params
-    params[:project].permit(:name, :url, :scm_urls_as_text)
+    params[:project].permit(:name, :tagline, :url, :scm_urls_as_text)
   end
 
 end

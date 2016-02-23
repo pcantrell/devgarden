@@ -8,6 +8,7 @@ class Project < ActiveRecord::Base
   mount_uploader :icon, ProjectIconUploader
 
   validates :name, presence: true
+  validates :tagline, length: { maximum: 50 }
 
   URL_REGEXP = URI::regexp(%w(http https))
   validates :url, format: URL_REGEXP, allow_blank: true

@@ -2,8 +2,9 @@
 
   = f.inputs do
     = f.input :name
-    = f.input :url, label: 'URL of your project web site', required: false, placeholder: 'http://'
-    = f.input :scm_urls_as_text, as: :text, label: 'Source control URL(s) for your project (one per line)'
+    = f.input :tagline, hint: "A very short description or slogan"
+    = f.input :url, label: 'Project web site', required: false, placeholder: 'https://'
+    = f.input :scm_urls_as_text, as: :text, label: 'Source code URL(s)', placeholder: "https://github.com/user/projectname", hint: "(one per line)"
 
   .actions
     = f.submit 'Save'

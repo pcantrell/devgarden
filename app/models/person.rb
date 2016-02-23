@@ -20,6 +20,10 @@ class Person < ActiveRecord::Base
     department?
   end
 
+  def owned_projects
+    projects.where('participations.admin' => true)
+  end
+
   include StringArrayAttribute
   exposes_string_array_as_text :urls
 

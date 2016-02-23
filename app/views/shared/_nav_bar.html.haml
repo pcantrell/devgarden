@@ -17,7 +17,7 @@
     %aside.dropdown#auth-dropdown
       - if logged_in?
         %ul.projects
-          - current_user.projects.recent.limit(6).each do |project|
+          - current_user.owned_projects.recent.limit(6).each do |project|
             %li
               = link_to project, style: "color: #{featured_color_for(project)}" do
                 = project.name

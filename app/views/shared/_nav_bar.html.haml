@@ -18,7 +18,11 @@
         - if current_user.projects.any?
           %ul.projects
             - current_user.projects.recent.limit(6).each do |project|
-              %li= link_to project.name, project
+              %li
+                = link_to project, style: "color: #{featured_color_for(project)}" do
+                  = project.name
+                  - if project.icon?
+                    .icon= image_tag project.icon.thumb.url
         %ul
           %li= link_to "Edit Profile", edit_person_path(current_user)
           %li= link_to "Log Out", logout_path

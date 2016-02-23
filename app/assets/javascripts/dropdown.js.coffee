@@ -25,7 +25,7 @@ showPopup = ($button, show) ->
 
   if show
     showPopup(curPopupButton(), false)
-    $dropdown.css('min-width', "#{$header.outerWidth() + 24}px")
+    $dropdown.css('min-width', "#{$header.outerWidth() + 12}px")
   
   $button.toggleClass('dropdown-button-active', show)
 

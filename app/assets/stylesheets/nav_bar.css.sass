@@ -40,7 +40,7 @@
   text-transform: none
   letter-spacing: 0
   font-size: 120%
-  text-align: center
+  text-align: right
   box-shadow: 0 1ex 1ex rgba(0, 0, 0, 0.333)
   border-top: 0.5px solid #ccc
   p
@@ -49,7 +49,7 @@
     margin: 1.2em
     max-width: 12em
   ul
-    padding: 0
+    padding: 0 1.2em
     margin: 1.2em 0
     &.projects
       padding-bottom: 1.2em
@@ -60,6 +60,12 @@
       margin-bottom: 1.2em
       &:last-child
         margin-bottom: 0
+      .icon
+        float: right
+        margin-left: 0.3em
+        img
+          width: 1em
+          height: 1em
 
 .dropdown, .dropdown-header-active
   background: white

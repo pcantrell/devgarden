@@ -1,9 +1,7 @@
-- person_color = featured_color_for(person)
-
 - if person == current_user
-  = link_to "Edit Profile", edit_person_path(person), class: 'big-button edit', style: "background: #{person_color}"
+  = link_to "Edit Profile", edit_person_path(person), class: 'big-button edit', style: theme_style(person, :button_background)
 
-.banner{style: "color: #{person_color}"}
+.banner{style: theme_style(person, :featured_text)}
   - heading person.name
 
   .bio
@@ -19,7 +17,7 @@
 
 - with_next_heading_level do
 
-  .meta{style: "color: #{person_color}"}
+  .meta{style: theme_style(person, :body_text)}
     - if person.projects.any?
       = render 'projects/thumb_list', projects: person.projects, project_list_title: "Participating in"
     

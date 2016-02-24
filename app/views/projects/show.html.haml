@@ -1,7 +1,7 @@
 - if logged_in? && project.admins_include?(current_user)
-  = link_to "Edit Project", edit_project_path(project), class: 'big-button edit'
+  = link_to "Edit Project", edit_project_path(project), class: 'big-button edit', style: theme_style(project, :button_background)
 
-.banner{style: "color: #{featured_color_for(project)}"}
+.banner{style: theme_style(project, :featured_text)}
   - if project.icon?
     .icon
       = image_tag project.icon.feature.url
@@ -18,7 +18,7 @@
 
 - with_next_heading_level do
 
-  .meta
+  .meta{style: theme_style(project, :body_text)}
     .participants
       - heading "Participants" do
         - project.participants.shuffle.each do |person|
@@ -37,4 +37,5 @@
             .repo= pretty_url_link url
 
   - if project.description?
-    .description= markdown(project.description)
+    .description{style: theme_style(project, :body_text)}
+      = markdown(project.description)

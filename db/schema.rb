@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222050605) do
+ActiveRecord::Schema.define(version: 20160223162347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20160222050605) do
     t.string   "urls",         default: [], null: false, array: true
     t.integer  "class_year"
     t.string   "department"
+    t.float    "theme_hue"
   end
 
   add_index "people", ["email"], name: "index_people_on_email", unique: true, using: :btree
@@ -91,6 +92,7 @@ ActiveRecord::Schema.define(version: 20160222050605) do
     t.string   "scm_urls",    default: [],              array: true
     t.string   "icon"
     t.string   "tagline"
+    t.float    "theme_hue"
   end
 
   create_table "role_categories", force: :cascade do |t|

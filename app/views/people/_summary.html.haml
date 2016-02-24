@@ -1,4 +1,4 @@
-.person.summary{style: "background: #{featured_color_for(person)}"}
+.person.summary{style: theme_style(person, :background)}
   .content
     .heading
       - heading link_to(person.name, person), class: "name"

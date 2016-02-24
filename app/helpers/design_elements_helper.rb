@@ -2,25 +2,33 @@ require "svg_path"
 
 module DesignElementsHelper
 
-  LIGHTNESS_BY_HUE = [38, 34, 25, 32, 45, 36]
-
-  def featured_color_for(model)
-    @hue_weights ||= [0] * 12
-    hue_index = weighted_rand(@hue_weights.map { |x| 1 / (x + 0.2) })
-
-    @hue_weights.map!.with_index do |weight, i|
-      bucket_angle = (hue_index - i) * 2 * Math::PI / @hue_weights.length
-      weight + (Math.cos(bucket_angle) + 1) ** 1.5
-    end
-    min_weight = @hue_weights.min
-    @hue_weights.map!.with_index do |weight, i|
-      weight - min_weight
-    end
-
-    hue = ((hue_index + rand) / @hue_weights.length * 360).to_i
+  def theme_style(model, role)
+    hue = configured_hue(model) || default_hue(model)
+    saturation = 45
     lightness = circular_interpolate(LIGHTNESS_BY_HUE, hue / 360.0 * LIGHTNESS_BY_HUE.length)
 
-    "hsl(#{hue}, 40%, #{lightness}%)"
+    case role
+      when :featured_text
+      when :body_text
+        lightness /= 1.5
+      when :background
+        saturation -= 5
+      when :button_background
+        saturation += 30
+      else
+        raise "Unknown feature color role: #{role.inspect}"
+    end
+
+    color = "hsl(#{hue}, #{saturation}%, #{lightness}%)"
+
+    case role
+      when :featured_text,
+           :body_text
+        "color: #{color}"
+      when :background,
+           :button_background
+        "background: #{color}"
+    end
   end
 
   def project_divider_path(npts = 2)
@@ -55,13 +63,15 @@ module DesignElementsHelper
 
 private
 
-  def weighted_rand(array)
-    x = Random.rand(array.sum)
-    array.each.with_index do |weight, i|
-      x -= weight
-      return i if x <= 0
-    end
-    array.length - 1
+  LIGHTNESS_BY_HUE = [38, 34, 25, 32, 45, 36]
+  GOLDEN_ANGLE = 180 * (3 - Math.sqrt(5))
+
+  def configured_hue(model)
+    model.theme_hue if model.respond_to?(:theme_hue)
+  end
+
+  def default_hue(model)
+    model.id * GOLDEN_ANGLE % 360
   end
 
   def circular_interpolate(array, index)

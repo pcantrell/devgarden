@@ -19,7 +19,7 @@
         %ul.projects
           - current_user.owned_projects.recent.limit(6).each do |project|
             %li
-              = link_to project, style: "color: #{featured_color_for(project)}" do
+              = link_to project, style: theme_style(project, :featured_text) do
                 = project.name
                 - if project.icon?
                   .icon= image_tag project.icon.thumb.url

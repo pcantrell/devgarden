@@ -2,4 +2,4 @@
   - project.tags_grouped.each do |category, tags|
     .tag-category{class: "tag-category-#{category.key}"}
       -tags.each do |tag|
-        .tag= link_to tag.name, tag
+        .tag= link_to tag.short_name || tag.name, tag

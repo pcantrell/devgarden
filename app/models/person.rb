@@ -9,7 +9,11 @@ class Person < ActiveRecord::Base
   include RecentScope
 
   def name
-    full_name || github_user
+    full_name || github_user || "[anonymous]"
+  end
+
+  def short_name
+    github_user || name.split.first
   end
 
   def student_or_alum?

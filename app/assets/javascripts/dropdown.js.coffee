@@ -56,7 +56,7 @@ togglePopup = ($button) ->
 $ ->
   $(document).on 'click', '[data-show-dropdown]', (e) ->
     e.preventDefault()
-    togglePopup($(e.target))
+    togglePopup($(e.target).closest('[data-show-dropdown]'))
 
 $(window).resize positionCurPopup
 $(window).scroll ->

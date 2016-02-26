@@ -29,6 +29,20 @@
         margin-right: 0.4em
         padding-bottom: 0.2em
         vertical-align: middle
+  .short-name
+    display: none
+  @include if-below-width(42em)
+    .short-name
+      display: inline
+    .long-name
+      display: none
+  @include if-below-width(37em)
+    font-size: 70%
+  @include if-below-width(32em)
+    font-size: 60%
+  @include if-below-width(26em)
+    font-size: 50%
+
 
 .dropdown
   position: absolute

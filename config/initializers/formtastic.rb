@@ -9,3 +9,14 @@ Formtastic::FormBuilder.optional_string = "<abbr class='validation optional'>Opt
 Formtastic::FormBuilder.default_hint_class = "inline-hint"
 Formtastic::FormBuilder.default_inline_error_class = "inline-error"
 # Formtastic::FormBuilder.default_error_list_class = "errors"
+
+class Formtastic::FormBuilder
+  def save_button
+    title = if object.respond_to?(:new_record?) && object.new_record?
+      "Create"
+    else
+      "Save"
+    end
+    submit(title)
+  end
+end

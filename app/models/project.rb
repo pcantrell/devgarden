@@ -27,9 +27,25 @@ class Project < ActiveRecord::Base
   end
 
   include StringArrayAttribute
-  exposes_string_array_as_text :scm_urls
+  exposes_array_as_text :scm_urls, from_text: ->(url) do
+    url.gsub(GIT_REPO_FROM_URL, 'https://github.com/\1')
+  end
 
 private
+
+  GIT_REPO_FROM_URL = %r{
+      (?:
+        # Several possible prefixes if user copied git URL instead of web URL
+        git@github.com:
+        | (?: https? | git )://github.com/
+      )
+      (
+        \w+  # user name
+        /
+        \w+  # project name
+      )
+      (\.git)?  # Drop .git suffix if present
+    }x
 
   def scm_urls_are_urls
     scm_urls.each do |url|

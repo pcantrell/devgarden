@@ -29,7 +29,7 @@ class Person < ActiveRecord::Base
   end
 
   include StringArrayAttribute
-  exposes_string_array_as_text :urls
+  exposes_array_as_text :urls
 
   def self.for_auth(auth)
     provider, uid = auth["provider"], auth["uid"]

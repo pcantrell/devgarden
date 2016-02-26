@@ -6,5 +6,8 @@
     = f.input :url, label: 'Project web site', required: false, placeholder: 'https://'
     = f.input :scm_urls_as_text, as: :text, label: 'Github URL(s)', placeholder: "https://github.com/user/projectname", hint: "(one per line)"
 
+    - TagCategory.in_order.each do |category|
+      = f.input :tags, label: category.name.pluralize, required: true, as: :check_boxes, collection: category.tags.order('name')
+
   .actions
     = f.save_button

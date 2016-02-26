@@ -51,7 +51,7 @@ private
   helper_method :project
 
   def project_params
-    params[:project].permit(:name, :tagline, :url, :scm_urls_as_text)
+    params[:project].permit(:name, :tagline, :url, :scm_urls_as_text, tag_ids: [])
   end
 
 end

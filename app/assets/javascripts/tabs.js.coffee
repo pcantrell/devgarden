@@ -25,4 +25,3 @@ $ ->
     $tab = targetOfLink($(e.target).closest("a"))
     showTab($tab)
     null
-

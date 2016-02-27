@@ -1,0 +1,31 @@
+@import "_shared"
+
+.tabs
+  >ul >li
+    @include meta-font
+    float: left
+    white-space: nowrap
+    marign: 0
+    padding: 0.3em 0.6em
+    border:
+      top-left-radius: 0.3em
+      top-right-radius: 0.3em
+      bottom: 0.5px solid #ccc
+    &:hover
+      color: $devgarden-highlight
+    &.active
+      background: $devgarden-dark
+      color: white
+    a
+      color: inherit
+    @include if-below-width(36em)
+      font-size: 90%
+    @include if-below-width(36em * 8/9)
+      font-size: 80%
+    @include if-below-width(36em * 7/9)
+      font-size: 70%
+    @include if-below-width(36em * 6/9)
+      font-size: 60%
+
+  .tab
+    clear: both

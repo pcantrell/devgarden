@@ -1,5 +1,6 @@
-$devgarden-dark: #282561
-$devgarden-highlight: #3d36de
+$dark-color: #282561
+$highlight-color: #3d36de
+$hairline-color: #cbcad3
 
 @mixin if-below-width($width)
   @media all and (max-width: $width)
@@ -52,9 +53,9 @@ $devgarden-highlight: #3d36de
   padding: 0.6em 1.2em
   border-radius: 0.6em
   color: white !important
-  background: $devgarden-dark
+  background: $dark-color
   &:hover
-    background: $devgarden-highlight
+    background: $highlight-color
     text-decoration: none
 
 @mixin thumb-icon
@@ -102,5 +103,5 @@ $devgarden-highlight: #3d36de
     margin: 0 0 1.2em 1.2em
     padding: 0.15em 0
     padding-left: 1.2em
-    border-left: 0.5px solid $devgarden-dark
+    border-left: 0.5px solid $dark-color
     max-width: 40%

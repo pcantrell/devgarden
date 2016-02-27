@@ -6,7 +6,7 @@
 body
   margin: 0
   padding: 0
-  color: $devgarden-dark
+  color: $dark-color
   @include body-font
   font-size: 1.1em
   line-height: 120%
@@ -36,9 +36,8 @@ p
 
 a
   &:link, &:visited
-    color: #3530b1
+    color: $highlight-color
   &:hover
-    color: $devgarden-highlight
     text-decoration: underline
   text-decoration: none
 
@@ -52,7 +51,7 @@ hr
   height: 1px
   width: 50%
   margin: 0.6em 25%
-  border-top: 0.5px solid #ccc
+  border-top: 0.5px solid $hairline-color
 
 .more
   margin-top: 0.6em
@@ -76,7 +75,7 @@ hr
   .feature
     margin: 1.2em 0
     padding-bottom: 1.2em
-    border-bottom: 0.5px solid #ccc
+    border-bottom: 0.5px solid $hairline-color
     @include if-above-width(36em)
       &:last-child
         border: none
@@ -156,7 +155,7 @@ hr
     position: relative
     top: -1px
     path
-      fill: $devgarden-dark
+      fill: $dark-color
 
 .tags
   overflow: hidden
@@ -195,7 +194,7 @@ hr
   @include button
   &.edit
     display: block
-    background: #256042
+    background: $highlight-color
     font-size: 100%
     text-align: center
     margin-top: 2.4em

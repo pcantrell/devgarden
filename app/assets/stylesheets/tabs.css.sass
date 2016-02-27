@@ -10,12 +10,13 @@
     border:
       top-left-radius: 0.3em
       top-right-radius: 0.3em
-      bottom: 0.5px solid #ccc
+      bottom: 0.5px solid $hairline-color
     &:hover
-      color: $devgarden-highlight
+      color: $highlight-color
     &.active
-      background: $devgarden-dark
+      background: $dark-color
       color: white
+      border-bottom-color: $dark-color
     a
       color: inherit
     @include if-below-width(36em)

@@ -9,7 +9,7 @@ form
     border-radius: 0.3em
     &:focus
       outline: none !important
-      box-shadow: 0 0 0.3em $devgarden-highlight
+      box-shadow: 0 0 0.3em $highlight-color
   input
     &[type='submit']
       @include button
@@ -25,7 +25,7 @@ form
     textarea
       display: block
       width: 99%
-      border: 0.5px solid $devgarden-dark
+      border: 0.5px solid $dark-color
       background: #fbfbf9
       &:focus
         background: white
@@ -34,7 +34,7 @@ form
       display: inline-block
       vertical-align: middle
       &:focus
-        outline: 2px solid $devgarden-highlight !important
+        outline: 2px solid $highlight-color !important
     input[type="submit"]
       padding: 0.6em 1.2em
       font-size: 110%

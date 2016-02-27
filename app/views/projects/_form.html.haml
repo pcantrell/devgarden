@@ -1,35 +1,34 @@
 = semantic_form_for project, class: 'project' do |f|
 
   .tabs
-    .tab(data-tab-target='project-info')         Basic info
-    .tab(data-tab-target='project-description')  Description
-    .tab(data-tab-target='project-tags')         Technologies
-    .tab(data-tab-target='project-participants') People
-    .tab(data-tab-target='project-role-reqs')    Help wanted
+    %ul
+      %li= link_to "Basic info",   "#info"
+      %li= link_to "Description",  "#description"
+      %li= link_to "Technologies", "#tags"
+      %li= link_to "People",       "#participants"
+      %li= link_to "Help wanted",  "#role-reqs"
 
-  .tabbed-group
-
-    .tabbed#project-info
+    .tab#info-tab
       = f.inputs do
         = f.input :name
         = f.input :tagline, hint: "A very short description or slogan"
         = f.input :url, label: 'Project web site', required: false, placeholder: 'https://'
         = f.input :scm_urls_as_text, as: :text, label: 'Github URL(s)', placeholder: "https://github.com/user/projectname", hint: "(one per line)"
 
-    .tabbed#project-description
+    .tab#description-tab
       = f.inputs do
         = f.input :description
 
-    .tabbed#project-tags
+    .tab#tags-tab
       = f.inputs do
         - TagCategory.in_order.each do |category|
           = f.input :tags, label: category.name.pluralize, required: true, as: :check_boxes, collection: category.tags.order('name')
 
-    .tabbed#project-participants
+    .tab#participants-tab
       = f.inputs do
         = f.input :participants
 
-    .tabbed#project-role-reqs
+    .tab#role-reqs-tab
       = f.inputs do
         = f.input :role_requests
 

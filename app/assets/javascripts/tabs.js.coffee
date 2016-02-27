@@ -1,15 +1,28 @@
 $ ->
-  $(document).on 'page:update', ->
-    $('.tabbed-group .tabbed').hide()
-    $('.tabbed-group .tabbed:first-child').show()
+  targetOfLink = ($link) ->
+    $($link.attr('href') + "-tab")
 
-  tabSelector = '.tab[data-tab-target]'
-  $(document).on 'click', tabSelector, (e) ->
-    e.preventDefault()
-    targetID = $(e.target).closest(tabSelector).data('tab-target')
-    $target = $('#' + targetID)
-    console.log targetID, $target
-    $target.closest('.tabbed-group').find('.tabbed').hide()
-    $target.show()
+  firstTab = ($tabs) ->
+    $($tabs.find('.tab')[0])
+
+  showTab = ($tab) ->
+    $group = $tab.closest('.tabs')
+
+    $group.find("> ul > li").toggleClass('active', false)
+    href = $tab.attr('id').replace("-tab", "")
+    $group.find("a[href='##{href}']").closest('li').toggleClass('active', true)
+
+    $group.find('.tab').hide()
+    $tab.show()
+
+  $(document).on 'page:update', ->
+    for tabs in $('.tabs')
+      showTab(
+        firstTab($(tabs)))
+    showTab $(window.location.hash + "-tab")
+
+  $(document).on 'click', '.tabs li a', (e) ->
+    $tab = targetOfLink($(e.target).closest("a"))
+    showTab($tab)
     null
 

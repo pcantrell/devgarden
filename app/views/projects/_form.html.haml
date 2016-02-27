@@ -1,13 +1,37 @@
 = semantic_form_for project, class: 'project' do |f|
 
-  = f.inputs do
-    = f.input :name
-    = f.input :tagline, hint: "A very short description or slogan"
-    = f.input :url, label: 'Project web site', required: false, placeholder: 'https://'
-    = f.input :scm_urls_as_text, as: :text, label: 'Github URL(s)', placeholder: "https://github.com/user/projectname", hint: "(one per line)"
+  .tabs
+    .tab(data-tab-target='project-info')         Basic info
+    .tab(data-tab-target='project-description')  Description
+    .tab(data-tab-target='project-tags')         Technologies
+    .tab(data-tab-target='project-participants') People
+    .tab(data-tab-target='project-role-reqs')    Help wanted
 
-    - TagCategory.in_order.each do |category|
-      = f.input :tags, label: category.name.pluralize, required: true, as: :check_boxes, collection: category.tags.order('name')
+  .tabbed-group
+
+    .tabbed#project-info
+      = f.inputs do
+        = f.input :name
+        = f.input :tagline, hint: "A very short description or slogan"
+        = f.input :url, label: 'Project web site', required: false, placeholder: 'https://'
+        = f.input :scm_urls_as_text, as: :text, label: 'Github URL(s)', placeholder: "https://github.com/user/projectname", hint: "(one per line)"
+
+    .tabbed#project-description
+      = f.inputs do
+        = f.input :description
+
+    .tabbed#project-tags
+      = f.inputs do
+        - TagCategory.in_order.each do |category|
+          = f.input :tags, label: category.name.pluralize, required: true, as: :check_boxes, collection: category.tags.order('name')
+
+    .tabbed#project-participants
+      = f.inputs do
+        = f.input :participants
+
+    .tabbed#project-role-reqs
+      = f.inputs do
+        = f.input :role_requests
 
   .actions
     = f.save_button

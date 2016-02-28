@@ -59,6 +59,24 @@ autosaveStatus = ($form, status) ->
   $form.data('autosave-status', status)
   updateStatusDisplay()
 
+submitIfDirty = ($form) ->
+  autosubmitAtTime = $form.data('autosubmitAtTime')
+  return unless autosubmitAtTime && Date.now() >= autosubmitAtTime
+
+  $form.data('autosubmitAtTime', null)
+  $.ajax
+    type: $form.attr('method') || "POST"
+    url: $form.attr('action') || '.'
+    data: $form.serialize()
+    beforeSend: -> autosaveStatus($form, 'saving')
+    complete: (result, status) ->
+      autosaveStatus $form,
+        if status == 'success'
+          retryFailedAutosaves()
+          'success'
+        else
+          'error'
+
 retryFailedAutosaves = ->
   for form in $('.autosave form')
     if $(form).data('autosave-status') == 'error'
@@ -72,19 +90,11 @@ $(document).on 'change', '.autosave input', (e) ->
 
 $(document).on 'submit', '.autosave form', (e) ->
   e.preventDefault()
+
   $form = $(e.target)
-  $.ajax
-    type: $form.attr('method') || "POST"
-    url: $form.attr('action') || '.'
-    data: $form.serialize()
-    beforeSend: -> autosaveStatus($form, 'saving')
-    complete: (result, status) ->
-      autosaveStatus $form,
-        if status == 'success'
-          retryFailedAutosaves()
-          'success'
-        else
-          'error'
+  throttle = 600
+  $form.data('autosubmitAtTime', Date.now() + throttle)
+  setTimeout (-> submitIfDirty($form)), throttle
 
 $(document).on 'click', '#autosave-status .error', (e) ->
   e.preventDefault()

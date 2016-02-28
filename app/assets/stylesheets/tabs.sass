@@ -1,16 +1,17 @@
 @import "_shared"
 
 .tabs
+  >ul
+    border-bottom: 0.5px solid $dark-color
   >ul >li
     @include meta-font
-    float: left
+    display: inline-block
     white-space: nowrap
     marign: 0
     padding: 0.3em 0.6em
     border:
       top-left-radius: 0.3em
       top-right-radius: 0.3em
-      bottom: 0.5px solid $hairline-color
     &:hover
       color: $highlight-color
     &.active

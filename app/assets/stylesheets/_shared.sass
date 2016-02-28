@@ -105,3 +105,21 @@ $hairline-color: #cbcad3
     padding-left: 1.2em
     border-left: 0.5px solid $dark-color
     max-width: 40%
+
+@mixin choices-in-wide-columns
+  .choices
+    .choices-group
+      column-width: 10em
+      column-gap: 0
+    .choice
+      margin: 0
+      min-width: 10em
+      white-space: nowrap
+      padding-right: 0
+
+@mixin choices-in-tall-columns
+  .inputs > ol
+    column-width: 10em
+    column-gap: 0
+    > li
+      display: inline-block

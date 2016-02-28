@@ -31,3 +31,13 @@
     >*:first-child
       h2, h3, h4
         margin-top: 0
+
+.projects-controller
+  #tags-tab
+    @include choices-in-wide-columns
+    .choice label
+      font:
+        size: 80%
+        weight: 400
+  #role-reqs-tab
+    @include choices-in-tall-columns

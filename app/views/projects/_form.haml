@@ -30,7 +30,8 @@
 
     .tab#role-reqs-tab
       = f.inputs do
-        = f.input :role_requests
+        - RoleCategory.all.shuffle.each do |category|
+          = f.input :role_requests, label: category.name, member_label: :person_name, required: true, as: :check_boxes, collection: category.roles.shuffle
 
   .actions
     = f.save_button

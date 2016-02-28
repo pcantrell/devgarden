@@ -9,7 +9,7 @@ $ ->
     $group = $tab.closest('.tabs')
 
     $group.find("> ul > li").toggleClass('active', false)
-    href = $tab.attr('id').replace("-tab", "")
+    href = ($tab.attr('id') || "").replace("-tab", "")
     $group.find("a[href='##{href}']").closest('li').toggleClass('active', true)
 
     $group.find('.tab').hide()

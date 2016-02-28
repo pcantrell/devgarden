@@ -2,8 +2,9 @@
 
   .tabs
     %ul
-      %li= link_to "Basic info",   "#info"
+      %li= link_to "Basics",       "#info"
       %li= link_to "Description",  "#description"
+      %li= link_to "Graphics",     "#graphics"
       %li= link_to "Technologies", "#tags"
       %li= link_to "People",       "#participants"
       %li= link_to "Help wanted",  "#role-reqs"
@@ -18,6 +19,12 @@
     .tab#description-tab
       = f.inputs do
         = f.input :description
+
+    .tab#graphics-tab
+      = f.inputs do
+        = f.input :icon
+        = f.hidden_field :icon_cache
+        = image_tag project.icon.thumb.url if project.icon?
 
     .tab#tags-tab
       = f.inputs do

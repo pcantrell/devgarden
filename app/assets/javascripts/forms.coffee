@@ -16,7 +16,8 @@ $(document).on 'page:update', ->
     $elem.transition { scale: 1.1 }, 160, 'easeOutSine'
          .transition { scale: 1 },   240, 'easeInOutSine'
 
-  bounce $('.flashes')
+  bounce $('.flashes:not(.flashed)')
+  $('.flashes').addClass('flashed')
 
   dirty = false
   $('input').change ->

@@ -1,5 +1,5 @@
 $(document).on 'page:update', ->
-  $('#project-icon-dropzone')
+  $('#project-icon-dropzone:not(.dropzone)')
     .addClass("dropzone")
     .dropzone
       paramName: "project[icon]"

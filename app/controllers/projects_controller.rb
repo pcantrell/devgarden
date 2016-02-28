@@ -52,7 +52,9 @@ private
   helper_method :project
 
   def project_params
-    params[:project].permit(:name, :tagline, :url, :scm_urls_as_text, :icon, :icon_cache, tag_ids: [])
+    params[:project].permit(
+      :name, :tagline, :url, :scm_urls_as_text, :icon, :icon_cache,
+      tag_ids: [], requested_role_ids: [])
   end
 
 end

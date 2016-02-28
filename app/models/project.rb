@@ -2,6 +2,7 @@ class Project < ActiveRecord::Base
   has_many :participations
   has_many :participants, through: :participations, source: :person
   has_many :role_requests, -> { includes(:role) }
+  has_many :requested_roles, through: :role_requests, source: :role
   has_many :project_tags, -> { includes(:tag).order(:order) }
   has_many :tags, -> { includes(:category) }, through: :project_tags
 

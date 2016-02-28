@@ -26,19 +26,19 @@
       = form_for project, html: { id: "project-icon-dropzone" } do
         .dz-message Drop PNG or JPEG here
 
-    .tab#tags-tab.autosave
-      = project_form "tags" do |f|
+    .tab#tags-tab
+      = project_form "tags", autosave: true do |f|
         = f.inputs do
           - TagCategory.in_order.each do |category|
             = f.input :tags, label: category.name.pluralize, required: true, as: :check_boxes, collection: category.tags.order('name')
 
-    .tab#participants-tab.autosave
-      = project_form "participants" do |f|
+    .tab#participants-tab
+      = project_form "participants", autosave: true do |f|
         = f.inputs do
           = f.input :participants
 
-    .tab#role-reqs-tab.autosave
-      = project_form "role-reqs" do |f|
+    .tab#role-reqs-tab
+      = project_form "role-reqs", autosave: true do |f|
         = f.inputs do
           - RoleCategory.all.shuffle.each do |category|
             = f.input :requested_roles, label: category.name, member_label: :person_name, required: true, as: :check_boxes, collection: category.roles.shuffle

@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 
   before_filter :require_project_admin, except: [:index, :show, :new, :create]
   before_filter :require_login, except: [:index, :show]
-  respond_to :html, :json
+  respond_to :html, :json, :js
 
   def index
     render partial: 'recent', locals: {
@@ -32,9 +32,10 @@ class ProjectsController < ApplicationController
 
   def update
     if project.update(project_params)
-      respond_with project, flash: { success: 'Project updated' }
-    else
-      render :edit
+      flash[:success] = 'Project updated'
+    end
+    respond_with project do |format|
+      format.js { render nothing: true }
     end
   end
 

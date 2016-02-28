@@ -8,7 +8,10 @@ module ProjectFormHelper
       }
     }
     semantic_form_for(project, **opts) do |f|
-      yield f
+      capture do
+        concat hidden_field_tag(:selected_tab, tab_name)
+        yield f
+      end
     end
   end
 end

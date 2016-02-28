@@ -1,7 +1,7 @@
 .more= link_to "View Project", project
 = render "shared/autosave_status"
 
-- heading "#{project.name} Info" do
+- heading "#{project.name.presence || 'Project'} Info" do
 
   .tabs
     %ul

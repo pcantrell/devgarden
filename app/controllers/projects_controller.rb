@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 
   before_filter :require_project_admin, except: [:index, :show, :new, :create]
   before_filter :require_login, except: [:index, :show]
-  respond_to :html, :json, :js
+  before_filter :remove_duplicate_params
 
   def index
     render partial: 'recent', locals: {
@@ -24,18 +24,29 @@ class ProjectsController < ApplicationController
     @project.participations.new(person: current_user, admin: true)
 
     if project.save
-      redirect_to edit_project_path(project, anchor: 'graphics'), flash: { success: 'Project created' }
+      flash[:success] = 'Project created'
+      redirect_to edit_project_tab_path('graphics')
     else
       render :new
     end
   end
 
   def update
-    if project.update(project_params)
-      flash[:success] = 'Project updated'
-    end
-    respond_with project do |format|
-      format.js { render nothing: true }
+    success = project.update(project_params)
+
+    respond_to do |format|
+      format.html do
+        if success
+          tab = params[:selected_tab] || ""
+          flash[:success] = "Project #{tab.downcase} updated"
+          redirect_to edit_project_tab_path(tab)
+        else
+          render :edit
+        end
+      end
+      format.js do
+        render nothing: true
+      end
     end
   end
 
@@ -54,8 +65,22 @@ private
 
   def project_params
     params[:project].permit(
-      :name, :tagline, :url, :scm_urls_as_text, :icon, :icon_cache,
+      :name, :tagline, :description, :url, :scm_urls_as_text, :icon, :icon_cache,
       tag_ids: [], requested_role_ids: [])
+  end
+
+  def edit_project_tab_path(tab_name)
+    edit_project_path(project, anchor: tab_name)
+  end
+
+  # For unknown reasons, remote: true causes tag and role request checkboxes to
+  # show up multiple times in the submitted array. Rails bug?
+  def remove_duplicate_params
+    [:tag_ids, :requested_role_ids].each do |key|
+      if params[:project] && params[:project][key]
+        params[:project][key].uniq!
+      end
+    end
   end
 
 end

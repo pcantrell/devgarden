@@ -58,7 +58,7 @@ form
           -moz-box-sizing: content-box
       &.error
         input, textarea
-          border: 0.5px solid #E22
+          border: 0.5px solid $error-color
           background: #fff4f4
     label
       @include sans
@@ -78,7 +78,7 @@ form
       padding: 0 0.6em
     .inline-error
       margin: 0
-      color: #b44
+      color: $error-color
       font-weight: 500
     .choices
       legend
@@ -90,3 +90,20 @@ form
         min-width: 10em
         white-space: nowrap
         padding-right: 0
+
+#autosave-status
+  float: right
+  padding-top: 0.6em
+  > *
+    @include meta-tiny-font
+    opacity: 0.6
+    padding: 0.6em
+    border-radius: 0.3em
+    text-transform: uppercase
+  .success
+    color: $success-color
+  .error
+    background: $error-color
+    color: white
+    opacity: 1
+    cursor: pointer

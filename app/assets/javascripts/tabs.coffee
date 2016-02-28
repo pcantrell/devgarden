@@ -24,4 +24,4 @@ $ ->
   $(document).on 'click', '.tabs li a', (e) ->
     $tab = targetOfLink($(e.target).closest("a"))
     showTab($tab)
-    null
+    return

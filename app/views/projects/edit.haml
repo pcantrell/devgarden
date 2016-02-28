@@ -1,3 +1,50 @@
-- heading "Edit Project Info" do
+= render "shared/autosave_status"
 
-  = render 'form'
+- heading "#{project.name} Info" do
+
+  .tabs
+    %ul
+      %li= link_to "Basics",       "#info"
+      %li= link_to "Description",  "#description"
+      %li= link_to "Icon",         "#graphics"
+      %li= link_to "Technologies", "#tags"
+      %li= link_to "People",       "#participants"
+      %li= link_to "Help wanted",  "#role-reqs"
+
+    .tab#info-tab
+      = semantic_form_for project do |f|
+        = f.inputs do
+          = f.input :name
+          = f.input :tagline, hint: "A very short description or slogan"
+          = f.input :url, label: 'Project web site', required: false, placeholder: 'https://'
+          = f.input :scm_urls_as_text, as: :text, label: 'Github URL(s)', placeholder: "https://github.com/user/projectname", hint: "(one per line)"
+        .actions
+          = f.save_button
+
+    .tab#description-tab
+      = semantic_form_for project do |f|
+        = f.inputs do
+          = f.input :description
+        .actions
+          = f.save_button
+
+    .tab#graphics-tab
+      = form_for project, html: { id: "project-icon-dropzone" } do
+        .dz-message Drop PNG or JPEG here
+
+    .tab#tags-tab.autosave
+      = semantic_form_for project do |f|
+        = f.inputs do
+          - TagCategory.in_order.each do |category|
+            = f.input :tags, label: category.name.pluralize, required: true, as: :check_boxes, collection: category.tags.order('name')
+
+    .tab#participants-tab.autosave
+      = semantic_form_for project do |f|
+        = f.inputs do
+          = f.input :participants
+
+    .tab#role-reqs-tab.autosave
+      = semantic_form_for project, html: { id: 'info-form' } do |f|
+        = f.inputs do
+          - RoleCategory.all.shuffle.each do |category|
+            = f.input :requested_roles, label: category.name, member_label: :person_name, required: true, as: :check_boxes, collection: category.roles.shuffle

@@ -1,44 +1,46 @@
-= semantic_form_for project, class: 'project' do |f|
+.tabs
+  %ul
+    %li= link_to "Basics",       "#info"
+    %li= link_to "Description",  "#description"
+    %li= link_to "Icon",         "#graphics"
+    %li= link_to "Technologies", "#tags"
+    %li= link_to "People",       "#participants"
+    %li= link_to "Help wanted",  "#role-reqs"
 
-  .tabs
-    %ul
-      %li= link_to "Basics",       "#info"
-      %li= link_to "Description",  "#description"
-      %li= link_to "Graphics",     "#graphics"
-      %li= link_to "Technologies", "#tags"
-      %li= link_to "People",       "#participants"
-      %li= link_to "Help wanted",  "#role-reqs"
-
-    .tab#info-tab
+  .tab#info-tab
+    = semantic_form_for project do |f|
       = f.inputs do
         = f.input :name
         = f.input :tagline, hint: "A very short description or slogan"
         = f.input :url, label: 'Project web site', required: false, placeholder: 'https://'
         = f.input :scm_urls_as_text, as: :text, label: 'Github URL(s)', placeholder: "https://github.com/user/projectname", hint: "(one per line)"
+      .actions
+        = f.save_button
 
-    .tab#description-tab
+  .tab#description-tab
+    = semantic_form_for project do |f|
       = f.inputs do
         = f.input :description
+      .actions
+        = f.save_button
 
-    .tab#graphics-tab
-      = f.inputs do
-        = f.input :icon
-        = f.hidden_field :icon_cache
-        = image_tag project.icon.thumb.url if project.icon?
+  .tab#graphics-tab
+    = form_for project, html: { id: "project-icon-dropzone" } do
+      .dz-message Drop PNG or JPEG here
 
-    .tab#tags-tab
+  .tab#tags-tab
+    = semantic_form_for project do |f|
       = f.inputs do
         - TagCategory.in_order.each do |category|
           = f.input :tags, label: category.name.pluralize, required: true, as: :check_boxes, collection: category.tags.order('name')
 
-    .tab#participants-tab
+  .tab#participants-tab
+    = semantic_form_for project do |f|
       = f.inputs do
         = f.input :participants
 
-    .tab#role-reqs-tab
+  .tab#role-reqs-tab
+    = semantic_form_for project do |f|
       = f.inputs do
         - RoleCategory.all.shuffle.each do |category|
           = f.input :role_requests, label: category.name, member_label: :person_name, required: true, as: :check_boxes, collection: category.roles.shuffle
-
-  .actions
-    = f.save_button

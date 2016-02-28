@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
 
   before_filter :require_project_admin, except: [:index, :show, :new, :create]
   before_filter :require_login, except: [:index, :show]
+  respond_to :html, :json
 
   def index
     render partial: 'recent', locals: {
@@ -23,7 +24,7 @@ class ProjectsController < ApplicationController
     @project.participations.new(person: current_user, admin: true)
 
     if project.save
-      redirect_to @project, flash: { success: 'Project created' }
+      respond_with @project, flash: { success: 'Project created' }
     else
       render :new
     end
@@ -31,7 +32,7 @@ class ProjectsController < ApplicationController
 
   def update
     if project.update(project_params)
-      redirect_to project, flash: { success: 'Project updated' }
+      respond_with project, flash: { success: 'Project updated' }
     else
       render :edit
     end
@@ -51,7 +52,7 @@ private
   helper_method :project
 
   def project_params
-    params[:project].permit(:name, :tagline, :url, :scm_urls_as_text, tag_ids: [])
+    params[:project].permit(:name, :tagline, :url, :scm_urls_as_text, :icon, :icon_cache, tag_ids: [])
   end
 
 end

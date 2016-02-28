@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require tabula_rasa
+ *= require dropzone
  *
  *= require_tree .
  *= require_self

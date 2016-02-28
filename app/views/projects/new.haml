@@ -1,5 +1,11 @@
 - heading "New Project" do
 
-  %ul
-    %li Create from github option
-    %li Raw create option
+  - if params[:full_form]
+    = render "basics_form"
+  - else
+    = semantic_form_for project do |f|
+      = f.inputs do
+        = f.input :scm_urls_as_text, as: :text, required: true, label: 'Your project’s Github URL', placeholder: "https://github.com/user/projectname", hint: "(one per line if the project has multiple repositories)"
+      .actions
+        = f.save_button
+        = link_to "This project doesn’t have a Github repository", new_project_path(full_form: true)

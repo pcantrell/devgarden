@@ -24,7 +24,7 @@ class ProjectsController < ApplicationController
     @project.participations.new(person: current_user, admin: true)
 
     if project.save
-      respond_with @project, flash: { success: 'Project created' }
+      redirect_to edit_project_path(project), flash: { success: 'Project created' }
     else
       render :new
     end

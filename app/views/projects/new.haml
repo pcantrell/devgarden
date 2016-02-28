@@ -1,8 +1,11 @@
 - heading "New Project" do
 
   - if params[:full_form]
-    = render "basics_form"
+
+    = render "basics_form", hide_scm_urls: true
+
   - else
+  
     = semantic_form_for project do |f|
       = f.inputs do
         = f.input :scm_urls_as_text, as: :text, required: true, label: 'Your project’s Github URL', placeholder: "https://github.com/user/projectname", hint: "(one per line if the project has multiple repositories)"

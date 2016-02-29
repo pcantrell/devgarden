@@ -14,4 +14,10 @@ module ProjectFormHelper
       end
     end
   end
+
+  def labeled_roles_for_category(category)
+    category.roles.shuffle.map do |role|
+      [role.person_name, role.id]
+    end
+  end
 end

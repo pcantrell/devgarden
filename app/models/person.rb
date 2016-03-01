@@ -32,17 +32,17 @@ class Person < ActiveRecord::Base
   exposes_array_as_text :urls
 
   def self.for_auth(auth)
-    provider, uid = auth["provider"], auth["uid"]
+    provider, uid = auth.provider, auth.uid
     raise "No credentials found" unless provider && uid
     external_id = "#{provider}:#{uid}"
     
     if provider == "github"
-      info = auth["info"] || {}
-      email       = info["email"]
-      name        = info["name"]
-      github_user = info["nickname"]
-      avatar_url  = info["image"]
-      urls        = info["urls"].values
+      info = auth.info || {}
+      email       = info.email
+      name        = info.name
+      github_user = info.nickname
+      avatar_url  = info.image
+      urls        = info.urls.values
     end
 
     user = Person.find_by('external_ids @> ARRAY[?]', external_id) ||

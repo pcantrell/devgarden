@@ -17,6 +17,24 @@ GIT
       sass-rails
 
 GIT
+  remote: git://github.com/haml/haml.git
+  revision: 025b89f421a31cd18db5cacdbcf69cbec893322f
+  specs:
+    haml (5.0.0.beta.2)
+      tilt
+
+GIT
+  remote: git://github.com/indirect/haml-rails.git
+  revision: 9806b904775531419c6f12dd59eadef50cdeb416
+  specs:
+    haml-rails (0.9.0)
+      actionpack (>= 4.0.1)
+      activesupport (>= 4.0.1)
+      haml (>= 4.0.6, < 5.0)
+      html2haml (>= 1.0.1)
+      railties (>= 4.0.1)
+
+GIT
   remote: git://github.com/pcantrell/exception_notification
   revision: 7fe1a7f0e2316f1a426f1469c7bd7a27edc54bf7
   specs:
@@ -118,23 +136,16 @@ GEM
     formtastic_i18n (0.5.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
-    haml (4.0.7)
-      tilt
-    haml-rails (0.9.0)
-      actionpack (>= 4.0.1)
-      activesupport (>= 4.0.1)
-      haml (>= 4.0.6, < 5.0)
-      html2haml (>= 1.0.1)
-      railties (>= 4.0.1)
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
     hashie (3.4.3)
-    html2haml (2.0.0)
+    hpricot (0.8.6)
+    html2haml (1.0.1)
       erubis (~> 2.7.0)
-      haml (~> 4.0.0)
-      nokogiri (~> 1.6.0)
-      ruby_parser (~> 3.5)
+      haml (>= 4.0.0.rc.1)
+      hpricot (~> 0.8.6)
+      ruby_parser (~> 3.1.1)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     i18n (0.7.0)
@@ -256,7 +267,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    ruby_parser (3.7.3)
+    ruby_parser (3.1.3)
       sexp_processor (~> 4.1)
     rubyzip (1.1.7)
     sass (3.4.21)
@@ -269,7 +280,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    sexp_processor (4.6.1)
+    sexp_processor (4.7.0)
     spring (1.6.3)
     sprockets (3.5.2)
       concurrent-ruby (~> 1.0)
@@ -319,14 +330,15 @@ DEPENDENCIES
   bcrypt
   byebug
   carrierwave
-  coffee-rails (~> 4.1.0)
+  coffee-rails
   dalli
   delayed_job_active_record
   exception_notification!
   factory_girl_rails
   ffaker
-  formtastic (>= 2.3.0.rc2)
-  haml-rails
+  formtastic
+  haml!
+  haml-rails!
   high_voltage!
   ice_nine
   jbuilder (~> 2.0)

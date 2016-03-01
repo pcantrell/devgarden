@@ -77,9 +77,12 @@ form
       margin: 1px
       padding: 0 0.6em
     .inline-error
-      margin: 0
+      margin: 0.6em
+      @include meta-important-font
       color: $error-color
-      font-weight: 500
+      .detail
+        @include meta-font
+        font-size: 80%
     .choices
       legend
         margin: 1.2em 0 0.6em 0

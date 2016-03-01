@@ -39,17 +39,19 @@ class Project < ActiveRecord::Base
 private
 
   GIT_REPO_FROM_URL = %r{
+      \A
       (?:
         # Several possible prefixes if user copied git URL instead of web URL
         git@github.com:
         | (?: https? | git )://github.com/
-      )
+      )?
       (
         \w+  # user name
         /
         \w+  # project name
       )
       (\.git)?  # Drop .git suffix if present
+      \Z
     }x
 
   def scm_urls_are_urls

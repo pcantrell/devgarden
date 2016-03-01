@@ -89,8 +89,12 @@ private
 
   def populate_from_github
     github = Octokit::Client.new(access_token: session[:github_token])
+    unless project.github_repos.any?
+      project.errors.add(:scm_urls_as_text, "Please enter at least one Github repository.")
+      return render :new
+    end
 
-    Project.transaction do
+    begin
       project.github_repos.each do |repo|
         repo_info = github.repository(repo)
         project.name    ||= repo_info.name.capitalize
@@ -110,6 +114,8 @@ private
           project.tags << lang_tag_category.find_or_create_tag!(lang)
         end
       end
+    rescue => e
+      flash[:error] = "Could not create project from Github: " + e.message
     end
 
     if project.save

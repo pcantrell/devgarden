@@ -29,6 +29,10 @@ $error-color: #b91c13
   @include sans
   font-weight: 200
 
+@mixin meta-important-font
+  @include sans
+  font-weight: 400
+
 @mixin meta-more-font
   @include sans
   font-weight: 400
@@ -96,7 +100,7 @@ $error-color: #b91c13
         @include thumb-icon
         padding: 0.6em 0
       .name
-        @include meta-more-font
+        @include meta-important-font
         padding: 1.2em 0
 
 @mixin meta-float-right

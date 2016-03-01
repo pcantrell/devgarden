@@ -1,4 +1,4 @@
-class CreateRoleOffers < ActiveRecord::Migration
+class CreateRoleOffers < ActiveRecord::Migration[4.2]
   def change
     create_table :role_offers do |t|
       t.references :person, index: true

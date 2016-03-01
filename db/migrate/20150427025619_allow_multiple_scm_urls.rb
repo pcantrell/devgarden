@@ -1,4 +1,4 @@
-class AllowMultipleScmUrls < ActiveRecord::Migration
+class AllowMultipleScmUrls < ActiveRecord::Migration[4.2]
   def up
     remove_column :projects, :scm_url
     add_column :projects, :scm_urls, :string, array: true, default: []

@@ -1,4 +1,4 @@
-class FixAssociationNotNullConstraints < ActiveRecord::Migration
+class FixAssociationNotNullConstraints < ActiveRecord::Migration[4.2]
   def change
     change_column_null :participations, :project_id, false
     change_column_null :participations, :person_id, false

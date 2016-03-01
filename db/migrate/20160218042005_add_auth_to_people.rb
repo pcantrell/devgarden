@@ -1,4 +1,4 @@
-class AddAuthToPeople < ActiveRecord::Migration
+class AddAuthToPeople < ActiveRecord::Migration[4.2]
   def change
     add_column :people, :external_ids, :text, array: true, null: false, default: []
     add_index :people, :external_ids, using: :gin

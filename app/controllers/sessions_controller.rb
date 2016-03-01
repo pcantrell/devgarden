@@ -3,8 +3,10 @@ class SessionsController < ApplicationController
 
   # props to https://www.natashatherobot.com/rails-omniauth-github-tutorial/
   def create
-    if user = Person.for_auth(request.env["omniauth.auth"])
+    auth = request.env["omniauth.auth"]
+    if user = Person.for_auth(auth)
       log_in_as(user)
+      session["#{auth.provider}_token"] = auth.credentials.token
       redirect_to root_url, flash: { success: "You are signed in" }
     else
       redirect_to login_url, flash: { error: "Unable to log in" }

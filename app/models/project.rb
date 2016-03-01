@@ -32,6 +32,10 @@ class Project < ActiveRecord::Base
     url.gsub(GIT_REPO_FROM_URL, 'https://github.com/\1')
   end
 
+  def github_repos
+    scm_urls.map { |url| $1 if url =~ GIT_REPO_FROM_URL}.compact
+  end
+
 private
 
   GIT_REPO_FROM_URL = %r{

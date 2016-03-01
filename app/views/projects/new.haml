@@ -8,6 +8,7 @@
   
     = semantic_form_for project do |f|
       = f.inputs do
+        = f.hidden_field :populate_from_github, value: true
         = f.input :scm_urls_as_text, as: :text, required: true, label: 'Your project’s Github URL', placeholder: "https://github.com/user/projectname", hint: "(one per line if the project has multiple repositories)"
       .actions
         = f.save_button

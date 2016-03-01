@@ -3,7 +3,7 @@ class Person < ActiveRecord::Base
   has_many :projects, through: :participations
   has_many :role_offers, -> { includes(:role) }
 
-  validates :name, :email, presence: true
+  validates :name, presence: true
   validates :class_year, inclusion: 1920..(Time.now.year + 4), allow_blank: true
 
   include RecentScope
@@ -57,5 +57,13 @@ class Person < ActiveRecord::Base
     user.urls = urls if user.urls.empty?
     user.save!
     user
+  end
+
+  def self.create_from_github_profile(profile)
+    create(
+      github_user: profile.login,
+      full_name:   profile.name,
+      email:       profile.email,
+      urls:        ["https://github.com/#{profile.login}", profile.blog].compact)
   end
 end

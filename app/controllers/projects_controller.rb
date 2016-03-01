@@ -1,3 +1,5 @@
+require "github_api"
+
 class ProjectsController < ApplicationController
 
   before_action :require_project_admin, except: [:index, :show, :new, :create]
@@ -21,6 +23,8 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    return populate_from_github if params[:project][:populate_from_github]
+
     @project.participations.new(person: current_user, admin: true)
 
     if project.save
@@ -80,6 +84,38 @@ private
       if params[:project] && params[:project][key]
         params[:project][key].uniq!
       end
+    end
+  end
+
+  def populate_from_github
+    github = Octokit::Client.new(access_token: session[:github_token])
+
+    Project.transaction do
+      project.github_repos.each do |repo|
+        repo_info = github.repository(repo)
+        project.name    ||= repo_info.name.capitalize
+        project.tagline ||= repo_info.description
+        project.url     ||= repo_info.homepage
+
+        github.contributors(repo).each do |contributor|
+          person = Person.find_by(github_user: contributor.login) || begin
+            Person.create_from_github_profile(
+              github.user(contributor.login))
+          end
+          project.participations.new(person: person) if person
+        end
+
+        lang_tag_category = TagCategory.find_by(key: 'language')
+        github.languages(repo).to_hash.keys.each do |lang|
+          project.tags << lang_tag_category.find_or_create_tag!(lang)
+        end
+      end
+    end
+
+    if project.save
+      render :edit
+    else
+      render :new
     end
   end
 

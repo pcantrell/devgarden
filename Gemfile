@@ -27,6 +27,7 @@ gem 'kramdown'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'bcrypt'
 gem 'omniauth-github'
+gem 'octokit'
 
 gem 'carrierwave'
 gem 'mini_magick'

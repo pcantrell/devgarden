@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  around_action :wrap_in_transaction
+
   include ApplicationHelper
 
   def body_classes
@@ -13,4 +15,11 @@ class ApplicationController < ActionController::Base
     ].compact
   end
   helper_method :body_classes
+
+private
+
+  def wrap_in_transaction(&block)
+    ActiveRecord::Base.transaction(&block)
+  end
+
 end

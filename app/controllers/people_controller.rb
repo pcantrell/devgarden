@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
 
-  before_filter :require_profile_owner, except: [:index, :show]
+  before_action :require_profile_owner, except: [:index, :show]
 
   def index
     render partial: 'recent', locals: {

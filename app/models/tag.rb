@@ -1,5 +1,5 @@
 class Tag < ActiveRecord::Base
-  belongs_to :category, class: TagCategory
+  belongs_to :category, class_name: "TagCategory"
   has_many :project_tags
   has_many :projects, -> { order('projects.updated_at desc') }, through: :project_tags
 

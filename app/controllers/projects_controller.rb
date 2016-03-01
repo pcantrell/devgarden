@@ -1,8 +1,8 @@
 class ProjectsController < ApplicationController
 
-  before_filter :require_project_admin, except: [:index, :show, :new, :create]
-  before_filter :require_login, except: [:index, :show]
-  before_filter :remove_duplicate_params
+  before_action :require_project_admin, except: [:index, :show, :new, :create]
+  before_action :require_login, except: [:index, :show]
+  before_action :remove_duplicate_params
 
   def index
     render partial: 'recent', locals: {
@@ -45,7 +45,7 @@ class ProjectsController < ApplicationController
         end
       end
       format.js do
-        render nothing: true
+        head :ok
       end
     end
   end

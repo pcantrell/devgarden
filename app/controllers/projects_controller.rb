@@ -45,7 +45,7 @@ class ProjectsController < ApplicationController
         end
       end
       format.js do
-        head :ok
+        head(success ? 200 : 400)
       end
     end
   end

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 
-gem 'rails', '5.0.0.beta3'
+gem 'rails', '~> 5.0.0.beta'
 gem 'pg'
 gem 'haml-rails'
 gem 'sass-rails', '~> 5.0'
@@ -15,7 +15,7 @@ gem 'dalli'
 
 gem 'jquery-cdn', '~> 2.2.0'
 gem 'jquery-rails'
-gem 'turbolinks'
+gem 'turbolinks', '~> 5.0.0.beta'
 
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc

@@ -1,4 +1,4 @@
-$(document).on 'page:update', ->
+$(document).on 'turbolinks:load', ->
   $('#project-icon-dropzone:not(.dropzone)')
     .addClass("dropzone")
     .dropzone

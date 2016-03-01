@@ -37,7 +37,7 @@ updateStatusDisplay = ->
   $('#autosave-status').children().hide()
   $("#autosave-status .#{globalStatus}").show()
 
-$(document).on 'page:update', updateStatusDisplay
+$(document).on 'turbolinks:load', updateStatusDisplay
 
 
 # Retry

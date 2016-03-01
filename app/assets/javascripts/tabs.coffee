@@ -15,7 +15,8 @@ $ ->
     $group.find('.tab').hide()
     $tab.show()
 
-  $(document).on 'page:update', ->
+  $(document).on 'turbolinks:load', ->
+    $('.tabs > ul > li a').attr("data-turbolinks", false)
     for tabs in $('.tabs')
       showTab(
         firstTab($(tabs)))

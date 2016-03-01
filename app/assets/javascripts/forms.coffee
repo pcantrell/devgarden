@@ -7,11 +7,11 @@ confirmUnload = (callback) ->
   else
     undefined
 $(window).bind 'beforeunload',       -> confirmUnload((msg) -> msg)
-$(document).on 'page:before-change', -> confirmUnload((msg) -> confirm(msg))
+$(document).on 'turbolinks:before-change', -> confirmUnload((msg) -> confirm(msg))
 
 # Error handling
 
-$(document).on 'page:update', ->
+$(document).on 'turbolinks:load', ->
   bounce = ($elem) ->
     $elem.transition { scale: 1.1 }, 160, 'easeOutSine'
          .transition { scale: 1 },   240, 'easeInOutSine'

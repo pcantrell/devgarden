@@ -32,7 +32,7 @@ loadMore = ($container, href) ->
     error: ->
       setTimeout (-> loadMore($container, href)), 5000
 
-$(document).on 'page:update', ->
+$(document).on 'turbolinks:load', ->
   $infiniteScroll = $('.infinite-scroll')
   updateInfiniteScroll()
 

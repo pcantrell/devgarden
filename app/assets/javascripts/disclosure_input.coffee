@@ -17,7 +17,7 @@ $ ->
   $(document).on 'change', '.disclosure-input input', (e) ->
     updateDisclosureInput(e.target, true)
 
-  $(document).on 'page:update', ->
+  $(document).on 'turbolinks:load', ->
     for disclosure in $('.disclosure-input input')
       updateDisclosureInput(disclosure, false)
     true

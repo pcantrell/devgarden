@@ -10,14 +10,14 @@ class GithubProjectImportJob < ApplicationJob
 
     project.github_repos.each do |repo|
       import_info(repo)
-      import_contributors(repo)
+      import_contributors(repo, opts[:requesting_user])
       import_languages(repo)
     end
 
     project.save!
 
     {
-      redirect_to: Rails.application.routes.url_helpers.project_path(project),
+      redirect_to: Rails.application.routes.url_helpers.edit_project_path(project),
       flash: {
         success: "Project imported."
       }
@@ -36,7 +36,7 @@ private
     project.url     ||= repo_info.homepage
   end
 
-  def import_contributors(repo)
+  def import_contributors(repo, requesting_user)
     github.contributors(repo).each do |contributor|
       #! Locking not strictly safe here, could result in dup users in high-traffic env
       person = Person.transaction do
@@ -44,7 +44,7 @@ private
         Person.create_from_github_profile(
           github.user(contributor.login))
       end
-      project.participations.new(person: person) if person
+      project.participations.new(person: person, admin: person == requesting_user) if person
     end
   end
 

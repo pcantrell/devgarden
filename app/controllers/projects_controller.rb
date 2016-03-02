@@ -98,6 +98,7 @@ private
     GithubProjectImportJob.perform_later(
       scm_urls: project.scm_urls,
       github_token: session[:github_token],
+      requesting_user: current_user,
       job_report: job_report)
     Que.wake!
 

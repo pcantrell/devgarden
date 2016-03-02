@@ -2,37 +2,55 @@ source 'https://rubygems.org'
 
 
 gem 'rails', '~> 5.0.0.beta'
+
+# Persistence & cache
+
 gem 'pg'
+gem 'dalli'
+gem 'que'
+
+# Views
+
 gem 'haml', github: 'haml/haml'
 gem 'haml-rails', github: 'indirect/haml-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
 gem 'formtastic'
-gem 'mail'
-gem 'valid_email'
-gem 'ice_nine'
-gem 'dalli'
+gem 'jbuilder', '~> 2.0'
 
 gem 'jquery-cdn', '~> 2.2.0'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5.0.0.beta'
 
-gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0', group: :doc
+# Static pages
 
 gem 'high_voltage', github: 'thoughtbot/high_voltage'
 gem 'kramdown'
 
-gem 'activeadmin', github: 'gregbell/active_admin'
-gem 'bcrypt'
-gem 'omniauth-github'
-gem 'octokit'
+# Email
+
+gem 'mail'
+gem 'valid_email'
+
+# Image uploads
 
 gem 'carrierwave'
 gem 'mini_magick'
 
-gem 'delayed_job_active_record'
+# Github integration
+
+gem 'omniauth-github'
+gem 'octokit'
+
+# Admin
+
+gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'bcrypt'
+
+# Util
+
+gem 'ice_nine'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

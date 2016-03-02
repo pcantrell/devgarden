@@ -16,5 +16,8 @@ module DevGarden
     config.generators.stylesheets = false
     config.generators.javascripts = false
     config.generators.helper      = false
+
+    config.active_job.queue_adapter = :que
+    config.active_record.schema_format = :sql  # for que: https://github.com/chanks/que#usage
   end
 end

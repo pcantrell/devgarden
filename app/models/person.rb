@@ -1,4 +1,4 @@
-class Person < ActiveRecord::Base
+class Person < ApplicationRecord
   has_many :participations
   has_many :projects, through: :participations
   has_many :role_offers, -> { includes(:role) }

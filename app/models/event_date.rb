@@ -1,4 +1,4 @@
-class EventDate < ActiveRecord::Base
+class EventDate < ApplicationRecord
   belongs_to :event
 
   scope :future, -> do

@@ -1,4 +1,4 @@
-class Project < ActiveRecord::Base
+class Project < ApplicationRecord
   has_many :participations
   has_many :participants, through: :participations, source: :person
   has_many :role_requests, -> { includes(:role) }

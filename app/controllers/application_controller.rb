@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 private
 
   def wrap_in_transaction(&block)
-    ActiveRecord::Base.transaction(&block)
+    ApplicationRecord.transaction(&block)
   end
 
 end

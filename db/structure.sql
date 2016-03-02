@@ -108,6 +108,40 @@ ALTER SEQUENCE events_id_seq OWNED BY events.id;
 
 
 --
+-- Name: job_reports; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE job_reports (
+    id integer NOT NULL,
+    owner_id integer,
+    results json,
+    error json,
+    completed_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: job_reports_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE job_reports_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: job_reports_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE job_reports_id_seq OWNED BY job_reports.id;
+
+
+--
 -- Name: locations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -550,6 +584,13 @@ ALTER TABLE ONLY events ALTER COLUMN id SET DEFAULT nextval('events_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY job_reports ALTER COLUMN id SET DEFAULT nextval('job_reports_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY locations ALTER COLUMN id SET DEFAULT nextval('locations_id_seq'::regclass);
 
 
@@ -652,6 +693,14 @@ ALTER TABLE ONLY event_dates
 
 ALTER TABLE ONLY events
     ADD CONSTRAINT events_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: job_reports_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY job_reports
+    ADD CONSTRAINT job_reports_pkey PRIMARY KEY (id);
 
 
 --
@@ -770,6 +819,13 @@ CREATE INDEX index_event_dates_on_event_id ON event_dates USING btree (event_id)
 --
 
 CREATE INDEX index_events_on_location_id ON events USING btree (location_id);
+
+
+--
+-- Name: index_job_reports_on_owner_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_job_reports_on_owner_id ON job_reports USING btree (owner_id);
 
 
 --
@@ -911,6 +967,14 @@ ALTER TABLE ONLY events
 
 
 --
+-- Name: fk_rails_62346f4a05; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY job_reports
+    ADD CONSTRAINT fk_rails_62346f4a05 FOREIGN KEY (owner_id) REFERENCES people(id);
+
+
+--
 -- Name: fk_rails_7e1b4fadcd; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -972,6 +1036,6 @@ ALTER TABLE ONLY role_offers
 
 SET search_path TO "$user",public;
 
-INSERT INTO schema_migrations (version) VALUES ('20150224225227'), ('20150225155116'), ('20150225160055'), ('20150227044734'), ('20150227044800'), ('20150227044803'), ('20150227044804'), ('20150427025619'), ('20160210043109'), ('20160210051448'), ('20160210055910'), ('20160212055159'), ('20160212055449'), ('20160216200401'), ('20160217071943'), ('20160218042005'), ('20160219033611'), ('20160222050605'), ('20160223162347'), ('20160226044247'), ('20160302043309');
+INSERT INTO schema_migrations (version) VALUES ('20150224225227'), ('20150225155116'), ('20150225160055'), ('20150227044734'), ('20150227044800'), ('20150227044803'), ('20150227044804'), ('20150427025619'), ('20160210043109'), ('20160210051448'), ('20160210055910'), ('20160212055159'), ('20160212055449'), ('20160216200401'), ('20160217071943'), ('20160218042005'), ('20160219033611'), ('20160222050605'), ('20160223162347'), ('20160226044247'), ('20160302043309'), ('20160302060224');
 
 

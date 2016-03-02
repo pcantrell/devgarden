@@ -46,9 +46,9 @@ private
         | (?: https? | git )://github.com/
       )?
       (
-        \w+  # user name
+        [\w-]+  # user name
         /
-        \w+  # project name
+        [\w-]+  # project name
       )
       (\.git)?  # Drop .git suffix if present
       \Z

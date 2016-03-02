@@ -7,7 +7,7 @@ gem 'rails', '~> 5.0.0.beta'
 
 gem 'pg'
 gem 'dalli'
-gem 'que'
+gem 'que', github: 'joevandyk/que', branch: 'rails5'  # Pending acceptance of https://github.com/chanks/que/pull/144
 
 # Views
 

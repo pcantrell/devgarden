@@ -35,6 +35,13 @@ GIT
       railties (>= 4.0.1)
 
 GIT
+  remote: git://github.com/joevandyk/que.git
+  revision: 9b2a6cfd12e8fa3ca8d54771ad14a9cb10e16b0d
+  branch: rails5
+  specs:
+    que (0.11.3)
+
+GIT
   remote: git://github.com/pcantrell/exception_notification
   revision: 7fe1a7f0e2316f1a426f1469c7bd7a27edc54bf7
   specs:
@@ -212,7 +219,6 @@ GEM
     pg (0.18.4)
     polyamorous (1.3.0)
       activerecord (>= 3.0)
-    que (0.11.3)
     rack (2.0.0.alpha)
       json
     rack-test (0.6.3)
@@ -348,7 +354,7 @@ DEPENDENCIES
   octokit
   omniauth-github
   pg
-  que
+  que!
   rails (~> 5.0.0.beta)
   rails_real_favicon
   sass-rails (~> 5.0)

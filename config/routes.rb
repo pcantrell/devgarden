@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   resources :roles
   resources :events
   resources :tags
+  resources :job_reports
 
 end

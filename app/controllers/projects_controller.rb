@@ -101,7 +101,7 @@ private
       job_report: job_report)
     Que.wake!
 
-    render text: "Importing!"
+    redirect_to job_report
   end
 
 end

@@ -1,4 +1,7 @@
 class JobReportsController < ApplicationController
+
+  before_action :require_job_owner
+
   def show
     if job_report.error
       render :error
@@ -35,6 +38,14 @@ class JobReportsController < ApplicationController
     @error ||= safe_hash(job_report.error)
   end
   helper_method :error
+
+private
+
+  def require_job_owner
+    unless current_user.id == job_report.owner_id
+      redirect_to login_path, flash: { error: "You must log in as the owner of this job in order to view it." }
+    end
+  end
 
   def safe_hash(h)
     OpenStruct.new(h)

@@ -39,6 +39,14 @@ class JobReportsController < ApplicationController
   end
   helper_method :error
 
+  def spinner_dot_numbers
+    dot_count = 12
+    1.upto(dot_count * 2 - 1).map do |x|
+      (dot_count - x).abs + 1
+    end
+  end
+  helper_method :spinner_dot_numbers
+
 private
 
   def require_job_owner

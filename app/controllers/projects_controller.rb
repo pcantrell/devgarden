@@ -94,7 +94,11 @@ private
     end
 
     # Now discard dummy and let background job create real project
-    job_report = JobReport.create!(owner: current_user)
+    
+    job_report = JobReport.create!(
+      owner: current_user,
+      message: "Importing project…")
+
     GithubProjectImportJob.perform_later(
       scm_urls: project.scm_urls,
       github_token: session[:github_token],

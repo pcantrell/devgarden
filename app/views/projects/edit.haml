@@ -25,6 +25,10 @@
     .tab#graphics-tab
       = form_for project, html: { id: "project-icon-dropzone" } do
         .dz-message Drop PNG or JPEG here
+        - if project.icon?
+          .dz-preview.dz-processing.dz-image-preview.dz-success.dz-complete.foo
+            .dz-image.existing-icon
+              = image_tag project.icon.feature.url, alt: 'Project logo'
 
     .tab#tags-tab
       = project_form "tags", autosave: true do |f|

@@ -125,6 +125,7 @@
       maxThumbnailFilesize: 10,
       thumbnailWidth: 120,
       thumbnailHeight: 120,
+      useFullImageForThumbnail: false,
       filesizeBase: 1000,
       maxFiles: null,
       params: {},
@@ -1084,7 +1085,7 @@
       fileReader = new FileReader;
       fileReader.onload = (function(_this) {
         return function() {
-          if (file.type === "image/svg+xml") {
+          if (_this.options.useFullImageForThumbnail || file.type === "image/svg+xml") {
             _this.emit("thumbnail", file, fileReader.result);
             if (callback != null) {
               callback();

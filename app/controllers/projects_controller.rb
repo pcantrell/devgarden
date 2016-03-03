@@ -49,6 +49,9 @@ class ProjectsController < ApplicationController
       format.js do
         head(success ? 200 : 400)
       end
+      format.json do
+        render json: { success: success }
+      end
     end
   end
 

@@ -9,6 +9,7 @@ class GithubProjectImportJob < ApplicationJob
     @github = Octokit::Client.new(access_token: opts[:github_token])
 
     project.github_repos.each do |repo|
+      show_message "Importing #{repo}…"
       import_info(repo)
       import_contributors(repo, opts[:requesting_user])
       import_languages(repo)
@@ -38,6 +39,7 @@ private
 
   def import_contributors(repo, requesting_user)
     github.contributors(repo).each do |contributor|
+
       #! Locking not strictly safe here, could result in dup users in high-traffic env
       person = Person.transaction do
         Person.find_by(github_user: contributor.login) ||

@@ -1,9 +1,11 @@
 class Project < ApplicationRecord
-  has_many :participations
+  has_many :participations, dependent: :destroy
   has_many :participants, through: :participations, source: :person
-  has_many :role_requests, -> { includes(:role) }
+
+  has_many :role_requests, -> { includes(:role) }, dependent: :destroy
   has_many :requested_roles, through: :role_requests, source: :role
-  has_many :project_tags, -> { includes(:tag).order(:order) }
+  
+  has_many :project_tags, -> { includes(:tag).order(:order) }, dependent: :destroy
   has_many :tags, -> { includes(:category) }, through: :project_tags
 
   mount_uploader :icon, ProjectIconUploader
@@ -14,6 +16,9 @@ class Project < ApplicationRecord
   URL_REGEXP = URI::regexp(%w(http https))
   validates :url, format: URL_REGEXP, allow_blank: true
   validate :scm_urls_are_urls
+
+  after_save :remove_duplicate_tags
+  after_save :remove_duplicate_participants
 
   include RecentScope
 
@@ -63,4 +68,17 @@ private
       end
     end
   end
+
+  def remove_duplicate_tags
+    self.project_tags = project_tags
+      .sort_by(&:order)
+      .uniq(&:tag_id)
+  end
+
+  def remove_duplicate_participants
+    self.participations = participations
+      .sort_by { |p| p.admin ? 0 : 1 }  # user is admin if any of their dup entries are
+      .uniq(&:person_id)
+  end
+
 end

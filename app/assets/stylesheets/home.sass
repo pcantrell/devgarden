@@ -4,7 +4,6 @@
 
   $summary-overflow: 10em
   $content-vpad: 2em
-  $divider-height: 1.6em
 
   .nav-bar .logo
     display: none
@@ -138,9 +137,15 @@
 
   .divider
     clear: both
-    height: $divider-height
     width: 60%
-    margin: 0 20% (-$divider-height) 20%
+    margin: 0 20%
     opacity: 0.4
+
     position: relative
-    top: $content-vpad - $divider-height/2
+    @mixin divider-positioning($height)
+      height: $height
+      margin-bottom: (-$height)
+      top: $content-vpad - $height/2
+    @include divider-positioning(1.8em)
+    @include if-below-width(24em)
+      @include divider-positioning(1.2em)

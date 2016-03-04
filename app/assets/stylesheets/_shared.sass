@@ -75,10 +75,10 @@ $error-color: #b91c13
     width: 128px
     height: 128px
     object-fit: contain
-    @include if-below-width(512px)
+    @include if-below-width(640px)
       width: 96px
       height: 96px
-    @include if-below-width(384px)
+    @include if-below-width(480px)
       width: 64px
       height: 64px
 
@@ -104,7 +104,11 @@ $error-color: #b91c13
         padding: 1.2em 0
 
 @mixin meta-float-right
-  @include if-above-width(30em)
+  @include if-below-width(32em)
+    border-bottom: 0.5px solid $dark-color
+    padding-bottom: 1.2em
+    margin-bottom: 1.3em
+  @include if-above-width(32em)
     float: right
     margin: 0 0 1.2em 1.2em
     padding: 0.15em 0

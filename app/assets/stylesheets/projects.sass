@@ -2,15 +2,29 @@
 
 .projects-controller.show-action main
   .banner
-    display: table
-    margin: 2.4em 0 1.2em 0
-    width: 100%
-    >.icon, >.info
-      vertical-align: middle
-      display: table-cell
+    margin: 1.2em 0
+    @include if-below-width(32em)
+      .icon
+        float: left
+        margin: 0.2em 0.6em 0.6em 0
+      h1
+        clear: none
+        margin-top: -0.2em
+      .tagline, .site
+        font-size: 80%
+        clear: right
+      .tags
+        clear: left
+    @include if-above-width(32em)
+      display: table
+      width: 100%
+      >.icon, >.info
+        vertical-align: middle
+        display: table-cell
+      .icon
+        padding-right: 1.2em
 
   .icon
-    padding-right: 1.2em
     @include feature-icon
 
   .info
@@ -32,6 +46,10 @@
       h2, h3, h4
         margin-top: 0
 
+  .repo
+    white-space: nowrap
+    overflow: hidden
+
 .projects-controller
   .more
     float: right
@@ -45,12 +63,13 @@
   #tags-tab
     @include choices-in-wide-columns
     .choice label
-      font:
-        size: 80%
-        weight: 400
+      font-size: 80%
   
   #role-reqs-tab
     @include choices-in-tall-columns
+    @include if-below-width(32em)
+      .choice label
+        font-size: 80%
 
   form.dropzone
     margin: 1.2em 0

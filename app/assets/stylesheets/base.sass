@@ -28,7 +28,7 @@ h2
   font-size: 1.8em
 h3
   font-size: 1.2em
-@include if-below-width(24em)
+@include if-below-width(32em)
   h1
     font-size: 1.8em
   h2
@@ -204,12 +204,17 @@ hr
   &.edit
     display: block
     background: $highlight-color
-    font-size: 100%
     text-align: center
     margin-top: 2.4em
-    @include if-above-width(36em)
-      float: right
-      margin: 0 0 0.6em 1.2em
+    float: right
+    margin: 0 0 0.6em 1.2em
+    font-size: 100%
+    @include if-below-width(36em)
+      font-size: 90%
+    @include if-below-width(32em)
+      font-size: 80%
+    @include if-below-width(28em)
+      font-size: 70%
 
 .page-login main
   text-align: center

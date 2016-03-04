@@ -2,8 +2,8 @@
   = link_to root_url, class: 'logo' do
     = image_tag image_url("devgarden-logo-small-white.svg"), alt: 'Dev Garden'
   .nav-items
-    .nav-item= link_to 'About', page_path('about')
-    .nav-item= link_to 'Contact', page_path('contact')
+    .nav-item.optional= link_to 'About', page_path('about')
+    .nav-item.optional= link_to 'Contact', page_path('contact')
 
     .nav-item#auth-nav-item
       - auth_item_opts = { 'data-show-dropdown' => 'auth-dropdown', 'data-dropdown-header' => 'auth-nav-item' }

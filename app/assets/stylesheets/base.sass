@@ -13,7 +13,9 @@ body
 
 main
   margin: 0 auto
-  padding: 0 1.8em
+  padding: 0 1.2em
+  @include if-below-width(24em)
+    padding: 0 0.6em
   max-width: 42em
 
 h1, h2, h3, h4
@@ -26,6 +28,13 @@ h2
   font-size: 1.8em
 h3
   font-size: 1.2em
+@include if-below-width(24em)
+  h1
+    font-size: 1.8em
+  h2
+    font-size: 1.2em
+  h3
+    font-size: 1em
 .meta
   h2, h3, h4
     @include meta-heading

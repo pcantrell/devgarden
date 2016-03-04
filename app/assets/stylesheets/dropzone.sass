@@ -89,6 +89,9 @@
 
   @include meta-important-font
 
+  @include if-below-width(24em)
+    text-align: center
+
   &.dz-clickable
     cursor: pointer
     *
@@ -110,8 +113,11 @@
       opacity: 0.5
 
   .dz-message
-    position: absolute
-    left: $image-size + $gutter * 2
+    @include if-below-width(24em)
+      margin-bottom: 0.6em
+    @include if-above-width(24em)
+      position: absolute
+      left: $image-size + $gutter * 2
     .detail
       @include meta-font
       font-size: 80%
@@ -163,8 +169,6 @@
 
       $mark-size: $image-size / 2
 
-      pointer-events: none
-
       opacity: 0
       z-index: 500
 
@@ -196,7 +200,6 @@
       opacity: 1
       z-index: 1000
 
-      pointer-events: none
       position: absolute
       height: 20px
       left: 50%
@@ -230,7 +233,6 @@
       .dz-error-message
         display: block
         opacity: 1
-        pointer-events: auto
 
     .dz-error-message
       $arrow-size: 8px

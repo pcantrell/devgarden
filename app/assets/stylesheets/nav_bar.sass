@@ -40,9 +40,10 @@
     font-size: 70%
   @include if-below-width(32em)
     font-size: 60%
-  @include if-below-width(26em)
-    font-size: 50%
 
+@include if-below-width(32em)
+  .logged-in:not(.home-controller) .nav-item.optional
+    display: none
 
 .dropdown
   position: absolute
@@ -55,6 +56,10 @@
   text-transform: none
   letter-spacing: 0
   font-size: 120%
+  @include if-below-width(37em)
+    font-size: 171%
+  @include if-below-width(32em)
+    font-size: 200%
   text-align: right
   box-shadow: 0 1ex 1ex rgba(0, 0, 0, 0.333)
   border-top: 0.5px solid $hairline-color

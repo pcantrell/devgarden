@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
     [
       "#{controller_name}-controller",
       "#{action_name}-action",
-      ("#{controller_name.singularize}-#{params[:id]}" if params[:id])
+      ("#{controller_name.singularize}-#{params[:id]}" if params[:id]),
+      ("logged-in" if logged_in?)
     ].compact
   end
   helper_method :body_classes

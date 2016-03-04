@@ -35,23 +35,18 @@
 .projects-controller
   .more
     float: right
+  
   #tags-tab
     @include choices-in-wide-columns
     .choice label
       font:
         size: 80%
         weight: 400
+  
   #role-reqs-tab
     @include choices-in-tall-columns
 
-  .dropzone
-    .dz-image
-      border-radius: 0
-    .dz-details
-      padding-top: 64px
-    .dz-filename
-      display: none
-    img
-      width: 100%
-      height: 100%
-      object-fit: contain
+  form.dropzone
+    margin: 1.2em 0
+    @if-above-width(32em)
+      margin: 1.2em

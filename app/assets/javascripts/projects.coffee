@@ -11,7 +11,7 @@ $(document).on 'turbolinks:load', ->
       maxFiles: 1
       init: ->
         @on "addedfile", ->
-          $('.dropzone .existing-icon').remove()
+          $('.dropzone .dz-preview:not(:last-child)').hide()
         @on "maxfilesexceeded", (file) =>
           @removeAllFiles()
           @addFile(file)

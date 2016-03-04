@@ -13,7 +13,6 @@ $ ->
     timeout = 100.0
     refresh = ->
       if $('.job-report').length > 0
-        console.log('refresh')
         setTimeout(updateJobStatus, timeout)
         timeout += 2000 / Math.sqrt(timeout)
 

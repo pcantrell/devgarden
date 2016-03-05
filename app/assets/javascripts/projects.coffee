@@ -30,3 +30,4 @@ $(document).on 'turbolinks:load', ->
           @removeAllFiles()
           @addFile(file)
     .find('.dz-preview img').load(updatePalette)
+  updatePalette()

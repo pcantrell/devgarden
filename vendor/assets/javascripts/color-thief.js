@@ -32,7 +32,6 @@ var CanvasImage = function (image) {
     this.width  = this.canvas.width  = image.width;
     this.height = this.canvas.height = image.height;
 
-console.log(image, 0, 0, this.width, this.height);
     this.context.drawImage(image, 0, 0, this.width, this.height);
 };
 

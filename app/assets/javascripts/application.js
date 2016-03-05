@@ -16,5 +16,6 @@
 //= require jquery.autogrow-textarea
 //= require dropzone
 //= require turbolinks
+//= require color-thief
 //
 //= require_tree .

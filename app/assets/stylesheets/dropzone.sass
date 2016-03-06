@@ -89,7 +89,7 @@
 
   @include meta-important-font
 
-  @include if-below-width(24em)
+  @include if-below-width(32em)
     text-align: center
 
   &.dz-clickable
@@ -113,9 +113,9 @@
       opacity: 0.5
 
   .dz-message
-    @include if-below-width(24em)
+    @include if-below-width(32em)
       margin-bottom: 0.6em
-    @include if-above-width(24em)
+    @include if-above-width(32em)
       position: absolute
       left: $image-size + $gutter * 2
     .detail

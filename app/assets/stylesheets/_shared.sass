@@ -9,7 +9,7 @@ $error-color: #b91c13
     @content
 
 @mixin if-above-width($width)
-  @media all and (min-width: $width)
+  @media not all and (max-width: $width)
     @content
 
 @mixin body-font

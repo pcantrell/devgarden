@@ -10,12 +10,16 @@ showPalette = (hues) ->
     $palette = $("#theme-#{hueKey}-hue ol")
     $palette.children().remove()
     for hue in hues
+      radioID = "icon-#{hueKey}-#{hue}"
       $palette.append("
         <li>
           <input type='radio'
                  name='project[theme][#{hueKey}_hue]'
                  value='#{hue}'
+                 id='#{radioID}'>
+          <label for='#{radioID}'
                  style='background: hsl(#{hue}, 100%, 50%)'>
+          </label>
         </li>")
   return
 

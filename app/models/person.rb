@@ -7,6 +7,7 @@ class Person < ApplicationRecord
   validates :class_year, inclusion: 1920..(Time.now.year + 4), allow_blank: true
 
   include RecentScope
+  include Themed
 
   def name
     full_name || github_user || "[anonymous]"

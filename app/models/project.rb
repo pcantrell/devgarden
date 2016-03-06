@@ -21,6 +21,7 @@ class Project < ApplicationRecord
   after_save :remove_duplicate_participants
 
   include RecentScope
+  include Themed
 
   def admins_include?(person)
     participations.where(person: person, admin: true).any?

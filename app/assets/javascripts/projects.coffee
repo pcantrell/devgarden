@@ -5,11 +5,24 @@ updatePalette = ->
       showPalette(palette)
   return
 
-showPalette = (palette) ->
-  $('main').append("<hr>")
-  for hue in palette
-    $('main').append("<div style='display: inline-block; width: 4em; height: 4em; background: hsl(#{hue}, 100%, 50%)'></div>")
+showPalette = (hues) ->
+  for hueKey in ['primary', 'highlight']
+    $palette = $("#theme-#{hueKey}-hue ol")
+    $palette.children().remove()
+    for hue in hues
+      $palette.append("
+        <li>
+          <input type='radio'
+                 name='project[theme][#{hueKey}_hue]'
+                 value='#{hue}'
+                 style='background: hsl(#{hue}, 100%, 50%)'>
+        </li>")
   return
+
+autoselectThemeColors = ->
+  for hueKey, i in ['highlight', 'primary']
+    $choices = $("#theme-#{hueKey}-hue ol input")
+    $choices[i % $choices.length].click()
 
 $(document).on 'turbolinks:load', ->
   $('#project-icon-dropzone:not(.dropzone)')
@@ -25,7 +38,9 @@ $(document).on 'turbolinks:load', ->
       init: ->
         @on "addedfile", ->
           $('.dropzone .dz-preview:not(:last-child)').hide()
-          $('.dropzone .dz-preview img').load(updatePalette)
+          $('.dropzone .dz-preview img').load ->
+              updatePalette()
+              autoselectThemeColors()
         @on "maxfilesexceeded", (file) =>
           @removeAllFiles()
           @addFile(file)

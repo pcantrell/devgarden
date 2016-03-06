@@ -71,7 +71,7 @@ private
   def project_params
     params[:project].permit(
       :name, :tagline, :description, :url, :scm_urls_as_text, :icon, :icon_cache,
-      tag_ids: [], requested_role_ids: [])
+      theme: [:primary_hue, :highlight_hue], tag_ids: [], requested_role_ids: [])
   end
 
   def edit_project_tab_path(tab_name)

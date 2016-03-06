@@ -2,16 +2,16 @@ require "svg_path"
 
 module DesignElementsHelper
 
-  def theme_style(model, role)
+  def theme_color(model, role)
     hue_key = case role
       when :featured_text,
            :button_background
-        :highlight
+        :highlight_hue
       else
-        :primary
+        :primary_hue
     end
 
-    hue = configured_hue(model, hue_key) || default_hue(model)
+    hue = theme_value(model, hue_key) || default_hue(model)
     saturation = 45
     lightness = circular_interpolate(LIGHTNESS_BY_HUE, hue / 360.0 * LIGHTNESS_BY_HUE.length)
 
@@ -28,7 +28,10 @@ module DesignElementsHelper
     end
 
     color = "hsl(#{hue}, #{saturation}%, #{lightness}%)"
+  end
 
+  def theme_style(model, role)
+    color = theme_color(model, role)
     case role
       when :featured_text,
            :body_text
@@ -74,10 +77,8 @@ private
   LIGHTNESS_BY_HUE = [38, 34, 25, 32, 45, 36]
   GOLDEN_ANGLE = 180 * (3 - Math.sqrt(5))
 
-  def configured_hue(model, key)
-    if model.respond_to?(:theme)
-      model.theme["#{key}_hue"]
-    end
+  def theme_value(model, key)
+    model.theme[key.to_s] rescue nil
   end
 
   def default_hue(model)

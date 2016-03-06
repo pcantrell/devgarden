@@ -75,3 +75,39 @@
     margin: 1.2em 0
     @if-above-width(32em)
       margin: 1.2em
+
+  .palette
+    $size: 2.4em
+    $selection-border: 0.3em
+
+    clear: both
+    margin: $selection-border * 3 0
+    legend
+      @include meta-font
+      width: 8em
+      text-align: right
+      margin-right: 1em
+      float: left
+      line-height: $size
+    li
+      display: inline-block
+      max-width: 15%
+      margin: 0
+      padding: 0
+    input[type=radio]
+      -webkit-appearance: none
+      -moz-appearance: none
+      appearance: none
+      font-size: 100%
+      margin: 0
+      padding: 0
+      border-radius: 0
+      border: none
+
+      display: block
+      width: $size
+      height: $size
+      &:checked
+        outline: $selection-border solid rgba(0, 0, 0, 0.8)
+        z-index: 100
+        transform: scale(1)

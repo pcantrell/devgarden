@@ -6,7 +6,7 @@
   #project-edit-tabs.tabs
     %ul
       %li= link_to "Basics",       "#info"
-      %li= link_to "Icon",         "#graphics"
+      %li= link_to "Icon",         "#icon"
       %li= link_to "Description",  "#description"
       %li= link_to "Technologies", "#tags"
       %li= link_to "People",       "#participants"
@@ -22,17 +22,8 @@
         .actions
           = f.save_button
 
-    .tab#graphics-tab
-      = form_for project, html: { id: "project-icon-dropzone" } do
-        .dz-message
-          Drop or click to change image
-          .detail
-            Required: <b>PNG or JPEG</b>, max <b>5 MB</b> <br>
-            Recommended: <b>square</b>, at least <b>512×512</b>
-        - if project.icon?
-          .dz-preview.dz-image-preview.existing-icon
-            .dz-image
-              = image_tag project.icon.feature.url, alt: 'Project logo'
+    .tab#icon-tab
+      = render "icon_form"
 
     .tab#tags-tab
       = project_form "tags", autosave: true do |f|

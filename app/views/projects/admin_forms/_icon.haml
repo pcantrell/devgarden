@@ -11,5 +11,7 @@
 
 = project_form "theme", autosave: true do |f|
   = f.fields_for :theme do |f|
+    = f.hidden_field :previous_primary_hue,   value: project.theme["primary_hue"]
+    = f.hidden_field :previous_highlight_hue, value: project.theme["highlight_hue"]
     = f.inputs name: "Text color", id: "theme-primary-hue", class: "palette"
     = f.inputs name: "Highlight color", id: "theme-highlight-hue", class: "palette"

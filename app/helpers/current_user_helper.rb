@@ -15,6 +15,7 @@ module CurrentUserHelper
   end
 
   def logged_in?
+    session[:user_id] ||= 1 if Rails.env.development? && ENV['fake_login']
     !!session[:user_id]
   end
 

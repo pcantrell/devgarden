@@ -20,4 +20,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  projects:
+    admin_tab_title:
+      info: Basics
+      icon: Icon
+      description: Description
+      tags: Technologies
+      participants: People
+      role-reqs: Help wanted

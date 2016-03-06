@@ -4,40 +4,11 @@
 - heading "#{project.name.presence || 'Project'} Info" do
 
   #project-edit-tabs.tabs
+    - tabs = %w(info icon description tags participants role-reqs)
     %ul
-      %li= link_to "Basics",       "#info"
-      %li= link_to "Icon",         "#icon"
-      %li= link_to "Description",  "#description"
-      %li= link_to "Technologies", "#tags"
-      %li= link_to "People",       "#participants"
-      %li= link_to "Help wanted",  "#role-reqs"
+      - tabs.each do |tab|
+        %li= link_to t("projects.admin_tab_title.#{tab}"), '#' + tab
 
-    .tab#info-tab
-      = render "basics_form"
-
-    .tab#description-tab
-      = project_form "description" do |f|
-        = f.inputs do
-          = f.input :description
-        .actions
-          = f.save_button
-
-    .tab#icon-tab
-      = render "icon_form"
-
-    .tab#tags-tab
-      = project_form "tags", autosave: true do |f|
-        = f.inputs do
-          - TagCategory.in_order.each do |category|
-            = f.input :tags, label: category.name.pluralize, required: true, as: :check_boxes, collection: category.tags.order('name')
-
-    .tab#participants-tab
-      = project_form "participants", autosave: true do |f|
-        = f.inputs do
-          = f.input :participants
-
-    .tab#role-reqs-tab
-      = project_form "role-reqs", autosave: true do |f|
-        = f.inputs do
-          - RoleCategory.all.shuffle.each do |category|
-            = f.input :requested_role_ids, label: category.name, required: true, as: :check_boxes, collection: labeled_roles_for_category(category)
+    - tabs.each do |tab|
+      .tab{id: "#{tab}-tab"}
+        = render "projects/admin_forms/#{tab.underscore}"

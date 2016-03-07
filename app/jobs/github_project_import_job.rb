@@ -3,6 +3,8 @@ require "github_api"
 class GithubProjectImportJob < ApplicationJob
   queue_as :default
 
+  include Rails.application.routes.url_helpers
+
   def perform(opts = {})
     @project = Project.new(scm_urls: opts[:scm_urls])
 
@@ -18,7 +20,7 @@ class GithubProjectImportJob < ApplicationJob
     project.save!
 
     {
-      redirect_to: Rails.application.routes.url_helpers.edit_project_path(project),
+      redirect_to: edit_project_path(project, anchor: :info),
       flash: {
         success: "Project imported."
       }

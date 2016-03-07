@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
 
     if project.save
       flash[:success] = 'Project created'
-      redirect_to edit_project_tab_path('graphics')
+      redirect_to edit_project_tab_path('icon')
     else
       render :new
     end

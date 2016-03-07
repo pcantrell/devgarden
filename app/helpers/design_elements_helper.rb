@@ -12,6 +12,10 @@ module DesignElementsHelper
     end
 
     hue = theme_value(model, hue_key) || default_hue(model)
+    theme_color_by_hue(hue, role)
+  end
+
+  def theme_color_by_hue(hue, role)
     saturation = 45
     lightness = circular_interpolate(LIGHTNESS_BY_HUE, hue / 360.0 * LIGHTNESS_BY_HUE.length)
 
@@ -27,11 +31,18 @@ module DesignElementsHelper
         raise "Unknown feature color role: #{role.inspect}"
     end
 
-    color = "hsl(#{hue}, #{saturation}%, #{lightness}%)"
+    [hue.round, saturation.round, lightness.round]
+  end
+
+  def hue_lookup_table(role)
+    (0...360).map do |hue|
+      theme_color_by_hue(hue, role)
+    end
   end
 
   def theme_style(model, role)
-    color = theme_color(model, role)
+    h,s,l = theme_color(model, role)
+    color = "hsl(#{h}, #{s}%, #{l}%)"
     case role
       when :featured_text,
            :body_text

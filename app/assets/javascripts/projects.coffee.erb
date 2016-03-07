@@ -1,3 +1,9 @@
+# Nasty hack to avoid duplication DesignElementsHelper logic in JS
+<% environment.context_class.instance_eval { include DesignElementsHelper } %>
+hueLookupTables =
+  primary:   <%= hue_lookup_table(:body_text).to_json %>
+  highlight: <%= hue_lookup_table(:button_background).to_json %>
+
 updatePalette = ->
   thumb = $('.dropzone .dz-preview img').last()
   if thumb.length > 0
@@ -9,6 +15,7 @@ buildPaletteUI = (hueKey, hues) ->
   $palette = $("#theme-#{hueKey}-hue ol")
   $palette.children().remove()
   for hue in hues
+    [h,s,l] = hueLookupTables[hueKey][hue]
     radioID = "icon-#{hueKey}-#{hue}"
     $palette.append("
       <li>
@@ -17,7 +24,7 @@ buildPaletteUI = (hueKey, hues) ->
                value='#{hue}'
                id='#{radioID}'>
         <label for='#{radioID}'
-               style='background: hsl(#{hue}, 100%, 50%)'>
+               style='background: hsl(#{h}, #{s}%, #{l}%)'>
         </label>
       </li>")
   return

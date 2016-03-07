@@ -9,6 +9,14 @@ class Person < ApplicationRecord
   include RecentScope
   include Themed
 
+  scope :name_search, ->(name) do
+    if name.blank?
+      none
+    else
+      ransack(full_name_or_github_user_cont: name).result
+    end
+  end
+
   def name
     full_name || github_user || "[anonymous]"
   end

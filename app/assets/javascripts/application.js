@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.transit
 //= require jquery.autogrow-textarea
+//= require typeahead.bundle
 //= require dropzone
 //= require turbolinks
 //= require color-thief

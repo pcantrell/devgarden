@@ -3,8 +3,26 @@ class PeopleController < ApplicationController
   before_action :require_profile_owner, except: [:index, :show]
 
   def index
-    render partial: 'recent', locals: {
-      people: Person.recent(10, scroll_continuation: params[:scroll_cont]) }
+    respond_to do |format|
+
+      format.html do
+        if params[:scroll_cont]
+          render partial: 'recent', locals: {
+            people: Person.recent(10, scroll_continuation: params[:scroll_cont]) }
+        else
+          redirect_to root_path
+        end
+      end
+
+      format.json do
+        render json:
+          Person
+            .name_search(params[:q])
+            .limit(32)
+            .select(:id, :full_name, :avatar_url)
+            .to_json
+      end
+    end
   end
 
   def show

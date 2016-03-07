@@ -50,6 +50,7 @@ gem 'bcrypt'
 
 # Util
 
+gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'ice_nine'
 
 group :development, :test do

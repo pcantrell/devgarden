@@ -12,6 +12,10 @@ $ ->
     $group.find('.tab').hide()
     $tab.show()
 
+    $inputs = $tab.find("textarea, input[type=text]")
+    if $inputs.length > 0 && $inputs.filter(":focus").length == 0
+      $($inputs[0]).focus()
+
     saveTab($group, $tab)
   
   saveTab = ($group, $tab) ->

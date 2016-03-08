@@ -32,20 +32,24 @@ $ ->
     $participants = $('#participants')
     $participants.children().remove()
     for person in $participants.data('participants')
-      $participants.append $("
-        <li>
+      $newParticipant = $("
+        <li class='participant'>
           <div class='name'>#{h person.full_name}</div>
           <div class='admin'>
             <input type='checkbox' id='admin#{person.id}' #{'checked' if person.admin}>
             <label for='admin#{person.id}'>Admin</label>
+            <button class='remove'>Remove</button>
           </div>
         </li>")
+      $newParticipant.data('person', person)
+      $participants.append($newParticipant)
     return
 
   addParticipant = (newPerson) ->
     return unless newPerson && newPerson.id
 
     $('#new-participant input[type=text]').val("")
+    showErrorMessage("")
 
     participants = $('#participants').data('participants')
     existingIndex = (i for person, i in participants when person.id == newPerson.id)[0]
@@ -54,6 +58,18 @@ $ ->
     else
       participants.push(newPerson)
       rebuildParticipantsList()
+
+  removeParticipant = (toRemove) ->
+    participants = $('#participants').data('participants')
+    $('#participants').data(
+      'participants',
+      (person for person in participants when person.id != toRemove.id))
+    rebuildParticipantsList()
+
+  showErrorMessage = (message) ->
+    $('#new-participant .inline-error').text(message)
+
+  # Typeahead glue
 
   $(document).on 'turbolinks:load', ->
 
@@ -80,23 +96,30 @@ $ ->
             <img src='#{person.avatar_url || noImage}' class='icon'>
             <span class='text'>#{h person.full_name}</span>
           </div>"))
-    
-    $(document).on 'typeahead:select', (e, person) ->
-      setTimeout (-> addParticipant(person)), 1
+  
+  $(document).on 'typeahead:select', (e, person) ->
+    setTimeout (-> addParticipant(person)), 1
 
-    $(document).on 'keydown', '#new-participant', (e) ->
-      errorMessage = ""
+  $(document).on 'keydown', '#new-participant', (e) ->
+    errorMessage = ""
 
-      if e.which == 13 && $('#new-participant-name').val()
-        e.preventDefault()
+    if e.which == 13 && $('#new-participant-name').val()
+      e.preventDefault()
 
-        typeahead = $('#new-participant-name').data('ttTypeahead')
-        results = typeahead.menu._getSelectables()
-        if results.length == 1
-          typeahead.select(results)
-        else if results.length > 1
-          errorMessage = "Please select a name from the list"
-        else
-          errorMessage = "Nobody with that name"
+      typeahead = $('#new-participant-name').data('ttTypeahead')
+      results = typeahead.menu._getSelectables()
+      if results.length == 1
+        typeahead.select(results)
+      else if results.length > 1
+        errorMessage = "Please select a name from the list"
+      else
+        errorMessage = "Nobody with that name"
 
-      $('#new-participant .inline-error').text(errorMessage)
+    showErrorMessage(errorMessage)
+
+  # Removing participants
+
+  $(document).on 'click', '#participants .remove', (e) ->
+    person = $(e.target).closest('.participant').data('person')
+    if confirm "Remove #{person.full_name} from the project?"
+      removeParticipant(person)

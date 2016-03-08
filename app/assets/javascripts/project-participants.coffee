@@ -1,24 +1,102 @@
-$(document).on 'turbolinks:load', ->
+$ ->
+  h = (s) -> $("<div/>").text(s).html()
+
   noImage = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
 
-  personSearch = new Bloodhound(
-    datumTokenizer: (x) -> x,  # unused
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    remote:
-      url: '/people.json?q=%QUERY',
-      wildcard: '%QUERY')
+  bounce = ($elem) ->
+    $elem
+      .css(transformOrigin: '0 50%')
+      .transition { scale: 1.1 },  80, 'easeOutSine'
+      .transition { scale: 1   }, 320, 'easeInOutSine'
 
-  $('#project-participants-form .participant').typeahead(
-    null,
-    name: 'people',
-    display: 'full_name',
-    source: personSearch,
-    limit: 8,
-    templates:
-      empty: "None"
-      suggestion: (person) ->
-        $("
+  fakeParticipants =
+    [
+      {
+        id: 1,
+        full_name: "Sally Jones",
+        admin: true
+      },
+      {
+        id: 2,
+        full_name: "Fred Fr<e>dson",
+        admin: true
+      },
+      {
+        id: 3,
+        full_name: "Lisa Lafriano",
+        admin: false
+      },
+    ]
+
+  rebuildParticipantsList = ->
+    $participants = $('#participants')
+    $participants.children().remove()
+    for person in $participants.data('participants')
+      $participants.append $("
+        <li>
+          <div class='name'>#{h person.full_name}</div>
+          <div class='admin'>
+            <input type='checkbox' id='admin#{person.id}' #{'checked' if person.admin}>
+            <label for='admin#{person.id}'>Admin</label>
+          </div>
+        </li>")
+    return
+
+  addParticipant = (newPerson) ->
+    return unless newPerson && newPerson.id
+
+    $('#new-participant input[type=text]').val("")
+
+    participants = $('#participants').data('participants')
+    existingIndex = (i for person, i in participants when person.id == newPerson.id)[0]
+    if existingIndex
+      bounce $($('#participants li')[existingIndex])
+    else
+      participants.push(newPerson)
+      rebuildParticipantsList()
+
+  $(document).on 'turbolinks:load', ->
+
+    $('#participants').data('participants', fakeParticipants)
+
+    rebuildParticipantsList()
+
+    personSearch = new Bloodhound(
+      datumTokenizer: (x) -> x,  # unused
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      remote:
+        url: '/people.json?q=%QUERY',
+        wildcard: '%QUERY')
+
+    $('#new-participant-name').typeahead(
+      null,
+      name: 'people',
+      display: 'full_name',
+      source: personSearch,
+      limit: 8,
+      templates:
+        suggestion: (person) -> $("
           <div class='search-result'>
             <img src='#{person.avatar_url || noImage}' class='icon'>
-            <span class='text'>#{person.full_name}</span>
+            <span class='text'>#{h person.full_name}</span>
           </div>"))
+    
+    $(document).on 'typeahead:select', (e, person) ->
+      setTimeout (-> addParticipant(person)), 1
+
+    $(document).on 'keydown', '#new-participant', (e) ->
+      errorMessage = ""
+
+      if e.which == 13 && $('#new-participant-name').val()
+        e.preventDefault()
+
+        typeahead = $('#new-participant-name').data('ttTypeahead')
+        results = typeahead.menu._getSelectables()
+        if results.length == 1
+          typeahead.select(results)
+        else if results.length > 1
+          errorMessage = "Please select a name from the list"
+        else
+          errorMessage = "Nobody with that name"
+
+      $('#new-participant .inline-error').text(errorMessage)

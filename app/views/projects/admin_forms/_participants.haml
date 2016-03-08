@@ -1,3 +1,8 @@
-= project_form "participants", autosave: true do |f|
+%ol#participants
+
+%form#new-participant(action='#')
   %fieldset
-    = text_field_tag :participant, nil, class: 'participant', placeholder: "Participant name or Github login"
+    %ol
+      %li
+        %input#new-participant-name{type: :text, placeholder: "Name or Github user"}
+        .inline-error

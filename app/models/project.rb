@@ -10,8 +10,9 @@ class Project < ApplicationRecord
 
   mount_uploader :icon, ProjectIconUploader
 
+  MAX_TAGLINE_LENGTH = 50
   validates :name, presence: true
-  validates :tagline, length: { maximum: 50 }
+  validates :tagline, length: { maximum: MAX_TAGLINE_LENGTH }
 
   URL_REGEXP = URI::regexp(%w(http https))
   validates :url, format: URL_REGEXP, allow_blank: true

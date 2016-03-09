@@ -35,7 +35,7 @@ private
   def import_info(repo)
     repo_info = github.repository(repo)
     project.name    ||= repo_info.name.capitalize
-    project.tagline ||= repo_info.description
+    project.tagline ||= repo_info.description[0...Project::MAX_TAGLINE_LENGTH]
     project.url     ||= repo_info.homepage
   end
 

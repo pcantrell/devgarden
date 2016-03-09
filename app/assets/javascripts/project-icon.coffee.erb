@@ -72,7 +72,7 @@ $(document).on 'turbolinks:load', ->
           $('.dropzone .dz-preview:not(:last-child)').hide()
           $('.dropzone .dz-preview img').load ->
             updatePalette()
-            $('#project-theme-form').submit()
+            $('#project-theme').submit()
         @on "maxfilesexceeded", (file) =>
           @removeAllFiles()
           @addFile(file)

@@ -3,7 +3,7 @@ module ProjectFormHelper
     opts = {
       remote: autosave,
       html: {
-        id: "project-#{tab_name}-form",
+        id: "project-#{tab_name}",
         class: ('autosave' if autosave)
       }
     }

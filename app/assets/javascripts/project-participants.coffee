@@ -9,29 +9,41 @@ $ ->
       .transition { scale: 1.1 },  80, 'easeOutSine'
       .transition { scale: 1   }, 320, 'easeInOutSine'
 
-  rebuildParticipantsDOM = ->
-    $participants = $('#participants')
-    $participants.children().remove()
-    for person in $participants.data('participants')
+  participantsChanged = ->
+    $participantList = $('#project-participants ol')
+    $participantList.children().remove()
+    for person in getParticipants()
       $newParticipant = $("
         <li class='participant'>
+          <input type='hidden'
+                 name='project[participations_attributes][][person_id]'
+                 value='#{person.id}'>
           <div class='name'>#{h person.full_name}</div>
           <div class='admin'>
-            <input type='checkbox' id='admin#{person.id}' #{if person.admin then 'checked' else ''}>
+            <input type='checkbox'
+                   id='admin#{person.id}'
+                   name='project[participations_attributes][][admin]'
+                   #{if person.admin then 'checked' else ''}>
             <label for='admin#{person.id}'>Admin</label>
             <button class='remove'>Remove</button>
           </div>
         </li>")
       $newParticipant.data('person', person)
-      $participants.append($newParticipant)
+      $participantList.append($newParticipant)
+
     return
 
-  getParticipants = -> $('#participants').data('participants')
+  getParticipants = -> $('#project-participants').data('participants')
 
   window.DevGarden.setParticipants =
   setParticipants = (participants) ->
-    $('#participants').data('participants', participants)
-    rebuildParticipantsDOM()
+    firstTime = !getParticipants()
+
+    $('#project-participants').data('participants', participants)
+    participantsChanged()
+
+    unless firstTime
+      $('#project-participants').trigger('devgarden:scheduleAutosave')
 
   addParticipant = (newPerson) ->
     return unless newPerson && newPerson.id
@@ -42,10 +54,10 @@ $ ->
     participants = getParticipants()
     existingIndex = (i for person, i in participants when person.id == newPerson.id)[0]
     if existingIndex
-      bounce $($('#participants li')[existingIndex])
+      bounce $($('#project-participants li')[existingIndex])
     else
       participants.push(newPerson)
-      rebuildParticipantsDOM()
+      setParticipants(participants)  # trigger update
 
   removeParticipant = (toRemove) ->
     participants = getParticipants()
@@ -54,7 +66,7 @@ $ ->
 
   reorderParticipantsFromDOM = ->
     setParticipants(
-      $(elem).data('person') for elem in $('#participants li'))
+      $(elem).data('person') for elem in $('#project-participants li'))
 
   showErrorMessage = (message) ->
     $('#new-participant .inline-error').text(message)
@@ -105,14 +117,14 @@ $ ->
 
   # Changing admin status
 
-  $(document).on 'change', '#participants .admin input', (e) ->
+  $(document).on 'change', '#project-participants .admin input', (e) ->
     person = $(e.target).closest('li').data('person')
     person.admin = !person.admin
 
   # Reordering participants
 
   $(document).on 'turbolinks:load', ->
-    if list = $('#participants')[0]
+    if list = $('#project-participants ol')[0]
       Sortable.create(
         list,
         animation: 150,
@@ -123,7 +135,7 @@ $ ->
 
   # Removing participants
 
-  $(document).on 'click', '#participants .remove', (e) ->
+  $(document).on 'click', '#project-participants .remove', (e) ->
     person = $(e.target).closest('.participant').data('person')
     if confirm "Remove #{person.full_name} from the project?"
       removeParticipant(person)

@@ -21,6 +21,8 @@ class Project < ApplicationRecord
   after_save :remove_duplicate_tags
   after_save :remove_duplicate_participants
 
+  accepts_nested_attributes_for :participations
+
   include RecentScope
   include Themed
 

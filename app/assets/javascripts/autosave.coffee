@@ -5,11 +5,14 @@ submitIfDirty = ($form) ->
   $form.data('autosubmitAtTime', null)
   $form.submit()
 
-$(document).on 'change', '.autosave input', (e) ->
+$(document).on 'devgarden:scheduleAutosave', (e) ->
   $form = $(e.target).closest('form')
   throttle = 600
   $form.data('autosubmitAtTime', Date.now() + throttle)
   setTimeout (-> submitIfDirty($form)), throttle
+
+$(document).on 'change', '.autosave input', (e) ->
+  $(e.target).trigger('devgarden:scheduleAutosave')
 
 
 # Status display

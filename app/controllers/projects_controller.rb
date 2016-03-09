@@ -71,7 +71,9 @@ private
   def project_params
     params[:project].permit(
       :name, :tagline, :description, :url, :scm_urls_as_text, :icon, :icon_cache,
-      theme: [:primary_hue, :highlight_hue], tag_ids: [], requested_role_ids: [])
+      theme: [:primary_hue, :highlight_hue],
+      participations_attributes: [:person_id, :admin],
+      tag_ids: [], requested_role_ids: [])
   end
 
   def edit_project_tab_path(tab_name)
@@ -115,7 +117,7 @@ private
   def participants_json
     project.participations.includes(:person).map do |p|
       {
-        id: p.id,
+        id: p.person.id,
         full_name: p.person.full_name,
         avatar_url: p.person.avatar_url,
         admin: p.admin

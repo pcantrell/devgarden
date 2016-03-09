@@ -25,8 +25,8 @@ $ ->
                    name='project[participations_attributes][][admin]'
                    #{if person.admin then 'checked' else ''}>
             <label for='admin#{person.id}'>Admin</label>
-            <button class='remove'>Remove</button>
           </div>
+          <button class='remove'>Remove</button>
         </li>")
       $newParticipant.data('person', person)
       $participantList.append($newParticipant)

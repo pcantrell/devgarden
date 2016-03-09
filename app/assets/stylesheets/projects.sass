@@ -103,7 +103,7 @@
       display: none
 
       &+label
-        content: 'x'
+        content: ''
         display: block
         width: $size
         height: $size
@@ -114,3 +114,47 @@
         outline: $selection-border solid rgba(0, 0, 0, 0.8)
         z-index: 100
         transform: scale(1)
+
+  #participants-tab
+    margin: 1.2em
+  #project-participants
+    ol
+      list-style: none
+    .participant
+      cursor: move
+      &:hover
+        x-background: rgba(0, 0, 0, 0.1)
+      .name
+        width: 12em
+        overflow: hidden
+        white-space: nowrap
+        display: inline-block
+        &:before
+          content: image-url('reorder.svg')
+          width: 0.6em
+          height: 0.6em
+          display: inline-block
+          margin-right: 0.6em
+          position: relative
+          top: -0.2em
+          opacity: 0.4
+      .admin, .remove
+        @include meta-important-font
+        font-size: 80%
+      .admin
+        display: inline-block
+        white-space: nowrap
+        label
+          margin-left: 0.2em
+      .remove
+        border: none
+        border-radius: 0.2em
+        background: none
+        margin-left: 1.2em
+        color: $danger-color
+        cursor: pointer
+        &:hover
+          color: white
+          background: $danger-color
+  #new-participant
+    margin-left: 0.6em

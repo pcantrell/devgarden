@@ -41,14 +41,23 @@ private
 
   def import_contributors(repo, requesting_user)
     github.contributors(repo).each do |contributor|
-
-      #! Locking not strictly safe here, could result in dup users in high-traffic env
-      person = Person.transaction do
-        Person.find_by(github_user: contributor.login) ||
-        Person.create_from_github_profile(
-          github.user(contributor.login))
-      end
+      person = person_for_github_contributor(contributor)
       project.participations.new(person: person, admin: person == requesting_user) if person
+    end
+  end
+
+  def person_for_github_contributor(contributor)
+    #! Locking not strictly safe here, could result in dup users in high-traffic env
+    Person.transaction do
+      Person.find_by(github_user: contributor.login) || begin
+        profile = github.user(contributor.login)
+        Person.find_by(email: profile.email) ||
+          Person.create(
+            github_user: profile.login,
+            full_name:   profile.name,
+            email:       profile.email,
+            urls:        ["https://github.com/#{profile.login}", profile.blog].compact)
+      end
     end
   end
 

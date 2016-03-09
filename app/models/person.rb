@@ -68,11 +68,4 @@ class Person < ApplicationRecord
     user
   end
 
-  def self.create_from_github_profile(profile)
-    create(
-      github_user: profile.login,
-      full_name:   profile.name,
-      email:       profile.email,
-      urls:        ["https://github.com/#{profile.login}", profile.blog].compact)
-  end
 end

@@ -125,6 +125,12 @@ $ ->
 
     showErrorMessage(errorMessage)
 
+  # Changing admin status
+
+  $(document).on 'change', '#participants .admin input', (e) ->
+    person = $(e.target).closest('li').data('person')
+    person.admin = !person.admin
+
   # Reordering participants
 
   $(document).on 'turbolinks:load', ->

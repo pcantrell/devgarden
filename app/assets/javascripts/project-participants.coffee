@@ -9,25 +9,6 @@ $ ->
       .transition { scale: 1.1 },  80, 'easeOutSine'
       .transition { scale: 1   }, 320, 'easeInOutSine'
 
-  fakeParticipants =
-    [
-      {
-        id: 1,
-        full_name: "Sally Jones",
-        admin: true
-      },
-      {
-        id: 2,
-        full_name: "Fred Fr<e>dson",
-        admin: true
-      },
-      {
-        id: 3,
-        full_name: "Lisa Lafriano",
-        admin: false
-      },
-    ]
-
   rebuildParticipantsDOM = ->
     $participants = $('#participants')
     $participants.children().remove()
@@ -36,7 +17,7 @@ $ ->
         <li class='participant'>
           <div class='name'>#{h person.full_name}</div>
           <div class='admin'>
-            <input type='checkbox' id='admin#{person.id}' #{'checked' if person.admin}>
+            <input type='checkbox' id='admin#{person.id}' #{if person.admin then 'checked' else ''}>
             <label for='admin#{person.id}'>Admin</label>
             <button class='remove'>Remove</button>
           </div>
@@ -47,7 +28,10 @@ $ ->
 
   getParticipants = -> $('#participants').data('participants')
 
-  setParticipants = (participants) -> $('#participants').data('participants', participants)
+  window.DevGarden.setParticipants =
+  setParticipants = (participants) ->
+    $('#participants').data('participants', participants)
+    rebuildParticipantsDOM()
 
   addParticipant = (newPerson) ->
     return unless newPerson && newPerson.id
@@ -67,24 +51,18 @@ $ ->
     participants = getParticipants()
     setParticipants(
       person for person in participants when person.id != toRemove.id)
-    rebuildParticipantsDOM()
 
   reorderParticipantsFromDOM = ->
     setParticipants(
       $(elem).data('person') for elem in $('#participants li'))
-    console.log getParticipants()
 
   showErrorMessage = (message) ->
     $('#new-participant .inline-error').text(message)
 
+
   # Typeahead / person selection
 
   $(document).on 'turbolinks:load', ->
-
-    setParticipants(fakeParticipants)
-
-    rebuildParticipantsDOM()
-
     personSearch = new Bloodhound(
       datumTokenizer: (x) -> x,  # unused
       queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -141,6 +119,7 @@ $ ->
         #handle: ".tile__title",
         draggable: "li",
         onUpdate: -> reorderParticipantsFromDOM())
+
 
   # Removing participants
 

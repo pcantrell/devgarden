@@ -112,4 +112,16 @@ private
     redirect_to job_report
   end
 
+  def participants_json
+    project.participations.includes(:person).map do |p|
+      {
+        id: p.id,
+        full_name: p.person.full_name,
+        avatar_url: p.person.avatar_url,
+        admin: p.admin
+      }
+    end.to_json
+  end
+  helper_method :participants_json
+
 end

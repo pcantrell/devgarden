@@ -6,3 +6,10 @@
       %li
         %input#new-participant-name{type: :text, placeholder: "Name or Github user"}
         .inline-error
+
+-# Supercheat: dump JSON straight into paige to prevent second req
+:javascript
+  $(function() {
+    DevGarden.setParticipants(
+      #{participants_json.html_safe})
+  })

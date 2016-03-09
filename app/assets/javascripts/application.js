@@ -16,6 +16,7 @@
 //= require jquery.autogrow-textarea
 //= require typeahead.bundle
 //= require dropzone
+//= require Sortable
 //= require turbolinks
 //= require color-thief
 //

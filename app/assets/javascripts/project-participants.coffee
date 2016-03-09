@@ -28,7 +28,7 @@ $ ->
       },
     ]
 
-  rebuildParticipantsList = ->
+  rebuildParticipantsDOM = ->
     $participants = $('#participants')
     $participants.children().remove()
     for person in $participants.data('participants')
@@ -45,37 +45,45 @@ $ ->
       $participants.append($newParticipant)
     return
 
+  getParticipants = -> $('#participants').data('participants')
+
+  setParticipants = (participants) -> $('#participants').data('participants', participants)
+
   addParticipant = (newPerson) ->
     return unless newPerson && newPerson.id
 
     $('#new-participant input[type=text]').val("")
     showErrorMessage("")
 
-    participants = $('#participants').data('participants')
+    participants = getParticipants()
     existingIndex = (i for person, i in participants when person.id == newPerson.id)[0]
     if existingIndex
       bounce $($('#participants li')[existingIndex])
     else
       participants.push(newPerson)
-      rebuildParticipantsList()
+      rebuildParticipantsDOM()
 
   removeParticipant = (toRemove) ->
-    participants = $('#participants').data('participants')
-    $('#participants').data(
-      'participants',
-      (person for person in participants when person.id != toRemove.id))
-    rebuildParticipantsList()
+    participants = getParticipants()
+    setParticipants(
+      person for person in participants when person.id != toRemove.id)
+    rebuildParticipantsDOM()
+
+  reorderParticipantsFromDOM = ->
+    setParticipants(
+      $(elem).data('person') for elem in $('#participants li'))
+    console.log getParticipants()
 
   showErrorMessage = (message) ->
     $('#new-participant .inline-error').text(message)
 
-  # Typeahead glue
+  # Typeahead / person selection
 
   $(document).on 'turbolinks:load', ->
 
-    $('#participants').data('participants', fakeParticipants)
+    setParticipants(fakeParticipants)
 
-    rebuildParticipantsList()
+    rebuildParticipantsDOM()
 
     personSearch = new Bloodhound(
       datumTokenizer: (x) -> x,  # unused
@@ -116,6 +124,17 @@ $ ->
         errorMessage = "Nobody with that name"
 
     showErrorMessage(errorMessage)
+
+  # Reordering participants
+
+  $(document).on 'turbolinks:load', ->
+    if list = $('#participants')[0]
+      Sortable.create(
+        list,
+        animation: 150,
+        #handle: ".tile__title",
+        draggable: "li",
+        onUpdate: -> reorderParticipantsFromDOM())
 
   # Removing participants
 

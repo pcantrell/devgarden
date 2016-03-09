@@ -34,7 +34,15 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    success = project.update(project_params)
+    success = false
+    begin
+      Project.transaction do
+        project.participations.destroy_all
+        project.update!(project_params)
+      end
+      success = true
+    rescue ActiveRecord::RecordInvalid
+    end
 
     respond_to do |format|
       format.html do

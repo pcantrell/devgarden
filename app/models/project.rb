@@ -1,5 +1,5 @@
 class Project < ApplicationRecord
-  has_many :participations, dependent: :destroy
+  has_many :participations, -> { order(:id) }, dependent: :destroy
   has_many :participants, through: :participations, source: :person
 
   has_many :role_requests, -> { includes(:role) }, dependent: :destroy

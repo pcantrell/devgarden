@@ -1,5 +1,14 @@
 = project_form "participants", autosave: true do |f|
   %ol
+    -# The list of participants is dynamically created by a script from JSON, and the script uses
+    -# this attr to initially populate the list. This prevents us from either:
+    -#   (1) havmaking the server try to render the same HTML as the script, or
+    -#   (2) forcing an API call every time the page loads.
+
+    -# This element gets wiped out as soon as the page is gone, preventing stale initial data
+    -# from wiping out newer, better data.
+
+    #initialParticipants{data: { initial_participants: participants_json.html_safe} }
 
 %form#new-participant(action='#')
   %fieldset
@@ -7,10 +16,3 @@
       %li
         %input#new-participant-name{type: :text, placeholder: "Name or Github user"}
         .inline-error
-
--# Supercheat: dump JSON straight into paige to prevent second req
-:javascript
-  $(function() {
-    DevGarden.setParticipants(
-      #{participants_json.html_safe})
-  })

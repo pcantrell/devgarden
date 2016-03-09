@@ -33,17 +33,15 @@ $ ->
 
     return
 
-  getParticipants = -> $('#project-participants').data('participants')
+  getParticipants = ->
+    $('#project-participants').data('participants')
 
-  window.DevGarden.setParticipants =
-  setParticipants = (participants) ->
-    firstTime = !getParticipants()
-
+  setParticipants = (participants, save = true) ->
     $('#project-participants').data('participants', participants)
     participantsChanged()
-
-    unless firstTime
+    if save
       $('#project-participants').trigger('devgarden:scheduleAutosave')
+    participants
 
   addParticipant = (newPerson) ->
     return unless newPerson && newPerson.id
@@ -139,3 +137,7 @@ $ ->
     person = $(e.target).closest('.participant').data('person')
     if confirm "Remove #{person.full_name} from the project?"
       removeParticipant(person)
+
+  $(document).on 'turbolinks:load', ->
+    if initialParticipants = $('#initialParticipants').attr('data-initial-participants')
+      setParticipants(JSON.parse(initialParticipants), false)

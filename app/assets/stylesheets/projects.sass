@@ -59,6 +59,19 @@
 
   h1
     clear: left
+
+  .error-headline
+    @include meta-important-font
+    color: $error-color
+    font-size: 120%
+
+  .duplicate-import
+    margin: 1.2em 0
+    .info
+      .project
+        margin: 0.3em
+        a
+          font-weight: 600
   
   #tags-tab
     @include choices-in-wide-columns

@@ -21,6 +21,18 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+
+    @duplicate_imports = project.scm_urls.map do |url|
+      if duplicate = Project.with_scm_url(url).first
+        OpenStruct.new(
+          repo: url,
+          project: duplicate)
+      end
+    end.compact
+    if @duplicate_imports.any?
+      return render :new
+    end
+
     return populate_from_github if params[:project][:populate_from_github]
 
     @project.participations.new(person: current_user, admin: true)
@@ -75,6 +87,11 @@ private
     @project ||= Project.find(params[:id])
   end
   helper_method :project
+
+  def duplicate_imports
+    @duplicate_imports ||= []
+  end
+  helper_method :duplicate_imports
 
   def project_params
     params[:project].permit(

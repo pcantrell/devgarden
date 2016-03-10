@@ -26,6 +26,10 @@ class Project < ApplicationRecord
   include RecentScope
   include Themed
 
+  scope :with_scm_url, ->(scm_url) do
+    where('scm_urls @> ARRAY[?::character varying]', scm_url)
+  end
+
   def admins_include?(person)
     participations.where(person: person, admin: true).any?
   end

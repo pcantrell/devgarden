@@ -6,10 +6,22 @@
 
   - else
   
+    - if duplicate_imports.any?
+      .error-headline
+        Import problem: Duplicate Github repositories
+      - duplicate_imports.each do |duplicate|
+        .duplicate-import
+          .info
+            .repo= pretty_url_link duplicate.repo
+            .project
+              ↳ already attached to the existing
+              = link_to duplicate.project.name, duplicate.project
+              project.
+
     = semantic_form_for project do |f|
       = f.inputs do
         = f.hidden_field :populate_from_github, value: true
         = f.input :scm_urls_as_text, as: :text, required: true, label: 'Your project’s Github URL', placeholder: "https://github.com/user/projectname", hint: "(one per line if the project has multiple repositories)"
       .actions
         = f.save_button
-        = link_to "This project doesn’t have a Github repository", new_project_path(full_form: true)
+        = link_to "My project doesn’t have a Github repository", new_project_path(full_form: true)

@@ -9,6 +9,12 @@ $ ->
       .transition { scale: 1.1 },  80, 'easeOutSine'
       .transition { scale: 1   }, 320, 'easeInOutSine'
 
+  showIf = (condition, str) ->
+    if condition
+      str
+    else
+      ''
+
   participantsChanged = ->
     $participantList = $('#project-participants ol')
     $participantList.children().remove()
@@ -20,21 +26,19 @@ $ ->
                  name='project[participations_attributes][][person_id]'
                  value='#{person.id}'>
           <div class='name'>#{h person.full_name}</div>
-          <button class='remove' #{if person.self then 'disabled' else ''}>⊖</button>
+          <button class='remove' #{showIf person.self, 'disabled'}>⊖</button>
           <div class='admin'>
             #{
-              if person.self
+              showIf person.self,
                 "<input type='hidden'
                         name='project[participations_attributes][][admin]'
                         value='on'>"
-              else
-                ""
             }
             <input type='checkbox'
                    id='admin#{person.id}'
                    name='project[participations_attributes][][admin]'
-                   #{if person.self then 'disabled' else ''}
-                   #{if person.admin then 'checked' else ''}>
+                   #{showIf person.self, 'disabled'}
+                   #{showIf person.admin, 'checked'}>
             <label for='admin#{person.id}'>Admin</label>
           </div>
         </li>")

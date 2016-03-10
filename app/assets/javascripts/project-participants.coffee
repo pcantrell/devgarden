@@ -15,10 +15,12 @@ $ ->
     for person in getParticipants()
       $newParticipant = $("
         <li class='participant'>
+          <div class='handle'></div>
           <input type='hidden'
                  name='project[participations_attributes][][person_id]'
                  value='#{person.id}'>
           <div class='name'>#{h person.full_name}</div>
+          <button class='remove'>⊖</button>
           <div class='admin'>
             <input type='checkbox'
                    id='admin#{person.id}'
@@ -26,7 +28,6 @@ $ ->
                    #{if person.admin then 'checked' else ''}>
             <label for='admin#{person.id}'>Admin</label>
           </div>
-          <button class='remove'>Remove</button>
         </li>")
       $newParticipant.data('person', person)
       $participantList.append($newParticipant)
@@ -126,7 +127,7 @@ $ ->
       Sortable.create(
         list,
         animation: 150,
-        #handle: ".tile__title",
+        handle: ".handle",
         draggable: "li",
         onUpdate: -> reorderParticipantsFromDOM())
 

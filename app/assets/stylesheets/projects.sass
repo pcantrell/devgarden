@@ -117,47 +117,78 @@
 
   #participants-tab
     margin: 1.2em
+    @include if-below-width(28em)
+      margin: 1.2em 0
     p
       max-width: 28em
   #project-participants
     margin-top: 1.2em
+    max-width: 24em
     ol
+      border-top: 0.5px solid $hairline-color
       list-style: none
+      @include if-below-width(28em)
+        margin: 0 -0.6em
     .participant
-      cursor: move
+      margin: 0.6em 0
+      padding-bottom: 0.6em
+      border-bottom: 0.5px solid $hairline-color
       &:hover
         x-background: rgba(0, 0, 0, 0.1)
+      &[draggable=true]:not(.sortable-ghost)
+        border-color: rgba(0,0,0,0)
+      .handle
+        cursor: move
+        background:
+          image: image-url('reorder.svg')
+          repeat: no-repeat
+          size: 0.6em 0.6em
+          position: center
+        width: 1.2em
+        height: 1.2em
+        margin-left: 0.3em
+        display: inline-block
+        vertical-align: middle
+        opacity: 0.4
+      .name, .admin, .remove
+        display: inline-block
+        vertical-align: baseline
       .name
         width: 16em
+        @include if-below-width(32em)
+          max-width: 14em
+        @include if-below-width(30em)
+          max-width: 12em
+        @include if-below-width(26em)
+          max-width: 10em
         overflow: hidden
         white-space: nowrap
-        display: inline-block
-        &:before
-          content: image-url('reorder.svg')
-          width: 0.6em
-          height: 0.6em
-          display: inline-block
-          margin-right: 0.6em
-          position: relative
-          top: -0.2em
-          opacity: 0.4
       .admin, .remove
         @include meta-important-font
         font-size: 80%
+        float: right
       .admin
-        display: inline-block
         white-space: nowrap
+        line-height: 150%
+        input
+          margin: 0
         label
           margin-left: 0.2em
       .remove
         border: none
-        border-radius: 0.2em
+        border-radius: 1em
         background: none
-        margin-left: 1.2em
+        margin: 0 0.6em
         color: $danger-color
         cursor: pointer
+        font-size: 120%
+        line-height: 100%
+        padding: 0
+        position: relative
+        top: -0.1em
         &:hover
           color: white
           background: $danger-color
   #new-participant
     margin-left: 0.6em
+    margin-bottom: 12em

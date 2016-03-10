@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def body_classes
     [
-      "#{controller_name}-controller",
+      "#{controller_name.dasherize}-controller",
       "#{action_name}-action",
       ("#{controller_name.singularize}-#{params[:id]}" if params[:id]),
       ("logged-in" if logged_in?)

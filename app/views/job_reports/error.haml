@@ -1,6 +1,5 @@
 %h1 Job failed
 
-%b= error.message
-%ol
-  - error.backtrace&.each do |line|
-    %li= line
+.error-headline= error.message
+
+%code.backtrace= error.backtrace&.join("\n")

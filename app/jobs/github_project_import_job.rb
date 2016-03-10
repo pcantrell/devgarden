@@ -34,6 +34,9 @@ private
 
   def import_info(repo)
     repo_info = github.repository(repo)
+    unless repo_info.permissions.push
+      raise "You need to have push access to #{repo} on Github in order to import it."
+    end
     project.name    ||= repo_info.name.capitalize
     project.tagline ||= repo_info.description[0...Project::MAX_TAGLINE_LENGTH]
     project.url     ||= repo_info.homepage
@@ -43,6 +46,9 @@ private
     github.contributors(repo).each do |contributor|
       person = person_for_github_contributor(contributor)
       project.participations.new(person: person, admin: person == requesting_user) if person
+    end
+    unless project.participations.any? { |p| p.person == requesting_user }
+      raise "You need to be a contributor to #{repo} on Github in order to import it."
     end
   end
 

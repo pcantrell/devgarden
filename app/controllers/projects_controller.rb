@@ -49,7 +49,9 @@ class ProjectsController < ApplicationController
     success = false
     begin
       Project.transaction do
-        project.participations.destroy_all
+        if project_params[:participations_attributes]
+          project.participations.destroy_all
+        end
         project.update!(project_params)
       end
       success = true

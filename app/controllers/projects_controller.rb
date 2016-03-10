@@ -52,7 +52,12 @@ class ProjectsController < ApplicationController
         if project_params[:participations_attributes]
           project.participations.destroy_all
         end
+        
         project.update!(project_params)
+
+        unless project.admins_include?(current_user)
+          raise "Cannot remove self as project admin"
+        end
       end
       success = true
     rescue ActiveRecord::RecordInvalid
@@ -147,7 +152,8 @@ private
         id: p.person.id,
         full_name: p.person.full_name,
         avatar_url: p.person.avatar_url,
-        admin: p.admin
+        admin: p.admin,
+        self: p.person == current_user
       }
     end.to_json
   end

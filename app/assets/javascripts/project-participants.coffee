@@ -20,11 +20,20 @@ $ ->
                  name='project[participations_attributes][][person_id]'
                  value='#{person.id}'>
           <div class='name'>#{h person.full_name}</div>
-          <button class='remove'>⊖</button>
+          <button class='remove' #{if person.self then 'disabled' else ''}>⊖</button>
           <div class='admin'>
+            #{
+              if person.self
+                "<input type='hidden'
+                        name='project[participations_attributes][][admin]'
+                        value='on'>"
+              else
+                ""
+            }
             <input type='checkbox'
                    id='admin#{person.id}'
                    name='project[participations_attributes][][admin]'
+                   #{if person.self then 'disabled' else ''}
                    #{if person.admin then 'checked' else ''}>
             <label for='admin#{person.id}'>Admin</label>
           </div>

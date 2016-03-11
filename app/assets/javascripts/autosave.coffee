@@ -26,6 +26,11 @@ bindStatusUpdate("beforeSend", "saving")
 bindStatusUpdate("success", "success")
 bindStatusUpdate("error", "error")
 
+arrayContainsValue = (array, value) ->
+  for elem in array
+    return true if elem == value
+  false
+
 updateStatusDisplay = ->
   statuses = $('.autosave')
     .map((i, elem) -> $(elem).data('autosave-status'))
@@ -33,7 +38,7 @@ updateStatusDisplay = ->
 
   globalStatus = "no-changes"
   for status in ["saving", "error", "success"]
-    if statuses.includes(status)
+    if arrayContainsValue(statuses, status)
       globalStatus = status
       break
   

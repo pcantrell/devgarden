@@ -25,7 +25,7 @@ form
     textarea
       display: block
       width: 99%
-      border: 0.5px solid $dark-color
+      @include hairline-border(all, $dark-color)
       background: #fbfbf9
       &:focus
         background: white
@@ -58,7 +58,7 @@ form
           -moz-box-sizing: content-box
       &.error
         input, textarea
-          border: 0.5px solid $error-color
+          @include hairline-border(all, $error-color)
           background: #fff4f4
     label
       @include sans

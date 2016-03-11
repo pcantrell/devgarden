@@ -61,7 +61,7 @@ hr
   height: 1px
   width: 50%
   margin: 0.6em 25%
-  border-top: 0.5px solid $hairline-color
+  @include hairline-border(top, $hairline-color)
 
 .more
   margin-top: 0.6em
@@ -85,7 +85,7 @@ hr
   .feature
     margin: 1.2em 0
     padding-bottom: 1.2em
-    border-bottom: 0.5px solid $hairline-color
+    @include hairline-border(bottom, $hairline-color)
     @include if-above-width(36em)
       &:last-child
         border: none
@@ -177,7 +177,7 @@ hr
   .tag-category-family
     color: #444
     .tag:last-child
-      border-right: 0.5px solid black
+      @include hairline-border(right, black)
       padding-right: 0.8em
       margin-right: 0.8em
     &:last-child .tag:last-child
@@ -224,7 +224,7 @@ hr
 input.tt-hint
   color: #999
 .tt-menu .tt-dataset
-  border: 0.5px solid $hairline-color
+  @include hairline-border(all, $hairline-color)
   border-radius: 0.3em
   overflow: hidden
   box-shadow: 0 0.5ex 0.5ex rgba(0, 0, 0, 0.1667)

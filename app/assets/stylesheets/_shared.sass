@@ -13,6 +13,13 @@ $danger-color: $error-color
   @media not all and (max-width: $width)
     @content
 
+@mixin hairline-border($side, $color)
+  @if $side == 'all'
+    $side: ""
+  @else
+    $side: "-#{$side}"
+  border#{$side}: 0.5pt solid $color
+
 @mixin body-font
   font:
     family: 'freight-text-pro'
@@ -106,7 +113,7 @@ $danger-color: $error-color
 
 @mixin meta-float-right
   @include if-below-width(32em)
-    border-bottom: 0.5px solid $dark-color
+    @include hairline-border(bottom, $dark-color)
     padding-bottom: 1.2em
     margin-bottom: 1.3em
   @include if-above-width(32em)
@@ -114,7 +121,7 @@ $danger-color: $error-color
     margin: 0 0 1.2em 1.2em
     padding: 0.15em 0
     padding-left: 1.2em
-    border-left: 0.5px solid $dark-color
+    @include hairline-border(left, $dark-color)
     max-width: 40%
 
 @mixin choices-in-wide-columns

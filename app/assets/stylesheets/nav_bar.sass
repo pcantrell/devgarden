@@ -6,7 +6,7 @@
   letter-spacing: 0.5px
   text-transform: uppercase
   background: $dark-color
-  border-bottom: 0.5px solid $hairline-color
+  @include hairline-border(bottom, $hairline-color)
   padding: 0.6em
   a
     color: rgba(255,255,255,0.9)
@@ -60,7 +60,7 @@
     font-size: 160%
   text-align: right
   box-shadow: 0 1ex 1ex rgba(0, 0, 0, 0.333)
-  border-top: 0.5px solid $hairline-color
+  @include hairline-border(top, $hairline-color)
   p
     font-weight: 400
     line-height: 120%
@@ -72,7 +72,7 @@
     margin: 1.2em 0
     &.projects
       padding-bottom: 1.2em
-      border-bottom: 0.5px solid $hairline-color
+      @include hairline-border(bottom, $hairline-color)
       font-weight: 400
     li
       padding: 0

@@ -221,6 +221,21 @@ hr
   text-align: center
   margin-top: 2.4em
 
+.edit-settings
+  .more
+    float: right
+    @include if-below-width(24em)
+      float: left
+      margin: 1.2em 0 0.6em
+
+  h1
+    clear: left
+
+  .error-headline
+    @include meta-important-font
+    color: $error-color
+    font-size: 120%
+
 input.tt-hint
   color: #999
 .tt-menu .tt-dataset

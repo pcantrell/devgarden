@@ -1,6 +1,6 @@
 - hide_scm_urls ||= false
 
-= project_form "basics" do |f|
+= settings_form_for project, "basics" do |f|
   = hidden_field_tag(:full_form, true)  # in case we're on the new page
   = f.inputs do
     = f.input :name

@@ -4,7 +4,7 @@
 %p.hint
   Admins can update project settings on this site. Dev Garden admin access <b>does not</b> affect Github or any other service.
 
-= project_form "participants", autosave: true do |f|
+= settings_form_for project, "participants", autosave: true do |f|
   %ol
     -# The list of participants is dynamically created by a script from JSON, and the script uses
     -# this attr to initially populate the list. This prevents us from either:

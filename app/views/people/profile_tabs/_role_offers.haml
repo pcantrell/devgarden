@@ -1,0 +1,4 @@
+= settings_form_for person, "role-offers", autosave: true do |f|
+  = f.inputs do
+    - RoleCategory.all.shuffle.each do |category|
+      = f.input :offered_role_ids, label: category.name, required: true, as: :check_boxes, collection: labeled_roles_for_category(category)

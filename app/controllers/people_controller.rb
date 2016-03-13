@@ -32,10 +32,21 @@ class PeopleController < ApplicationController
   end
 
   def update
-    if person.update(person_params)
-      redirect_to person, flash: { success: 'Person updated' }
-    else
-      render :edit
+    success = person.update(person_params)
+
+    respond_to do |format|
+      format.html do
+        if success
+          tab = params[:selected_tab] || ""
+          flash[:success] = "Profile #{tab.downcase} updated"
+          redirect_to edit_person_path(person, anchor: tab)
+        else
+          render :edit
+        end
+      end
+      format.js do
+        head(success ? 200 : 400)
+      end
     end
   end
 

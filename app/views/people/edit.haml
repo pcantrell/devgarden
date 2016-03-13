@@ -1,3 +1,7 @@
-- heading "Edit Profile" do
+.edit-settings
+  .more= link_to "View Profile", person
+  = render "shared/autosave_status"
 
-  = render 'form'
+  - heading "Edit Profile" do
+
+    = render 'shared/tabs', controller: 'people', tab_group: 'profile', tabs: %w(info role_offers)

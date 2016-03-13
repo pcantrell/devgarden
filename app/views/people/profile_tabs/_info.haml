@@ -1,4 +1,4 @@
-= semantic_form_for person, class: 'person' do |f|
+= settings_form_for person, "info" do |f|
 
   = f.inputs do
     = f.input :full_name, required: true, hint: "It’s best to use your full, real name so that other students and potential employers can identify you."
@@ -8,9 +8,6 @@
     = render "shared/disclosure_input", f: f, property: :faculty_or_staff?, target: "person_department", label: "I’m Macalester faculty or staff"
     = f.input :department
     = f.input :urls_as_text, as: :text, label: "Web site(s)", hint: "(One per line)"
-
-    -# :participations
-    -# :role_offers, -> { includes(:role) }
 
   .actions
     = f.save_button

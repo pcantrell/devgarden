@@ -35,7 +35,8 @@ selectClosestToPreviousHue = (hueKey, index) ->
   return if values.length == 0
 
   prevValue = parseFloat($("#project_theme_previous_#{hueKey}_hue").val())
-  prevValue ||= Math.random() * 360
+  if isNaN(prevValue)
+    prevValue = Math.random() * 360
 
   newValue = undefined
   closestDist = Infinity
@@ -45,7 +46,7 @@ selectClosestToPreviousHue = (hueKey, index) ->
       closestDist = dist
       newValue = value
 
-  if newValue
+  if newValue != undefined
     $inputs.val([newValue])
 
   return

@@ -1,0 +1,8 @@
+.tabs{id: "#{controller}-#{tab_group}-tabs"}
+  %ul
+    - tabs.each do |tab|
+      %li= link_to t("#{controller}.#{tab_group}_tab_title.#{tab}"), '#' + tab
+
+  - tabs.each do |tab|
+    .tab{id: "#{tab}-tab"}
+      = render "#{controller}/#{tab_group}_tabs/#{tab.underscore}"

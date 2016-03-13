@@ -3,12 +3,6 @@
 
 - heading "#{project.name.presence || 'Project'} Info" do
 
-  #project-edit-tabs.tabs
-    - tabs = %w(info icon description tags participants role-reqs)
-    %ul
-      - tabs.each do |tab|
-        %li= link_to t("projects.admin_tab_title.#{tab}"), '#' + tab
+  = render 'shared/tabs', controller: 'projects', tab_group: 'admin', tabs: %w(info icon description tags participants role-reqs)
 
-    - tabs.each do |tab|
-      .tab{id: "#{tab}-tab"}
-        = render "projects/admin_forms/#{tab.underscore}"
+  

@@ -2,7 +2,6 @@ class ProjectsController < ApplicationController
 
   before_action :require_project_admin, except: [:index, :show, :new, :create]
   before_action :require_login, except: [:index, :show]
-  before_action :remove_duplicate_params
 
   def index
     render partial: 'recent', locals: {
@@ -110,16 +109,6 @@ private
 
   def edit_project_tab_path(tab_name)
     edit_project_path(project, anchor: tab_name)
-  end
-
-  # For unknown reasons, remote: true causes tag and role request checkboxes to
-  # show up multiple times in the submitted array. Rails bug?
-  def remove_duplicate_params
-    [:tag_ids, :requested_role_ids].each do |key|
-      if params[:project] && params[:project][key]
-        params[:project][key].uniq!
-      end
-    end
   end
 
   def populate_from_github

@@ -31,7 +31,7 @@ class Project < ApplicationRecord
   end
 
   def admins_include?(person)
-    participations.where(person: person, admin: true).any?
+    person && participations.where(person: person, admin: true).any?
   end
 
   def tags_grouped

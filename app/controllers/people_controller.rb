@@ -53,10 +53,15 @@ class PeopleController < ApplicationController
 private
 
   def require_profile_owner
-    unless current_user == person
+    unless can_edit?(person)
       redirect_to login_path, flash: { error: "You must log in as #{person.name} in order to edit their profile." }
     end
   end
+
+  def can_edit?(person)
+    current_user&.site_admin? || person == current_user
+  end
+  helper_method :can_edit?
 
   def person
     @person ||= Person.find(params[:id])

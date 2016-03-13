@@ -54,7 +54,7 @@ class ProjectsController < ApplicationController
         
         project.update!(project_params)
 
-        unless project.admins_include?(current_user)
+        unless can_edit?(project)
           raise "Cannot remove self as project admin"
         end
       end
@@ -84,10 +84,15 @@ class ProjectsController < ApplicationController
 private
 
   def require_project_admin
-    unless project.admins_include?(current_user)
+    unless can_edit?(project)
       redirect_to login_path, flash: { error: "You must log in as an admin of #{project.name} in order to edit it." }
     end
   end
+
+  def can_edit?(project)
+    current_user&.site_admin? || project.admins_include?(current_user)
+  end
+  helper_method :can_edit?
 
   def project
     @project ||= Project.find(params[:id])

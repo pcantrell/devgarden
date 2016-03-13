@@ -5,7 +5,7 @@
       = image_tag project.icon.feature.url
 
   .info
-    - if logged_in? && project.admins_include?(current_user)
+    - if can_edit?(project)
       = link_to "Edit Project", edit_project_path(project), class: 'big-button edit', style: theme_style(project, :button_background)
 
     - heading project.name, class: "name" do

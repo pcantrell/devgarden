@@ -1,4 +1,4 @@
-- if person == current_user
+- if can_edit?(person)
   = link_to "Edit Profile", edit_person_path(person), class: 'big-button edit', style: theme_style(person, :button_background)
 
 .banner{style: theme_style(person, :featured_text)}

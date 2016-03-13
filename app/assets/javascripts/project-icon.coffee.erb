@@ -38,6 +38,10 @@ selectClosestToPreviousHue = (hueKey, index) ->
   if isNaN(prevValue)
     prevValue = Math.random() * 360
 
+    # Project has never had theme colors, probably because it was just imported.
+    # Save whatever colors we randomly pick.
+    $('#project-theme').trigger('devgarden:scheduleAutosave')
+
   newValue = undefined
   closestDist = Infinity
   for value in values

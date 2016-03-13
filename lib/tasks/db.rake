@@ -27,7 +27,7 @@ namespace :db do
           Project.create!(
             name: FFaker::Lorem.words(rand(2) + 1).map(&:capitalize).join(['', ' '].sample),
             url: (FFaker::Internet.http_url if rand < 0.5),
-            tagline: FFaker::Company.catch_phrase,
+            tagline: FFaker::Company.catch_phrase[0...50],
             tags: all_tags.sample(rand(1..4) * rand(1..4)).uniq,
             description: FFaker::Lorem.paragraphs(4).join("\n\n"),
             participants: all_people.sample(rand(1..3) * rand(1..3)).uniq,

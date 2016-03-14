@@ -16,12 +16,12 @@
       = render "tags/project_tags", project: project
       
       - with_next_heading_level do
-        .participants
+        .participants{style: theme_style(project, :body_text)}
           - project.participants.shuffle.each do |person|
             .name= link_to person.name, person
 
         - if project.role_requests.any?
-          .role-requests
+          .role-requests{style: theme_style(project, :body_text)}
             - heading "Looking for" do
               - project.role_requests.shuffle.each do |request|
                 .role= link_to request.role.person_name, request.role

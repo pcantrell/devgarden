@@ -4,8 +4,12 @@ class ProjectsController < ApplicationController
   before_action :require_login, except: [:index, :show]
 
   def index
-    render partial: 'recent', locals: {
-      projects: Project.recent(10, scroll_continuation: params[:scroll_cont]) }
+    if params[:scroll_cont]
+      render partial: 'recent', locals: {
+        projects: Project.recent(10, scroll_continuation: params[:scroll_cont]) }
+    else
+      redirect_to root_path
+    end
   end
 
   def show

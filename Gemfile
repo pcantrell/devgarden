@@ -72,6 +72,6 @@ group :development, :test do
 end
 
 group :production do
-  gem 'exception_notification', git: 'git://github.com/pcantrell/exception_notification'
+  gem 'exception_notification'
   gem 'therubyracer'
 end

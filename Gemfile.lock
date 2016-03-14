@@ -53,13 +53,6 @@ GIT
     que (0.11.3)
 
 GIT
-  remote: git://github.com/pcantrell/exception_notification
-  revision: 7fe1a7f0e2316f1a426f1469c7bd7a27edc54bf7
-  specs:
-    exception_notification (2.5.2)
-      actionmailer (>= 3.0.4)
-
-GIT
   remote: git://github.com/thoughtbot/high_voltage.git
   revision: 32ae7427ebd752de421322a7876adada445aad1a
   specs:
@@ -135,6 +128,9 @@ GEM
     domain_name (0.5.20160128)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
+    exception_notification (4.1.1)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
     execjs (2.6.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -340,7 +336,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails
   dalli
-  exception_notification!
+  exception_notification
   factory_girl_rails
   ffaker
   formtastic

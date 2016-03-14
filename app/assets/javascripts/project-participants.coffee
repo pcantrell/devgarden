@@ -25,9 +25,9 @@ $ ->
           <input type='hidden'
                  name='project[participations_attributes][][person_id]'
                  value='#{person.id}'>
-          <div class='name'>#{h person.full_name}</div>
+          <div class='title'>#{h person.full_name}</div>
           <button class='remove' #{showIf person.self, 'disabled'}>⊖</button>
-          <div class='admin'>
+          <div class='options'>
             #{
               showIf person.self,
                 "<input type='hidden'

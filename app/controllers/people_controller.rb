@@ -72,4 +72,15 @@ private
     params[:person].permit(:name, :email, :urls_as_text, :class_year, :department, offered_role_ids: [])
   end
 
+  def project_groups
+    person.projects.group_by do |project|
+      if project.admins_include?(current_user)
+        :admin
+      else
+        :participant
+      end
+    end
+  end
+  helper_method :project_groups
+
 end

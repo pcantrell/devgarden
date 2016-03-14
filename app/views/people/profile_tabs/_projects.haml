@@ -1,0 +1,7 @@
+
+- project_groups.each do |group_title, projects|
+  - if projects.any?
+    - heading group_title.to_s do
+      %ul
+        - projects.each do |project|
+          %li= link_to project.name, project

@@ -1,25 +1,26 @@
-.person.summary{style: theme_style(person, :background)}
-  .content
-    .heading
-      - heading link_to(person.name, person), class: "name"
+- cache person do
+  .person.summary{style: theme_style(person, :background)}
+    .content
+      .heading
+        - heading link_to(person.name, person), class: "name"
+        
+        - if person.urls.any?
+          .urls
+            - person.urls.each do |url|
+              .url= pretty_url_link url
       
-      - if person.urls.any?
-        .urls
-          - person.urls.each do |url|
-            .url= pretty_url_link url
-    
-    - with_next_heading_level do
+      - with_next_heading_level do
 
-      - if person.projects.any?
-        .projects
-          - heading "Projects" do
-            - person.projects.each do |proj|
-              .project= link_to proj.name, proj
-      
-      - if person.role_offers.any?
-        .role-offers
-          - heading "Interested in" do
-            - person.role_offers.each do |offer|
-              .role= link_to offer.role.skill_name, offer.role
+        - if person.projects.any?
+          .projects
+            - heading "Projects" do
+              - person.projects.each do |proj|
+                .project= link_to proj.name, proj
+        
+        - if person.role_offers.any?
+          .role-offers
+            - heading "Interested in" do
+              - person.role_offers.each do |offer|
+                .role= link_to offer.role.skill_name, offer.role
 
-    .divider
+      .divider

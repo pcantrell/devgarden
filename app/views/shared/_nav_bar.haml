@@ -1,35 +1,36 @@
-.nav-bar
-  = link_to root_url, class: 'logo' do
-    = image_tag image_url("devgarden-logo-small-white.svg"), alt: 'Dev Garden'
-  .nav-items
-    .nav-item.optional= link_to 'About', page_path('about')
-    .nav-item.optional= link_to 'Contact', page_path('contact')
+- cache current_user do
+  .nav-bar
+    = link_to root_url, class: 'logo' do
+      = image_tag image_url("devgarden-logo-small-white.svg"), alt: 'Dev Garden'
+    .nav-items
+      .nav-item.optional= link_to 'About', page_path('about')
+      .nav-item.optional= link_to 'Contact', page_path('contact')
 
-    .nav-item#auth-nav-item
-      - auth_item_opts = { 'data-show-dropdown' => 'auth-dropdown', 'data-dropdown-header' => 'auth-nav-item' }
-      - if logged_in?
-        = link_to logout_path, auth_item_opts do
-          - if current_user.avatar_url?
-            %img.avatar{src: current_user.avatar_url}
-          %span.short-name= current_user.short_name
-          %span.long-name= current_user.name
-      - else
-        = link_to 'Log In', login_path, auth_item_opts
-    %aside.dropdown#auth-dropdown
-      - if logged_in?
-        %ul.projects
-          - current_user.owned_projects.recent.limit(6).each do |project|
-            %li
-              = link_to project, style: theme_style(project, :featured_text) do
-                = project.name
-                - if project.icon?
-                  .icon= image_tag project.icon.thumb.url
-          %li.add= link_to "Add Project", new_project_path
-        %ul
-          %li= link_to "Edit Profile", edit_person_path(current_user)
-          %li= link_to "Log Out", logout_path
-      - else
-        %p The Dev Garden uses Github for authentication.
-        %p= link_to "Log in with Github", "/auth/github", class: "big-button"
+      .nav-item#auth-nav-item
+        - auth_item_opts = { 'data-show-dropdown' => 'auth-dropdown', 'data-dropdown-header' => 'auth-nav-item' }
+        - if logged_in?
+          = link_to logout_path, auth_item_opts do
+            - if current_user.avatar_url?
+              %img.avatar{src: current_user.avatar_url}
+            %span.short-name= current_user.short_name
+            %span.long-name= current_user.name
+        - else
+          = link_to 'Log In', login_path, auth_item_opts
+      %aside.dropdown#auth-dropdown
+        - if logged_in?
+          %ul.projects
+            - current_user.owned_projects.recent.limit(6).each do |project|
+              %li
+                = link_to project, style: theme_style(project, :featured_text) do
+                  = project.name
+                  - if project.icon?
+                    .icon= image_tag project.icon.thumb.url
+            %li.add= link_to "Add Project", new_project_path
+          %ul
+            %li= link_to "Edit Profile", edit_person_path(current_user)
+            %li= link_to "Log Out", logout_path
+        - else
+          %p The Dev Garden uses Github for authentication.
+          %p= link_to "Log in with Github", "/auth/github", class: "big-button"
 
-  .clear
+    .clear

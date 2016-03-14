@@ -15,22 +15,25 @@
 
     %meta(name="description" content="Macalester’s Software Collaboration Space")
     
-    = render 'favicon'
+    - cache 'layout-headers' do
 
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-    /[if lt IE 9]
-      = stylesheet_link_tag 'ie', media: 'all', 'data-turbolinks-track' => true
-      = javascript_include_tag 'html5shiv'
-    /[if lt IE 10]
+      = render 'application/favicon'
+
+      = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+      /[if lt IE 9]
+        = stylesheet_link_tag 'ie', media: 'all', 'data-turbolinks-track' => true
+        = javascript_include_tag 'html5shiv'
+      /[if lt IE 10]
+        :javascript
+          document.typekitDisabled = 1
+
+      = javascript_include_tag "https://use.typekit.net/mon8ewb.js"
       :javascript
-        document.typekitDisabled = 1
+        try { Typekit.load({ async: true });} catch(e) { }
 
-    = javascript_include_tag "https://use.typekit.net/mon8ewb.js"
-    :javascript
-      try { Typekit.load({ async: true });} catch(e) { }
+      = include_jquery
+      = javascript_include_tag 'application', 'data-turbolinks-track' => true
 
-    = include_jquery
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
   %body{class: body_classes.join(' ')}

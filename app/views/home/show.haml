@@ -2,26 +2,29 @@
 = provide :hero do
   .hero= image_tag image_url("devgarden-logo.svg"), alt: 'Dev Garden – Macalester Software Collaboration Space'
 
-.features
-  .feature.about
-    .blurb
-      The Dev Garden supports student software projects.
-      %br
-      It is open to all majors, roles, backgrounds, and ability levels.
-    .more= link_to 'More Info', page_path('about')
+- cache ['home', 'features', Event.maximum(:updated_at)] do
+  .features
+    .feature.about
+      .blurb
+        The Dev Garden supports student software projects.
+        %br
+        It is open to all majors, roles, backgrounds, and ability levels.
+      .more= link_to 'More Info', page_path('about')
 
-  .feature.events
-    .event-list
-      - upcoming_events(min_events: 3, including_all_within: 1.week) do |event, dates|
-        = render 'events/event', event: event, dates: dates
-    .more= link_to "More events", events_path
+    .feature.events
+      .event-list
+        - upcoming_events(min_events: 3, including_all_within: 1.week) do |event, dates|
+          = render 'events/event', event: event, dates: dates
+      .more= link_to "More events", events_path
 
-.projects.infinite-scroll.summary-group
-  - heading "Projects" do
-    .content
-      = render 'projects/recent', projects: Project.recent(20)
+- cache ['home', 'projects', Project.maximum(:updated_at)] do
+  .projects.infinite-scroll.summary-group
+    - heading "Projects" do
+      .content
+        = render 'projects/recent', projects: Project.recent(20)
 
-.people.infinite-scroll.summary-group
-  - heading "People" do
-    .content
-      = render 'people/recent', people: Person.recent(20)
+- cache ['home', 'people', Person.maximum(:updated_at)] do
+  .people.infinite-scroll.summary-group
+    - heading "People" do
+      .content
+        = render 'people/recent', people: Person.recent(20)

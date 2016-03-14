@@ -51,10 +51,17 @@ a
     text-decoration: underline
   text-decoration: none
 
-ul
+ul, ol
   list-style: none
-.description ul
-  list-style: bullet
+.description, .pages-controller
+  ul, ol
+    margin-left: 1.2em
+  ul
+    list-style: disc
+  ol
+    list-style: decimal
+  li
+    margin: 0.6em 0
 
 hr
   border: none
@@ -128,10 +135,13 @@ hr
     padding: 1em 1.6em
     background: #858997
     &:before
-      font-size: 180%
+      @include body-font
+      font:
+        size: 200%
+        weight: 900
       opacity: 0.6
       margin-right: 0.8ex
-      vertical-align: middle
+      vertical-align: bottom
     &.success
       background: #3da649
       &:before
@@ -143,7 +153,7 @@ hr
     &.error
       background: #a6443d
       &:before
-        content: '☠'
+        content: '!'
 
 .site
   @include meta-font

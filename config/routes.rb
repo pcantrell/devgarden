@@ -2,7 +2,10 @@ Rails.application.routes.draw do
 
   root 'home#show'
 
-  get "/login" => "high_voltage/pages#show", id: 'login'
+  %w(login about contact).each do |page|
+    get "/#{page}" => "high_voltage/pages#show", id: page
+  end
+
   get "/logout" => "sessions#destroy", as: :logout
   get "/auth/:provider/callback" => "sessions#create"
 

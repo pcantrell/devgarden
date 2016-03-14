@@ -10,11 +10,18 @@ The space is open to students of **all majors, roles, backgrounds and ability le
 
 **All projects that involve software** are welcome: capstones, course projects, internship work, business ideas, endeavors of social entrepreneurship, open source projects, art projects, and of course pure labors of love. The Dev Garden also welcomes any projects that are **open to student participation**, even if they are not student-led.
 
-## Can I just show up and get help?
+## How can I get involved?
 
-Yes! There are [open consulting hours](/events/1) for anyone to drop by and find expert help, new collaborators, or just some good old moral support.
+- [Add your project](/projects/new) to this site.
+- Offer to let people help you with your project.
+- Offer to help with other people’s projects.
+- [Show up](/events)!
 
-## Do I need to already have a project figured out?
+## Wait, I can just show up?
+
+Yes! There are [open consulting hours](/events/1) for anyone to drop by and get expert help, find collaborators, get some moral support, or just enjoy the community of interesting people building cool things.
+
+## Do I need to already have a project all figured out?
 
 No! The best time to come talk is when you’re not sure where to start.
 
@@ -24,4 +31,4 @@ These are all great reasons to visit.
 
 ## Who’s behind it?
 
-The Dev Garden is run by [MSCS](http://www.macalester.edu/academics/mscs/) professor and freelance software developer Paul Cantrell ’98. It is housed in the [Innovator Space](http://www.macalester.edu/entrepreneurship/create/). The name came from a suggestion by Hannah Brown ’15.
+The Dev Garden is run by [MSCS](http://www.macalester.edu/academics/mscs/) professor and freelance software developer [Paul Cantrell](/people/1) ’98. It is housed in the [Innovator Space](http://www.macalester.edu/entrepreneurship/create/), which the Dev Garden co-sponsors with Macalester’s [Entrepreneurship Program](http://www.macalester.edu/entrepreneurship/). The name came from a suggestion by [Hannah Brown](/people/19) ’15.

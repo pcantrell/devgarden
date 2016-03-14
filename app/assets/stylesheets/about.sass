@@ -1,5 +1,10 @@
+@import "_shared"
+
 body.page-about
   h1
-    content: image-url('about.svg')
     width: auto
-    margin: 1.2em 0
+    margin: 1.2em 0 2.4em
+    content: image-url('about.svg')
+    @include if-below-width(40em)
+      content: image-url('about-mobile.svg')
+      margin-bottom: 1.2em

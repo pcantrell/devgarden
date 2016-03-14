@@ -824,6 +824,13 @@ CREATE INDEX index_events_on_location_id ON events USING btree (location_id);
 
 
 --
+-- Name: index_events_on_updated_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_updated_at ON events USING btree (updated_at);
+
+
+--
 -- Name: index_job_reports_on_owner_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -866,6 +873,13 @@ CREATE INDEX index_people_on_github_user ON people USING btree (github_user);
 
 
 --
+-- Name: index_people_on_updated_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_people_on_updated_at ON people USING btree (updated_at);
+
+
+--
 -- Name: index_project_tags_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -877,6 +891,13 @@ CREATE INDEX index_project_tags_on_project_id ON project_tags USING btree (proje
 --
 
 CREATE INDEX index_project_tags_on_tag_id ON project_tags USING btree (tag_id);
+
+
+--
+-- Name: index_projects_on_updated_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_projects_on_updated_at ON projects USING btree (updated_at);
 
 
 --
@@ -1038,6 +1059,6 @@ ALTER TABLE ONLY role_offers
 
 SET search_path TO "$user",public;
 
-INSERT INTO schema_migrations (version) VALUES ('20150224225227'), ('20150225155116'), ('20150225160055'), ('20150227044734'), ('20150227044800'), ('20150227044803'), ('20150227044804'), ('20150427025619'), ('20160210043109'), ('20160210051448'), ('20160210055910'), ('20160212055159'), ('20160212055449'), ('20160216200401'), ('20160217071943'), ('20160218042005'), ('20160219033611'), ('20160222050605'), ('20160223162347'), ('20160226044247'), ('20160302043309'), ('20160302060224'), ('20160302155356'), ('20160305220106'), ('20160313201026');
+INSERT INTO schema_migrations (version) VALUES ('20150224225227'), ('20150225155116'), ('20150225160055'), ('20150227044734'), ('20150227044800'), ('20150227044803'), ('20150227044804'), ('20150427025619'), ('20160210043109'), ('20160210051448'), ('20160210055910'), ('20160212055159'), ('20160212055449'), ('20160216200401'), ('20160217071943'), ('20160218042005'), ('20160219033611'), ('20160222050605'), ('20160223162347'), ('20160226044247'), ('20160302043309'), ('20160302060224'), ('20160302155356'), ('20160305220106'), ('20160313201026'), ('20160314070131');
 
 

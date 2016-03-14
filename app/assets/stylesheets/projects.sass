@@ -2,7 +2,9 @@
 
 .projects-controller.show-action main
   .banner
-    margin: 1.2em 0
+    margin: 2.4em 0 1.2em
+    @include if-below-width(46em)
+      margin-top: 1.2em
     @include if-below-width(32em)
       .icon
         float: left

@@ -14,7 +14,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = !!ENV['cache']
   config.cache_store = :dalli_store, 'localhost', {
     namespace: 'devgarden',
-    expires_in: 24.hour,
+    expires_in: 1.hour,
     race_condition_ttl: 1.second,
     compress: true
   }

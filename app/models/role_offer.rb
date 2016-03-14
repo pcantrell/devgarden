@@ -1,4 +1,4 @@
 class RoleOffer < ApplicationRecord
-  belongs_to :person
-  belongs_to :role
+  belongs_to :person, touch: true
+  belongs_to :role, touch: true
 end

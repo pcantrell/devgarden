@@ -57,6 +57,7 @@ class ProjectsController < ApplicationController
         end
         
         project.update!(project_params)
+        project.touch  # Because tag & role req updates don’t touch project, despite touch: true on assocations
 
         unless can_edit?(project)
           raise "Cannot remove self as project admin"

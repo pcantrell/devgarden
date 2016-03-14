@@ -1,4 +1,4 @@
 class ProjectTag < ApplicationRecord
-  belongs_to :project
-  belongs_to :tag
+  belongs_to :project, touch: true
+  belongs_to :tag, touch: true
 end

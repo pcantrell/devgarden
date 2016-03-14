@@ -1,4 +1,4 @@
 class RoleRequest < ApplicationRecord
-  belongs_to :project
-  belongs_to :role
+  belongs_to :project, touch: true
+  belongs_to :role, touch: true
 end

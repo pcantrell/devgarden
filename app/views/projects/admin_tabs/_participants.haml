@@ -1,8 +1,8 @@
-%p.hint
-  A participant is anybody who has contributed work to the project.
-
-%p.hint
-  Admins can update project settings on this site. Dev Garden admin access <b>does not</b> affect Github or any other service.
+.hint
+  %p
+    A participant is anybody who has contributed work to the project.
+  %p
+    Admins can update project settings on this site. Dev Garden admin access <b>does not</b> affect Github or any other service.
 
 = settings_form_for project, "participants", autosave: true do |f|
   %ol.editable-list

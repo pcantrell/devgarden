@@ -1,5 +1,11 @@
+.hint
+  %p
+    What does your project do? What’s its goal? What its premise? How did you build it?
+  %p
+    Just give people a little taste here. If you find yourself going into exhaustive detail — more than 1000 words, say — then you might instead want to set up a separate site for your project. (You can link to it from the <a href="#info">Basics</a> tab.)
+
 = settings_form_for project, "description" do |f|
   = f.inputs do
-    = f.input :description
+    = f.input :description, hint: '<a href="https://daringfireball.net/projects/markdown/">Markdown</a> allowed'.html_safe
   .actions
     = f.save_button

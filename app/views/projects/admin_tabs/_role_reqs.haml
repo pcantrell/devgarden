@@ -1,3 +1,7 @@
+.hint
+  %p Would you like to invite students to participate in your project?
+  %p What would you like help with?
+
 = settings_form_for project, "role-reqs", autosave: true do |f|
   = f.inputs do
     - RoleCategory.all.shuffle.each do |category|

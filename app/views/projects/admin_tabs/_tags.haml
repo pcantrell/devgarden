@@ -1,3 +1,9 @@
+.hint
+  %p
+    What technologies played a significant role in your project?
+  %p
+    Don’t list every little library or tool you used — just the things that are central to how your code is structured.
+
 = settings_form_for project, "tags", autosave: true do |f|
   = f.inputs do
     - TagCategory.in_order.each do |category|

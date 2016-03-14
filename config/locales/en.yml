@@ -28,3 +28,7 @@ en:
       tags: Technologies
       participants: People
       role-reqs: Help wanted
+  people:
+    project_group:
+      admin: Administrator of
+      participant: Participating in

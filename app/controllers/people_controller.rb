@@ -73,7 +73,7 @@ private
   end
 
   def project_groups
-    person.projects.group_by do |project|
+    @project_groups ||= person.projects.group_by do |project|
       if project.admins_include?(current_user)
         :admin
       else

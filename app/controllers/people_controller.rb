@@ -73,12 +73,14 @@ private
   end
 
   def project_groups
-    @project_groups ||= person.projects.group_by do |project|
-      if project.admins_include?(current_user)
+    @project_groups ||= person.participations.includes(:project).group_by do |participation|
+      if participation.admin?
         :admin
       else
         :participant
       end
+    end.map do |group, participations|
+      [group, participations.map(&:project)]
     end
   end
   helper_method :project_groups

@@ -4,5 +4,5 @@
 
 = settings_form_for project, "role-reqs", autosave: true do |f|
   = f.inputs do
-    - RoleCategory.all.shuffle.each do |category|
+    - RoleCategory.includes(:roles).all.shuffle.each do |category|
       = f.input :requested_role_ids, label: category.name, required: true, as: :check_boxes, collection: labeled_roles_for_category(category)

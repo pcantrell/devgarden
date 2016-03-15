@@ -19,5 +19,6 @@
 //= require Sortable
 //= require turbolinks
 //= require color-thief
+//= require html5shiv
 //
 //= require_tree .

@@ -98,9 +98,14 @@ hr
       &:last-child
         border: none
 
+.about
+  .line
+    display: inline
 @include if-above-width(36em)
   .about
     text-align: center
+    .line
+      display: block
   .features
     display: table
 

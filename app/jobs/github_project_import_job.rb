@@ -6,6 +6,8 @@ class GithubProjectImportJob < ApplicationJob
   include Rails.application.routes.url_helpers
 
   def perform(opts = {})
+    raise "Missing access token" unless opts[:github_token]
+
     @project = Project.new(scm_urls: opts[:scm_urls])
 
     @github = Octokit::Client.new(access_token: opts[:github_token])

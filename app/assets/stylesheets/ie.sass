@@ -1,2 +1,9 @@
+@import "_shared"
+
 main
   display: block
+
+body.ie .hero
+  padding-right: 2.4em
+  @include if-above-width(36em)
+    padding-right: 4.8em

@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
       "#{controller_name.dasherize}-controller",
       "#{action_name}-action",
       ("#{controller_name.singularize}-#{params[:id]}" if params[:id]),
-      ("logged-in" if logged_in?)
+      ("logged-in" if logged_in?),
+      ("ie" if request.user_agent =~ /MSIE|Trident/)
     ].compact
   end
   helper_method :body_classes

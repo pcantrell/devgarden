@@ -47,13 +47,6 @@ GIT
       railties (>= 4.0.1)
 
 GIT
-  remote: git://github.com/joevandyk/que.git
-  revision: 9b2a6cfd12e8fa3ca8d54771ad14a9cb10e16b0d
-  branch: rails5
-  specs:
-    que (0.11.3)
-
-GIT
   remote: git://github.com/thoughtbot/high_voltage.git
   revision: 3235c857c986fa5177039e7190e77965989621f7
   specs:
@@ -225,6 +218,7 @@ GEM
     pg (0.18.4)
     polyamorous (1.3.0)
       activerecord (>= 3.0)
+    que (0.11.4)
     rack (2.0.0.alpha)
       json
     rack-test (0.6.3)
@@ -352,7 +346,7 @@ DEPENDENCIES
   octokit
   omniauth-github
   pg
-  que!
+  que
   rails (~> 5.0.0.beta)
   rails_real_favicon
   ransack!

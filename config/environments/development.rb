@@ -30,7 +30,7 @@ Rails.application.configure do
 
   config.logger = Logger.new(STDOUT)
   config.logger.level = Logger::INFO
-  config.log_level = (ENV['log_level'] || :info).to_sym
+  config.log_level = (ENV['RAILS_LOG_LEVEL'] || :info).to_sym
 
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large

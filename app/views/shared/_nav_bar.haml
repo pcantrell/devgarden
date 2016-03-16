@@ -1,7 +1,7 @@
 - cache current_user do
   .nav-bar
     = link_to root_path, class: 'logo' do
-      = image_tag image_path("devgarden-logo-small-white.svg"), alt: 'Dev Garden'
+      = image_tag "devgarden-logo-small-white.svg", alt: 'Dev Garden'
     .nav-items
       .nav-item.optional= link_to 'About', about_path
       .nav-item.optional= link_to 'Contact', contact_path

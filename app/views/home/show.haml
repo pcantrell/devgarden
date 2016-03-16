@@ -1,6 +1,6 @@
 
 = provide :hero do
-  .hero= image_tag image_url("devgarden-logo.svg"), alt: 'Dev Garden – Macalester Software Collaboration Space'
+  .hero= image_tag "devgarden-logo.svg", alt: 'Dev Garden – Macalester Software Collaboration Space'
 
 - cache ['home', 'features', Event.maximum(:updated_at)], expires_in: 5.minutes do
   .features

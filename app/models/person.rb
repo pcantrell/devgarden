@@ -18,6 +18,11 @@ class Person < ApplicationRecord
     end
   end
 
+  def self.find_by_if_not_nil(keys)
+    return nil if keys.values.any?(&:nil?)
+    find_by(keys)
+  end
+
   def name
     full_name || github_user || "[anonymous]"
   end

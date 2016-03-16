@@ -57,9 +57,9 @@ private
   def person_for_github_contributor(contributor)
     #! Locking not strictly safe here, could result in dup users in high-traffic env
     Person.transaction do
-      Person.find_by(github_user: contributor.login) || begin
+      Person.find_by_if_not_nil(github_user: contributor.login) || begin
         profile = github.user(contributor.login)
-        Person.find_by(email: profile.email) ||
+        Person.find_by_if_not_nil(email: profile.email) ||
           Person.create(
             github_user: profile.login,
             full_name:   profile.name,

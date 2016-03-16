@@ -13,6 +13,14 @@ class SessionsController < ApplicationController
     end
   end
 
+  def create_failed
+    strategy = (params[:strategy] || "unknown").to_s.capitalize
+    message = if params[:message]
+      ": #{params[:message]}"
+    end
+    redirect_to login_url, flash: { error: "Internal #{strategy} authentication error#{message}" }
+  end
+
   def destroy
     log_out
     redirect_to root_url, flash: { success: "You are signed out" }

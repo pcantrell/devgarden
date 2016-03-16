@@ -19,7 +19,6 @@ gem 'coffee-rails'
 gem 'formtastic'
 gem 'jbuilder', '~> 2.0'
 
-gem 'jquery-cdn', '~> 2.2.0'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5.0.0.beta'
 

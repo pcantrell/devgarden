@@ -49,6 +49,7 @@ private
       person = person_for_github_contributor(contributor)
       project.participations.new(person: person, admin: person == requesting_user) if person
     end
+    
     unless project.participations.any? { |p| p.person == requesting_user }
       raise "You need to be a contributor to #{repo} on Github in order to import it."
     end
@@ -57,15 +58,26 @@ private
   def person_for_github_contributor(contributor)
     #! Locking not strictly safe here, could result in dup users in high-traffic env
     Person.transaction do
-      Person.find_by_if_not_nil(github_user: contributor.login) || begin
-        profile = github.user(contributor.login)
-        Person.find_by_if_not_nil(email: profile.email) ||
-          Person.create(
-            github_user: profile.login,
-            full_name:   profile.name,
-            email:       profile.email,
-            urls:        ["https://github.com/#{profile.login}", profile.blog].compact)
+      if person = Person.find_by_if_not_nil(github_user: contributor.login)
+        return person
       end
+
+      profile = github.user(contributor.login)
+      person = Person.find_by_if_not_nil(email: profile.email) ||
+               Person.new
+
+      person.github_user ||= profile.login
+      person.full_name   ||= profile.name
+      person.email       ||= profile.email
+      person.urls = (
+          person.urls + [
+            profile.html_url,
+            profile.blog
+          ]
+        ).compact.uniq
+      person.save!
+
+      person
     end
   end
 

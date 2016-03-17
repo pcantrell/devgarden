@@ -12,12 +12,6 @@ Rails.application.configure do
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = !!ENV['cache']
-  config.cache_store = :dalli_store, 'localhost', {
-    namespace: 'devgarden',
-    expires_in: 1.hour,
-    race_condition_ttl: 1.second,
-    compress: true
-  }
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false

@@ -1,13 +1,20 @@
 # Confirm discard on close
 
-dirty = false
+anyFormsDirty = ->
+  $('form').toArray().some (form) ->
+    $(form).data('dirty')
+
 confirmUnload = (callback) ->
-  if dirty
+  if anyFormsDirty()
     callback 'You will lose your changes.'
   else
     undefined
-$(window).bind 'beforeunload',       -> confirmUnload((msg) -> msg)
-$(document).on 'turbolinks:before-change', -> confirmUnload((msg) -> confirm(msg))
+
+$(window).bind 'beforeunload', ->
+  confirmUnload((msg) -> msg)
+
+$(document).on 'turbolinks:before-visit', ->
+  confirmUnload((msg) -> confirm(msg))
 
 # Error handling
 
@@ -20,10 +27,10 @@ $(document).on 'turbolinks:load', ->
   $('.flashes').addClass('flashed')
 
   dirty = false
-  $('input').change ->
-    dirty = true
-  $('form').submit ->
-    dirty = false
+  $(document).on 'change', 'form *', (e) ->
+    $(e.target).closest('form').data('dirty', true)
+  $(document).on 'submit', 'form', (e) ->
+    $(e.target).data('dirty', false)
     true
 
   focusError = ->  

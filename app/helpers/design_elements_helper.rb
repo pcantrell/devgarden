@@ -93,7 +93,7 @@ private
   end
 
   def default_hue(model)
-    model.id * GOLDEN_ANGLE % 360
+    ((model.id - 1) * GOLDEN_ANGLE + 243) % 360
   end
 
   def circular_interpolate(array, index)

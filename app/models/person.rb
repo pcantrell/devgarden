@@ -43,6 +43,12 @@ class Person < ApplicationRecord
     projects.where('participations.admin' => true)
   end
 
+  %w(email github_user).each do |lowercase_prop|
+    define_method "#{lowercase_prop}=" do |val|
+      super(val&.downcase)
+    end
+  end
+
   include StringArrayAttribute
   exposes_array_as_text :urls
 
@@ -61,8 +67,8 @@ class Person < ApplicationRecord
     end
 
     user = Person.find_by('external_ids @> ARRAY[?]', external_id) ||
-           (Person.find_by(github_user: github_user) if github_user) ||
-           (Person.find_by(email: email) if email) ||
+           (Person.find_by(github_user: github_user.downcase) if github_user) ||
+           (Person.find_by(email: email.downcase) if email) ||
            Person.new
     user.full_name ||= name
     user.email ||= email

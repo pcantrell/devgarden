@@ -1,30 +1,29 @@
 - if can_edit?(person)
   = link_to "Edit Profile", edit_person_path(person), class: 'big-button edit', style: theme_style(person, :button_background)
 
-.banner{style: theme_style(person, :featured_text)}
-  - heading person.name
+- cache person do
+  .banner{style: theme_style(person, :featured_text)}
+    - heading person.name
 
-  .bio
-    - if person.department?
-      .bio-item= person.department
-    - if person.class_year?
-      .bio-item Class of #{person.class_year}
-  
-  - if person.urls.any?
-    .urls
-      - person.urls.each do |url|
-        .url= pretty_url_link url
-
-- with_next_heading_level do
-
-  .meta{style: theme_style(person, :body_text)}
-    - if person.projects.any?
-      = render 'projects/thumb_list', projects: person.projects, project_list_title: "Participating in"
+    .bio
+      - if person.department?
+        .bio-item= person.department
+      - if person.class_year?
+        .bio-item Class of #{person.class_year}
     
-    - if person.role_offers.includes(:role).any?
-      .role-offers
-        - heading "Interested in" do
-          - person.role_offers.each do |offer|
-            .role= link_to offer.role.skill_name, offer.role
+    - if person.urls.any?
+      .urls
+        - person.urls.each do |url|
+          .url= pretty_url_link url
 
-.divider
+  - with_next_heading_level do
+
+    .meta{style: theme_style(person, :body_text)}
+      - if person.projects.any?
+        = render 'projects/thumb_list', projects: person.projects, project_list_title: "Participating in"
+      
+      - if person.role_offers.includes(:role).any?
+        .role-offers
+          - heading "Interested in" do
+            - person.role_offers.each do |offer|
+              .role= link_to offer.role.skill_name, offer.role

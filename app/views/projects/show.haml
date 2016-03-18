@@ -1,3 +1,6 @@
+- if can_edit?(project)
+  = link_to "Edit Project", edit_project_path(project), class: 'big-button edit', style: theme_style(project, :button_background)
+
 - cache project do
   .banner{style: theme_style(project, :featured_text)}
 
@@ -6,9 +9,6 @@
         = image_tag project.icon.feature.url
 
     .info
-      - if can_edit?(project)
-        = link_to "Edit Project", edit_project_path(project), class: 'big-button edit', style: theme_style(project, :button_background)
-
       - heading project.name, class: "name" do
 
         .tagline= project.tagline

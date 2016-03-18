@@ -151,7 +151,7 @@ private
     project.participations.includes(:person).map do |p|
       {
         id: p.person.id,
-        full_name: p.person.full_name,
+        name: p.person.name,
         avatar_url: p.person.avatar_url,
         admin: p.admin,
         self: p.person == current_user

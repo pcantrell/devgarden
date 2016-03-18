@@ -15,12 +15,18 @@ class PeopleController < ApplicationController
       end
 
       format.json do
-        render json:
+        render(json:
           Person
             .name_search(params[:q])
             .limit(32)
-            .select(:id, :full_name, :avatar_url)
-            .to_json
+            .map do |p|
+              {
+                id: p.id,
+                name: p.name,
+                avatar_url: p.avatar_url,
+              }
+            end
+        )
       end
     end
   end

@@ -25,7 +25,7 @@ $ ->
           <input type='hidden'
                  name='project[participations_attributes][][person_id]'
                  value='#{person.id}'>
-          <div class='title'>#{h person.full_name}</div>
+          <div class='title'>#{h person.name}</div>
           <button class='remove' #{showIf person.self, 'disabled'}>⊖</button>
           <div class='options'>
             #{
@@ -97,14 +97,14 @@ $ ->
     $('#new-participant-name').typeahead(
       null,
       name: 'people',
-      display: 'full_name',
+      display: 'name',
       source: personSearch,
       limit: 8,
       templates:
         suggestion: (person) -> $("
           <div class='search-result'>
             <img src='#{person.avatar_url || noImage}' class='icon'>
-            <span class='text'>#{h person.full_name}</span>
+            <span class='text'>#{h person.name}</span>
           </div>"))
   
   $(document).on 'typeahead:select', (e, person) ->
@@ -149,7 +149,7 @@ $ ->
 
   $(document).on 'click', '#project-participants .remove', (e) ->
     person = $(e.target).closest('.participant').data('person')
-    if confirm "Remove #{person.full_name} from the project?"
+    if confirm "Remove #{person.name} from the project?"
       removeParticipant(person)
 
   $(document).on 'turbolinks:load', ->

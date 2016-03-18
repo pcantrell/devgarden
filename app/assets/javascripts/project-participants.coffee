@@ -65,7 +65,7 @@ $ ->
 
     participants = getParticipants()
     existingIndex = (i for person, i in participants when person.id == newPerson.id)[0]
-    if existingIndex
+    if existingIndex?
       bounce $($('#project-participants li')[existingIndex])
     else
       participants.push(newPerson)

@@ -1,3 +1,6 @@
+- if current_user&.site_admin?
+  = link_to "New Event", new_event_path, class: 'big-button edit'
+
 - heading event_query_description do
 
   .events

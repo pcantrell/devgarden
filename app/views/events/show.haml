@@ -1,3 +1,6 @@
+- if current_user&.site_admin?
+  = link_to "Edit Event", edit_event_path(event), class: 'big-button edit'
+
 - heading event.title do
 
   .dates

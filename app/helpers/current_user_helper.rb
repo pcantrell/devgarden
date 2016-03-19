@@ -25,6 +25,12 @@ module CurrentUserHelper
     end
   end
 
+  def require_site_admin
+    unless current_user&.site_admin?
+      redirect_to login_path, flash: { error: "You must log in as a site admininistrator to #{action_name_as_verb} #{controller_name}." }
+    end
+  end
+
   def action_name_as_verb
     case action_name
       when "new"           then "create"

@@ -1,8 +1,45 @@
 class EventsController < ApplicationController
+
+  before_action :require_site_admin, except: [:index, :show]
+
   def index
   end
 
   def show
+  end
+
+  def new
+    @event = Event.new
+    render :edit
+  end
+
+  def edit
+  end
+
+  def create
+    @event = Event.new(event_params)
+
+    if event.save
+      flash[:success] = 'Event created'
+      redirect_to event
+    else
+      render :edit
+    end
+  end
+
+  def update
+    if event.update(event_params)
+      flash[:success] = 'Event updated'
+      redirect_to event
+    else
+      render :edit
+    end
+  end
+
+private
+
+  def event_params
+    params[:event].permit(:title, :description)
   end
 
   def event

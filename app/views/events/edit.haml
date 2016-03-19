@@ -1,0 +1,13 @@
+.edit-settings
+  - unless event.new_record?
+    .more= link_to "View Event", event
+
+  - heading "#{event.new_record? ? 'New' : 'Edit'} Event" do
+
+    = semantic_form_for event do |f|
+      = f.inputs do
+        = f.input :title, required: true
+        = f.input :description
+        = f.input :location, required: true
+      .actions
+        = f.save_button

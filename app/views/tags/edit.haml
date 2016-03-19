@@ -1,0 +1,15 @@
+.edit-settings
+  - unless current_tag.new_record?
+    .more= link_to "View Tag", current_tag
+
+  - heading "#{current_tag.new_record? ? 'New' : 'Edit'} Tag" do
+
+    = semantic_form_for current_tag do |f|
+      = f.inputs do
+        = f.input :category, required: true
+        = f.input :name, required: true
+        = f.input :short_name
+        = f.input :url
+        = f.input :description
+      .actions
+        = f.save_button

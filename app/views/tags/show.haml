@@ -1,3 +1,6 @@
+- if current_user&.site_admin?
+  = link_to "Edit Tag", edit_tag_path(current_tag), class: 'big-button edit'
+
 - heading current_tag.name do
 
   .meta

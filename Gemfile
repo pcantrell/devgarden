@@ -42,11 +42,6 @@ gem 'mini_magick'
 gem 'omniauth-github'
 gem 'octokit'
 
-# Admin
-
-gem 'activeadmin', github: 'gregbell/active_admin'
-gem 'bcrypt'
-
 # Util
 
 gem 'ransack', github: 'activerecord-hackery/ransack'

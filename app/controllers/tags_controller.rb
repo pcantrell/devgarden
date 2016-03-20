@@ -16,7 +16,11 @@ class TagsController < ApplicationController
   def create
     @tag = Tag.new(tag_params)
 
-    if current_tag.save
+    success = notify_admin_of_changes(current_tag) do
+      current_tag.save
+    end
+
+    if success
       flash[:success] = 'Tag created'
       redirect_to current_tag
     else
@@ -25,7 +29,11 @@ class TagsController < ApplicationController
   end
 
   def update
-    if current_tag.update(tag_params)
+    success = notify_admin_of_changes(current_tag) do
+      current_tag.update(tag_params)
+    end
+
+    if success
       flash[:success] = 'Tag updated'
       redirect_to current_tag
     else

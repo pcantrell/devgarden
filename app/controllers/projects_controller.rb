@@ -40,7 +40,11 @@ class ProjectsController < ApplicationController
 
     @project.participations.new(person: current_user, admin: true)
 
-    if project.save
+    success = notify_admin_of_changes(project) do
+      project.save
+    end
+
+    if success
       flash[:success] = 'Project created'
       redirect_to edit_project_tab_path('icon')
     else
@@ -49,22 +53,24 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    success = false
-    begin
-      Project.transaction do
-        if project_params[:participations_attributes]
-          project.participations.destroy_all
-        end
-        
-        project.update!(project_params)
-        project.touch  # Because tag & role req updates don’t touch project, despite touch: true on assocations
+    success = notify_admin_of_changes(project) do
+      begin
+        Project.transaction do
+          if project_params[:participations_attributes]
+            project.participations.destroy_all
+          end
+          
+          project.update!(project_params)
+          project.touch  # Because tag & role req updates don’t touch project, despite touch: true on assocations
 
-        unless can_edit?(project)
-          raise "Cannot remove self as project admin"
+          unless can_edit?(project)
+            raise "Cannot remove self as project admin"
+          end
         end
+        true
+      rescue ActiveRecord::RecordInvalid
+        false
       end
-      success = true
-    rescue ActiveRecord::RecordInvalid
     end
 
     respond_to do |format|

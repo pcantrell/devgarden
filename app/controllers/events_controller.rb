@@ -19,7 +19,11 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
-    if event.save
+    success = notify_admin_of_changes(event) do
+      event.save
+    end
+
+    if success
       flash[:success] = 'Event created'
       redirect_to event
     else
@@ -28,7 +32,11 @@ class EventsController < ApplicationController
   end
 
   def update
-    if event.update(event_params)
+    success = notify_admin_of_changes(event) do
+      event.update(event_params)
+    end
+
+    if success
       flash[:success] = 'Event updated'
       redirect_to event
     else

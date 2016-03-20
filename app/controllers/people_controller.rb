@@ -38,7 +38,9 @@ class PeopleController < ApplicationController
   end
 
   def update
-    success = person.update(person_params)
+    success = notify_admin_of_changes(person) do
+      person.update(person_params)
+    end
 
     respond_to do |format|
       format.html do

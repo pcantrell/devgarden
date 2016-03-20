@@ -1,0 +1,28 @@
+- provide :head do
+  :sass
+    .summary
+      font-size: 120%
+    .changed-attr
+      margin: 1.2em 0
+      .name
+        font-family: 'Menlo'
+        margin: 0.6em 0
+      .value
+        padding: 0.3em 0.6em
+        margin-left: 0.6em
+      .old
+        background: #ebb7b6
+      .new
+        background: #c1e8c3
+
+.summary
+  %b= @user_name
+  = @action
+  = @model.class.name
+  = link_to model_name(@model), @model
+
+- @changed_attrs.each do |attr_diff|
+  .changed-attr
+    .name= attr_diff[:name]
+    .old.value= attr_diff[:old_value]
+    .new.value= attr_diff[:new_value]

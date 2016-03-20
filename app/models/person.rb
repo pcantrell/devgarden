@@ -24,7 +24,7 @@ class Person < ApplicationRecord
   end
 
   def name
-    full_name || github_user || "[anonymous]"
+    full_name || github_user || "[anonymous:#{id}]"
   end
 
   def short_name

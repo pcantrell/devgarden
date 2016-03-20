@@ -19,11 +19,11 @@
   - with_next_heading_level do
 
     .meta{style: theme_style(person, :body_text)}
-      - if person.projects.any?
-        = render 'projects/thumb_list', projects: person.projects, project_list_title: "Participating in"
-      
       - if person.role_offers.includes(:role).any?
         .role-offers
           - heading "Interested in" do
             - person.role_offers.each do |offer|
               .role= link_to offer.role.skill_name, offer.role
+
+      - if person.projects.any?
+        = render 'projects/thumb_list', projects: person.projects, project_list_title: "Participating in"

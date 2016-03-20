@@ -3,7 +3,9 @@
     - projects.each do |project|
       .project
         .icon
-          - if project.icon?
-            = link_to project do
+          = link_to project do
+            - if project.icon?
               = image_tag project.icon.thumb.url
+            - else
+              %img.none
         .name= link_to project.name, project

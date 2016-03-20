@@ -72,10 +72,12 @@ $danger-color: $error-color
     background: $highlight-color
     text-decoration: none
 
+$thumb-size: 48px
+
 @mixin thumb-icon
   img
-    width: 48px
-    height: 48px
+    width: $thumb-size
+    height: $thumb-size
     object-fit: contain
 
 @mixin feature-icon
@@ -90,26 +92,28 @@ $danger-color: $error-color
       width: 64px
       height: 64px
 
-@mixin project-thumb-list
+@mixin project-thumbs
   .projects
-    display: table
     h2, h3, h4
-      display: table-caption
       white-space: nowrap
     .project
-      display: table-row
+      display: table
+      margin-right: 0.6em
+      display: inline-block
+      width: 13.2em
+      overflow: hidden
       .icon, .name
         display: table-cell
         vertical-align: middle
       .icon
         img
           float: left
-          margin-right: 0.6em
         @include thumb-icon
         padding: 0.6em 0
       .name
         @include meta-important-font
-        padding: 1.2em 0
+        padding: 1.2em 0 1.2em 0.6em
+        width: 100%
 
 @mixin meta-float-right
   @include if-below-width(32em)
@@ -118,8 +122,8 @@ $danger-color: $error-color
     margin-bottom: 1.3em
   @include if-above-width(32em)
     float: right
-    margin: 0 0 1.2em 1.2em
-    padding: 0.15em 0
+    margin: -0.05em 0 1.2em 1.2em
+    padding: 0.2em 0
     padding-left: 1.2em
     @include hairline-border(left, $dark-color)
     max-width: 40%

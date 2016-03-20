@@ -18,14 +18,11 @@
       color: inherit
 
   .meta
-    .projects, .role-offers
-      float: left
-      margin-right: 2.4em
-      padding-right: 2.4em
-      @include hairline-border(right, $dark-color)
-      &:last-child
-        border: none
-        margin-right: 0
-        padding-right: 0
-
-    @include project-thumb-list
+    @include project-thumbs
+    .projects
+      h2, h3, h4
+        padding-top: 0.4em
+    .role-offers
+      @include meta-float-right
+      h2, h3, h4
+        margin-top: 0

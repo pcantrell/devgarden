@@ -21,6 +21,10 @@ class GithubProjectImportJob < ApplicationJob
 
     project.save!
 
+    AdminNotifications
+      .user_made_changes(opts[:requesting_user], project, "import")
+      .deliver_later
+
     {
       redirect_to: edit_project_path(project, anchor: :info),
       flash: {

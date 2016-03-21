@@ -224,7 +224,8 @@ CREATE TABLE people (
     class_year integer,
     department character varying,
     theme json DEFAULT '{}'::json NOT NULL,
-    site_admin boolean DEFAULT false NOT NULL
+    site_admin boolean DEFAULT false NOT NULL,
+    last_login_at timestamp without time zone
 );
 
 

@@ -1,7 +1,7 @@
 class MailingList
   def initialize
-    @mailchimp = Mailchimp::API.new(required_env('MAILCHIMP_API_KEY'))
-    @list_id = required_env 'MAILCHIMP_LIST_ID'
+    @mailchimp = Mailchimp::API.new(required_env('DEV_GARDEN_MAILCHIMP_API_KEY'))
+    @list_id = required_env 'DEV_GARDEN_MAILCHIMP_LIST_ID'
   end
 
   def subscription_status(email)

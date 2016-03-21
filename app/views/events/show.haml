@@ -9,7 +9,7 @@
         .name=   event.location.name
         .detail= event.location.detail
 
-    .dates
+    .dates{class: (:multiple if event.dates.length > 1)}
       - event.dates.future.group_by { |d| d.start_time.strftime('%U') }.each do |week, dates|
         .group
           - dates.each do |date|

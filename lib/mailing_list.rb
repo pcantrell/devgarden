@@ -6,7 +6,7 @@ class MailingList
 
   def subscription_status(email)
     result = @mailchimp.lists.member_info @list_id, [{ email: email }]
-    result['data']&.first&['status']
+    result['data']&.first['status']
   end
 
   def subscribe!(email)

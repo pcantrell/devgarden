@@ -31,6 +31,7 @@ gem 'kramdown'
 
 gem 'mail'
 gem 'valid_email'
+gem 'mailchimp-api', require: 'mailchimp'
 
 # Image uploads
 

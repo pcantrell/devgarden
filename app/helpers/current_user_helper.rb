@@ -48,6 +48,10 @@ private
     AdminNotifications
       .user_made_changes(person, person, "create")
       .deliver_later
+
+    SubscribeToMailingListJob
+      .set(wait: 5.seconds)   # so they have time to change their email
+      .perform_later(person)
   end
 
 end

@@ -11,7 +11,11 @@ module PrettyUrlHelper
   end
 
   def pretty_url_link(url)
-    link_to pretty_url(url), url
+    if url.blank?
+      ''
+    else
+      link_to pretty_url(url), url
+    end
   end
 
 private

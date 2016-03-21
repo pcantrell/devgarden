@@ -62,7 +62,18 @@
       margin: 0 auto
       padding: 0 1.8em
       max-width: 40em
-    .dates
-      float: right
-      text-align: right
+    .location
       margin-bottom: 0.6em
+    .meta
+      @include meta-float-right
+    .dates
+      .group
+        margin-bottom: 0.6em
+        &:last-child
+          margin-bottom: 0
+      .weekday, .monthday
+        display: inline-block
+      .weekday
+        min-width: 2.4em
+      .monthday
+        min-width: 3.6em

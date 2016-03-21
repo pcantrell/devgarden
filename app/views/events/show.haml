@@ -3,14 +3,17 @@
 
 - heading event.title do
 
-  .dates
-    - event.dates.future.each do |date|
-      .date= format_time_range(date.start_time, date.end_time)
+  .meta
+    - if event.location
+      .location
+        .name=   event.location.name
+        .detail= event.location.detail
 
-  - if event.location
-    .location
-      .name=   event.location.name
-      .detail= event.location.detail
+    .dates
+      - event.dates.future.group_by { |d| d.start_time.strftime('%U') }.each do |week, dates|
+        .group
+          - dates.each do |date|
+            .date= format_time_range(date.start_time, date.end_time)
 
   - if event.description
     .description= markdown(event.description)

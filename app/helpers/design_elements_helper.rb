@@ -16,7 +16,7 @@ module DesignElementsHelper
   end
 
   def theme_color_by_hue(hue, role)
-    saturation = 45
+    saturation = 60
     lightness = circular_interpolate(LIGHTNESS_BY_HUE, hue / 360.0 * LIGHTNESS_BY_HUE.length)
 
     case role
@@ -24,7 +24,7 @@ module DesignElementsHelper
       when :body_text
         lightness /= 1.5
       when :background
-        saturation -= 5
+        saturation -= 10
       when :button_background
         saturation += 30
       else
@@ -85,7 +85,7 @@ module DesignElementsHelper
 
 private
 
-  LIGHTNESS_BY_HUE = [38, 34, 25, 32, 45, 36]
+  LIGHTNESS_BY_HUE = [38, 34, 37, 32, 49, 36]
   GOLDEN_ANGLE = 180 * (3 - Math.sqrt(5))
 
   def theme_value(model, key)

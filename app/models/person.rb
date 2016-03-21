@@ -18,9 +18,12 @@ class Person < ApplicationRecord
     end
   end
 
-  def self.find_by_if_not_nil(keys)
-    return nil if keys.values.any?(&:nil?)
-    find_by(keys)
+  def self.find_by_github_user(login)
+    find_case_insensitive_if_present(:github_user, login)
+  end
+
+  def self.find_by_email(email)
+    find_case_insensitive_if_present(:email, email)
   end
 
   def name
@@ -67,8 +70,8 @@ class Person < ApplicationRecord
     end
 
     user = Person.find_by('external_ids @> ARRAY[?]', external_id) ||
-           (Person.find_by(github_user: github_user.downcase) if github_user) ||
-           (Person.find_by(email: email.downcase) if email) ||
+           (Person.find_by_github_user(github_user)) ||
+           (Person.find_by_email(email)) ||
            Person.new
     user.full_name ||= name
     user.email ||= email
@@ -78,6 +81,13 @@ class Person < ApplicationRecord
     user.urls = urls if user.urls.empty?
     user.save!
     user
+  end
+
+private
+
+  def self.find_case_insensitive_if_present(key, value)
+    return nil if value.blank?
+    find_by(key => value.downcase)
   end
 
 end

@@ -62,12 +62,12 @@ private
   def person_for_github_contributor(contributor)
     #! Locking not strictly safe here, could result in dup users in high-traffic env
     Person.transaction do
-      if person = Person.find_by_if_not_nil(github_user: contributor.login)
+      if person = Person.find_by_github_user(contributor.login)
         return person
       end
 
       profile = github.user(contributor.login)
-      person = Person.find_by_if_not_nil(email: profile.email) ||
+      person = Person.find_by_email(profile.email) ||
                Person.new
 
       person.github_user ||= profile.login

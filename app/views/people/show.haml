@@ -1,3 +1,6 @@
+= provide :page_description do
+  #{person.name}, a participant in Macalester’s Dev Garden.
+
 - if can_edit?(person)
   = link_to "Edit Profile", edit_person_path(person), class: 'big-button edit', style: theme_style(person, :button_background)
 

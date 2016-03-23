@@ -1,3 +1,8 @@
+= provide :page_description do
+  #{project.name}: #{project.tagline.gsub(/\.$/, '')}.
+  A project supported by Macalester’s Dev Garden.
+  = first_paragraph_of_markdown(project.description)
+
 - if can_edit?(project)
   = link_to "Edit Project", edit_project_path(project), class: 'big-button edit', style: theme_style(project, :button_background)
 

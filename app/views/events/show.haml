@@ -1,3 +1,7 @@
+= provide :page_description do
+  #{event.title} in Macalester’s Dev Garden.
+  = $1 if event.description =~ /\A\s*(.+?)(\r\n\r\n|\n\n|$)/m
+
 - if current_user&.site_admin?
   = link_to "Edit Event", edit_event_path(event), class: 'big-button edit'
 

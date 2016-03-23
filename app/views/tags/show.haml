@@ -1,3 +1,8 @@
+= provide :page_description do
+  A list of
+  = current_tag.name
+  projects in Macalester’s Dev Garden.
+
 - if current_user&.site_admin?
   = link_to "Edit Tag", edit_tag_path(current_tag), class: 'big-button edit'
 

@@ -52,4 +52,19 @@ module ApplicationHelper
     Kramdown::Document.new(md, header_offset: heading_level - 1).to_html.html_safe
   end
 
+  def first_paragraph_of_markdown(md)
+    $1 if md =~ %r{
+      \A            # At the start of the document,
+      (?:\s|^\#.*)* # any amount of whitespace & headings, then
+      
+      (.+?)         # the shortest string of chars followed by
+
+      (?:           # a paragraph break or document boundary
+        \r\n\r\n
+        |\n\n
+        |$
+      )
+    }xm
+  end
+
 end

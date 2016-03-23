@@ -1,11 +1,12 @@
 $ ->
-  $window = $(window)
-  $document = $(document)
-
-  applyCoverParallax = ->
-    scrollOffset = $document.scrollTop()
+  applyHeadingParallax = ->
+    scrollOffset = $(document).scrollTop()
+    windowBottom = $(window).height()
     for heading in $('.summary-group h1')
-      $(heading).css('top', "#{scrollOffset / 2}px")
+      zeroPoint = Math.max(
+        $(heading).offset().top - windowBottom,
+        0)
+      $(heading).css('top', "#{(scrollOffset - zeroPoint) / 2}px")
 
-  applyCoverParallax()
-  $window.scroll applyCoverParallax
+  applyHeadingParallax()
+  $(window).scroll applyHeadingParallax

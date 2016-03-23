@@ -2,6 +2,6 @@
   .more= link_to "View Project", project
   = render "shared/autosave_status"
 
-  - heading "#{project.name.presence || 'Project'} Info" do
+  - heading "Edit #{project.name.presence || 'Project'} Info" do
 
     = render 'shared/tabs', controller: 'projects', tab_group: 'admin', tabs: %w(info icon description tags participants role-reqs)

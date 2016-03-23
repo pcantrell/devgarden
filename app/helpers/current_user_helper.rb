@@ -2,7 +2,9 @@ module CurrentUserHelper
 
   def log_in_as(person)
     handle_first_login(person) if person.last_login_at.blank?
-    person.update!(last_login_at: Time.now)
+
+    # update_columns so we don't change updated_at
+    person.update_columns(last_login_at: Time.now)
 
     session[:user_id] = person.id
   end

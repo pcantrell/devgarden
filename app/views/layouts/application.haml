@@ -8,6 +8,7 @@
     %meta(name="viewport" content="width=device-width,initial-scale=1")
 
     - if page_description = (@custom_page_description || yield(:page_description)).presence
+      - page_description.gsub!(/\s+/, ' ').strip!
       %meta{name: "description", content: page_description}
       %meta{property: "og:description", content: page_description}
     

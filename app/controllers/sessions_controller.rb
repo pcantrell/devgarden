@@ -7,7 +7,8 @@ class SessionsController < ApplicationController
     if user = Person.for_auth(auth)
       log_in_as(user)
       session["#{auth.provider}_token"] = auth.credentials.token
-      redirect_to edit_person_path(current_user), flash: { success: "You are signed in" }
+
+      redirect_to pluck_login_redirect_url, flash: { success: "You are logged in" }
     else
       redirect_to login_url, flash: { error: "Unable to log in" }
     end
@@ -23,6 +24,6 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
-    redirect_to root_url, flash: { success: "You are signed out" }
+    redirect_to root_url, flash: { success: "You are logged out" }
   end
 end

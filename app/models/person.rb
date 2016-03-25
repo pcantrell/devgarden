@@ -34,6 +34,10 @@ class Person < ApplicationRecord
     github_user || name.split.first
   end
 
+  def newly_created?
+    @newly_created
+  end
+
   def student_or_alum?
     class_year?
   end
@@ -81,6 +85,13 @@ class Person < ApplicationRecord
     user.urls = urls if user.urls.empty?
     user.save!
     user
+  end
+
+  def logged_in!
+    @newly_created = last_login_at.blank?
+
+    # update_columns so we don't change updated_at
+    update_columns(last_login_at: Time.now)
   end
 
 private

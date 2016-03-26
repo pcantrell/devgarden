@@ -25,6 +25,7 @@ class Project < ApplicationRecord
 
   include RecentScope
   include Themed
+  include ConditionallyVisible
 
   scope :with_scm_url, ->(scm_url) do
     where('scm_urls @> ARRAY[?::character varying]', scm_url)

@@ -28,5 +28,5 @@
             - person.role_offers.each do |offer|
               .role= link_to offer.role.skill_name, offer.role
 
-      - if person.projects.any?
-        = render 'projects/thumb_list', projects: person.projects, project_list_title: "Participating in"
+      - if person.projects.visible.any?
+        = render 'projects/thumb_list', projects: person.projects.visible, project_list_title: "Participating in"

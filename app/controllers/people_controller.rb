@@ -8,7 +8,7 @@ class PeopleController < ApplicationController
       format.html do
         if params[:scroll_cont]
           render partial: 'recent', locals: {
-            people: Person.recent(10, scroll_continuation: params[:scroll_cont]) }
+            people: Person.visible.recent(10, scroll_continuation: params[:scroll_cont]) }
         else
           redirect_to root_path
         end
@@ -81,15 +81,16 @@ private
   end
 
   def project_groups
-    @project_groups ||= person.participations.includes(:project).group_by do |participation|
-      if participation.admin?
-        :admin
-      else
-        :participant
+    @project_groups ||=
+      person.participations.with_visible_project.group_by do |participation|
+        if participation.admin?
+          :admin
+        else
+          :participant
+        end
+      end.map do |group, participations|
+        [group, participations.map(&:project)]
       end
-    end.map do |group, participations|
-      [group, participations.map(&:project)]
-    end
   end
   helper_method :project_groups
 

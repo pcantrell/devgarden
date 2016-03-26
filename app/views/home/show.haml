@@ -24,10 +24,10 @@
   .projects.infinite-scroll.summary-group
     - heading "Projects" do
       .content
-        = render 'projects/recent', projects: Project.recent(20)
+        = render 'projects/recent', projects: Project.visible.recent(20)
 
 - cache ['home', 'people', Person.maximum(:updated_at)] do
   .people.infinite-scroll.summary-group
     - heading "People" do
       .content
-        = render 'people/recent', people: Person.recent(20)
+        = render 'people/recent', people: Person.visible.recent(20)

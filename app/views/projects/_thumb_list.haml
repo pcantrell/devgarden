@@ -1,11 +1,12 @@
-.projects
-  - heading project_list_title do
-    - projects.each do |project|
-      .project
-        .icon
-          = link_to project do
-            - if project.icon?
-              = image_tag project.icon.thumb.url
-            - else
-              %img.none
-        .name= link_to project.name, project
+- if projects.any?
+  .projects
+    - heading project_list_title do
+      - projects.each do |project|
+        .project
+          .icon
+            = link_to project do
+              - if project.icon?
+                = image_tag project.icon.thumb.url
+              - else
+                %img.none
+          .name= link_to project.name, project

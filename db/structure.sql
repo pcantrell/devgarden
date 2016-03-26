@@ -84,7 +84,8 @@ CREATE TABLE events (
     description text,
     location_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    visible boolean DEFAULT true NOT NULL
 );
 
 
@@ -226,7 +227,8 @@ CREATE TABLE people (
     theme json DEFAULT '{}'::json NOT NULL,
     site_admin boolean DEFAULT false NOT NULL,
     mailing_list_subscription_offered boolean DEFAULT false NOT NULL,
-    last_login_at timestamp without time zone
+    last_login_at timestamp without time zone,
+    visible boolean DEFAULT true NOT NULL
 );
 
 
@@ -296,7 +298,8 @@ CREATE TABLE projects (
     scm_urls character varying[] DEFAULT '{}'::character varying[],
     icon character varying,
     tagline character varying,
-    theme json DEFAULT '{}'::json NOT NULL
+    theme json DEFAULT '{}'::json NOT NULL,
+    visible boolean DEFAULT true NOT NULL
 );
 
 
@@ -547,7 +550,8 @@ CREATE TABLE tags (
     updated_at timestamp without time zone NOT NULL,
     short_name character varying,
     url character varying,
-    description text
+    description text,
+    visible boolean DEFAULT true NOT NULL
 );
 
 
@@ -1061,6 +1065,6 @@ ALTER TABLE ONLY role_offers
 
 SET search_path TO "$user",public;
 
-INSERT INTO schema_migrations (version) VALUES ('20150224225227'), ('20150225155116'), ('20150225160055'), ('20150227044734'), ('20150227044800'), ('20150227044803'), ('20150227044804'), ('20150427025619'), ('20160210043109'), ('20160210051448'), ('20160210055910'), ('20160212055159'), ('20160212055449'), ('20160216200401'), ('20160217071943'), ('20160218042005'), ('20160219033611'), ('20160222050605'), ('20160223162347'), ('20160226044247'), ('20160302043309'), ('20160302060224'), ('20160302155356'), ('20160305220106'), ('20160313201026'), ('20160314070131'), ('20160318191246'), ('20160321045134'), ('20160321050934');
+INSERT INTO schema_migrations (version) VALUES ('20150224225227'), ('20150225155116'), ('20150225160055'), ('20150227044734'), ('20150227044800'), ('20150227044803'), ('20150227044804'), ('20150427025619'), ('20160210043109'), ('20160210051448'), ('20160210055910'), ('20160212055159'), ('20160212055449'), ('20160216200401'), ('20160217071943'), ('20160218042005'), ('20160219033611'), ('20160222050605'), ('20160223162347'), ('20160226044247'), ('20160302043309'), ('20160302060224'), ('20160302155356'), ('20160305220106'), ('20160313201026'), ('20160314070131'), ('20160318191246'), ('20160321045134'), ('20160321050934'), ('20160325201115');
 
 

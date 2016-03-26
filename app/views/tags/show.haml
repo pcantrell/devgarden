@@ -15,4 +15,4 @@
     .description= markdown(current_tag.description)
 
   .meta
-    = render 'projects/thumb_list', projects: current_tag.projects, project_list_title: project_list_heading
+    = render 'projects/thumb_list', projects: current_tag.projects.visible, project_list_title: project_list_heading

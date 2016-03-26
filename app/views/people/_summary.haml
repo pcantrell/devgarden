@@ -11,10 +11,10 @@
       
       - with_next_heading_level do
 
-        - if person.projects.any?
+        - if person.projects.visible.any?
           .projects
             - heading "Projects" do
-              - person.projects.each do |proj|
+              - person.projects.visible.each do |proj|
                 .project= link_to proj.name, proj
         
         - if person.role_offers.any?

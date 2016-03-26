@@ -4,6 +4,7 @@ class EventDate < ApplicationRecord
   scope :future, -> do
     where('start_time >= ? or end_time >= ?', Time.now, Time.now)
       .order(:start_time)
-      .includes(:event)
+      .includes(event: :location)
+      .where(events: { visible: true })
   end
 end

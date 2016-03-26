@@ -17,7 +17,7 @@
       
       - with_next_heading_level do
         .participants{style: theme_style(project, :body_text)}
-          - project.participants.shuffle.each do |person|
+          - project.participants.visible.shuffle.each do |person|
             .name= link_to person.name, person
 
         - if project.role_requests.any?

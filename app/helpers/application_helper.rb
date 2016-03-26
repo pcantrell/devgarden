@@ -8,7 +8,7 @@ module ApplicationHelper
 
   def upcoming_events(min_events:, including_all_within:, limit: 20)
     time_limit = including_all_within.from_now
-    EventDate.future.limit(limit).includes(event: :location)
+    EventDate.future.limit(limit)
       .each.with_index
       .take_while { |d, i| i < min_events || d.start_time < time_limit }
       .map { |d,i| d }

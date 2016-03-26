@@ -9,6 +9,7 @@ class Person < ApplicationRecord
 
   include RecentScope
   include Themed
+  include ConditionallyVisible
 
   scope :name_search, ->(name) do
     if name.blank?

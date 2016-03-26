@@ -6,7 +6,7 @@
         - projects.each do |project|
           %li= link_to project.name, project
 
-- if person.projects.empty?
+- if person.projects.visible.empty?
   %p Not currently participating in any projects.
 
 = link_to "New Project", new_project_path, class: "big-button"

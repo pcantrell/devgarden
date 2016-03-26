@@ -6,7 +6,8 @@ class ProjectsController < ApplicationController
   def index
     if params[:scroll_cont]
       render partial: 'recent', locals: {
-        projects: Project.recent(10, scroll_continuation: params[:scroll_cont]) }
+        projects: Project.visible.recent(10, scroll_continuation: params[:scroll_cont])
+      }
     else
       redirect_to root_path
     end
@@ -154,7 +155,7 @@ private
   end
 
   def participants_json
-    project.participations.includes(:person).map do |p|
+    project.participations.with_visible_person.map do |p|
       {
         id: p.person.id,
         name: p.person.name,

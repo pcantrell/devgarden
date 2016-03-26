@@ -7,4 +7,4 @@
 = settings_form_for project, "tags", autosave: true do |f|
   = f.inputs do
     - TagCategory.in_order.includes(:tags).each do |category|
-      = f.input :tags, label: category.name.pluralize, required: true, as: :check_boxes, collection: category.tags.sort_by(&:name)
+      = f.input :tags, label: category.name.pluralize, required: true, as: :check_boxes, collection: category.tags.visible.sort_by(&:name)

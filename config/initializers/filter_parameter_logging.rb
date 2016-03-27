@@ -1,4 +1,4 @@
 # Be sure to restart your server when you modify this file.
 
 # Configure sensitive parameters which will be filtered from the log file.
-Rails.application.config.filter_parameters += [:password, /^DEV_GARDEN_/]
+Rails.application.config.filter_parameters += [:password, /^DEV_GARDEN_/, /secret/i]

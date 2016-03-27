@@ -37,6 +37,7 @@ class Project < ApplicationRecord
 
   def tags_grouped
     tags
+      .visible
       .group_by(&:category)
       .sort_by(&:first)
   end

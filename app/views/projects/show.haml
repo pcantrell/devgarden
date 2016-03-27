@@ -6,7 +6,7 @@
 - if can_edit?(project)
   = link_to "Edit Project", edit_project_path(project), class: 'big-button edit', style: theme_style(project, :button_background)
 
-- cache project do
+- cache project_cache_key(project) do
   .banner{style: theme_style(project, :featured_text)}
 
     - if project.icon?

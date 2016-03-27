@@ -9,6 +9,7 @@ module SettingsFormHelper
     }
     semantic_form_for(model, **opts) do |f|
       capture do
+        concat f.semantic_errors
         concat hidden_field_tag(:selected_tab, tab_name)
         yield f
       end

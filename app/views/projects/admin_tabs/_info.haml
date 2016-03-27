@@ -3,6 +3,7 @@
 = settings_form_for project, "basics" do |f|
   = hidden_field_tag(:full_form, true)  # in case we're on the new page
   = f.inputs do
+    = render 'shared/edit_visibility', f: f
     = f.input :name
     = f.input :tagline, hint: "A very short description or slogan"
     = f.input :url, label: 'Project web site', required: false, placeholder: 'https://'

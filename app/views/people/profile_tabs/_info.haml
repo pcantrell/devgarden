@@ -1,6 +1,7 @@
 = settings_form_for person, "info" do |f|
 
   = f.inputs do
+    = render 'shared/edit_visibility', f: f
     = f.input :full_name, required: true, hint: "It’s best to use your full, real name so that other students can identify you. However, you can use an alias if you are more comfortable being anonymous."
     = f.input :email, required: true
     = render "shared/disclosure_input", f: f, property: :student_or_alum?, target: "person_class_year", label: "I’m a Macalester student or alum"

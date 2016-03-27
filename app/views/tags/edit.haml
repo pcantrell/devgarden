@@ -6,6 +6,7 @@
 
     = semantic_form_for current_tag do |f|
       = f.inputs do
+        = render 'shared/edit_visibility', f: f
         = f.input :category, required: true
         = f.input :name, required: true
         = f.input :short_name

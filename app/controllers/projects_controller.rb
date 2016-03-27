@@ -117,8 +117,9 @@ private
   helper_method :duplicate_imports
 
   def project_params
-    params[:project].permit(
+    params.require(:project).permit(
       :name, :tagline, :description, :url, :scm_urls_as_text, :icon, :icon_cache,
+      (:visible if current_user.site_admin?),
       theme: [:primary_hue, :highlight_hue],
       participations_attributes: [:person_id, :admin],
       tag_ids: [], requested_role_ids: [])

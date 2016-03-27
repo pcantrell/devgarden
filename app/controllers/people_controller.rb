@@ -77,7 +77,10 @@ private
   helper_method :person
 
   def person_params
-    params[:person].permit(:full_name, :email, :urls_as_text, :class_year, :department, offered_role_ids: [])
+    params.require(:person).permit(
+      :full_name, :email, :urls_as_text, :class_year, :department,
+      (:visible if current_user.site_admin?),
+      offered_role_ids: [])
   end
 
   def project_groups

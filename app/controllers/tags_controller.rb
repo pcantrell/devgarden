@@ -44,7 +44,7 @@ class TagsController < ApplicationController
 private
 
   def tag_params
-    params[:tag].permit(:name, :short_name, :category_id, :url, :description)
+    params.require(:tag).permit(:name, :short_name, :category_id, :url, :description, :visible)
   end
 
   # Called “current_tag” because Rails alreay defines a helper method named “tag”

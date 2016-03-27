@@ -86,8 +86,13 @@ private
   end
 
   def import_languages(repo)
-    github.languages(repo).to_hash.keys.each do |lang|
-      project.tags << language_tags.find_or_create_tag!(lang)
+    languages = github.languages(repo).to_hash
+    total_bytes = languages.values.sum
+    languages.each do |lang, bytes|
+      tag = language_tags.find_or_create_tag!(lang)  # Always create language tag, but...
+      if bytes / total_bytes.to_f > 0.04             # ...don’t import it if barely used
+        project.tags << tag
+      end
     end
   end
 

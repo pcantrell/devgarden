@@ -1,4 +1,4 @@
-- cache [current_user, current_user&.owned_projects.maximum(:updated_at)] do
+- cache [current_user, current_user&.owned_projects&.maximum(:updated_at)] do
   .nav-bar
     = link_to root_path, class: 'logo' do
       = image_tag "devgarden-logo-small-white.svg", alt: 'Dev Garden'

@@ -9,20 +9,21 @@ class GithubProjectImportJob < ApplicationJob
     raise "Missing access token" unless opts[:github_token]
 
     @project = Project.new(scm_urls: opts[:scm_urls])
+    @requesting_user = opts[:requesting_user]
 
     @github = Octokit::Client.new(access_token: opts[:github_token])
 
     project.github_repos.each do |repo|
       show_message "Importing #{repo}…"
       import_info(repo)
-      import_contributors(repo, opts[:requesting_user])
+      import_contributors(repo)
       import_languages(repo)
     end
 
     project.save!
 
     AdminNotifications
-      .user_made_changes(opts[:requesting_user], project, "import")
+      .user_made_changes(@requesting_user, project, "import")
       .deliver_later
 
     {
@@ -40,7 +41,7 @@ private
 
   def import_info(repo)
     repo_info = github.repository(repo)
-    unless repo_info.permissions.push
+    unless repo_info.permissions.push || @requesting_user.site_admin?
       raise "You need to have push access to #{repo} on Github in order to import it."
     end
     project.name    ||= repo_info.name.capitalize
@@ -48,13 +49,13 @@ private
     project.url     ||= repo_info.homepage
   end
 
-  def import_contributors(repo, requesting_user)
+  def import_contributors(repo)
     github.contributors(repo).each do |contributor|
       person = person_for_github_contributor(contributor)
-      project.participations.new(person: person, admin: person == requesting_user) if person
+      project.participations.new(person: person, admin: person == @requesting_user) if person
     end
     
-    unless project.participations.any? { |p| p.person == requesting_user }
+    unless project.participations.any? { |p| p.person == @requesting_user } || @requesting_user.site_admin?
       raise "You need to be a contributor to #{repo} on Github in order to import it."
     end
   end

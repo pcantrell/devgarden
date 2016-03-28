@@ -9,7 +9,8 @@ class AdminNotifications < ApplicationMailer
     @changed_attrs = changed_attrs
 
     mail to: Person.where(site_admin: true).map(&:email),
-         subject: "[devgarden] #{@user_name} made changes"
+         subject: "[devgarden] #{@user_name} made changes",
+         references: "<#{user.id}changes@devgarden>"
   end
 
 private

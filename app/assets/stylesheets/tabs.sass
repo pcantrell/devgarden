@@ -2,7 +2,12 @@
 
 .tabs
   >ul
+    $shadow-size: 0.6em
+    $h-overflow: 1.2em
     @include hairline-border(bottom, $dark-color)
+    box-shadow: 0 $shadow-size $shadow-size (-$shadow-size) rgba(0, 0, 0, 0.3)
+    margin: 0 (-$h-overflow) $shadow-size
+    padding: 0 $h-overflow
   >ul >li
     @include meta-font
     display: inline-block
@@ -21,7 +26,12 @@
     a
       color: inherit
 
+    font-size: 120%
+    @include if-below-width(44em)
+      font-size: 110%
     @include if-below-width(42em)
+      font-size: 100%
+    @include if-below-width(38em)
       font-size: 90%
 
   .tab

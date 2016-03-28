@@ -1,5 +1,8 @@
 module SettingsFormHelper
-  def settings_form_for(model, tab_name, autosave: false, &block)
+
+  def settings_form_for(model, tab_name, autosave: true, &block)
+    autosave = false if model.new_record?
+
     opts = {
       remote: autosave,
       html: {
@@ -21,4 +24,5 @@ module SettingsFormHelper
       [role.person_name, role.id]
     end
   end
+
 end

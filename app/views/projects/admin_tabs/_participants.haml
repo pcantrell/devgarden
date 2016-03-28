@@ -4,7 +4,7 @@
   %p
     Admins can update project settings on this site. Dev Garden admin access <b>does not</b> affect Github or any other service.
 
-= settings_form_for project, "participants", autosave: true do |f|
+= settings_form_for project, "participants" do |f|
   %ol.editable-list
   
     -# The list of participants is dynamically created by a script from JSON, and the script uses
@@ -16,6 +16,9 @@
     -# from wiping out newer, better data.
 
     #initialParticipants{data: { initial_participants: participants_json.html_safe} }
+
+  .actions
+    = f.tabbed_save_button
 
 %form#new-participant(action='#')
   %fieldset

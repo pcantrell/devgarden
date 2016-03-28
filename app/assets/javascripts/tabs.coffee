@@ -41,3 +41,8 @@ $ ->
     $tab = targetOfLink($(e.target).closest("a"))
     showTab($tab)
     return
+
+  $(document).on 'click', '.next-tab', (e) ->
+    $(e.target).closest('.tabs').scrollIntoView(false)
+    showTab(
+      $(e.target).closest('.tab').next())

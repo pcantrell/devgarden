@@ -4,7 +4,10 @@
   %p
     Don’t list every little library or tool you used — just the things that are central to how your code is structured.
 
-= settings_form_for project, "tags", autosave: true do |f|
+= settings_form_for project, "tags" do |f|
   = f.inputs do
     - TagCategory.in_order.includes(:tags).each do |category|
       = f.input :tags, label: category.name.pluralize, required: true, as: :check_boxes, collection: category.tags.visible.sort_by(&:name)
+
+  .actions
+    = f.tabbed_save_button

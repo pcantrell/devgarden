@@ -1,4 +1,4 @@
-- hide_scm_urls ||= false
+- new_project = project.new_record?
 
 = settings_form_for project, "basics" do |f|
   = hidden_field_tag(:full_form, true)  # in case we're on the new page
@@ -7,7 +7,8 @@
     = f.input :name
     = f.input :tagline, hint: "A very short description or slogan"
     = f.input :url, label: 'Project web site', required: false, placeholder: 'https://'
-    - unless hide_scm_urls
+    - unless new_project
       = f.input :scm_urls_as_text, as: :text, label: 'Github URL(s)', placeholder: "https://github.com/user/projectname", hint: "(one per line)"
+
   .actions
-    = f.save_button
+    = f.tabbed_save_button

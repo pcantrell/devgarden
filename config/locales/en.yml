@@ -32,3 +32,7 @@ en:
     project_group:
       admin: Administrator of
       participant: Participating in
+    profile_tab_title:
+      info: Basics
+      role_offers: Offer to Help
+      projects: Projects

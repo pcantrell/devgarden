@@ -128,11 +128,18 @@ $thumb-size: 48px
     @include hairline-border(left, $dark-color)
     max-width: 40%
 
+@mixin columns($width, $gap)
+  column-width: $width
+  column-gap: $gap
+  -moz-column-width: $width
+  -moz-column-gap: $gap
+  -webkit-column-width: $width
+  -webkit-column-gap: $gap
+
 @mixin choices-in-wide-columns
   .choices
     .choices-group
-      column-width: 10em
-      column-gap: 0
+      @include columns(10em, 0)
     .choice
       margin: 0
       min-width: 10em
@@ -141,7 +148,6 @@ $thumb-size: 48px
 
 @mixin choices-in-tall-columns
   fieldset > ol
-    column-width: 10em
-    column-gap: 0
+    @include columns(10em, 0)
     > li
       display: inline-block

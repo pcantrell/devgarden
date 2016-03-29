@@ -19,13 +19,14 @@
     .meta
       @include meta-more
       color: $dark-color
-      position: relative
-      margin-top: -3.6em
-      left: 5.2em
-      @include if-below-width(36em)
-        margin-top: 0
-        margin-bottom: 2.4em
-        left: 1.6em
+      position: fixed
+      background: white
+      @include hairline-border(top, $dark-color)
+      @include hairline-border(right, $dark-color)
+      top: 100%
+      padding: 1.2em
+      border-top-right-radius: 0.6em
+      z-index: 200
       .project-add, .project-count
         display: inline-block
         white-space: nowrap
@@ -34,8 +35,10 @@
         &:after
           color: $hairline-color
           content: ' | '
-          margin: 0.3em
+          margin: 0.6em
       .project-add
+        font-weight: 500
+        margin-right: 1.2em
     &.projects
       width: 60%
       color: rgba(39,37,93,0.1)

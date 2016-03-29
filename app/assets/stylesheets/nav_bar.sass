@@ -56,20 +56,22 @@
   text-transform: none
   letter-spacing: 0
   font-size: 120%
-  @include if-below-width(37em)
+  @include if-below-width(32em)
     font-size: 160%
+    line-height: 1em  // to make project icons line up
   text-align: right
   box-shadow: 0 1ex 1ex rgba(0, 0, 0, 0.333)
   @include hairline-border(top, $hairline-color)
   p
     font-weight: 400
-    line-height: 120%
+    line-height: 100%
     margin: 1.2em
     max-width: 12em
     text-align: center
   ul
     padding: 0 1.2em
     margin: 1.2em 0
+    min-width: 8em
     &.projects
       padding-bottom: 1.2em
       @include hairline-border(bottom, $hairline-color)

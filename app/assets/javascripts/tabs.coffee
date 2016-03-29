@@ -14,7 +14,9 @@ $ ->
 
     $inputs = $tab.find("textarea, input[type=text]")
     if $inputs.length > 0 && $inputs.filter(":focus").length == 0
+      savedScroll = $(document).scrollTop()
       $($inputs[0]).focus()
+      $(document).scrollTop(savedScroll)
 
     saveTab($group, $tab)
   

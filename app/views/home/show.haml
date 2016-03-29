@@ -23,6 +23,9 @@
 - cache ['home', 'projects', Project.maximum(:updated_at)] do
   .projects.infinite-scroll.summary-group
     - heading "Projects" do
+      .meta
+        .project-count #{Project.visible.count} projects
+        .project-add= link_to 'Add yours!', new_project_path
       .content
         = render 'projects/recent', projects: Project.visible.recent(20)
 

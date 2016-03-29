@@ -60,6 +60,21 @@ $danger-color: $error-color
   padding: 0.2em 0
   margin-bottom: 0
 
+@mixin meta-more
+  @include meta-more-font
+  font-size: 80%
+  text-transform: uppercase
+  a:after
+    display: inline-block
+    opacity: 0.33
+    content: asset-data-url('more.svg')
+    $icon-width: 0.6em
+    $icon-spacing: 0.4em
+    width: $icon-width
+    padding-left: $icon-spacing
+    margin-right: -($icon-width + $icon-spacing)
+    vertical-align: middle
+
 @mixin button
   @include title-font
   display: inline-block

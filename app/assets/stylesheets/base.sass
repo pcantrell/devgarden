@@ -91,20 +91,8 @@ img.none
 
 .more
   margin-top: 0.6em
-  @include meta-more-font
-  font-size: 80%
-  text-transform: uppercase
   text-align: right
-  a:after
-    display: inline-block
-    opacity: 0.33
-    content: asset-data-url('more.svg')
-    $icon-width: 0.6em
-    $icon-spacing: 0.4em
-    width: $icon-width
-    padding-left: $icon-spacing
-    margin-right: -($icon-width + $icon-spacing)
-    vertical-align: middle
+  @include meta-more
 
 .infinite-scroll-more
   clear: both

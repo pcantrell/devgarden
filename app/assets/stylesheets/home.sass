@@ -16,6 +16,26 @@
   .summary-group
     float: left
     margin-top: 1.2em
+    .meta
+      @include meta-more
+      color: $dark-color
+      position: relative
+      margin-top: -3.6em
+      left: 5.2em
+      @include if-below-width(36em)
+        margin-top: 0
+        margin-bottom: 2.4em
+        left: 1.6em
+      .project-add, .project-count
+        display: inline-block
+        white-space: nowrap
+      .project-count
+        color: $dark-color
+        &:after
+          color: $hairline-color
+          content: ' | '
+          margin: 0.3em
+      .project-add
     &.projects
       width: 60%
       color: rgba(39,37,93,0.1)

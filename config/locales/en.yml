@@ -27,7 +27,7 @@ en:
       description: Description
       tags: Technologies
       participants: People
-      role-reqs: Help wanted
+      role_reqs: Help wanted
   people:
     project_group:
       admin: Administrator of

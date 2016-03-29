@@ -4,4 +4,4 @@
 
   - heading "Edit #{project.name.presence || 'Project'} Info" do
 
-    = render 'shared/tabs', controller: 'projects', tab_group: 'admin', tabs: %w(info icon description tags participants role-reqs)
+    = render 'shared/tabs', controller: 'projects', tab_group: 'admin', tabs: %w(info icon description tags participants role-reqs), after_last_tab: project_path(project)

@@ -1,4 +1,5 @@
-.tabs{id: "#{controller}-#{tab_group}-tabs"}
+- after_last_tab ||= nil
+.tabs{id: "#{controller}-#{tab_group}-tabs", data: { after_last_tab: after_last_tab }}
   %ul
     - tabs.each do |tab|
       %li= link_to t("#{controller}.#{tab_group}_tab_title.#{tab}"), '#' + tab

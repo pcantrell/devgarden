@@ -43,6 +43,10 @@ $ ->
     return
 
   $(document).on 'click', '.next-tab', (e) ->
-    $(e.target).closest('.tabs').scrollIntoView(false)
-    showTab(
-      $(e.target).closest('.tab').next())
+    $tabs = $(e.target).closest('.tabs')
+    $tabs.scrollIntoView(false)
+    $nextTab = $(e.target).closest('.tab').next()
+    if $nextTab.length > 0
+      showTab($nextTab)
+    else if afterLast = $tabs.data('after-last-tab')
+      Turbolinks.visit(afterLast)

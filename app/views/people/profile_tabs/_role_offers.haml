@@ -1,3 +1,7 @@
+.hint
+  %p Would you be interested in contributing to other people’s projects?
+  %p What sorts of things would you like to do?
+
 = settings_form_for person, "role-offers" do |f|
   = f.inputs do
     - RoleCategory.includes(:roles).all.shuffle.each do |category|

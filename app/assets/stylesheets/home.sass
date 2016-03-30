@@ -23,6 +23,7 @@
       background: white
       @include hairline-border(top, $dark-color)
       @include hairline-border(right, $dark-color)
+      box-shadow: 0 0.6em 1.2em rgba(0, 0, 0, 0.333)
       top: 100%
       padding: 1.2em
       border-top-right-radius: 0.6em
@@ -32,10 +33,9 @@
         white-space: nowrap
       .project-count
         color: $dark-color
-        &:after
-          color: $hairline-color
-          content: ' | '
-          margin: 0.6em
+        @include hairline-border(right, $hairline-color)
+        padding: 0.3em 0.6em 0.3em 0
+        margin-right: 0.6em
       .project-add
         font-weight: 500
         margin-right: 1.2em

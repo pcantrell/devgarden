@@ -9,7 +9,7 @@ body.ie
     @include if-above-width(36em)
       padding-right: 4.8em
 
-  .more
+  .more, .summary-group .meta
     a:after
-      content: '＞'
-      font-weight: bold
+      $icon-width: 0.6em
+      height: $icon-width * 512 / 224

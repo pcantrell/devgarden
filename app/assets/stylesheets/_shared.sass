@@ -166,3 +166,8 @@ $thumb-size: 48px
     @include columns(10em, 0)
     > li
       display: inline-block
+
+@mixin ellipsis-overflow
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis

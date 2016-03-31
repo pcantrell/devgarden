@@ -81,6 +81,8 @@
       @include meta-font
     h3, h4
       @include meta-heading
+    h2, .role, .tagline, .participants .name, &.person .project
+      @include ellipsis-overflow
 
   .project.summary
     > .content

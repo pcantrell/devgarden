@@ -26,6 +26,7 @@ class Project < ApplicationRecord
   include RecentScope
   include Themed
   include ConditionallyVisible
+  include ChangeNotifying
 
   scope :with_scm_url, ->(scm_url) do
     where('scm_urls @> ARRAY[?::character varying]', scm_url)
@@ -49,6 +50,14 @@ class Project < ApplicationRecord
 
   def github_repos
     scm_urls.map { |url| $1 if url =~ GIT_REPO_FROM_URL}.compact
+  end
+
+  def custom_notification_attributes
+    {
+      participations: participations.map { |p| p.person.name + (p.admin ? " [admin]" : "") },
+      requested_roles: requested_roles.map(&:person_name),
+      tags: tags.map(&:name),
+    }
   end
 
 private

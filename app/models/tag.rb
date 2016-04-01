@@ -7,4 +7,5 @@ class Tag < ApplicationRecord
   validates :category, presence: true
 
   include ConditionallyVisible
+  include ChangeNotifying
 end

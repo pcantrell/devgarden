@@ -9,6 +9,7 @@ class Person < ApplicationRecord
   include RecentScope
   include Themed
   include ConditionallyVisible
+  include ChangeNotifying
 
   scope :name_search, ->(name) do
     if name.blank?
@@ -92,6 +93,13 @@ class Person < ApplicationRecord
 
     # update_columns so we don't change updated_at
     update_columns(last_login_at: Time.now)
+  end
+
+  def custom_notification_attributes
+    {
+      projects: projects.map(&:name),
+      role_offers: role_offers.map(&:skill_name),
+    }
   end
 
 private

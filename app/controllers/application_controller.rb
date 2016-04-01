@@ -37,9 +37,11 @@ protected
         end
       end.compact
 
-      AdminNotifications
-        .user_made_changes(current_user, model, action_name, changed_attrs)
-        .deliver_later
+      if changed_attrs.any?
+        AdminNotifications
+          .user_made_changes(current_user, model, action_name, changed_attrs)
+          .deliver_later
+      end
     end
 
     success

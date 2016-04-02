@@ -98,7 +98,7 @@ class Person < ApplicationRecord
   def custom_notification_attributes
     {
       projects: projects.map(&:name),
-      role_offers: role_offers.map(&:skill_name),
+      role_offers: offered_roles.map(&:skill_name),
     }
   end
 

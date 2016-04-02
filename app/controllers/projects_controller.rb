@@ -47,7 +47,7 @@ class ProjectsController < ApplicationController
 
     if success
       flash[:success] = 'Project created'
-      redirect_to edit_project_tab_path('icon')
+      redirect_to edit_project_path(project, anchor: 'icon', initial_setup: 1)
     else
       render :new
     end
@@ -79,7 +79,7 @@ class ProjectsController < ApplicationController
         if success
           tab = params[:selected_tab] || ""
           flash[:success] = "Project #{tab.downcase} updated"
-          redirect_to edit_project_tab_path(tab)
+          redirect_to edit_project_path(project, anchor: tab)
         else
           render :edit
         end
@@ -123,10 +123,6 @@ private
       theme: [:primary_hue, :highlight_hue],
       participations_attributes: [:person_id, :admin],
       tag_ids: [], requested_role_ids: [])
-  end
-
-  def edit_project_tab_path(tab_name)
-    edit_project_path(project, anchor: tab_name)
   end
 
   def populate_from_github

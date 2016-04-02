@@ -42,7 +42,7 @@ module CurrentUserHelper
 
   def pluck_login_redirect_url
     if current_user.newly_created?
-      edit_person_path(current_user)
+      edit_person_path(current_user, anchor: 'info', initial_setup: 1)
     else
       saved_url = session[:login_redirect_url]
       session[:login_redirect_url] = nil

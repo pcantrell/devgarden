@@ -9,6 +9,3 @@
     = f.input :url, label: 'Project web site', required: false, placeholder: 'https://'
     - unless new_project
       = f.input :scm_urls_as_text, as: :text, label: 'Github URL(s)', placeholder: "https://github.com/user/projectname", hint: "(one per line)"
-
-  .actions
-    = f.tabbed_save_button

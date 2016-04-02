@@ -9,6 +9,3 @@
     = render "shared/disclosure_input", f: f, property: :faculty_or_staff?, target: "person_department", label: "I’m Macalester faculty or staff"
     = f.input :department
     = f.input :urls_as_text, as: :text, label: "Web site(s)", hint: "(One per line)"
-
-  .actions
-    = f.tabbed_save_button

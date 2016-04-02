@@ -1,6 +1,6 @@
 module SettingsFormHelper
 
-  def settings_form_for(model, tab_name, autosave: true, &block)
+  def settings_form_for(model, tab_name, autosave: true, last_tab: false, &block)
     autosave = false if model.new_record?
 
     opts = {
@@ -14,7 +14,18 @@ module SettingsFormHelper
       capture do
         concat f.semantic_errors
         concat hidden_field_tag(:selected_tab, tab_name)
+
         yield f
+
+        haml_tag(:div, class: 'actions') do
+          if model.new_record?
+            concat f.save_button
+          elsif params[:initial_setup]
+            concat f.save_button(
+              title_for_existing_record: last_tab ? 'Done' : 'Next',
+              html: { class: 'next-tab' })
+          end
+        end
       end
     end
   end

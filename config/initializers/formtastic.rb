@@ -12,22 +12,16 @@ Formtastic::FormBuilder.default_inline_error_class = "inline-error"
 
 class Formtastic::FormBuilder
   def save_button(
-      new_record_title: "Create",
-      existing_record_title: "Save",
-      css_class: nil)
+      title_for_new_record: "Create",
+      title_for_existing_record: "Save",
+      html: {})
 
     title = if object_is_new?
-      new_record_title
+      title_for_new_record
     else
-      existing_record_title
+      title_for_existing_record
     end
-    submit(title, class: css_class)
-  end
-
-  def tabbed_save_button
-    save_button(
-      existing_record_title: 'Next',
-      css_class: ('next-tab' unless object_is_new?))
+    submit(title, html)
   end
 
 private

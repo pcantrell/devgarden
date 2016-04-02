@@ -3,7 +3,8 @@
 .home-controller
 
   $summary-overflow: 10em
-  $content-vpad: 2em
+  $project-vpad: 2.4em
+  $person-vpad: 1.2em
 
   .nav-bar .logo
     display: none
@@ -42,12 +43,12 @@
     &.projects
       width: 60%
       color: rgba(39,37,93,0.1)
+      > .content
+        margin-top: ($person-vpad - $project-vpad)  // so tops of headings line up
     &.people
       overflow: hidden
       width: 40%
       color: rgba(39,37,93,0.4)
-      .content
-        font-size: 92%
     h1
       position: relative
       font:
@@ -76,7 +77,6 @@
       color: inherit
     > .content
       transform: rotate(0deg)  // To draw on top of big h1
-      padding: $content-vpad 1.2em
     .tagline
       @include meta-font
     h3, h4
@@ -86,6 +86,7 @@
 
   .project.summary
     > .content
+      padding: $project-vpad 1.2em
       padding-left: 4em
     .tags
       clear: left
@@ -116,7 +117,10 @@
     .inline-icon svg path
       fill: rgba(255, 255, 255, 0.6)
     > .content
-      padding-left: 2em
+      padding: $person-vpad 1.2em
+      padding-left: 1.8em
+      > *
+        font-size: 83.33%
     .projects, .role-offers
       width: 50%
       h2, h3, h4
@@ -170,7 +174,7 @@
     @mixin divider-positioning($height)
       height: $height
       margin-bottom: (-$height)
-      top: $content-vpad - $height/2
+      top: $project-vpad - $height/2
     @include divider-positioning(1.8em)
     @include if-below-width(24em)
       @include divider-positioning(1.2em)

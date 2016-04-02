@@ -1,19 +1,23 @@
-submitIfDirty = ($form) ->
+submitIfDirty = ($form, opts = {}) ->
   autosubmitAtTime = $form.data('autosubmitAtTime')
-  return unless autosubmitAtTime && Date.now() >= autosubmitAtTime
+  return unless autosubmitAtTime && (opts.immedately || Date.now() >= autosubmitAtTime)
 
   $form.data('autosubmitAtTime', null)
   $form.submit()
 
 $(document).on 'devgarden:scheduleAutosave', (e) ->
   $form = $(e.target).closest('form')
-  throttle = 600
+  throttle = 1200
   $form.data('autosubmitAtTime', Date.now() + throttle)
   setTimeout (-> submitIfDirty($form)), throttle
 
-$(document).on 'change', '.autosave input', (e) ->
+$(document).on 'change', '.autosave *', (e) ->
   $(e.target).trigger('devgarden:scheduleAutosave')
 
+$(document).on 'turbolinks:before-visit', ->
+  document.activeElement.blur()
+  for form in $('.autosave')
+    submitIfDirty($(form), immedately: true)
 
 # Status display
 
@@ -46,7 +50,6 @@ updateStatusDisplay = ->
   $("#autosave-status .#{globalStatus}").show()
 
 $(document).on 'turbolinks:load', updateStatusDisplay
-
 
 # Retry
 

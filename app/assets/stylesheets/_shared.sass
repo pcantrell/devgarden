@@ -171,3 +171,14 @@ $thumb-size: 48px
   white-space: nowrap
   overflow: hidden
   text-overflow: ellipsis
+
+@keyframes pulsing
+  0%
+    opacity: 0.2
+  50%
+    opacity: 1.0
+  100%
+    opacity: 0.2
+
+@mixin pulsing
+  animation: pulsing 1.2s infinite ease-in-out both

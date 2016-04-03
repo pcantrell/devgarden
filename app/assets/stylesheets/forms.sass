@@ -114,12 +114,15 @@ form
   clear: right
   > *
     @include meta-tiny-font
-    opacity: 0.6
+    font-size: 64%
+    opacity: 0.8
     padding: 0.6em 0
     border-radius: 0.3em
     text-transform: uppercase
   .success
     color: $success-color
+  .saving
+    @include pulsing
   .error
     background: $error-color
     padding: 0.6em

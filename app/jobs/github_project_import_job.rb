@@ -27,7 +27,7 @@ class GithubProjectImportJob < ApplicationJob
       .deliver_later
 
     {
-      redirect_to: edit_project_path(project, anchor: :info),
+      redirect_to: edit_project_path(project, anchor: :info, initial_setup: 1),
       flash: {
         success: "Project imported."
       }

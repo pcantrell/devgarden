@@ -6,18 +6,21 @@ hueLookupTables =
 
 updatePalette = ->
   thumb = $('.dropzone .dz-preview img').last()
+  palette = []
   if thumb.length > 0
-    if palette = DevGarden.extractSignificantHues(thumb[0], 5)
-      showPalette(palette)
+    palette = DevGarden.extractSignificantHues(thumb[0], 5)
+  showPalette(palette)
   return
 
 buildPaletteUI = (hueKey, hues) ->
-  $palette = $("#theme-#{hueKey}-hue ol")
-  $palette.children().remove()
-  for hue in hues
+  $palette = $("#theme-#{hueKey}-hue")
+  $palette.toggle(hues.length > 0)
+  $paletteColors = $palette.find('ol')
+  $paletteColors.children().remove()
+  for hue in (hues || [])
     [h,s,l] = hueLookupTables[hueKey][hue]
     radioID = "icon-#{hueKey}-#{hue}"
-    $palette.append("
+    $paletteColors.append("
       <li>
         <input type='radio'
                name='project[theme][#{hueKey}_hue]'

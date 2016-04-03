@@ -7,6 +7,7 @@ submitIfDirty = ($form, opts = {}) ->
 
 $(document).on 'devgarden:scheduleAutosave', (e) ->
   $form = $(e.target).closest('form')
+  changeStatus($form, 'saving')
   throttle = 1200
   $form.data('autosubmitAtTime', Date.now() + throttle)
   setTimeout (-> submitIfDirty($form)), throttle
@@ -21,10 +22,13 @@ $(document).on 'turbolinks:before-visit', ->
 
 # Status display
 
+changeStatus = ($form, status) ->
+  $form.data('autosave-status', status)
+  updateStatusDisplay()
+
 bindStatusUpdate = (eventType, status) ->
   $(document).on "ajax:#{eventType}", (e) ->
-    $(e.target).data('autosave-status', status)
-    updateStatusDisplay()
+    changeStatus($(e.target), status)
 
 bindStatusUpdate("beforeSend", "saving")
 bindStatusUpdate("success", "success")

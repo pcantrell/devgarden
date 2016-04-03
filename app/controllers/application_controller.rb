@@ -28,7 +28,7 @@ protected
     if success
       changed_attrs = model.notification_attributes.map do |key, new_value|
         old_value = old_values[key]
-        if old_value != new_value
+        if old_value.presence != new_value.presence
           {
             name: key.to_s,
             old_value: old_value.to_s,

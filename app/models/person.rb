@@ -3,6 +3,7 @@ class Person < ApplicationRecord
   has_many :projects, through: :participations
   has_many :role_offers, -> { includes(:role) }, dependent: :destroy
   has_many :offered_roles, through: :role_offers, source: :role
+  has_many :participant_invitations, foreign_key: :created_by_id, dependent: :destroy
 
   validates :class_year, inclusion: 1920..(Time.now.year + 4), allow_blank: true
 

@@ -176,6 +176,41 @@ ALTER SEQUENCE locations_id_seq OWNED BY locations.id;
 
 
 --
+-- Name: participant_invitations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE participant_invitations (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    email character varying NOT NULL,
+    invitation_code text NOT NULL,
+    project_id integer,
+    created_by_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: participant_invitations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE participant_invitations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: participant_invitations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE participant_invitations_id_seq OWNED BY participant_invitations.id;
+
+
+--
 -- Name: participations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -606,6 +641,13 @@ ALTER TABLE ONLY locations ALTER COLUMN id SET DEFAULT nextval('locations_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY participant_invitations ALTER COLUMN id SET DEFAULT nextval('participant_invitations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY participations ALTER COLUMN id SET DEFAULT nextval('participations_id_seq'::regclass);
 
 
@@ -717,6 +759,14 @@ ALTER TABLE ONLY job_reports
 
 ALTER TABLE ONLY locations
     ADD CONSTRAINT locations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: participant_invitations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY participant_invitations
+    ADD CONSTRAINT participant_invitations_pkey PRIMARY KEY (id);
 
 
 --
@@ -841,6 +891,20 @@ CREATE INDEX index_events_on_updated_at ON events USING btree (updated_at);
 --
 
 CREATE INDEX index_job_reports_on_owner_id ON job_reports USING btree (owner_id);
+
+
+--
+-- Name: index_participant_invitations_on_created_by_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_participant_invitations_on_created_by_id ON participant_invitations USING btree (created_by_id);
+
+
+--
+-- Name: index_participant_invitations_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_participant_invitations_on_project_id ON participant_invitations USING btree (project_id);
 
 
 --
@@ -1028,6 +1092,14 @@ ALTER TABLE ONLY project_tags
 
 
 --
+-- Name: fk_rails_9a8569370f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY participant_invitations
+    ADD CONSTRAINT fk_rails_9a8569370f FOREIGN KEY (project_id) REFERENCES projects(id);
+
+
+--
 -- Name: fk_rails_a08156eb51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1041,6 +1113,14 @@ ALTER TABLE ONLY participations
 
 ALTER TABLE ONLY project_tags
     ADD CONSTRAINT fk_rails_a52ff3d861 FOREIGN KEY (project_id) REFERENCES projects(id);
+
+
+--
+-- Name: fk_rails_b186ab565a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY participant_invitations
+    ADD CONSTRAINT fk_rails_b186ab565a FOREIGN KEY (created_by_id) REFERENCES people(id);
 
 
 --
@@ -1065,6 +1145,6 @@ ALTER TABLE ONLY role_offers
 
 SET search_path TO "$user",public;
 
-INSERT INTO schema_migrations (version) VALUES ('20150224225227'), ('20150225155116'), ('20150225160055'), ('20150227044734'), ('20150227044800'), ('20150227044803'), ('20150227044804'), ('20150427025619'), ('20160210043109'), ('20160210051448'), ('20160210055910'), ('20160212055159'), ('20160212055449'), ('20160216200401'), ('20160217071943'), ('20160218042005'), ('20160219033611'), ('20160222050605'), ('20160223162347'), ('20160226044247'), ('20160302043309'), ('20160302060224'), ('20160302155356'), ('20160305220106'), ('20160313201026'), ('20160314070131'), ('20160318191246'), ('20160321045134'), ('20160321050934'), ('20160325201115');
+INSERT INTO schema_migrations (version) VALUES ('20150224225227'), ('20150225155116'), ('20150225160055'), ('20150227044734'), ('20150227044800'), ('20150227044803'), ('20150227044804'), ('20150427025619'), ('20160210043109'), ('20160210051448'), ('20160210055910'), ('20160212055159'), ('20160212055449'), ('20160216200401'), ('20160217071943'), ('20160218042005'), ('20160219033611'), ('20160222050605'), ('20160223162347'), ('20160226044247'), ('20160302043309'), ('20160302060224'), ('20160302155356'), ('20160305220106'), ('20160313201026'), ('20160314070131'), ('20160318191246'), ('20160321045134'), ('20160321050934'), ('20160325201115'), ('20160405152513');
 
 

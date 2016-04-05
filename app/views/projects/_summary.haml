@@ -19,6 +19,8 @@
         .participants{style: theme_style(project, :body_text)}
           - project.participants.visible.shuffle.each do |person|
             .name= link_to person.name, person
+          - project.participant_invitations.shuffle.each do |invitation|
+            .name= invitation.name
 
         - if project.role_requests.any?
           .role-requests{style: theme_style(project, :body_text)}

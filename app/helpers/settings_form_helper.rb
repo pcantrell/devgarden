@@ -7,7 +7,10 @@ module SettingsFormHelper
       remote: autosave,
       html: {
         id: "#{model.class.name.dasherize.downcase}-#{tab_name}",
-        class: ('autosave' if autosave)
+        class: [
+          'warn-unsaved',
+          ('autosave' if autosave)
+        ].compact.join(' ')
       }
     }
     semantic_form_for(model, **opts) do |f|

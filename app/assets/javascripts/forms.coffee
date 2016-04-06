@@ -1,7 +1,9 @@
 # Confirm discard on close
 
+warnUnsavedSelector = 'form.warn-unsaved'
+
 anyFormsDirty = ->
-  $('form').toArray().some (form) ->
+  $(warnUnsavedSelector).toArray().some (form) ->
     $(form).data('dirty')
 
 confirmUnload = (callback) ->
@@ -27,9 +29,11 @@ $(document).on 'turbolinks:load', ->
   $('.flashes').addClass('flashed')
 
   dirty = false
-  $(document).on 'change', 'form *', (e) ->
+  $(document).on 'change', warnUnsavedSelector + ' *', (e) ->
+    console.log 'dirty!'
     $(e.target).closest('form').data('dirty', true)
-  $(document).on 'submit', 'form', (e) ->
+  $(document).on 'submit', warnUnsavedSelector, (e) ->
+    console.log 'clean!'
     $(e.target).data('dirty', false)
     true
 

@@ -21,7 +21,6 @@ module ApplicationHelper
   end
 
   def heading(title, **tag_attrs, &block)
-    @first_heading_on_page ||= title
     haml_tag("h#{heading_level}", title, **tag_attrs)
     with_next_heading_level(&block) if block
   end
@@ -37,11 +36,23 @@ module ApplicationHelper
   end
 
   def page_title
-    return @custom_page_title if @custom_page_title
+    @page_title ||= begin
+      heading = first_heading(content_for(:layout))
+      title = if heading
+        strip_tags(heading).strip.gsub(/\s+/, ' ')
+      else
+        controller_name.humanize.capitalize
+      end
+      "Dev Garden – #{title}"
+    end
+  end
 
-    title = @first_heading_on_page ||
-      (params[:id] || controller_name).humanize.capitalize
-    "Dev Garden – #{title}"
+  def first_heading(html)
+    $1 if html =~ %r{
+      <h1 [^>]* >   # Opening tag, with optional attrs
+        (.*?)       # Tag content
+      </h1>         # Closing tag
+    }xm
   end
 
   def span_tag(css_class, text)

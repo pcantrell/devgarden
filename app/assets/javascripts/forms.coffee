@@ -30,10 +30,8 @@ $(document).on 'turbolinks:load', ->
 
   dirty = false
   $(document).on 'change', warnUnsavedSelector + ' *', (e) ->
-    console.log 'dirty!'
     $(e.target).closest('form').data('dirty', true)
   $(document).on 'submit', warnUnsavedSelector, (e) ->
-    console.log 'clean!'
     $(e.target).data('dirty', false)
     true
 

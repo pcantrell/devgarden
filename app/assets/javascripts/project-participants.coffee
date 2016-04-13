@@ -18,28 +18,31 @@ $ ->
   participantsChanged = ->
     $participantList = $('#project-participants ol')
     $participantList.children().remove()
-    for person in getParticipants()
+    for person, index in getParticipants()
       $newParticipant = $("
         <li class='participant'>
           <div class='handle'></div>
           <input type='hidden'
-                 name='project[participations_attributes][][person_id]'
-                 value='#{person.id}'>
-          <div class='title'>#{h person.name}</div>
+                 name='project[participants][][kind]'
+                 value='#{person.kind}'>
+          <input type='hidden'
+                 name='project[participants][][key]'
+                 value='#{person.key}'>
+          <div class='title #{person.kind}'>#{h person.name}</div>
           <button class='remove' #{showIf person.self, 'disabled'}>⊖</button>
           <div class='options'>
             #{
               showIf person.self,
                 "<input type='hidden'
-                        name='project[participations_attributes][][admin]'
+                        name='project[participants][][admin]'
                         value='on'>"
             }
             <input type='checkbox'
-                   id='admin#{person.id}'
-                   name='project[participations_attributes][][admin]'
+                   id='participant-admin-#{index}'
+                   name='project[participants][][admin]'
                    #{showIf person.self, 'disabled'}
                    #{showIf person.admin, 'checked'}>
-            <label for='admin#{person.id}'>Admin</label>
+            <label for='participant-admin-#{index}'>Admin</label>
           </div>
         </li>")
       $newParticipant.data('person', person)
@@ -64,17 +67,28 @@ $ ->
     showErrorMessage("")
 
     participants = getParticipants()
-    existingIndex = (i for person, i in participants when person.id == newPerson.id)[0]
+    console.log participants
+    existingIndex = (                     \
+      i for person, i in participants     \
+        when person.kind == 'participant' \
+          && person.key == newPerson.id   \
+      )[0]
     if existingIndex?
       bounce $($('#project-participants li')[existingIndex])
     else
-      participants.push(newPerson)
+      participants.push
+        kind: 'participant',
+        name: newPerson.name,
+        key: newPerson.id
       setParticipants(participants)  # trigger update
 
   removeParticipant = (toRemove) ->
     participants = getParticipants()
     setParticipants(
-      person for person in participants when person.id != toRemove.id)
+      person                              \
+        for person in participants        \
+        when person.kind != toRemove.kind \
+          || person.key  != toRemove.key)
 
   reorderParticipantsFromDOM = ->
     setParticipants(

@@ -181,10 +181,12 @@ ALTER SEQUENCE locations_id_seq OWNED BY locations.id;
 
 CREATE TABLE participant_invitations (
     id integer NOT NULL,
-    name character varying NOT NULL,
-    email character varying NOT NULL,
     invitation_code text NOT NULL,
     project_id integer,
+    name character varying NOT NULL,
+    email character varying NOT NULL,
+    admin boolean DEFAULT false NOT NULL,
+    "order" integer,
     created_by_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL

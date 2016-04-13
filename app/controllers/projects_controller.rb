@@ -57,10 +57,7 @@ class ProjectsController < ApplicationController
     success = notify_admin_of_changes(project) do
       begin
         Project.transaction do
-          if project_params[:participations_attributes]
-            project.participations.destroy_all
-          end
-          
+          update_participants
           project.update!(project_params)
           project.touch  # Because tag & role req updates don’t touch project, despite touch: true on assocations
 
@@ -121,7 +118,6 @@ private
       :name, :tagline, :description, :url, :scm_urls_as_text, :icon, :icon_cache,
       (:visible if current_user.site_admin?),
       theme: [:primary_hue, :highlight_hue],
-      participations_attributes: [:person_id, :admin],
       tag_ids: [], requested_role_ids: [])
   end
 
@@ -152,16 +148,63 @@ private
   end
 
   def participants_json
-    project.participations.with_visible_person.map do |p|
-      {
-        id: p.person.id,
-        name: p.person.name,
-        avatar_url: p.person.avatar_url,
-        admin: p.admin,
-        self: p.person == current_user
-      }
-    end.to_json
+    def confirmed_participants
+      project.participations.with_visible_person.map do |p|
+        {
+          kind: 'participant',
+          key: p.person_id,
+          name: p.person.name,
+          avatar_url: p.person.avatar_url,
+          admin: p.admin,
+          self: p.person == current_user,
+        }
+      end
+    end
+
+    def invited_participants
+      project.participant_invitations.map do |i|
+        {
+          kind: 'invitation',
+          key: i.email,
+          name: i.name,
+          admin: i.admin,
+        }
+      end
+    end
+
+    (confirmed_participants + invited_participants).to_json
   end
   helper_method :participants_json
+
+  def update_participants
+    update_people(project.participations,          'participant', key_attr: :person_id)
+    update_people(project.participant_invitations, 'invitation',  key_attr: :email)
+  rescue => e
+    p e
+    puts e.backtrace.join("\n")
+    reraise
+  end
+
+  def update_people(association, kind, key_attr:)
+    return unless participant_params = params[:project][:participants]
+
+    unused_items = Hash[
+      association.map do |item|
+        [item.send(key_attr).to_s, item]
+      end
+    ]
+    new_items = []
+
+    participant_params.uniq { |pparam| pparam[:key] }.each do |pparam|
+      next unless pparam[:kind] == kind
+      key = pparam[:key]
+      item = unused_items.delete(key) || association.new(key_attr => key)
+      item.admin = !!pparam[:admin].presence
+      item.name = pparam[:name] if pparam[:name]
+      item.save!
+      new_items << item
+    end
+    association.replace(new_items)
+  end
 
 end

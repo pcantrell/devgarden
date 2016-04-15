@@ -1,4 +1,6 @@
 $ ->
+  # ────── Helpers ──────
+
   h = (s) -> $("<div/>").text(s).html()
 
   noImage = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
@@ -14,6 +16,8 @@ $ ->
       str
     else
       ''
+
+  # ────── View ──────
 
   participantsChanged = ->
     $participantList = $('#project-participants ol')
@@ -49,6 +53,8 @@ $ ->
       $participantList.append($newParticipant)
 
     return
+
+  # ────── State manipulation ──────
 
   getParticipants = ->
     $('#project-participants').data('participants')
@@ -97,6 +103,37 @@ $ ->
   showErrorMessage = (message) ->
     $('#new-participant .inline-error').text(message)
 
+  # ────── Events & Interactions ──────
+
+  # Initial population
+
+  $(document).on 'turbolinks:load', ->
+    if initialParticipants = $('#initialParticipants').attr('data-initial-participants')
+      setParticipants(JSON.parse(initialParticipants), false)
+
+  # Changing admin status
+
+  $(document).on 'change', '#project-participants .admin input', (e) ->
+    person = $(e.target).closest('li').data('person')
+    person.admin = !person.admin
+
+  # Reordering participants
+
+  $(document).on 'turbolinks:load', ->
+    if list = $('#project-participants ol')[0]
+      Sortable.create(
+        list,
+        animation: 150,
+        handle: ".handle",
+        draggable: "li",
+        onUpdate: -> reorderParticipantsFromDOM())
+
+  # Removing participants
+
+  $(document).on 'click', '#project-participants .remove', (e) ->
+    person = $(e.target).closest('.participant').data('person')
+    if confirm "Remove #{person.name} from the project?"
+      removeParticipant(person)
 
   # Typeahead / person selection
 
@@ -140,32 +177,3 @@ $ ->
         errorMessage = "Nobody with that name"
 
     showErrorMessage(errorMessage)
-
-  # Changing admin status
-
-  $(document).on 'change', '#project-participants .admin input', (e) ->
-    person = $(e.target).closest('li').data('person')
-    person.admin = !person.admin
-
-  # Reordering participants
-
-  $(document).on 'turbolinks:load', ->
-    if list = $('#project-participants ol')[0]
-      Sortable.create(
-        list,
-        animation: 150,
-        handle: ".handle",
-        draggable: "li",
-        onUpdate: -> reorderParticipantsFromDOM())
-
-
-  # Removing participants
-
-  $(document).on 'click', '#project-participants .remove', (e) ->
-    person = $(e.target).closest('.participant').data('person')
-    if confirm "Remove #{person.name} from the project?"
-      removeParticipant(person)
-
-  $(document).on 'turbolinks:load', ->
-    if initialParticipants = $('#initialParticipants').attr('data-initial-participants')
-      setParticipants(JSON.parse(initialParticipants), false)

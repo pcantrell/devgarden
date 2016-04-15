@@ -7,8 +7,9 @@
 = settings_form_for project, "participants" do |f|
   %ol.editable-list
   
-    -# The list of participants is dynamically created by a script from JSON, and the script uses
-    -# this attr to initially populate the list. This prevents us from either:
+    -# The HTML for the participants UI is dynamically created client side using JSON.
+    -# The client code uses the initialParticipants element to initially populate the list,
+    -# which prevents us from either:
     -#   (1) havmaking the server try to render the same HTML as the script, or
     -#   (2) forcing an API call every time the page loads.
 

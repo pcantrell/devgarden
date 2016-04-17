@@ -73,7 +73,6 @@ $ ->
     showErrorMessage("")
 
     participants = getParticipants()
-    console.log participants
     existingIndex = (                     \
       i for person, i in participants     \
         when person.kind == 'participant' \
@@ -145,18 +144,35 @@ $ ->
         url: '/people.json?q=%QUERY',
         wildcard: '%QUERY')
 
+    footerTemplate = (message, name) ->
+      (search) -> $("
+        #{showIf message,
+          "<div class='search-footer'>
+            <div class='message'>#{message?(search.query)}</div>
+          </div>"
+        }
+        <div class='search-footer'>
+          <a href='#' class='invite-new'>Invite #{name(search.query)}</a> to the Dev Garden
+        </div>")
+
     $('#new-participant-name').typeahead(
       null,
       name: 'people',
       display: 'name',
       source: personSearch,
-      limit: 8,
+      limit: 6,
       templates:
         suggestion: (person) -> $("
           <div class='search-result'>
             <img src='#{person.avatar_url || noImage}' class='icon'>
             <span class='text'>#{h person.name}</span>
-          </div>"))
+          </div>")
+        notFound: footerTemplate(
+          (query) -> "Can’t find “#{query}”"
+          (query) -> "new user"),
+        footer: footerTemplate(
+          null,
+          (query) -> "a different “#{query}”"))
   
   $(document).on 'typeahead:select', (e, person) ->
     setTimeout (-> addParticipant(person)), 1
@@ -172,7 +188,8 @@ $ ->
       if results.length == 1
         typeahead.select(results)
       else if results.length > 1
-        errorMessage = "Please select a name from the list"
+        typeahead.autocomplete(
+          typeahead.menu.getTopSelectable())
       else
         errorMessage = "Nobody with that name"
 

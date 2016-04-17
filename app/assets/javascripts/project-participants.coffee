@@ -70,7 +70,6 @@ $ ->
     return unless newPerson && newPerson.id
 
     $('#new-participant-name').data('ttTypeahead').setVal("")
-    showErrorMessage("")
 
     participants = getParticipants()
     existingIndex = (                     \
@@ -98,9 +97,6 @@ $ ->
   reorderParticipantsFromDOM = ->
     setParticipants(
       $(elem).data('person') for elem in $('#project-participants li'))
-
-  showErrorMessage = (message) ->
-    $('#new-participant .inline-error').text(message)
 
   # ────── Events & Interactions ──────
 
@@ -178,8 +174,6 @@ $ ->
     setTimeout (-> addParticipant(person)), 1
 
   $(document).on 'keydown', '#new-participant', (e) ->
-    errorMessage = ""
-
     if e.which == 13 && $('#new-participant-name').val()
       e.preventDefault()
 
@@ -190,7 +184,3 @@ $ ->
       else if results.length > 1
         typeahead.autocomplete(
           typeahead.menu.getTopSelectable())
-      else
-        errorMessage = "Nobody with that name"
-
-    showErrorMessage(errorMessage)

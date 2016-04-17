@@ -26,12 +26,13 @@ $ ->
       $newParticipant = $("
         <li class='participant'>
           <div class='handle'></div>
-          <input type='hidden'
-                 name='project[participants][][kind]'
-                 value='#{person.kind}'>
-          <input type='hidden'
-                 name='project[participants][][key]'
-                 value='#{person.key}'>
+          #{
+            (for prop in ['kind', 'key', 'name']
+              "<input type='hidden'
+                      name='project[participants][][#{prop}]'
+                      value='#{person[prop]}'>"
+            ).join("")
+          }
           <div class='title #{person.kind}'>#{h person.name}</div>
           <button class='remove' #{showIf person.self, 'disabled'}>⊖</button>
           <div class='options'>
@@ -81,10 +82,18 @@ $ ->
       bounce $($('#project-participants li')[existingIndex])
     else
       participants.push
-        kind: 'participant',
-        name: newPerson.name,
+        kind: 'participant'
         key: newPerson.id
+        name: newPerson.name
       setParticipants(participants)  # trigger update
+
+  inviteParticipant = (name, email) ->
+    participants = getParticipants()
+    participants.push
+      kind: 'invitation'
+      key: email
+      name: name
+    setParticipants(participants)  # trigger update
 
   removeParticipant = (toRemove) ->
     participants = getParticipants()
@@ -97,6 +106,14 @@ $ ->
   reorderParticipantsFromDOM = ->
     setParticipants(
       $(elem).data('person') for elem in $('#project-participants li'))
+
+  showSearchForm = ->
+    $('#new-participant').show()
+    $('#participant-invitation').hide()
+
+  showInvitationForm = ->
+    $('#new-participant').hide()
+    $('#participant-invitation').show()
 
   # ────── Events & Interactions ──────
 
@@ -133,6 +150,8 @@ $ ->
   # Typeahead / person selection
 
   $(document).on 'turbolinks:load', ->
+    showSearchForm()
+
     personSearch = new Bloodhound(
       datumTokenizer: (x) -> x,  # unused
       queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -148,7 +167,7 @@ $ ->
           </div>"
         }
         <div class='search-footer'>
-          <a href='#' class='invite-new'>Invite #{name(search.query)}</a> to the Dev Garden
+          <a href='#' class='start-invitation'>Invite #{name(search.query)}</a> to the Dev Garden
         </div>")
 
     $('#new-participant-name').typeahead(
@@ -184,3 +203,32 @@ $ ->
       else if results.length > 1
         typeahead.autocomplete(
           typeahead.menu.getTopSelectable())
+
+  $(document).on 'click', '.start-invitation', (e) ->
+    e.preventDefault()
+
+    showInvitationForm()
+    $('#invitation-name').val(
+      $('#new-participant-name').val())
+    $('#invitation-email').val('')
+    $('#invitation-email').focus()
+
+  $(document).on 'click', '.cancel-invitation', (e) ->
+    e.preventDefault()
+
+    showSearchForm()
+
+  $(document).on 'submit', '#participant-invitation', (e) ->
+    e.preventDefault()
+
+    someMissing = false
+    [name, email] = for id in ['name', 'email']
+      $field = $("#invitation-#{id}")
+      unless val = $field.val()
+        $field.focus()
+        someMissing = true
+      val
+
+    unless someMissing
+      inviteParticipant(name, email)
+      showSearchForm()

@@ -178,11 +178,9 @@ private
 
   def update_participants
     update_people(project.participations,          'participant', key_attr: :person_id)
-    update_people(project.participant_invitations, 'invitation',  key_attr: :email)
-  rescue => e
-    p e
-    puts e.backtrace.join("\n")
-    reraise
+    update_people(project.participant_invitations, 'invitation',  key_attr: :email) do |invite, invite_params|
+      invite.name = invite_params[:name] if invite_params[:name]
+    end
   end
 
   def update_people(association, kind, key_attr:)
@@ -200,7 +198,7 @@ private
       key = pparam[:key]
       item = unused_items.delete(key) || association.new(key_attr => key)
       item.admin = !!pparam[:admin].presence
-      item.name = pparam[:name] if pparam[:name]
+      yield(item, pparam) if block_given?
       item.save!
       new_items << item
     end

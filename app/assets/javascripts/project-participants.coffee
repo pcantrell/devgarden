@@ -69,7 +69,7 @@ $ ->
   addParticipant = (newPerson) ->
     return unless newPerson && newPerson.id
 
-    $('#new-participant input[type=text]').val("")
+    $('#new-participant-name').data('ttTypeahead').setVal("")
     showErrorMessage("")
 
     participants = getParticipants()

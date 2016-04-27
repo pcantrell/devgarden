@@ -190,13 +190,23 @@ $ ->
           (query) -> "a different “#{query}”"))
   
   $(document).on 'typeahead:select', (e, person) ->
-    setTimeout (-> addParticipant(person)), 1
+    addPerson = ->
+      addParticipant(person)
+      $('#new-participant').scrollIntoView()
+    setTimeout addPerson, 1
 
-  $(document).on 'keydown', '#new-participant', (e) ->
-    if e.which == 13 && $('#new-participant-name').val()
+  $(document).on 'keydown', '#new-participant-name', (e) ->
+    $nameInput = $('#new-participant-name')
+
+    # Parent form has padding that extends under typeahead menu,
+    # so scrolling it into view shows menu too.
+
+    $('#new-participant').scrollIntoView()
+
+    if e.which == 13 && $nameInput.val()
       e.preventDefault()
 
-      typeahead = $('#new-participant-name').data('ttTypeahead')
+      typeahead = $nameInput.data('ttTypeahead')
       results = typeahead.menu._getSelectables()
       if results.length == 1
         typeahead.select(results)

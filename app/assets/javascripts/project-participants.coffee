@@ -224,7 +224,8 @@ $ ->
     someMissing = false
     [name, email] = for id in ['name', 'email']
       $field = $("#invitation-#{id}")
-      unless val = $field.val()
+      val = $field.val()
+      unless val || someMissing
         $field.focus()
         someMissing = true
       val

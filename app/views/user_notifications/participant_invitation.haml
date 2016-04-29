@@ -1,0 +1,21 @@
+%p
+  <b>#{@invitation.created_by.full_name}</b>
+  indicated that you worked on the
+  <b>#{@invitation.project.name}</b>
+  project.
+%p
+  Is that correct?
+%p
+  If so, please accept the invitation below so that we can credit you properly!
+
+%blockquote.featured
+  %b= link_to 'View Invitation', accept_invitation_url(@invitation.invitation_code)
+
+%p
+  What is the Dev Garden? It is a space that supports student software projects at Macalester.
+  It is open to all majors, roles, backgrounds, and ability levels.
+%p
+  The 
+  = link_to "Dev Garden site", root_url
+  you’re being invited to is a college-wide portfolio of student software projects,
+  designed to showcase your amazing work and encourage collaboration.

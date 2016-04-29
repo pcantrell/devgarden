@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback" => "sessions#create"
   get "/auth/failure" => "sessions#create_failed"
 
+  get "/invitation/:code" => "invitations#accept", as: :accept_invitation
+
   resources :projects
   resources :people
   resources :roles

@@ -177,9 +177,16 @@ private
   helper_method :participants_json
 
   def update_participants
+    invitations_to_send = []
     update_people(project.participations,          'participant', key_attr: :person_id)
     update_people(project.participant_invitations, 'invitation',  key_attr: :email) do |invite, invite_params|
       invite.name = invite_params[:name] if invite_params[:name]
+      invite.created_by ||= current_user
+      invitations_to_send << invite if invite.new_record?
+    end
+
+    invitations_to_send.each do |invite|
+      UserNotifications.participant_invitation(invite).deliver_later
     end
   end
 

@@ -42,7 +42,9 @@
     - unless flash.empty?
       .flashes
         - flash.each do |kind, message|
-          .flash{class: kind}= message
+          .flash{class: kind}
+            .icon
+            .message= message
       - flash.clear
 
     %main

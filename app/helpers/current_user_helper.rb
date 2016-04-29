@@ -10,7 +10,7 @@ module CurrentUserHelper
   end
 
   def log_out
-    session[:user_id] = nil
+    session.delete(:user_id)
   end
 
   def current_user
@@ -24,11 +24,12 @@ module CurrentUserHelper
     !!session[:user_id]
   end
 
-  def require_login
+  def require_login(override_new_user_setup: false)
     unless logged_in?
-      save_login_redirect_url
+      save_login_redirect_url(override_new_user_setup)
       redirect_to login_path,
-        flash: { error: "You must log in to #{action_name_as_verb} #{controller_name}." }
+        flash: { notice: "You must log in to #{action_name_as_verb} #{controller_name}." }
+      false
     end
   end
 
@@ -40,14 +41,24 @@ module CurrentUserHelper
     end
   end
 
-  def pluck_login_redirect_url
-    if current_user.newly_created?
-      edit_person_path(current_user, anchor: 'info', initial_setup: 1)
+  def pluck_login_redirect_url(default_url: root_url)
+
+    saved_url = session.delete(:login_redirect_url) || default_url
+    override_new_user_setup = session.delete(:override_new_user_setup)
+
+    if !current_user.newly_created?
+      saved_url
+    elsif override_new_user_setup
+      # New user, but login_redirect_url promises to call pluck_login_redirect_url again
+      session[:login_redirect_url] = new_user_setup_path
+      saved_url
     else
-      saved_url = session[:login_redirect_url]
-      session[:login_redirect_url] = nil
-      saved_url || root_url
+      new_user_setup_path
     end
+  end
+
+  def new_user_setup_path
+    edit_person_path(current_user, anchor: 'info', initial_setup: 1)
   end
 
   def action_name_as_verb
@@ -70,9 +81,10 @@ private
       .perform_later(person)
   end
 
-  def save_login_redirect_url
+  def save_login_redirect_url(override_new_user_setup = false)
     if request.method == 'GET'
       session[:login_redirect_url] = request.url
+      session[:override_new_user_setup] = true if override_new_user_setup
     end
   end
 

@@ -1,6 +1,8 @@
 class InvitationsController < ApplicationController
 
-  before_action :require_login
+  # Require login, but ask to be redirected back here even for
+  # newly created users.
+  before_action -> { require_login(override_new_user_setup: true) }
 
   def accept
     invitation = ParticipantInvitation.find_by(invitation_code: params[:code])
@@ -13,7 +15,11 @@ class InvitationsController < ApplicationController
     invitation.accepted_by(current_user)
 
     flash[:success] = "You are now participating in #{invitation.project.name}."
-    redirect_to invitation.project
+
+    # Follow through on user setup if this is a newly created user;
+    # other wise show the newly joined project.
+    redirect_to pluck_login_redirect_url(
+      default_url: invitation.project)
   end
 
 end

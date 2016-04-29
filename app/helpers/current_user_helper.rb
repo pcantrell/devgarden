@@ -66,7 +66,7 @@ private
       .deliver_later
 
     SubscribeToMailingListJob
-      .set(wait: 5.seconds)   # so they have time to change their email
+      .set(wait: 5.minutes)   # so they have time to change their email
       .perform_later(person)
   end
 

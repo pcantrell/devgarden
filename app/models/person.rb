@@ -29,11 +29,11 @@ class Person < ApplicationRecord
   end
 
   def name
-    full_name || github_user || "[anonymous:#{id}]"
+    full_name.presence || github_user.presence || "[anonymous:#{id}]"
   end
 
   def short_name
-    github_user || name.split.first
+    github_user.presence || name.split.first
   end
 
   def newly_created?

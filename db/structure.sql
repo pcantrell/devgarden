@@ -2,12 +2,16 @@
 -- PostgreSQL database dump
 --
 
+-- Dumped from database version 9.3.5
+-- Dumped by pg_dump version 9.5.1
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
@@ -30,7 +34,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE ar_internal_metadata (
@@ -42,7 +46,7 @@ CREATE TABLE ar_internal_metadata (
 
 
 --
--- Name: event_dates; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: event_dates; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE event_dates (
@@ -75,7 +79,7 @@ ALTER SEQUENCE event_dates_id_seq OWNED BY event_dates.id;
 
 
 --
--- Name: events; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: events; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE events (
@@ -109,7 +113,7 @@ ALTER SEQUENCE events_id_seq OWNED BY events.id;
 
 
 --
--- Name: job_reports; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: job_reports; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE job_reports (
@@ -144,7 +148,7 @@ ALTER SEQUENCE job_reports_id_seq OWNED BY job_reports.id;
 
 
 --
--- Name: locations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: locations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE locations (
@@ -176,7 +180,7 @@ ALTER SEQUENCE locations_id_seq OWNED BY locations.id;
 
 
 --
--- Name: participant_invitations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: participant_invitations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE participant_invitations (
@@ -213,7 +217,7 @@ ALTER SEQUENCE participant_invitations_id_seq OWNED BY participant_invitations.i
 
 
 --
--- Name: participations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: participations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE participations (
@@ -246,7 +250,7 @@ ALTER SEQUENCE participations_id_seq OWNED BY participations.id;
 
 
 --
--- Name: people; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: people; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE people (
@@ -289,7 +293,7 @@ ALTER SEQUENCE people_id_seq OWNED BY people.id;
 
 
 --
--- Name: project_tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: project_tags; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE project_tags (
@@ -322,7 +326,7 @@ ALTER SEQUENCE project_tags_id_seq OWNED BY project_tags.id;
 
 
 --
--- Name: projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: projects; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE projects (
@@ -360,7 +364,7 @@ ALTER SEQUENCE projects_id_seq OWNED BY projects.id;
 
 
 --
--- Name: que_jobs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: que_jobs; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE que_jobs (
@@ -402,7 +406,7 @@ ALTER SEQUENCE que_jobs_job_id_seq OWNED BY que_jobs.job_id;
 
 
 --
--- Name: role_categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: role_categories; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE role_categories (
@@ -433,7 +437,7 @@ ALTER SEQUENCE role_categories_id_seq OWNED BY role_categories.id;
 
 
 --
--- Name: role_offers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: role_offers; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE role_offers (
@@ -466,7 +470,7 @@ ALTER SEQUENCE role_offers_id_seq OWNED BY role_offers.id;
 
 
 --
--- Name: role_requests; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: role_requests; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE role_requests (
@@ -500,7 +504,7 @@ ALTER SEQUENCE role_requests_id_seq OWNED BY role_requests.id;
 
 
 --
--- Name: roles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: roles; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE roles (
@@ -534,7 +538,7 @@ ALTER SEQUENCE roles_id_seq OWNED BY roles.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE schema_migrations (
@@ -543,7 +547,7 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: tag_categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: tag_categories; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE tag_categories (
@@ -576,7 +580,7 @@ ALTER SEQUENCE tag_categories_id_seq OWNED BY tag_categories.id;
 
 
 --
--- Name: tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: tags; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE tags (
@@ -724,7 +728,7 @@ ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclas
 
 
 --
--- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ar_internal_metadata
@@ -732,7 +736,7 @@ ALTER TABLE ONLY ar_internal_metadata
 
 
 --
--- Name: event_dates_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: event_dates_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY event_dates
@@ -740,7 +744,7 @@ ALTER TABLE ONLY event_dates
 
 
 --
--- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY events
@@ -748,7 +752,7 @@ ALTER TABLE ONLY events
 
 
 --
--- Name: job_reports_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: job_reports_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY job_reports
@@ -756,7 +760,7 @@ ALTER TABLE ONLY job_reports
 
 
 --
--- Name: locations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: locations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY locations
@@ -764,7 +768,7 @@ ALTER TABLE ONLY locations
 
 
 --
--- Name: participant_invitations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: participant_invitations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY participant_invitations
@@ -772,7 +776,7 @@ ALTER TABLE ONLY participant_invitations
 
 
 --
--- Name: participations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: participations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY participations
@@ -780,7 +784,7 @@ ALTER TABLE ONLY participations
 
 
 --
--- Name: people_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: people_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY people
@@ -788,7 +792,7 @@ ALTER TABLE ONLY people
 
 
 --
--- Name: project_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: project_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY project_tags
@@ -796,7 +800,7 @@ ALTER TABLE ONLY project_tags
 
 
 --
--- Name: projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY projects
@@ -804,7 +808,7 @@ ALTER TABLE ONLY projects
 
 
 --
--- Name: que_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: que_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY que_jobs
@@ -812,7 +816,7 @@ ALTER TABLE ONLY que_jobs
 
 
 --
--- Name: role_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: role_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY role_categories
@@ -820,7 +824,7 @@ ALTER TABLE ONLY role_categories
 
 
 --
--- Name: role_offers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: role_offers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY role_offers
@@ -828,7 +832,7 @@ ALTER TABLE ONLY role_offers
 
 
 --
--- Name: role_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: role_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY role_requests
@@ -836,7 +840,7 @@ ALTER TABLE ONLY role_requests
 
 
 --
--- Name: roles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: roles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY roles
@@ -844,7 +848,7 @@ ALTER TABLE ONLY roles
 
 
 --
--- Name: schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY schema_migrations
@@ -852,7 +856,7 @@ ALTER TABLE ONLY schema_migrations
 
 
 --
--- Name: tag_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: tag_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tag_categories
@@ -860,7 +864,7 @@ ALTER TABLE ONLY tag_categories
 
 
 --
--- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tags
@@ -868,154 +872,154 @@ ALTER TABLE ONLY tags
 
 
 --
--- Name: index_event_dates_on_event_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_event_dates_on_event_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_event_dates_on_event_id ON event_dates USING btree (event_id);
 
 
 --
--- Name: index_events_on_location_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_events_on_location_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_events_on_location_id ON events USING btree (location_id);
 
 
 --
--- Name: index_events_on_updated_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_events_on_updated_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_events_on_updated_at ON events USING btree (updated_at);
 
 
 --
--- Name: index_job_reports_on_owner_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_job_reports_on_owner_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_job_reports_on_owner_id ON job_reports USING btree (owner_id);
 
 
 --
--- Name: index_participant_invitations_on_created_by_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_participant_invitations_on_created_by_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_participant_invitations_on_created_by_id ON participant_invitations USING btree (created_by_id);
 
 
 --
--- Name: index_participant_invitations_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_participant_invitations_on_project_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_participant_invitations_on_project_id ON participant_invitations USING btree (project_id);
 
 
 --
--- Name: index_participations_on_person_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_participations_on_person_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_participations_on_person_id ON participations USING btree (person_id);
 
 
 --
--- Name: index_participations_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_participations_on_project_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_participations_on_project_id ON participations USING btree (project_id);
 
 
 --
--- Name: index_people_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_people_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_people_on_email ON people USING btree (email);
 
 
 --
--- Name: index_people_on_external_ids; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_people_on_external_ids; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_people_on_external_ids ON people USING gin (external_ids);
 
 
 --
--- Name: index_people_on_github_user; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_people_on_github_user; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_people_on_github_user ON people USING btree (github_user);
 
 
 --
--- Name: index_people_on_updated_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_people_on_updated_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_people_on_updated_at ON people USING btree (updated_at);
 
 
 --
--- Name: index_project_tags_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_project_tags_on_project_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_project_tags_on_project_id ON project_tags USING btree (project_id);
 
 
 --
--- Name: index_project_tags_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_project_tags_on_tag_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_project_tags_on_tag_id ON project_tags USING btree (tag_id);
 
 
 --
--- Name: index_projects_on_updated_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_projects_on_updated_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_projects_on_updated_at ON projects USING btree (updated_at);
 
 
 --
--- Name: index_role_offers_on_person_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_role_offers_on_person_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_role_offers_on_person_id ON role_offers USING btree (person_id);
 
 
 --
--- Name: index_role_offers_on_role_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_role_offers_on_role_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_role_offers_on_role_id ON role_offers USING btree (role_id);
 
 
 --
--- Name: index_role_requests_on_project_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_role_requests_on_project_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_role_requests_on_project_id ON role_requests USING btree (project_id);
 
 
 --
--- Name: index_role_requests_on_role_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_role_requests_on_role_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_role_requests_on_role_id ON role_requests USING btree (role_id);
 
 
 --
--- Name: index_roles_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_roles_on_category_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_roles_on_category_id ON roles USING btree (category_id);
 
 
 --
--- Name: index_tags_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_tags_on_category_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_tags_on_category_id ON tags USING btree (category_id);
 
 
 --
--- Name: index_tags_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_tags_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_tags_on_name ON tags USING btree (name);

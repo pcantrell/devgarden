@@ -22,7 +22,7 @@ class Project < ApplicationRecord
   after_save :remove_duplicate_tags
   after_save :remove_duplicate_participants
 
-  include RecentScope
+  include OrderedDisplay
   include Themed
   include ConditionallyVisible
   include ChangeNotifying
@@ -97,6 +97,15 @@ private
     self.participations = participations
       .sort_by { |p| p.admin ? 0 : 1 }  # user is admin if any of their dup entries are
       .uniq(&:person_id)
+  end
+
+  def metadata_quality
+    [
+      (0.50 if icon.present?),
+      (0.05 if tagline.present?),
+      (0.20 * [(description || '').length / 1000.0, 1.0].min),
+      (0.25 if role_requests.any?)
+    ].compact.sum
   end
 
 end

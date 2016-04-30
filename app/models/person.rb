@@ -7,7 +7,7 @@ class Person < ApplicationRecord
 
   validates :class_year, inclusion: 1920..(Time.now.year + 4), allow_blank: true
 
-  include RecentScope
+  include OrderedDisplay
   include Themed
   include ConditionallyVisible
   include ChangeNotifying
@@ -108,6 +108,13 @@ private
   def self.find_case_insensitive_if_present(key, value)
     return nil if value.blank?
     find_by(key => value.downcase)
+  end
+
+  def metadata_quality
+    [
+      (0.3 if full_name.present?),
+      (0.7 if role_offers.any?)
+    ].compact.sum
   end
 
 end

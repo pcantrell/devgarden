@@ -108,29 +108,6 @@ $thumb-size: 48px
       width: 64px
       height: 64px
 
-@mixin project-thumbs
-  .projects
-    h2, h3, h4
-      white-space: nowrap
-    .project
-      display: table
-      margin-right: 0.6em
-      display: inline-block
-      width: 13.2em
-      overflow: hidden
-      .icon, .name
-        display: table-cell
-        vertical-align: middle
-      .icon
-        img
-          float: left
-        @include thumb-icon
-        padding: 0.6em 0
-      .name
-        @include meta-important-font
-        padding: 1.2em 0 1.2em 0.6em
-        width: 100%
-
 @mixin meta-float-right
   @include if-below-width(32em)
     @include hairline-border(bottom, $dark-color)

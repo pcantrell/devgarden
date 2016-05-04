@@ -1,5 +1,27 @@
 @import "_shared"
 
+.projects.thumbs
+  h2, h3, h4
+    white-space: nowrap
+  .project
+    display: table
+    margin-right: 0.6em
+    display: inline-block
+    width: 13.2em
+    overflow: hidden
+    .icon, .name
+      display: table-cell
+      vertical-align: middle
+    .icon
+      img
+        float: left
+      @include thumb-icon
+      padding: 0.6em 0
+    .name
+      @include meta-important-font
+      padding: 1.2em 0 1.2em 0.6em
+      width: 100%
+
 .projects-controller.show-action main
   .banner
     $small-banner-width: 36em

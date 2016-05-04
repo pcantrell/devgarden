@@ -1,10 +1,7 @@
 
 - project_groups.each do |group_title, projects|
   - if projects.any?
-    - heading t("people.project_group.#{group_title}") do
-      %ul
-        - projects.each do |project|
-          %li= link_to project.name, project
+    = render 'projects/thumb_list', projects: projects, project_list_title: t("people.project_group.#{group_title}")
 
 - if person.projects.visible.empty?
   %p Not currently participating in any projects.

@@ -85,15 +85,18 @@ private
 
   def project_groups
     @project_groups ||=
-      person.participations.with_visible_project.group_by do |participation|
-        if participation.admin?
-          :admin
-        else
-          :participant
-        end
-      end.map do |group, participations|
-        [group, participations.map(&:project)]
-      end
+      person.participations.with_visible_project
+        .group_by do |participation|
+            if participation.admin?
+              :admin
+            else
+              :participant
+            end
+          end
+        .sort_by(&:first)  # Cheat: “admin” comes first in alphabetical order
+        .map do |group, participations|
+            [group, participations.map(&:project)]
+          end
   end
   helper_method :project_groups
 

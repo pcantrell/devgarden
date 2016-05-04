@@ -43,8 +43,9 @@
     &.projects
       width: 60%
       color: rgba(39,37,93,0.1)
-      > .content
-        margin-top: ($person-vpad - $project-vpad)  // so tops of headings line up
+      @include if-above-width(36em)
+        > .content
+          margin-top: ($person-vpad - $project-vpad)  // so tops of headings line up
     &.people
       overflow: hidden
       width: 40%

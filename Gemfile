@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-
-gem 'rails', '~> 5.0.0.beta'
+gem 'rails', '~> 5.0'
 
 # Persistence & cache
 
@@ -20,7 +19,7 @@ gem 'formtastic'
 gem 'jbuilder', '~> 2.0'
 
 gem 'jquery-rails'
-gem 'turbolinks', '~> 5.0.0.beta'
+gem 'turbolinks', '~> 5.0'
 
 # Static pages
 

@@ -10,13 +10,14 @@ $ ->
     for popup in $('.popup-on-scroll')
       $popup = $(popup)
       em = parseFloat($("body").css("font-size"))
+      popupHeight = $popup.outerHeight()
       offset =
-        Math.max(
+        popupHeight - Math.max(
           0.6*em,          # Always show a little bit poking up
           Math.min(
-            $popup.outerHeight(),
+            popupHeight,
             scrollOffset * 0.67 - 1.2*em))
-      $popup.css('margin-top', "#{-offset}px")
+      $popup.css('transform', "translateY(#{offset}px)")
 
   applyScrollEffects = ->
     scrollOffset = $(document).scrollTop()

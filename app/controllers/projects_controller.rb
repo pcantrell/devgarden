@@ -141,7 +141,6 @@ private
         github_token: session[:github_token],
         requesting_user: current_user,
         job_report: job_report)
-      Que.wake!
 
       redirect_to job_report
     end

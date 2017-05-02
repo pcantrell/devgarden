@@ -50,8 +50,8 @@ Rails.application.configure do
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
   config.logger = Logger.new(STDOUT)
-  config.logger.level = Logger::WARN
-  config.log_level = (ENV['RAILS_LOG_LEVEL'] || :warn).to_sym
+  config.logger.level = Logger::INFO
+  config.log_level = (ENV['RAILS_LOG_LEVEL'] || :info).to_sym
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

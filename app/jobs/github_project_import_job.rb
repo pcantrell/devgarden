@@ -44,8 +44,8 @@ private
     unless repo_info.permissions.push || @requesting_user.site_admin?
       raise "You need to have push access to #{repo} on Github in order to import it."
     end
-    project.name    ||= repo_info.name.capitalize
-    project.tagline ||= repo_info.description[0...Project::MAX_TAGLINE_LENGTH]
+    project.name    ||= repo_info.name&.capitalize
+    project.tagline ||= (repo_info.description || "")[0...Project::MAX_TAGLINE_LENGTH]
     project.url     ||= repo_info.homepage
   end
 

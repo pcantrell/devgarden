@@ -22,11 +22,13 @@ module OrderedDisplay
     end
 
     before_save do
-      self.display_order =
-        [
-          created_at || Time.now,
-          Time.now - 1.month * (1 - metadata_quality)
-        ].max.to_i * 1000
+      if changed.any? { |attr| attr !~ /_at$|display_order/ }  # Don't bump to top just for updated_at / logged_in_at
+        self.display_order =
+          [
+            created_at || Time.now,
+            Time.now - 1.month * (1 - metadata_quality)
+          ].max.to_i * 1000
+      end
     end
   end
 end

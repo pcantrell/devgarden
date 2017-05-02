@@ -26,7 +26,7 @@ module OrderedDisplay
         self.display_order =
           [
             created_at || Time.now,
-            Time.now - 1.month * (1 - metadata_quality)
+            Time.now - 1.month.to_f * (1 - metadata_quality)
           ].max.to_i * 1000
       end
     end

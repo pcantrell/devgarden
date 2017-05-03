@@ -85,6 +85,7 @@
     h2, .role, .tagline, .participants .name, &.person .project
       @include ellipsis-overflow
 
+  // Default (projects)+(people) column rhythm is (3+3)+(2)
   .project.summary
     > .content
       padding: $project-vpad 1.2em
@@ -131,6 +132,7 @@
     .role-offers
       float: right
 
+  // Projects only on narrow screens
   @include if-below-width(36em)
     .summary-group
       margin: 0
@@ -144,6 +146,20 @@
       &.people
         display: none
 
+  @mixin two-column-summary
+    width: 50%
+    float: left
+    clear: left
+    &:nth-child(odd)
+      .content
+        padding-right: 0
+    &:nth-child(even)
+      float: right
+      clear: right
+      .content
+        padding-left: 1.2em
+
+  // Column rhythm is (3+3)+(2)
   @include if-above-width(60em)
     .summary-group
       &.projects
@@ -151,19 +167,19 @@
       &.people
         overflow: hidden
         width: 25%
+    .summary.project
+      @include two-column-summary
+
+  // Column rhythm is (3+3)+(2+2)
+  @include if-above-width(75em)
+    .summary-group
+      &.projects
+        width: 60%
+      &.people
+        overflow: hidden
+        width: 40%
     .summary
-      &.project
-        width: 50%
-        float: left
-        clear: left
-        &:nth-child(odd)
-          .content
-            padding-right: 0
-        &:nth-child(even)
-          float: right
-          clear: right
-          .content
-            padding-left: 1.2em
+      @include two-column-summary
 
   .divider
     clear: both

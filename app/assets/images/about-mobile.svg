@@ -4,13 +4,13 @@
 	 viewBox="0 0 475.3 612.1" style="enable-background:new 0 0 475.3 612.1;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#282561;}
-	.st1{font-family:'FreightTextProBook-Regular';}
+	.st1{font-family:'Calluna-Regular';}
 	.st2{font-size:27.3262px;}
 	.st3{fill:#878787;}
 	.st4{font-size:36.4349px;}
 	.st5{font-size:18.2174px;}
 	.st6{fill:#610061;}
-	.st7{font-family:'FreightTextProMedium-Regular';}
+	.st7{font-family:'Calluna-Regular';}
 	.st8{font-size:13.6631px;}
 	.st9{fill:#006146;}
 	.st10{fill:#612900;}
@@ -31,9 +31,7 @@
 <g>
 	<g>
 		<g>
-			<text transform="matrix(1 0 0 1 291.8858 317.6019)" class="st0 st1 st2">Where do I g</text>
-			<text transform="matrix(1 0 0 1 435.8858 317.6019)" class="st0 st1 st2">o</text>
-			<text transform="matrix(1 0 0 1 448.3858 317.6019)" class="st0 st1 st2">?</text>
+			<text transform="matrix(1 0 0 1 286.8858 317.6019)" class="st0 st1 st2">Where do I go?</text>
 		</g>
 		<text transform="matrix(1 0 0 1 459.6701 321.3342)" class="st3 st1 st4">”</text>
 	</g>

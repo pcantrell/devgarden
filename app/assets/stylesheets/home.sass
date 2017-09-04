@@ -5,6 +5,7 @@
   $summary-overflow: 10em
   $project-vpad: 2.4em
   $person-vpad: 1.2em
+  $megabanner-opacity: 0.15
 
   .nav-bar .logo
     display: none
@@ -42,18 +43,18 @@
         margin-right: 1.2em
     &.projects
       width: 60%
-      color: rgba(39,37,93,0.1)
+      color: rgba(39,37,93,$megabanner-opacity*0.5)
       @include if-above-width(36em)
         > .content
           margin-top: ($person-vpad - $project-vpad)  // so tops of headings line up
     &.people
       overflow: hidden
       width: 40%
-      color: rgba(39,37,93,0.4)
+      color: rgba(39,37,93,$megabanner-opacity*1.3)
     h1
       position: relative
       font:
-        size: 1200%
+        size: 1600%
         weight: 900
       text-transform: uppercase
       margin: 0

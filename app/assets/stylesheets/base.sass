@@ -42,6 +42,10 @@ h3
     @include meta-heading
     margin-bottom: 0.6em
 
+main
+  &>h1, &>h2, &>h3, &>h4
+    color: $heading-color
+
 p
   margin: 0.6em 0
 
@@ -167,15 +171,15 @@ img.none
       padding-right: 0.8ex
       vertical-align: top
     &.success
-      background: #3da649
+      background: $success-color
       .icon:before
         content: '✓'
     &.warning, &.notice
-      background: #bc941f
+      background: $warning-color
       .icon:before
         content: '!'
     &.error
-      background: #a6443d
+      background: $error-color
       .icon:before
         content: '!'
 

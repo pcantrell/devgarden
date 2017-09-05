@@ -15,8 +15,6 @@ body
 main
   margin: 0 auto
   padding: 0 1.2em
-  @include if-below-width(24em)
-    padding: 0 0.6em
   max-width: 42em
   margin-bottom: 2.4em
 
@@ -98,10 +96,17 @@ img.none
   margin-top: 0.6em
   text-align: right
   @include meta-more
+  @include if-below-width(36em)
+    a:after
+      margin-right: 0 !important
 
 .infinite-scroll-more
   clear: both
   margin: 1.2em 2.4em 0 0
+
+.loading
+  @include pulsing
+  @include meta-more-font
 
 .features
   margin: 0 auto

@@ -1,7 +1,7 @@
 - cache [event, dates] do
   .event
     .title= link_to event.title, event
-    .dates
+    .dates{ 'data-collapse-children': 6 }
       - dates.each do |date|
         .date= link_to format_time_range(date.start_time, date.end_time), event
     - if event.location

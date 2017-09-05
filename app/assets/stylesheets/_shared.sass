@@ -77,6 +77,8 @@ $danger-color: $error-color
     padding-left: $icon-spacing
     margin-right: -($icon-width + $icon-spacing)
     vertical-align: middle
+  &.more-down a:after
+    content: asset-data-url('more-down.svg')
 
 @mixin button
   @include title-font

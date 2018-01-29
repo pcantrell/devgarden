@@ -39,7 +39,7 @@ class Project < ApplicationRecord
     tags
       .visible
       .group_by(&:category)
-      .sort_by(&:first)
+      .sort_by(&:first)   # Sort groups in category order
   end
 
   include StringArrayAttribute

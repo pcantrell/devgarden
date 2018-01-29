@@ -42,6 +42,11 @@ gem 'mini_magick'
 gem 'omniauth-github'
 gem 'octokit'
 
+# Calendar integration
+
+gem 'icalendar'
+gem 'icalendar-recurrence'
+
 # Util
 
 gem 'ransack', github: 'activerecord-hackery/ransack'

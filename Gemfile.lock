@@ -126,6 +126,11 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.8.6)
+    icalendar (2.4.1)
+    icalendar-recurrence (1.1.2)
+      icalendar (~> 2.0)
+      ice_cube (~> 0.13)
+    ice_cube (0.16.2)
     ice_nine (0.11.2)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
@@ -304,6 +309,8 @@ DEPENDENCIES
   haml!
   haml-rails!
   high_voltage!
+  icalendar
+  icalendar-recurrence
   ice_nine
   jbuilder (~> 2.0)
   jquery-rails

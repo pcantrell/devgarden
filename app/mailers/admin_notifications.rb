@@ -8,9 +8,16 @@ class AdminNotifications < ApplicationMailer
     @model = model
     @changed_attrs = changed_attrs
 
-    mail to: Person.where(site_admin: true).map(&:email),
+    mail to: site_admin_emails,
          subject: "[devgarden] #{@user_name} made changes",
          references: "<#{user.id}changes@devgarden>"
+  end
+
+  def calendar_import_had_problems(problems)
+    @problems = problems
+
+    mail to: site_admin_emails,
+         subject: "[devgarden] Calendar import problems"
   end
 
 private
@@ -19,5 +26,9 @@ private
     model.try(:name)&.presence || model.to_s
   end
   helper_method :model_name
+
+  def site_admin_emails
+    Person.where(site_admin: true).map(&:email)
+  end
 
 end

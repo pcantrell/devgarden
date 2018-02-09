@@ -4,7 +4,7 @@ gem 'rails', '~> 5.0'
 
 # Persistence & cache
 
-gem 'pg'
+gem 'pg', '~> 0.2'
 gem 'dalli'
 gem 'que'
 
@@ -57,7 +57,7 @@ group :development, :test do
   gem 'byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 3.0'
 
   gem 'spring'
   gem 'letter_opener'

@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/activerecord-hackery/ransack.git
+  remote: https://github.com/activerecord-hackery/ransack.git
   revision: 4128660fd26797874511a8b0f54de8ffacfc826d
   specs:
     ransack (1.8.8)
@@ -10,7 +10,7 @@ GIT
       polyamorous (~> 1.3.2)
 
 GIT
-  remote: git://github.com/haml/haml.git
+  remote: https://github.com/haml/haml.git
   revision: c32fa3c3356d3f4c1df73518910f46ea5f5d9fda
   specs:
     haml (5.0.4)
@@ -18,7 +18,7 @@ GIT
       tilt
 
 GIT
-  remote: git://github.com/indirect/haml-rails.git
+  remote: https://github.com/indirect/haml-rails.git
   revision: df4ca1490969c4113dd2aac4a626ca3a9dcb4fa3
   specs:
     haml-rails (1.0.0)
@@ -29,7 +29,7 @@ GIT
       railties (>= 4.0.1)
 
 GIT
-  remote: git://github.com/thoughtbot/high_voltage.git
+  remote: https://github.com/thoughtbot/high_voltage.git
   revision: 7f363bbc5536b429c31fd6534740b546a980a06d
   specs:
     high_voltage (3.0.0)
@@ -339,4 +339,4 @@ DEPENDENCIES
   web-console (~> 3.0)
 
 BUNDLED WITH
-   1.15.3
+   1.16.1

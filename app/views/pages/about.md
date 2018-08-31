@@ -31,4 +31,4 @@ These are all great reasons to visit.
 
 ## Who’s behind it?
 
-The Dev Garden is run by [MSCS](http://www.macalester.edu/academics/mscs/) professor and freelance software developer [Paul Cantrell](/people/1) ’98. It is housed in the [Innovator Space](http://www.macalester.edu/entrepreneurship/create/), which the Dev Garden co-sponsors with Macalester’s [Entrepreneurship Program](http://www.macalester.edu/entrepreneurship/). The name came from a suggestion by [Hannah Brown](/people/19) ’15.
+The Dev Garden is run by [MSCS](http://www.macalester.edu/academics/mscs/) professor and freelance software developer [Paul Cantrell](/people/1) ’98. It is housed in the [Idea Lab](https://www.macalester.edu/entrepreneurship/idealab/). The name came from a suggestion by [Hannah Brown](/people/19) ’15.

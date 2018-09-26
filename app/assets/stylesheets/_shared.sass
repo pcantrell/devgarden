@@ -67,16 +67,24 @@ $danger-color: $error-color
   @include meta-more-font
   font-size: 80%
   text-transform: uppercase
-  a:after
-    display: inline-block
-    opacity: 0.33
-    content: asset-data-url('more.svg')
+  a
     $icon-width: 0.6em
     $icon-spacing: 0.4em
-    width: $icon-width
-    padding-left: $icon-spacing
-    margin-right: -($icon-width + $icon-spacing)
-    vertical-align: middle
+    &:after
+      display: inline-block
+      opacity: 0.33
+      vertical-align: middle
+    &:last-child:after
+      width: $icon-width
+      content: asset-data-url('more.svg')
+      padding-left: $icon-spacing
+      margin-right: -($icon-width + $icon-spacing)
+    &:not(:last-child):after
+      content: '|'
+      color: black
+      width: $icon-width
+      margin: 0 $icon-spacing
+      text-align: center
   &.more-down
     text-align: left
     margin-top: 0.3em

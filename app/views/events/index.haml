@@ -4,7 +4,11 @@
 - if current_user&.site_admin?
   = link_to "New Event", new_event_path, class: 'big-button edit'
 
-- heading event_query_description do
+- heading event_query_description do      
+  .subscribe
+    Subscribe:
+    = link_to "Google Calendar", Rails.application.config.x.dev_garden.gcal_url
+    = link_to "iPhone", Rails.application.config.x.dev_garden.ics_url
 
   .events
     .event-list

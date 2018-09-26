@@ -1,4 +1,4 @@
-calendar_url = 'https://calendar.google.com/calendar/ical/macalester.edu_foee38ec77nqatr9hor7id17bk%40group.calendar.google.com/public/basic.ics'
+calendar_url = Rails.application.config.x.dev_garden.ics_url
 
 namespace :calendar do
 

@@ -25,11 +25,23 @@
       .dates, .location
         padding-left: 1.2em
 
-.events-controller.index-action
-  main
-    max-width: none
-
 .event, .events-controller
+  .subscribe
+    @include meta-more-font
+    text-transform: uppercase
+    font-size: 80%
+    a
+      padding-left: 0.6em
+      &:after
+        display: inline-block
+        opacity: 0.33
+        vertical-align: middle
+        content: '|'
+        color: black
+        padding-left: 0.6em
+      &:last-child:after
+        display: none
+
   .dates
     @include meta-font
     font-size: 94%
@@ -46,7 +58,7 @@
       &:before, &:after
         content: ' '
   .location
-    @include meta-more-font
+    @include meta-important-font
     font-size: 94%
     white-space: nowrap
     .detail
@@ -55,8 +67,6 @@
 
 .events-controller
   &.index-action
-    h1
-      text-align: center
     .events
       margin: 1.2em auto
 

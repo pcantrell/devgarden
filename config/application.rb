@@ -26,5 +26,8 @@ module DevGarden
       race_condition_ttl: 1.second,
       compress: true
     }
+
+    config.x.dev_garden.ics_url = 'https://calendar.google.com/calendar/ical/macalester.edu_foee38ec77nqatr9hor7id17bk%40group.calendar.google.com/public/basic.ics'
+    config.x.dev_garden.gcal_url = 'https://calendar.google.com/calendar?cid=bWFjYWxlc3Rlci5lZHVfZm9lZTM4ZWM3N25xYXRyOWhvcjdpZDE3YmtAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ'
   end
 end

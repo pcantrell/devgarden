@@ -58,7 +58,9 @@ namespace :calendar do
     Event.find_by!(
       'lower(title) in (?, ?)',
       title.downcase,
-      title.downcase.gsub(/^dev garden\s+/, ''))
+      title.downcase
+        .gsub(/^dev garden\s+/, '')
+        .gsub(/(.*) - (.*)/, '\1'))
   rescue => e
     raise "No event #{title.inspect} (#{e.class}: #{e})"
   end

@@ -28,7 +28,7 @@ namespace :calendar do
           if event.location != location
             problems <<
               "Warning: #{cal_event.summary} on #{cal_event.start_time} has a mismatched location: " +
-              "#{event.location.name} != #{location.name}"
+              "#{event.location&.name} != #{location&.name}"
           end
 
           cal_event.occurrences_between(window_start, window_end).each do |occurrence|

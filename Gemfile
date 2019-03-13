@@ -12,7 +12,7 @@ gem 'que'
 # Views
 
 gem 'haml', github: 'haml/haml'
-gem 'haml-rails', github: 'indirect/haml-rails'
+gem 'haml-rails', github: 'indirect/haml-rails', tag: 'v1.0.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'

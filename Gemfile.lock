@@ -146,7 +146,8 @@ GEM
     json (2.2.0)
     jwt (2.1.0)
     kgio (2.11.2)
-    kramdown (2.1.0)
+    kramdown (2.3.0)
+      rexml
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.7.0)
@@ -237,6 +238,7 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     ref (2.0.0)
+    rexml (3.2.4)
     ruby_parser (3.13.1)
       sexp_processor (~> 4.9)
     rubyzip (1.2.2)

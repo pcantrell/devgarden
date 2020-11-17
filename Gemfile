@@ -66,7 +66,7 @@ group :development, :test do
   gem 'unicorn', platform: :ruby
   gem 'minitest-spec-rails'
   gem 'factory_girl_rails'
-  gem 'ffaker'
+  gem 'ffaker', '< 2.17'
 
   gem 'rails_real_favicon'
 end

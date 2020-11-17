@@ -14,6 +14,15 @@
         .line It is open to <b>all</b> majors, roles, backgrounds, and ability levels.
       .more= link_to 'More Info', about_path
 
+    .feature.about
+      .blurb
+        .line
+          = link_to "Open consulting hours", event_path(1)
+          are remote during the pandemic.
+        .line Get help with your project at a safe social distance —
+        .line but with the same up-close attention as ever!
+      .more= link_to "Book appointment", 'https://goo.gl/ZGTKBC'
+
     - if EventDate.future.any?
       .feature.events
         .event-list

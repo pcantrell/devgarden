@@ -10,9 +10,9 @@ module ApplicationHelper
     time_limit = including_all_within.from_now
     EventDate.future.limit(limit)
       .each.with_index
-      .take_while { |d, i| i < min_events || d.start_time < time_limit }
-      .map { |d,i| d }
-      .slice_when { |d0, d1| d0.event != d1.event }
+      .take_while { |date, index| index < min_events || date.start_time < time_limit }
+      .map { |date, _| date }
+      .slice_when { |date0, date1| date0.event != date1.event }
       .each { |dates| yield dates.first.event, dates }
   end
 

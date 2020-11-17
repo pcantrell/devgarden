@@ -14,11 +14,12 @@
         .line It is open to <b>all</b> majors, roles, backgrounds, and ability levels.
       .more= link_to 'More Info', about_path
 
-    .feature.events
-      .event-list
-        - upcoming_events(min_events: 3, including_all_within: 1.week) do |event, dates|
-          = render 'events/event', event: event, dates: dates
-      .more= link_to "More events", events_path
+    - if EventDate.future.any?
+      .feature.events
+        .event-list
+          - upcoming_events(min_events: 3, including_all_within: 1.week) do |event, dates|
+            = render 'events/event', event: event, dates: dates
+          .more= link_to "More events", events_path
 
 - cache ['home', 'projects', Project.maximum(:updated_at)] do
   .projects.infinite-scroll.summary-group

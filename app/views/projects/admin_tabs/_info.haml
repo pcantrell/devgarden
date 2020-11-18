@@ -6,6 +6,6 @@
     = render 'shared/edit_visibility', f: f
     = f.input :name
     = f.input :tagline, hint: "A very short slogan / description of what your software does".html_safe
-    = f.input :url, label: 'Public web site', required: false, placeholder: 'https://', hint: "A user-facing site where people can get your software and/or learn more about it<br>(Note that this is <b>not</b> for your Github repo or other developer-facing site)".html_safe
+    = f.input :url, label: 'Public web site', required: false, placeholder: 'https://', hint: "A user-facing site where people can get your software and/or learn more about it<br>(Note that this is <b>not</b> for your GitHub repo or other developer-facing site)".html_safe
     - unless new_project
-      = f.input :scm_urls_as_text, as: :text, label: 'Source code URL(s)', placeholder: "https://github.com/user/projectname", hint: "Link to Github, Bitbucket, or wherever your code is hosted<br>(<b>One URL per line</b> if your project uses multiple repositories)".html_safe
+      = f.input :scm_urls_as_text, as: :text, label: 'Source code URL(s)', placeholder: "https://github.com/user/projectname", hint: "Link to GitHub, Bitbucket, or wherever your code is hosted<br>(<b>One URL per line</b> if your project uses multiple repositories)".html_safe

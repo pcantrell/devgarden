@@ -9,7 +9,7 @@
     
       - if duplicate_imports.any?
         .error-headline
-          Import problem: Duplicate Github repositories
+          Import problem: Duplicate GitHub repositories
         - duplicate_imports.each do |duplicate|
           .duplicate-import
             .info
@@ -22,7 +22,7 @@
       = semantic_form_for project do |f|
         = f.inputs do
           = f.hidden_field :populate_from_github, value: true
-          = f.input :scm_urls_as_text, as: :text, required: true, label: 'Your project’s Github URL', placeholder: "https://github.com/user/projectname", hint: "(<b>one per line</b> if the project has multiple repositories)".html_safe
+          = f.input :scm_urls_as_text, as: :text, required: true, label: 'Your project’s GitHub URL', placeholder: "https://github.com/user/projectname", hint: "(<b>one per line</b> if the project has multiple repositories)".html_safe
         .actions
           = f.save_button
-          = link_to "My project doesn’t have a Github repository", new_project_path(full_form: true)
+          = link_to "My project doesn’t have a GitHub repository", new_project_path(full_form: true)

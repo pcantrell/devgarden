@@ -125,7 +125,7 @@ private
 
     # Validate URLs using dumming project
     unless project.github_repos.any?
-      project.errors.add(:scm_urls_as_text, "Please enter at least one Github repository.")
+      project.errors.add(:scm_urls_as_text, "Please enter at least one GitHub repository.")
       return render :new
     end
 

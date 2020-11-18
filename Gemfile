@@ -38,7 +38,7 @@ gem 'mailchimp-api', require: 'mailchimp'
 gem 'carrierwave'
 gem 'mini_magick'
 
-# Github integration
+# GitHub integration
 
 gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection', '~> 0.1'  # https://github.com/omniauth/omniauth/wiki/Resolving-CVE-2015-9284

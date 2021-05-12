@@ -18,10 +18,10 @@
       .blurb
         .line
           = link_to "Open consulting hours", event_path(1)
-          are remote during the pandemic.
-        .line Get help with your project at a safe social distance —
-        .line but with the same up-close attention as ever!
-      .more= link_to "Book appointment", 'https://calendly.com/macalester-pcantrell/dev-garden'
+          are available to all Macalester students
+        .line who are working on a software-related project, regardless
+        .line of major, background, or level of experience.
+      .more= link_to "More info", event_path(1)
 
     - if EventDate.future.any?
       .feature.events

@@ -17,10 +17,12 @@ module DevGarden
     config.generators.javascripts = false
     config.generators.helper      = false
 
+    config.active_record.legacy_connection_handling = false
+
     config.active_job.queue_adapter = :que
     config.active_record.schema_format = :sql  # for que: https://github.com/chanks/que#usage
 
-    config.cache_store = :dalli_store, 'localhost', {
+    config.cache_store = :mem_cache_store, 'localhost', {
       namespace: 'devgarden',
       expires_in: 1.hour,
       race_condition_ttl: 1.second,

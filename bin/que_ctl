@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Wrapper for starting / stopped que from monit.
+# Also works directly from a shell.
+# Adapted from https://mmonit.com/wiki/Monit/FAQ#pidfile
+
+APP_DIR="$(dirname "$0")/.."
+
+function start() {
+  wrapper_que=/usr/share/rvm/wrappers/devgarden/que
+  if [ -f "$wrapper_que" ]; then
+    QUE="$wrapper_que"
+  elif which que; then
+    QUE="$(which que)"
+  else
+    echo "Unable to find que executable" >&2
+    exit 1
+  fi
+  echo "que executable: $QUE"
+
+  set -e
+  cd "$APP_DIR"
+  mkdir -p tmp/pids
+  echo $$ > "$APP_DIR"/tmp/pids/que.pid
+  exec 2>&1 $QUE -q default -q mailers 1>"$APP_DIR"/log/que.log
+}
+
+function stop() {
+  kill `cat "$APP_DIR"/tmp/pids/que.pid`
+}
+
+case "$1" in
+  start)
+    start ;;
+  stop)
+    stop ;;
+  *)
+    echo "usage: $0 {start|stop}" >&2
+    exit 1
+    ;;
+esac

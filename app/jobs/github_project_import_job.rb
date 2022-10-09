@@ -6,7 +6,7 @@ class GithubProjectImportJob < ApplicationJob
   include Rails.application.routes.url_helpers
 
   def perform(opts = {})
-    raise "Missing access token" unless opts[:github_token]
+    raise "Missing GitHub access token (Are you not logged in?)" unless opts[:github_token]
 
     @project = Project.new(scm_urls: opts[:scm_urls])
     @requesting_user = opts[:requesting_user]
@@ -42,7 +42,7 @@ private
   def import_info(repo)
     repo_info = github.repository(repo)
     unless repo_info.permissions.push || @requesting_user.site_admin?
-      raise "You need to have push access to #{repo} on Github in order to import it."
+      raise "You need to have push access to #{repo} on GitHub in order to import it."
     end
     project.name    ||= repo_info.name&.capitalize
     project.tagline ||= (repo_info.description || "")[0...Project::MAX_TAGLINE_LENGTH]
@@ -56,7 +56,7 @@ private
     end
     
     unless project.participations.any? { |p| p.person == @requesting_user } || @requesting_user.site_admin?
-      raise "You need to be a contributor to #{repo} on Github in order to import it."
+      raise "You need to be a contributor to #{repo} on GitHub in order to import it."
     end
   end
 

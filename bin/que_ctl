@@ -4,29 +4,65 @@
 # Also works directly from a shell.
 # Adapted from https://mmonit.com/wiki/Monit/FAQ#pidfile
 
-APP_DIR="$(dirname "$0")/.."
+set -e
+app_dir="$(dirname "$0")/.."
 
 function start() {
   wrapper_que=/usr/share/rvm/wrappers/devgarden/que
   if [ -f "$wrapper_que" ]; then
-    QUE="$wrapper_que"
+    que="$wrapper_que"
   elif which que; then
-    QUE="$(which que)"
+    que="$(which que)"
   else
     echo "Unable to find que executable" >&2
     exit 1
   fi
-  echo "que executable: $QUE"
+  echo "que executable: $que"
 
-  set -e
-  cd "$APP_DIR"
+  cd "$app_dir"
   mkdir -p tmp/pids
-  echo $$ > "$APP_DIR"/tmp/pids/que.pid
-  exec 2>&1 $QUE -q default -q mailers 1>"$APP_DIR"/log/que.log
+  echo $$ > "$app_dir"/tmp/pids/que.pid
+  exec 2>&1 $que -q default -q mailers 1>"$app_dir"/log/que.log
+}
+
+function isalive() {
+  local pid="$1"
+
+  kill -0 "$pid" 2>/dev/null
+}
+
+function trykill() {
+  local pid="$1"
+  local signal="$2"
+  local sleepinterval="$3"
+
+  sleep "$sleepinterval"
+  if isalive "$que_pid"; then
+    echo "Trying $signal..."
+    kill -$signal "$que_pid"
+  fi
 }
 
 function stop() {
-  kill `cat "$APP_DIR"/tmp/pids/que.pid`
+  local pidfile="$app_dir"/tmp/pids/que.pid
+  local que_pid="$(cat "$pidfile")"
+
+  if [ -z "$que_pid" ] || ! isalive "$que_pid"; then
+    echo "que is already stopped"
+  else
+    echo "Stopping que ($que_pid)..."
+
+    trykill "$que_pid" SIGTERM  0
+    trykill "$que_pid" SIGHUP   5 & trySIGHUP=$!
+    trykill "$que_pid" SIGKILL 20 & trySIGKILL=$!
+
+    while isalive "$que_pid"; do sleep 1; done
+    echo 'que stopped.'
+    (
+      kill $trySIGHUP; kill $trySIGKILL
+    ) 2>/dev/null
+  fi
+  [ -f "$pidfile" ] && rm "$pidfile"
 }
 
 case "$1" in

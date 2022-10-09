@@ -195,6 +195,9 @@ GEM
     omniauth-oauth2 (1.8.0)
       oauth2 (>= 1.4, < 3)
       omniauth (~> 2.0)
+    omniauth-rails_csrf_protection (1.0.1)
+      actionpack (>= 4.2)
+      omniauth (~> 2.0)
     pg (1.4.3)
     public_suffix (5.0.0)
     que (2.2.0)
@@ -332,6 +335,7 @@ DEPENDENCIES
   net-smtp
   octokit
   omniauth-github
+  omniauth-rails_csrf_protection
   pg
   que
   rails (~> 7.0)

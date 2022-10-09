@@ -43,6 +43,7 @@ gem 'mini_magick'
 # GitHub integration
 
 gem 'omniauth-github'
+gem 'omniauth-rails_csrf_protection'
 gem 'octokit'
 
 # Calendar integration

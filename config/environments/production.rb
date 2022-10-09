@@ -60,7 +60,8 @@ Rails.application.configure do
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     domain: 'devgarden.macalester.edu',
-    enable_starttls_auto: false
+    # enable_starttls_auto: false,
+    openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE  # workaround for mail gem bug: https://github.com/mikel/mail/pull/1435
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

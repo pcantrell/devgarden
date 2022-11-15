@@ -1,10 +1,10 @@
-class GithubCallbackController < ApplicationController
+class GithubWebhookController < ApplicationController
   # Disable CSRF verification for the endpoint GitHub uses
   skip_before_action :verify_authenticity_token, only: [:receive]
 
   def receive
     # Ignore all but `push` events
-    if request.headers["X-GitHub-Event"] != "push"
+    unless request.headers["X-GitHub-Event"] == "push"
       # GitHub Docs advise returning 200 if the webhook was delivered, even if you don't want it
       render body: nil
       return
@@ -12,7 +12,7 @@ class GithubCallbackController < ApplicationController
 
     # Verify message
     hash = OpenSSL::HMAC.hexdigest("SHA256", ENV['GITHUB_WEBHOOK_SECRET'], request.raw_post)
-    if request.headers["X-Hub-Signature-256"] != "sha256=#{hash}" # Signatures are in the format `sha256=HASH`
+    unless request.headers["X-Hub-Signature-256"] == "sha256=#{hash}" # Signatures are in the format `sha256=HASH`
       render body: nil, status: :unauthorized
       return
     end
@@ -24,6 +24,8 @@ class GithubCallbackController < ApplicationController
     if project != nil
       # Update `display_order` with latest commit's timestamp
       project.update(display_order: params[:repository][:pushed_at].to_i * 1000)
+    else
+      logger.warn "Repository #{repository_url} does not exist"
     end
 
     render body: nil

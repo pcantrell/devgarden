@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get "/invitation/:code" => "invitations#accept", as: :accept_invitation
 
   # Explains what the webhook that was mysteriously added does
-  post "/reorder-project-on-commit" => "github_callback#receive"
+  post "/github/webhook" => "github_webhook#receive"
 
   resources :projects
   resources :people

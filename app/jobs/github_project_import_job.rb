@@ -103,7 +103,7 @@ private
       repo,
       "web",
       {
-        url: "https://devgarden.macalester.edu/reorder-project-on-commit",
+        url: github_webhook_url,
         content_type: "json",
         secret: ENV['GITHUB_WEBHOOK_SECRET']
       }

@@ -18,6 +18,7 @@ class GithubProjectImportJob < ApplicationJob
       import_info(repo)
       import_contributors(repo)
       import_languages(repo)
+      add_webhook(repo)
     end
 
     project.save!
@@ -95,6 +96,18 @@ private
         project.tags << tag
       end
     end
+  end
+
+  def add_webhook(repo)
+    github.create_hook(
+      repo,
+      "web",
+      {
+        url: github_webhook_url,
+        content_type: "json",
+        secret: ENV['GITHUB_WEBHOOK_SECRET']
+      }
+    )
   end
 
   def language_tags

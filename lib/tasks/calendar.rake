@@ -25,16 +25,11 @@ namespace :calendar do
           event = find_event(cal_event.summary)
           location = find_location(cal_event.location)
 
-          if event.location != location
-            problems <<
-              "Warning: #{cal_event.summary} on #{cal_event.start_time} has a mismatched location: " +
-              "#{event.location&.name} != #{location&.name}"
-          end
-
           cal_event.occurrences_between(window_start, window_end).each do |occurrence|
             event.dates.create!(
               start_time: occurrence.start_time,
-              end_time:   occurrence.end_time)
+              end_time:   occurrence.end_time,
+              location:   location)
           end
         rescue => e
           logger.error e
@@ -68,11 +63,15 @@ namespace :calendar do
   def find_location(name)
     return nil if name.blank?
 
-    Location.find_by!(
-      'lower(name) = ?',
-      name.gsub(/\s*\(.*\)\s*$/, '').downcase)
+    if name.starts_with?("https://")
+      Location.find_by!(url: name.to_s)
+    else
+      Location.find_by!(
+        'lower(name) = ?',
+        name.gsub(/\s*\(.*\)\s*$/, '').downcase)
+    end
   rescue => e
-    raise "No location #{title.inspect} (#{e.class}: #{e})"
+    raise "No location matching #{name.inspect} (#{e.class}: #{e})"
   end
 
   def logger

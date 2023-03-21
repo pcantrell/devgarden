@@ -1,4 +1,4 @@
 - if location
   .location
-    .name=   location.name
+    .name= link_to_if location.url, location.name, location.url
     .detail= location.detail

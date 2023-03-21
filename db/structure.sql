@@ -343,7 +343,8 @@ CREATE TABLE public.locations (
     name character varying NOT NULL,
     detail character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    url character varying
 );
 
 
@@ -1439,6 +1440,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20160405152513'),
 ('20160430022010'),
 ('20221007021346'),
-('20230321180944');
+('20230321180944'),
+('20230321231036');
 
 

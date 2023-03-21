@@ -38,6 +38,13 @@ namespace :db do
       end
     end
 
+    task locations: :environment do
+      5.times do
+        Location.create!(name: FFaker::Lorem.words(rand(2) + 1).map(&:capitalize).join(" "))
+          .update!(detail: FFaker::Lorem.words(rand(4) + 2).join(" ").capitalize)
+      end
+    end
+
     task events: :environment do
       Event.transaction do
         locations = Location.all.to_a
@@ -47,12 +54,12 @@ namespace :db do
             start_time = Time.now + rand(2.days .. 12.months)
             EventDate.new(
               start_time: start_time,
-              end_time: (start_time + rand(3).hours if rand(2) > 0))
+              end_time: (start_time + rand(3).hours if rand(2) > 0),
+              location: locations.sample)
           end
           Event.create!(
             title: FFaker::Lorem.words(4).join(" ").capitalize,
             description: FFaker::Lorem.paragraphs(4).join("\n\n"),
-            location: locations.sample,
             dates: dates)
         end
       end

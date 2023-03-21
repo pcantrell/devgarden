@@ -1,5 +1,4 @@
 class Event < ApplicationRecord
-  belongs_to :location
   has_many :dates, class_name: "EventDate", dependent: :destroy
 
   validates :title, presence: true
@@ -9,8 +8,7 @@ class Event < ApplicationRecord
 
   def custom_notification_attributes
     {
-      location: location.name,
-      dates: dates.map { |d| [d.start_time, d.end_time] },
+      dates: dates.map { |d| [d.start_time, d.end_time, d.location&.name] }
     }
   end
 end

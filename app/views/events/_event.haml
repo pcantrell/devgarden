@@ -1,10 +1,13 @@
 - cache [event, dates] do
+  - default_location = dates.map(&:location).most_frequent_element
+
   .event
     .title= link_to event.title, event
     .dates{ 'data-collapse-children': 6 }
       - dates.each do |date|
-        .date= link_to format_time_range(date.start_time, date.end_time), event
-    - if event.location
-      .location
-        .name=   event.location.name
-        .detail= event.location.detail
+        .date
+          = link_to format_time_range(date.start_time, date.end_time), event
+          - if date.location != default_location
+            = render 'events/location', location: date.location
+
+    = render 'events/location', location: default_location

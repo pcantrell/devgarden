@@ -5,19 +5,22 @@
 - if current_user&.site_admin?
   = link_to "Edit Event", edit_event_path(event), class: 'big-button edit'
 
+- future_dates = event.dates.future
+- default_location = future_dates.map(&:location).most_frequent_element
+
 - heading event.title do
 
   .meta
-    - if event.location
-      .location
-        .name=   event.location.name
-        .detail= event.location.detail
+    = render 'location', location: default_location
 
     .dates{class: (:multiple if event.dates.length > 1), 'data-collapse-children': 3}
-      - event.dates.future.group_by { |d| d.start_time.strftime('%U') }.each do |week, dates|
+      - future_dates.group_by { |d| d.start_time.strftime('%U') }.each do |week, dates|
         .group
           - dates.each do |date|
-            .date= format_time_range(date.start_time, date.end_time)
+            .date
+              = format_time_range(date.start_time, date.end_time)
+              - if date.location != default_location
+                = render 'location', location: date.location
 
   - if event.description
     .description= markdown(event.description)

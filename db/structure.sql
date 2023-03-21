@@ -242,7 +242,8 @@ CREATE TABLE public.event_dates (
     start_time timestamp without time zone NOT NULL,
     end_time timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    location_id bigint
 );
 
 
@@ -273,7 +274,6 @@ CREATE TABLE public.events (
     id integer NOT NULL,
     title character varying NOT NULL,
     description text,
-    location_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     visible boolean DEFAULT true NOT NULL
@@ -1091,10 +1091,10 @@ CREATE INDEX index_event_dates_on_event_id ON public.event_dates USING btree (ev
 
 
 --
--- Name: index_events_on_location_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_event_dates_on_location_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_events_on_location_id ON public.events USING btree (location_id);
+CREATE INDEX index_event_dates_on_location_id ON public.event_dates USING btree (location_id);
 
 
 --
@@ -1312,14 +1312,6 @@ ALTER TABLE ONLY public.role_requests
 
 
 --
--- Name: events fk_rails_3d0bd29ec6; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.events
-    ADD CONSTRAINT fk_rails_3d0bd29ec6 FOREIGN KEY (location_id) REFERENCES public.locations(id);
-
-
---
 -- Name: job_reports fk_rails_62346f4a05; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1392,6 +1384,14 @@ ALTER TABLE ONLY public.roles
 
 
 --
+-- Name: event_dates fk_rails_bd5125b92e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.event_dates
+    ADD CONSTRAINT fk_rails_bd5125b92e FOREIGN KEY (location_id) REFERENCES public.locations(id);
+
+
+--
 -- Name: role_offers fk_rails_cbcc8e2c35; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1438,6 +1438,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20160325201115'),
 ('20160405152513'),
 ('20160430022010'),
-('20221007021346');
+('20221007021346'),
+('20230321180944');
 
 

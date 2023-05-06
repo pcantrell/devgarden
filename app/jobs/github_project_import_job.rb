@@ -49,7 +49,18 @@ private
     end
     project.name    ||= repo_info.name&.capitalize
     project.tagline ||= (repo_info.description || "")[0...Project::MAX_TAGLINE_LENGTH]
-    project.url     ||= repo_info.homepage
+    project.url     ||= normalize_url(repo_info.homepage)
+  end
+
+  def normalize_url(url)
+    return nil unless url
+    url = url.strip
+    [url, "https://#{url}"].each do |candidate|
+      if Project::URL_REGEXP =~ candidate
+        return candidate
+      end
+    end
+    nil  # Don't let bogus URL break the import
   end
 
   def import_contributors(repo)

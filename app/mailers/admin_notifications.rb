@@ -1,3 +1,5 @@
+require 'ostruct'
+
 class AdminNotifications < ApplicationMailer
   default from: "pcantrel@macalester.edu"
   layout 'admin_notifications'
@@ -18,6 +20,28 @@ class AdminNotifications < ApplicationMailer
 
     mail to: site_admin_emails,
          subject: "[devgarden] Calendar import problems"
+  end
+
+  def self.soft_failure(message, **attrs)
+    yield
+  rescue => e
+    AdminNotifications
+      .generic_error(
+        "WARNING: #{message}",
+        attrs: attrs,
+        error_message: e.inspect,
+        backtrace: e.backtrace)
+      .deliver_later
+  end
+
+  def generic_error(message, attrs: {}, error_message:, backtrace: nil)
+    @message = message
+    @attrs = attrs
+    @error_message = error_message
+    @backtrace = backtrace
+
+    mail to: site_admin_emails,
+         subject: "[devgarden] #{message}"
   end
 
 private

@@ -18,7 +18,9 @@ class GithubProjectImportJob < ApplicationJob
       import_info(repo)
       import_contributors(repo)
       import_languages(repo)
-      add_webhook(repo)
+      AdminNotifications.soft_failure("Could not add GitHub hooks during project import", repo: repo) do
+        add_webhook(repo)
+      end
     end
 
     project.save!

@@ -15,3 +15,6 @@ To run the site locally:
 
 - Run `unicorn` on the command line.
 - Visit `http://localhost:8080` in your web browser.
+
+To run queued jobs (email, project imports, etc):
+- `bin/que_ctl start` within the project directory.

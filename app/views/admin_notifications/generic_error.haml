@@ -1,0 +1,14 @@
+%p
+  #{@message}
+
+- @attrs.each do |key, value|
+  %dl
+    %dt= key
+    %dd= value
+
+%p
+  Error: #{@error_message}
+  - if @backtrace
+    %ul
+      - @backtrace.each do |line|
+        %li= line

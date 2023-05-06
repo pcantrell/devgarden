@@ -15,7 +15,7 @@ class Project < ApplicationRecord
   validates :name, presence: true
   validates :tagline, length: { maximum: MAX_TAGLINE_LENGTH }
 
-  URL_REGEXP = URI::regexp(%w(http https))
+  URL_REGEXP = /\A#{URI::regexp(%w(http https))}\Z/
   validates :url, format: URL_REGEXP, allow_blank: true
   validate :scm_urls_are_urls
 

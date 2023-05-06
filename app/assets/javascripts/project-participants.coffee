@@ -34,7 +34,7 @@ $ ->
             ).join("")
           }
           <div class='title #{person.kind}'>#{h person.name}</div>
-          <button class='remove' #{showIf person.self, 'disabled'}>⊖</button>
+          <button class='remove' #{showIf !person.removable, 'disabled'}>⊖</button>
           <div class='options'>
             #{
               showIf person.self,

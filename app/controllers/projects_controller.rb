@@ -156,6 +156,7 @@ private
           avatar_url: p.person.avatar_url,
           admin: p.admin,
           self: p.person == current_user,
+          removable: current_user.site_admin? || p.person != current_user,
         }
       end
     end

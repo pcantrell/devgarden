@@ -102,7 +102,7 @@ private
   def metadata_quality
     [
       (0.50 if icon.present?),
-      (0.05 if tagline.present?),
+      (0.05 if tagline.present? || url.present?),
       (0.20 * [(description || '').length / 1000.0, 1.0].min),
       (0.25 if role_requests.any?)
     ].compact.sum

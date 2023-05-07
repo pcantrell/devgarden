@@ -22,8 +22,8 @@ class GithubWebhookController < ApplicationController
     project = Project.where("? = ANY(scm_urls)", repository_url)
 
     if project != nil
-      # Update `display_order` with latest commit's timestamp
-      project.update(display_order: params[:repository][:pushed_at].to_i * 1000)
+      project.bump_display_order!
+      project.save!
     else
       logger.warn "Repository #{repository_url} does not exist"
     end

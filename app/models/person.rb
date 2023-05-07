@@ -54,6 +54,7 @@ class Person < ApplicationRecord
 
   %w(email github_user).each do |lowercase_prop|
     define_method "#{lowercase_prop}=" do |val|
+      val = nil if val.blank?
       super(val&.downcase)
     end
   end

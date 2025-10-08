@@ -6,7 +6,7 @@ body.page-about
     margin: 1.2em -0.3em 2.4em
     content: image-url('about.svg')
     @media (prefers-color-scheme: dark)
-      filter: #{"invert() hue-rotate(180deg) brightness(105%)"}
+      filter: var(--invert) hue-rotate(180deg) brightness(105%)
     @include if-below-width(40em)
       content: image-url('about-mobile.svg')
       margin-bottom: 1.2em

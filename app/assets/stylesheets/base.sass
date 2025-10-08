@@ -1,5 +1,12 @@
 @import '_shared'
 
+// This is a hack to work around the fact that our old version of Sass fights with certain
+// CSS filter functions. Making them CSS vars causes Sass to ignore them. If we ever upgrade
+// to dartsass-rails, we can remove this workaround.
+html
+  --invert: invert()
+  --grayscale: grayscale()
+
 .clear
   clear: both
 
@@ -139,8 +146,7 @@ img.none
 
 @media (prefers-color-scheme: dark)
   .dark-mode-logo
-    // We can nix the #{...} if/when we upgrade to a newer sass
-    filter: #{"invert() grayscale() brightness(110%)"}
+    filter: var(--invert) var(--grayscale) brightness(110%)
 
 .more
   margin-top: 0.6em

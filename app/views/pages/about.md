@@ -4,7 +4,7 @@ The Dev Garden is a physical, virtual, and social space at [Macalester](http://w
 
 ## Who can get involved?
 
-The space is open to students of **all majors, roles, backgrounds and ability levels**. Software projects need a [wide variety of skills](/roles), and thus need a wide variety of people. Jump in! You might be surprised how helpful you can be — and how much fun you can have helping.
+The space is open to students of **all majors, roles, backgrounds and ability levels**. Software projects need a [wide variety of skills](/roles), and thus need a wide variety of people. Jump in! You might be surprised how helpful you can be — and how much fun you can have helping.
 
 ## What projects does it support?
 

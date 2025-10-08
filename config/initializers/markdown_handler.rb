@@ -7,7 +7,7 @@ module MarkdownHandler
 
   def self.call(*args)
     compiled_source = erb.call(*args)
-    "Kramdown::Document.new(begin;#{compiled_source};end).to_html"
+    "Kramdown::Document.new(begin;#{compiled_source};end.to_s).to_html"
   end
 end
 

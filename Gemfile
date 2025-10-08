@@ -12,7 +12,7 @@ gem 'que'
 
 # Views
 
-gem 'haml', '~> 5'  # haml 6 removed haml_tag; replacement unclear
+gem 'haml', '~> 6'
 gem 'haml-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'

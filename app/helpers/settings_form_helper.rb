@@ -20,15 +20,15 @@ module SettingsFormHelper
 
         yield f
 
-        haml_tag(:div, class: 'actions') do
+        action_content =
           if model.new_record?
-            concat f.save_button
+            f.save_button
           elsif params[:initial_setup]
-            concat f.save_button(
+            f.save_button(
               title_for_existing_record: last_tab ? 'Done' : 'Next',
               html: { class: 'next-tab' })
           end
-        end
+        concat content_tag(:div, action_content, class: 'actions')
       end
     end
   end

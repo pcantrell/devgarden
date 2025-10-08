@@ -21,7 +21,7 @@ module ApplicationHelper
   end
 
   def heading(title, **tag_attrs, &block)
-    haml_tag("h#{heading_level}", title, **tag_attrs)
+    concat content_tag("h#{heading_level}", title, **tag_attrs)
     with_next_heading_level(&block) if block
   end
 

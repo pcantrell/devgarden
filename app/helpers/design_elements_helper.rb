@@ -34,6 +34,10 @@ module DesignElementsHelper
     [hue.round, saturation.round, lightness.round]
   end
 
+  def bend_percentage(percent, gamma)
+    (percent / 100.0) ** gamma * 100.0
+  end
+
   def hue_lookup_table(role)
     (0...360).map do |hue|
       theme_color_by_hue(hue, role)
@@ -43,13 +47,16 @@ module DesignElementsHelper
   def theme_style(model, role)
     h,s,l = theme_color(model, role)
     color = "hsl(#{h}, #{s}%, #{l}%)"
+    lighter = "hsl(#{h}, #{bend_percentage(s, 0.6)}%, #{bend_percentage(l, 0.3)}%)"
+    darker = "hsl(#{h}, #{bend_percentage(s, 0.2)}%, #{bend_percentage(l, 2.0)}%)"
     case role
       when :featured_text,
            :body_text
-        "color: #{color}"
-      when :background,
-           :button_background
-        "background: #{color}"
+        "color: light-dark(#{color}, #{lighter})"
+      when :background
+        "background: light-dark(#{color}, #{darker})"
+      when :button_background
+        "background: light-dark(#{color}, #{lighter})"
     end
   end
 

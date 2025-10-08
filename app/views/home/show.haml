@@ -4,7 +4,7 @@
   Open to all majors, roles, backgrounds and ability levels.
 
 = provide :hero do
-  .hero= image_tag "devgarden-logo.svg", alt: 'Dev Garden – Macalester Software Collaboration Space'
+  .hero= image_tag "devgarden-logo.svg", alt: 'Dev Garden – Macalester Software Collaboration Space', class: "dark-mode-logo"
 
 - cache ['home', 'features', Event.maximum(:updated_at)], expires_in: 5.minutes do
   .features

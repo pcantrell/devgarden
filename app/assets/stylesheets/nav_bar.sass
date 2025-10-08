@@ -5,13 +5,13 @@
   font-size: 80%
   letter-spacing: 0.5px
   text-transform: uppercase
-  background: $dark-color
-  @include hairline-border(bottom, $hairline-color)
+  background: var(--nav-bar-bg-color)
+  @include hairline-border(bottom, var(--hairline-color))
   padding: 0.6em
   a
-    color: rgba(255,255,255,0.9)
+    color: var(--nav-bar-text-color)
     &:hover
-      color: white
+      color: var(--nav-bar-text-hot-color)
   .logo
     img
       float: left
@@ -50,7 +50,6 @@
   display: none
   z-index: 100
   padding: 0
-  background: white
   border-radius: 1ex
   border-top-right-radius: 0
   text-transform: none
@@ -61,7 +60,7 @@
     line-height: 1em  // to make project icons line up
   text-align: right
   box-shadow: 0 1ex 1ex rgba(0, 0, 0, 0.333)
-  @include hairline-border(top, $hairline-color)
+  @include hairline-border(top, var(--hairline-color))
   p
     font-weight: 400
     line-height: 100%
@@ -74,7 +73,7 @@
     min-width: 8em
     &.projects
       padding-bottom: 1.2em
-      @include hairline-border(bottom, $hairline-color)
+      @include hairline-border(bottom, var(--hairline-color))
       font-weight: 400
     li
       padding: 0
@@ -93,10 +92,10 @@
           height: 1em
 
 .dropdown, .dropdown-header-active
-  background: white
-  color: $dark-color
+  background: var(--overlay-color)
+  color: var(--dark-color)
   a, a:hover, a:visited
-    color: $dark-color
+    color: var(--dark-color)
 
 .dropdown-header-active
   border-top-left-radius: 1ex

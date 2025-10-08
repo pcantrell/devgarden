@@ -3,11 +3,56 @@
 .clear
   clear: both
 
+html
+  color-scheme: light dark
+
+  --background-color: #fefefe
+  --dark-color: #282561
+  --highlight-color: #3b82d6
+  --heading-color: #413f67
+  --hairline-color: #a4a9ad
+  --success-color: #49873b
+  --error-color: #bd2432
+  --warning-color: #f2b029
+  --danger-color: var(--error-color)
+  --fade-text-color: #999
+  --overlay-color: white
+
+  --nav-bar-bg-color: var(--dark-color)
+  --nav-bar-text-color: color-mix(in display-p3, var(--background-color) 90%, transparent)
+  --nav-bar-text-hot-color: var(--background-color)
+
+  --input-bg-color: #fbfbf9
+  --input-bg-focus-color: white
+
+  @media (prefers-color-scheme: dark)
+    --background-color: #120445
+    --dark-color: #d0d0d0
+    --highlight-color: #5fa6fd
+    --heading-color: #8e8dba
+    --hairline-color: black
+    --success-color: #49873b
+    --error-color: #bd2432
+    --warning-color: #f2b029
+    --danger-color: var(--error-color)
+    --fade-text-color: #777
+    --overlay-color: #282561
+
+    --nav-bar-bg-color: #000
+    --nav-bar-text-color: #bbb
+    --nav-bar-text-hot-color: #fff
+
+    --input-bg-color: var(--background-color)
+    --input-bg-focus-color: black
+
+html, body
+  background: var(--background-color)
+
 body
   margin: 0
   padding: 0
   padding-bottom: 1.2em
-  color: $dark-color
+  color: var(--dark-color)
   @include body-font
   font-size: 1.1em
   line-height: 120%
@@ -42,14 +87,14 @@ h3
 
 main
   &>h1, &>h2, &>h3, &>h4
-    color: $heading-color
+    color: var(--heading-color)
 
 p
   margin: 0.6em 0
 
 a
   &:link, &:visited
-    color: $highlight-color
+    color: var(--highlight-color)
   &:hover
     text-decoration: underline
   text-decoration: none
@@ -85,12 +130,17 @@ hr
   height: 1px
   width: 100%
   margin: 1.2em 0
-  @include hairline-border(top, $hairline-color)
+  @include hairline-border(top, var(--hairline-color))
 
 img.none
   border: none
   outline: none
   background: #f4f4f4
+
+@media (prefers-color-scheme: dark)
+  .dark-mode-logo
+    // We can nix the #{...} if/when we upgrade to a newer sass
+    filter: #{"invert() grayscale() brightness(110%)"}
 
 .more
   margin-top: 0.6em
@@ -114,7 +164,7 @@ img.none
   .feature
     margin: 1.2em 0
     padding-bottom: 1.2em
-    @include hairline-border(bottom, $hairline-color)
+    @include hairline-border(bottom, var(--hairline-color))
     @include if-above-width(36em)
       &:last-child
         border: none
@@ -176,15 +226,15 @@ img.none
       padding-right: 0.8ex
       vertical-align: top
     &.success
-      background: $success-color
+      background: var(--success-color)
       .icon:before
         content: '✓'
     &.warning, &.notice
-      background: $warning-color
+      background: var(--warning-color)
       .icon:before
         content: '!'
     &.error
-      background: $error-color
+      background: var(--error-color)
       .icon:before
         content: '!'
 
@@ -208,7 +258,7 @@ img.none
     position: relative
     top: -1px
     path
-      fill: $dark-color
+      fill: var(--dark-color)
 
 .tags
   overflow: hidden
@@ -218,7 +268,7 @@ img.none
   .tag-category
     display: inline
   .tag-category-family
-    color: #444
+    color: light-dark(#444, #999)
     .tag:last-child
       @include hairline-border(right, black)
       padding-right: 0.8em
@@ -231,11 +281,11 @@ img.none
     margin-right: 0.8em
     float: left
   .tag-category-platform
-    color: hsl(110, 40%, 30%)
+    color: light-dark(hsl(110, 40%, 30%), hsl(110, 20%, 60%))
   .tag-category-tool
-    color: hsl(42, 40%, 30%)
+    color: light-dark(hsl(42, 40%, 30%), hsl(42, 30%, 60%))
   .tag-category-language
-    color: hsl(260, 40%, 40%)
+    color: light-dark(hsl(260, 40%, 40%), hsl(260, 40%, 70%))
 
 .infinite-scroll .loading
   height: 20em
@@ -246,7 +296,7 @@ img.none
   @include button
   &.edit
     display: block
-    background: $highlight-color
+    background: var(--highlight-color)
     text-align: center
     margin-top: 2.4em
     float: right
@@ -276,13 +326,13 @@ img.none
 
   .error-headline
     @include meta-important-font
-    color: $error-color
+    color: var(--error-color)
     font-size: 120%
 
 input.tt-hint
-  color: #999
+  color: var(--fade-text-color)
 .tt-menu .tt-dataset
-  @include hairline-border(all, $hairline-color)
+  @include hairline-border(all, var(--hairline-color))
   border-radius: 0.3em
   overflow: hidden
   box-shadow: 0 0.5ex 0.5ex rgba(0, 0, 0, 0.1667)
@@ -294,7 +344,7 @@ input.tt-hint
     cursor: pointer
     min-width: 12em
     &.tt-cursor, &:hover
-      background: $highlight-color
+      background: var(--highlight-color)
       color: white
     .icon
       width: 1.2em

@@ -6,9 +6,9 @@
 
   .title, .date
     a, a:link, a:visited
-      color: $dark-color
+      color: var(--dark-color)
       &:hover
-        color: $highlight-color
+        color: var(--highlight-color)
 
   .title
     margin-bottom: 0.6em
@@ -67,7 +67,7 @@
   .date
     .location
       padding: 0.15em 0 0.15em 0.45em
-      border-left: 0.3em solid $warning-color
+      border-left: 0.3em solid var(--warning-color)
       font-size: 82%
     &:has(.location)
       margin: 0.6em 0

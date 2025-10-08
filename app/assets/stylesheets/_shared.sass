@@ -1,12 +1,3 @@
-$dark-color: #282561
-$highlight-color: #3b82d6
-$heading-color: #413f67
-$hairline-color: #a4a9ad
-$success-color: #49873b
-$error-color: #bd2432
-$warning-color: #f2b029
-$danger-color: $error-color
-
 @mixin if-below-width($width)
   @media all and (max-width: $width)
     @content
@@ -97,10 +88,10 @@ $danger-color: $error-color
   margin: 1.2em auto
   padding: 0.6em 1.2em
   border-radius: 0.6em
-  color: white !important
-  background: $dark-color
+  color: var(--background-color) !important
+  background: var(--dark-color)
   &:hover
-    background: $highlight-color
+    background: var(--highlight-color)
     text-decoration: none
 
 $thumb-size: 48px
@@ -125,7 +116,7 @@ $thumb-size: 48px
 
 @mixin meta-float-right
   @include if-below-width(32em)
-    @include hairline-border(bottom, $dark-color)
+    @include hairline-border(bottom, var(--dark-color))
     padding-bottom: 1.2em
     margin-bottom: 1.3em
   @include if-above-width(32em)
@@ -133,7 +124,7 @@ $thumb-size: 48px
     margin: -0.05em 0 1.2em 1.2em
     padding: 0.2em 0
     padding-left: 1.2em
-    @include hairline-border(left, $dark-color)
+    @include hairline-border(left, var(--dark-color))
     max-width: 40%
 
 @mixin columns($width, $gap)

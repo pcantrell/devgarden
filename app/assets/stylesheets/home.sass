@@ -20,11 +20,11 @@
     margin-top: 1.2em
     .meta
       @include meta-more
-      color: $dark-color
+      color: var(--dark-color)
       position: fixed
-      background: white
-      @include hairline-border(top, $dark-color)
-      @include hairline-border(right, $dark-color)
+      background: var(--overlay-color)
+      @include hairline-border(top, var(--hairline-color))
+      @include hairline-border(right, var(--hairline-color))
       box-shadow: 0 0.6em 1.2em rgba(0, 0, 0, 0.333)
       bottom: 0
       padding: 1.2em 1.8em
@@ -34,8 +34,8 @@
         display: inline-block
         white-space: nowrap
       .project-count
-        color: $dark-color
-        @include hairline-border(right, $hairline-color)
+        color: var(--dark-color)
+        @include hairline-border(right, var(--hairline-color))
         padding: 0.3em 0.6em 0.3em 0
         margin-right: 0.6em
       .project-add
@@ -111,7 +111,7 @@
           content: '⤑'
           width: 1.2em
           font-size: 133%
-          color: $hairline-color
+          color: var(--hairline-color)
       .role
         padding-left: 1.2em
 

@@ -101,9 +101,9 @@
         cursor: pointer
   
   min-height: 150px
-  border: ($gutter / 8) dotted rgba(0, 0, 0, 0.2)
+  border: ($gutter / 8) dotted color-mix(in display-p3, var(--dark-color) 25%, transparent)
   border-radius: 1em
-  background: white
+  background: var(--background-color)
   padding: $gutter
 
   &.dz-drag-hover
@@ -244,7 +244,7 @@
       @include prefix((transition: opacity 0.3s ease))
       border-radius: 4px
       font-size: 80%
-      background: $error-color
+      background: var(--error-color)
       color: white
       position: absolute
       padding: 0.6em
@@ -264,7 +264,7 @@
           top: -$arrow-size
           border-left: $arrow-size solid transparent
           border-right: $arrow-size solid transparent
-          border-bottom: $arrow-size solid $error-color
+          border-bottom: $arrow-size solid var(--error-color)
       
       @include if-above-width(36em)
         top: $image-size / 2
@@ -276,4 +276,4 @@
           top: 0.8em
           border-top: $arrow-size solid transparent
           border-bottom: $arrow-size solid transparent
-          border-right: $arrow-size solid $error-color
+          border-right: $arrow-size solid var(--error-color)

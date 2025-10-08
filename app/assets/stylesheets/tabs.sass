@@ -4,7 +4,7 @@
   >ul
     $shadow-size: 0.6em
     $h-overflow: 1.2em
-    @include hairline-border(bottom, $dark-color)
+    @include hairline-border(bottom, var(--dark-color))
     box-shadow: 0 $shadow-size $shadow-size (-$shadow-size) rgba(0, 0, 0, 0.3)
     margin: 0 (-$h-overflow) ($shadow-size * 3)
     padding: 0 $h-overflow
@@ -18,11 +18,11 @@
       top-left-radius: 0.3em
       top-right-radius: 0.3em
     &:hover
-      color: $highlight-color
+      color: var(--highlight-color)
     &.active
-      background: $dark-color
-      color: white
-      border-bottom-color: $dark-color
+      background: var(--dark-color)
+      color: var(--background-color)
+      border-bottom-color: var(--dark-color)
     a
       color: inherit
 

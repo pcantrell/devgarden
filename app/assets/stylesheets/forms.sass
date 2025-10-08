@@ -3,13 +3,14 @@
 form
   input, textarea
     @include body-font
+    color: var(--text-color)
     font-size: 100%
     margin: 0.6em 0
     padding: 0.3em 0.6em
     border-radius: 0.3em
     &:focus
       outline: none !important
-      box-shadow: 0 0 0.3em $highlight-color
+      box-shadow: 0 0 0.3em var(--highlight-color)
   input
     &[type='submit']
       @include button
@@ -21,9 +22,9 @@ form
   .errors
     margin: 1.2em 0
     @include meta-important-font
-    color: $error-color
+    color: var(--error-color)
     margin-left: -0.2em
-    border-left: 0.2em solid $error-color
+    border-left: 0.2em solid var(--error-color)
     border-radius: 0.2em
     padding: 0.3em 0.6em
 
@@ -35,16 +36,16 @@ form
     textarea
       display: block
       width: 99%
-      @include hairline-border(all, $dark-color)
-      background: #fbfbf9
+      @include hairline-border(all, var(--dark-color))
+      background: var(--input-bg-color)
       &:focus
-        background: white
+        background: var(--input-bg-focus-color)
     input[type="checkbox"]
       margin-right: 0.6em
       display: inline-block
       vertical-align: middle
       &:focus
-        outline: 2px solid $highlight-color !important
+        outline: 2px solid var(--highlight-color) !important
     input[type="submit"]
       padding: 0.6em 1.2em
       font-size: 110%
@@ -68,14 +69,14 @@ form
           -moz-box-sizing: content-box
       &.error
         input, textarea
-          @include hairline-border(all, $error-color)
+          @include hairline-border(all, var(--error-color))
           background: #fff4f4
     label
       @include sans
       margin: 0 0.6em
     .validation
       @include meta-tiny-font
-      color: rgba(0, 0, 1, 0.4)
+      color: color-mix(in display-p3, var(--dark-color) 45%, transparent)
       border: none
       margin-left: 1.2em
       line-height: 240%
@@ -90,7 +91,7 @@ form
     .inline-error
       margin: 0.6em
       @include meta-important-font
-      color: $error-color
+      color: var(--error-color)
       .detail
         @include meta-font
         font-size: 80%
@@ -120,11 +121,11 @@ form
     padding: 0.6em 0
     border-radius: 0.3em
   .success
-    color: $success-color
+    color: var(--success-color)
   .saving
     @include pulsing
   .error
-    background: $error-color
+    background: var(--error-color)
     padding: 0.6em
     color: white
     opacity: 1

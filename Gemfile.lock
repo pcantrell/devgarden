@@ -1,3 +1,13 @@
+GIT
+  remote: https://github.com/icalendar/icalendar-recurrence
+  revision: e8acf2772786957acfe94a77b36841cb0d8f44a3
+  branch: main
+  specs:
+    icalendar-recurrence (1.2.0)
+      icalendar (~> 2.0)
+      ice_cube (~> 0.16)
+      tzinfo (~> 2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -145,10 +155,6 @@ GEM
       ice_cube (~> 0.16)
       logger
       ostruct
-    icalendar-recurrence (1.2.0)
-      icalendar (~> 2.0)
-      ice_cube (~> 0.16)
-      tzinfo (~> 2.0)
     ice_cube (0.17.0)
     ice_nine (0.11.2)
     image_processing (1.14.0)
@@ -392,8 +398,8 @@ DEPENDENCIES
   haml (~> 6)
   haml-rails
   high_voltage
-  icalendar
-  icalendar-recurrence
+  icalendar (~> 2.11)
+  icalendar-recurrence!
   ice_nine
   jbuilder (~> 2.0)
   jquery-rails

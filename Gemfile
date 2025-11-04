@@ -48,8 +48,10 @@ gem 'octokit'
 
 # Calendar integration
 
-gem 'icalendar'
-gem 'icalendar-recurrence'
+gem "icalendar", "~> 2.11"
+# main branch has a bug fix not yet released as of 1.2.0 for an issue where
+# recurring event end times are only a fraction of a second after the start time:
+gem "icalendar-recurrence", git: "https://github.com/icalendar/icalendar-recurrence", branch: "main"
 
 # Util
 
